@@ -22,8 +22,8 @@
 
 ### Autores
 
-- @serenablanco
-- @Daguerre45
-- @EXCALOFRIO
-- @pblrvo
-- @juaki0315
+- <span style="color:grey">**@serenablanco -> Serena Blanco García**</span>
+- <span style="color:grey">**@Daguerre45 -> Alberto Daguerre Torres**</span>
+- <span style="color:grey">**@EXCALOFRIO -> Alejandro Ramírez Larena**</span>
+- <span style="color:grey">**@pblrvo -> Pablo Rivero**</span>
+- <span style="color:grey">**@juaki0315 -> Joaquin Moreno Guzman**</span>
