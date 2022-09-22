@@ -21,6 +21,7 @@
 - [ ] Crear una aplicación web que permita a los usuarios ver los eventos y discotecas disponibles y la creación de eventos privados.
 
 ### Autores
+
 - @serenablanco
 - @Daguerre45
 - @EXCALOFRIO
