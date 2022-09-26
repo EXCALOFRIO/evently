@@ -18,7 +18,7 @@
 - [ ] Crear un servicio de comentarios en directo dentro de cada discoteca para que te puedas comunicar
 - [ ] Creación de servicio donde aparezcan todos los perfiles de las personas que están en la discoteca que tengan la aplicación (como un tinder adaptado a la aplicación)
 ### Descripción del proyecto
-- [ ] Crear una aplicación web que permita a los usuarios ver los eventos y discotecas disponibles y la creación de eventos privados.
+- [ ] Crear una aplicación movil que permita a los usuarios ver los eventos y discotecas disponibles y la creación de eventos privados o públicos.
 
 ### Autores
 
