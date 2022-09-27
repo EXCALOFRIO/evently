@@ -18,7 +18,7 @@
 - [ ] Crear un servicio de comentarios en directo dentro de cada discoteca para que te puedas comunicar
 - [ ] Creación de servicio donde aparezcan todos los perfiles de las personas que están en la discoteca que tengan la aplicación (como un tinder adaptado a la aplicación)
 
-###Criterios de validación
+### Criterios de validación
 - [ ] La aplicación debe ser capaz de conectar cuentas de distintos usuarios mediante el sistema de amigos
 - [ ] La aplicación debe ser capaz de crear un evento permitiendo invitación de amigos ya sea el evento tanto público como privado
 - [ ] La aplicación debe ser capaz de crear un evento al que se puedan unir usuarios fuera de la lista de amigos, siempre que dicho evento sea público
