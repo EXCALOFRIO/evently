@@ -17,6 +17,15 @@
 - [ ] Crear un servicio de notificaciones sobre cierta información de las discotecas o de la creación de eventos de tus amigos
 - [ ] Crear un servicio de comentarios en directo dentro de cada discoteca para que te puedas comunicar
 - [ ] Creación de servicio donde aparezcan todos los perfiles de las personas que están en la discoteca que tengan la aplicación (como un tinder adaptado a la aplicación)
+
+###Criterios de validación
+- [ ] La aplicación debe ser capaz de conectar cuentas de distintos usuarios mediante el sistema de amigos
+- [ ] La aplicación debe ser capaz de crear un evento permitiendo invitación de amigos ya sea el evento tanto público como privado
+- [ ] La aplicación debe ser capaz de crear un evento al que se puedan unir usuarios fuera de la lista de amigos, siempre que dicho evento sea público
+- [ ] La aplicaciób debe ser capaz de distinguir a la hora de crear eventos entre públicos y privados
+- [ ] El sistema de mensajería ha de ser eficaz y confiable
+- [ ] Proporcionar un servicio de alquiler de plazas en un coche así como el pago del mismo
+
 ### Descripción del proyecto
 - [ ] Crear una aplicación movil que permita a los usuarios ver los eventos y discotecas disponibles y la creación de eventos privados o públicos.
 
