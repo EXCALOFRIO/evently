@@ -1,5 +1,7 @@
 # Eventos y discotecas
+
 ### Requisitos para el proyecto
+
 - [ ] Crear un repositorio para garantizar el control de versiones.
 - [ ] Crear una guia que explique el proyecto.
 - [ ] Crear un servicio donde puedas añadir a tus amigos a la aplicación
@@ -20,6 +22,7 @@
 - [ ] Crear un servicio de cartera donde los usuarios puedan meter dinero en la app para pagar directamente desde la app las entradas a los locales
 
 ### Criterios de validación
+
 - [ ] Crear un repositorio en el cual el cliente pueda entrar y ver todos los cambios
 - [ ] La guía debe contener todos los requisitos y todos los criterios de validación bien detallados
 - [ ] La aplicación debe ser capaz de conectar cuentas de distintos usuarios mediante el sistema de amigos, la interfaz debe de ser lo más sencilla para el usuario
@@ -35,16 +38,16 @@
 - [ ] La aplicación debe ser capaz de filtrar según las características de la discoteca
 - [ ] El sistema de valoración de las discotecas se hará mediante estrellitas y podrán votar de 0 a 5 estrellitas una vez por usuario teniendo la opción de poder editar su valoración y con la opción de poder dejar o no un comentario de su experiencia
 - [ ] Dentro de cada discoteca habrá una interfaz donde podrás sacar las entradas en esa interfaz aparecerán el número de entradas que quieres compras, el precio unitario de cada entrada y el precio final
-- [ ] La aplicación debe haber un apratado donde aparezcan todos los eventos creados por totras personas y un botón donde aparezca la opción de poder solicitar la entrada a dicho evento
-- [ ] En el mapa debe haber en todo momento la cantidad de gente que hay en la dicoteca representado por colores: verde = poca gente amarillo = bastante gente rojo = lleno
+- [ ] La aplicación debe haber un apartado donde aparezcan todos los eventos creados por otras personas y un botón donde aparezca la opción de poder solicitar la entrada a dicho evento
+- [ ] En el mapa debe haber en todo momento la cantidad de gente que hay en la discoteca representado por colores: verde = poca gente, amarillo = bastante gente, rojo = lleno
 - [ ] Dentro de la aplicación debe haber un lugar llamado "social" donde cada usuario debe poder subir fotos e historias desde dentro de la discoteca
-- [ ] Las notificaciones de la aplicación deben aparecer como un pop-up desde la parte superior de la aplicación ese pop-up estará acompañado de un sonido de notificación 
+- [ ] Las notificaciones de la aplicación deben aparecer como un pop-up desde la parte superior de la aplicación ese pop-up estará acompañado de un sonido de notificación
 - [ ] Dentro de cada discoteca habrá un apartado de "chat" donde cualquier usuario puede escribir por dicho chat en directo
 - [ ] En la interfaz del chat arriba del todo aparecerá unas luces intermitentes de "discoteca" para saber que el chat está activo
-- [ ] Se tendrá que crear una sección denominada "perreo" en esa sección aparecerán de uno en uno los usuarios que hay en dicha discoteca que tengan la applicación. Ahi si despablazas la focho a la derecha rechazas a la persona si la desplazas a la derecha la acceptas. En el momento en le que dos usuarios se acepten mutuamente se les notificará y se abrirá un chat exclusivo para dichas personas de forma automática
-
+- [ ] Se tendrá que crear una sección denominada "perreo" en esa sección aparecerán de uno en uno los usuarios que hay en dicha discoteca que tengan la aplicación. Ahi si desplazas la foto a la izquierda rechazas a la persona y si la desplazas a la derecha la aceptas. En el momento en que dos usuarios se acepten mutuamente se les notificará y se abrirá un chat exclusivo para dichas personas de forma automática
 
 ### Descripción del proyecto
+
 - [ ] Crear una aplicación movil que permita a los usuarios ver los eventos y discotecas disponibles y la creación de eventos privados o públicos.
 
 ### Autores
