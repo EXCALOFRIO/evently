@@ -4,17 +4,17 @@ firebase = firebase.FirebaseApplication(
     "https://evently-646a2-default-rtdb.firebaseio.com/", None)
 
 
-# metodo para insertar un nodo en la base de datos discotecas en firebase
-discotecas = {
-    'nombre': 'BH',
-    'calle': 'Calle de la Palma',
-    'numero': 0,
-    'zona': 'Centro'
-}
+# metodo para insertar un nodo en la base de datos discotecas en firebase con los campos nombre, calle, numero y zona
+def insertarDiscoteca(nombre, calle, numero, zona):
+    discotecas = {
+        'nombre': nombre,
+        'calle': calle,
+        'numero': numero,
+        'zona': zona
+    }
+    firebase.post('/data/discotecas', discotecas)
 
-# manda el push del dato a la base de datos
-result = firebase.post('/data/discotecas', discotecas)
-
+insertarDiscoteca('cats', 'calle Lavanfa', 22, 'moncloa')
 # metodo para leer un nodo en la base de datos discotecas en firebase
 # leer = firebase.get('/data/discotecas', '#nodo_de_ejemplo')
 # print(leer)
