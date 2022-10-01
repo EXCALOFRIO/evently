@@ -4,7 +4,23 @@ firebase = firebase.FirebaseApplication(
     "https://evently-646a2-default-rtdb.firebaseio.com/", None)
 
 
+# metodo instertar un nodo en la base de datos usuarios en firebase con los campos usuario,nombre,apellido,edad, email, contraseña
+
+
+def insertarUsuario(usuario, nombre, apellido, edad, email, contraseña):
+    usuarios = {
+        'usuario': usuario,
+        'nombre': nombre,
+        'apellido': apellido,
+        'edad': edad,
+        'email': email,
+        'contraseña': contraseña
+    }
+    firebase.post('/data/usuarios', usuarios)
+
 # metodo para insertar un nodo en la base de datos discotecas en firebase con los campos nombre, calle, numero y zona
+
+
 def insertarDiscoteca(nombre, calle, numero, zona):
     discotecas = {
         'nombre': nombre,
@@ -14,7 +30,22 @@ def insertarDiscoteca(nombre, calle, numero, zona):
     }
     firebase.post('/data/discotecas', discotecas)
 
+# metodo para insertar un nodo en la base de datos valoracones en firebase con los campos nombre_discoteca, nota, texto
+
+
+def insertarValoracion(nombre_discoteca, nota, texto):
+    valoraciones = {
+        'nombre_discoteca': nombre_discoteca,
+        'nota': nota,
+        'texto': texto
+    }
+    firebase.post('/data/valoraciones', valoraciones)
+
+
 insertarDiscoteca('cats', 'calle Lavanfa', 22, 'moncloa')
+insertarValoracion('cats', 5, 'muy buena')
+insertarUsuario('EXCALOFRIO', 'Alejandro', 'Ramirez',
+                20, 'aleramlar@gmail.com', 'perro69')
 # metodo para leer un nodo en la base de datos discotecas en firebase
 # leer = firebase.get('/data/discotecas', '#nodo_de_ejemplo')
 # print(leer)
