@@ -44,8 +44,20 @@ def insertarValoracion(nombre_discoteca, nota, texto):
 
 insertarDiscoteca('cats', 'calle Lavanfa', 22, 'moncloa')
 insertarValoracion('cats', 5, 'muy buena')
-insertarUsuario('EXCALOFRIO', 'Alejandro', 'Ramirez',
-                20, 'aleramlar@gmail.com', 'perro69')
+# comprobar mediante un metodo que no se puede insertar un usuario con el mismo nombre de usuario y email
+
+
+def comprobarUsuario(usuario, nombre, apellido, edad, email, contraseña):
+    usuarios = firebase.get('/data/usuarios', '')
+    for i in usuarios:
+        if usuarios[i]['usuario'] == usuario or usuarios[i]['email'] == email:
+            print('El usuario ya existe')
+            return False
+    return insertarUsuario(usuario, nombre, apellido, edad, email, contraseña)
+
+
+comprobarUsuario('EXCALOFRIO2', 'Alejandro', 'Ramirez',
+                 20, 'aleramlar2@gmail.com', 'perro69')
 # metodo para leer un nodo en la base de datos discotecas en firebase
 # leer = firebase.get('/data/discotecas', '#nodo_de_ejemplo')
 # print(leer)
@@ -59,4 +71,4 @@ def getNombre():
         print(discotecas[i]['nombre'])
 
 
-getNombre()
+# getNombre()
