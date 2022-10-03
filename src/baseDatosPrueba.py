@@ -19,17 +19,28 @@ def insertarUsuario(usuario, nombre, apellido, edad, email, contraseña):
     }
     firebase.post('/data/usuarios', usuarios)
 
-def insertarDiscoteca(nombre, calle, numero, zona):
+def insertarDiscoteca(nombre, calle, numero, zona, codigo_postal):
     discotecas = {
         'nombre': nombre,
         'calle': calle,
         'numero': numero,
-        'zona': zona
+        'zona': zona,
+        'codigo_postal' : codigo_postal
     }
     firebase.post('/data/discotecas', discotecas)
 
-def insertarValoracion(nombre_discoteca, nota, texto):
+def insertarFiesta(nombre, calle, numero, zona, codigo_postal):
+    fiestas = {
+        'nombre' : nombre,
+        'calle': calle,
+        'numero': numero,
+        'zona': zona,
+        'codigo_postal' : codigo_postal
+    }
+
+def insertarValoracion(usuario, nombre_discoteca, nota, texto):
     valoraciones = {
+        'usuario' : usuario,
         'nombre_discoteca': nombre_discoteca,
         'nota': nota,
         'texto': texto
@@ -83,12 +94,14 @@ def añadir():
     print('1. Discoteca')
     print('2. Usuario')
     print('3. Valoracion')
+    print('4. Fiesta')
     opcion = input('Elige una opcion: ')
     if opcion == '1':
         nombre = input('Introduce el nombre: ')
         calle = input('Introduce la calle: ')
         zona = input('Introduce la zona: ')
-        insertarDiscoteca(nombre, calle, zona)
+        codigo_postal = input ('Introduce codigo postal')
+        insertarDiscoteca(nombre, calle, zona, codigo_postal)
     elif opcion == '2':
         usuario = input('Introduce el usuario: ')
         nombre = input('Introduce el nombre: ')
@@ -102,6 +115,13 @@ def añadir():
         nota = input('Introduce la nota: ')
         texto = input('Introduce el texto: ')
         insertarValoracion(nombre_discoteca, nota, texto)
+    elif opcion == '4':
+        
+        nombre = input('Introduce el nombre: ')
+        calle = input('Introduce la calle: ')
+        zona = input('Introduce la zona: ')
+        codigo_postal = input('Introduce el codigo postal')
+        insertarFiesta(nombre, calle, zona, codigo_postal)
     else:
         print('Opcion incorrecta')
 
