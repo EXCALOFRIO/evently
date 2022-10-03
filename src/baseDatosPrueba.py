@@ -76,57 +76,6 @@ def inicioSesion(usuario, contraseña):
     print('El usuario o la contraseña son incorrectos')
     return False
 
-# crea una funcion que pregunte por que variable de dicoetca quieres filtrar mostrando las opciones de filtrado y te devuelve un diccionario con las discotecas que cumplen con el filtro
-# que no importe las mayusculas y minusculas
-# que no importe si es una calle o una avenida
-# tambien se pueda filtrar por las valoraciones usando el campo nombre_discoteca o por la nota de la valoracion
-
-
-def filtrarDiscotecas():
-    discotecas = firebase.get('/data/discotecas', '')
-    print('¿Por que quieres filtrar las discotecas?')
-    print('1. Por zona')
-    print('2. Por nombre')
-    print('3. Por calle')
-    print('4. Por valoraciones')
-    print('5. Por nota de valoracion')
-    filtro = input('Elige una opcion: ')
-    if filtro == '1':
-        zona = input('Introduce la zona: ')
-        for i in discotecas:
-            if discotecas[i]['zona'].lower() == zona.lower():
-                print(discotecas[i]['nombre'])
-    elif filtro == '2':
-        nombre = input('Introduce el nombre: ')
-        for i in discotecas:
-            if discotecas[i]['nombre'].lower() == nombre.lower():
-                print(discotecas[i]['nombre'])
-    elif filtro == '3':
-        calle = input('Introduce la calle: ')
-        for i in discotecas:
-            if discotecas[i]['calle'].lower() == calle.lower():
-                print(discotecas[i]['nombre'])
-    elif filtro == '4':
-        nombre_discoteca = input('Introduce el nombre de la discoteca: ')
-        valoraciones = firebase.get('/data/valoraciones', '')
-        for i in valoraciones:
-            if valoraciones[i]['nombre_discoteca'].lower() == nombre_discoteca.lower():
-                print(valoraciones[i]['nombre_discoteca'])
-    elif filtro == '5':
-        nota = input('Introduce la nota: ')
-        # transforma a int nota
-        nota = int(nota)
-        valoraciones = firebase.get('/data/valoraciones', '')
-        for i in valoraciones:
-            if valoraciones[i]['nota'] >= nota:
-                print(valoraciones[i]['nombre_discoteca'])
-
-    else:
-        print('Opcion incorrecta')
-
-
-#filtrarDiscotecas()
-
 #metodo para añadir a la base de datos,tiene que preguntar que queremos añadir y los campos a añadir
 #tiene que comprobar que no se puede añadir un usuario con el mismo nombre de usuario y email usando la funcion comprobarUsuario
 def añadir():
