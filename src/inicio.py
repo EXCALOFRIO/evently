@@ -44,11 +44,13 @@ botonRegistro = Button(frame2, text="Registro",
 botonRegistro.grid(column=1, row=0, padx=5, pady=10)
 
 
+# Acciones del botón Registro
 def botonRegistroClick():
     raiz.destroy()
     import registro
 
 
+# Acciones del botón Aceptar
 def botonAceptarClick():
     if comprobarInicioSesion(usuarioEntry.get(), contrasenaEntry.get()):
         raiz.destroy()

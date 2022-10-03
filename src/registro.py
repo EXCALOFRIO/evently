@@ -64,12 +64,13 @@ edadEntry.grid(column=3, row=2, padx=5, pady=5)
 
 frame2=Frame(raiz, pady=20)
 frame2.pack()
+
 #Estructura de la tabla usuario
 #def comprobarUsuario(usuario, nombre, apellido, edad, email, contraseña)
-
 botonAceptar=Button(frame2, text="Aceptar",command=lambda:botonAceptarClick(), font=("Arial", 12))
 botonAceptar.pack()
 
+#Acciones del boton Aceptar
 def botonAceptarClick():
     if comprobarUsuario(usuario.get(), nombre.get(), apellidos.get(), edad.get(), email.get(), contrasena.get()):
         raiz.destroy()
