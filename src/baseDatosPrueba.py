@@ -1,4 +1,4 @@
-# pip install git+https://github.com/ozgur/python-firebase
+#pip install git+https://github.com/ozgur/python-firebase
 #pip install python-firebase
 
 from firebase import firebase
