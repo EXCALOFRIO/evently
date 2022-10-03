@@ -34,7 +34,7 @@ def insertarDiscoteca(nombre, calle, numero, zona):
 
 # metodo para insertar un nodo en la base de datos valoracones en firebase con los campos nombre_discoteca, nota, texto
 
-
+# añadir que para hacer una valoracion haya que que poner un nombre de usuario con contraseña validas
 def insertarValoracion(nombre_discoteca, nota, texto):
     valoraciones = {
         'nombre_discoteca': nombre_discoteca,
