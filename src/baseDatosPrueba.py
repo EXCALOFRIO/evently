@@ -60,8 +60,8 @@ def comprobarUsuario(usuario, nombre, apellido, edad, email, contraseña):
     return insertarUsuario(usuario, nombre, apellido, edad, email, contraseña)
 
 
-comprobarUsuario('EXCALOFRIO2', 'Alejandro', 'Ramirez',
-                 20, 'aleramlar2@gmail.com', 'perro69')
+#comprobarUsuario('EXCALOFRIO2', 'Alejandro', 'Ramirez',20, 'aleramlar2@gmail.com', 'perro69')
+
 # metodo para leer un nodo en la base de datos discotecas en firebase
 # leer = firebase.get('/data/discotecas', '#nodo_de_ejemplo')
 # print(leer)
@@ -137,4 +137,35 @@ def filtrarDiscotecas():
         print('Opcion incorrecta')
 
 
-filtrarDiscotecas()
+#filtrarDiscotecas()
+
+#metodo para añadir a la base de datos,tiene que preguntar que queremos añadir y los campos a añadir
+#tiene que comprobar que no se puede añadir un usuario con el mismo nombre de usuario y email usando la funcion comprobarUsuario
+def añadir():
+    print('¿Que quieres añadir?')
+    print('1. Discoteca')
+    print('2. Usuario')
+    print('3. Valoracion')
+    opcion = input('Elige una opcion: ')
+    if opcion == '1':
+        nombre = input('Introduce el nombre: ')
+        calle = input('Introduce la calle: ')
+        zona = input('Introduce la zona: ')
+        insertarDiscoteca(nombre, calle, zona)
+    elif opcion == '2':
+        usuario = input('Introduce el usuario: ')
+        nombre = input('Introduce el nombre: ')
+        apellido = input('Introduce el apellido: ')
+        edad = input('Introduce la edad: ')
+        email = input('Introduce el email: ')
+        contraseña = input('Introduce la contraseña: ')
+        comprobarUsuario(usuario, nombre, apellido, edad, email, contraseña)
+    elif opcion == '3':
+        nombre_discoteca = input('Introduce el nombre de la discoteca: ')
+        nota = input('Introduce la nota: ')
+        texto = input('Introduce el texto: ')
+        insertarValoracion(nombre_discoteca, nota, texto)
+    else:
+        print('Opcion incorrecta')
+
+añadir()

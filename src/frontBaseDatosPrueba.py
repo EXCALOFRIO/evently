@@ -11,6 +11,8 @@ frame1.pack()
 inicioSesionText = Label(frame1, text="Inicio de Sesión", font=("Arial", 16))
 inicioSesionText.grid(row=0, padx=10, pady=10)
 
+
+
 usuarioLabel = Label(frame1, text="Usuario:")
 usuarioLabel.grid(row=1, pady=5)
 
@@ -32,12 +34,12 @@ frame2 = Frame(raiz)
 frame2.pack()
 
 # crea un boton aceptar que llame al metodo inicioSesion con los campos usuarioEntry y contrasenaEntry
-botonAceptar = Button(frame2, text="Aceptar", command=lambda: inicioSesion(
-    usuarioEntry.get(), contrasenaEntry.get()))
+botonAceptar = Button(frame2, text="Aceptar", command=lambda:inicioSesion(usuarioEntry.get(), contrasenaEntry.get()) )
 botonAceptar.grid(column=0, row=0, padx=5, pady=10)
 
 botonRegistro = Button(frame2, text="Registro")
 botonRegistro.grid(column=1, row=0, padx=5, pady=10)
+
 
 
 raiz.mainloop()
