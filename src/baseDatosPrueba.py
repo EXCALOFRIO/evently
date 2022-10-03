@@ -1,13 +1,16 @@
-#pip install git+https://github.com/ozgur/python-firebase
-#pip install python-firebase
+# pip install git+https://github.com/ozgur/python-firebase
+# pip install python-firebase
 
+import re
 from firebase import firebase
-firebase= firebase.FirebaseApplication(
+firebase = firebase.FirebaseApplication(
     "https://evently-646a2-default-rtdb.firebaseio.com/", None)
 
 ##############################################################################
 #METODOS PARA INSERTAR LOS DIFERENTES DATOS EN LAS TABLAS DE LA BASE DE DATOS#
 ##############################################################################
+
+
 def insertarUsuario(usuario, nombre, apellido, edad, email, contraseña):
     usuarios = {
         'usuario': usuario,
@@ -19,28 +22,31 @@ def insertarUsuario(usuario, nombre, apellido, edad, email, contraseña):
     }
     firebase.post('/data/usuarios', usuarios)
 
+
 def insertarDiscoteca(nombre, calle, numero, zona, codigo_postal):
     discotecas = {
         'nombre': nombre,
         'calle': calle,
         'numero': numero,
         'zona': zona,
-        'codigo_postal' : codigo_postal
+        'codigo_postal': codigo_postal
     }
     firebase.post('/data/discotecas', discotecas)
 
+
 def insertarFiesta(nombre, calle, numero, zona, codigo_postal):
     fiestas = {
-        'nombre' : nombre,
+        'nombre': nombre,
         'calle': calle,
         'numero': numero,
         'zona': zona,
-        'codigo_postal' : codigo_postal
+        'codigo_postal': codigo_postal
     }
+
 
 def insertarValoracion(usuario, nombre_discoteca, nota, texto):
     valoraciones = {
-        'usuario' : usuario,
+        'usuario': usuario,
         'nombre_discoteca': nombre_discoteca,
         'nota': nota,
         'texto': texto
@@ -50,13 +56,29 @@ def insertarValoracion(usuario, nombre_discoteca, nota, texto):
 ################################################################
 #METODO PARA COMPROBAR SI EL USUARIO EXISTE EN LA BASE DE DATOS#
 ################################################################
+
+
 def comprobarUsuario(usuario, nombre, apellido, edad, email, contraseña):
     usuarios = firebase.get('/data/usuarios', '')
     for i in usuarios:
         if usuarios[i]['usuario'] == usuario or usuarios[i]['email'] == email:
             print('El usuario ya existe')
             return False
-    return insertarUsuario(usuario, nombre, apellido, edad, email, contraseña)
+
+    insertarUsuario(usuario, nombre, apellido, edad, email, contraseña)
+    return True
+
+# metodo comprueba que el usuario y la contraseña son correctos
+
+
+def comprobarInicioSesion(usuario, contraseña):
+    usuarios = firebase.get('/data/usuarios', '')
+    for i in usuarios:
+        if usuarios[i]['usuario'] == usuario and usuarios[i]['contraseña'] == contraseña:
+            print('Inicio de sesion correcto, bienvenido: ', usuario)
+            return True
+    print('El usuario o la contraseña son incorrectos')
+    return False
 
 
 #comprobarUsuario('EXCALOFRIO2', 'Alejandro', 'Ramirez',20, 'aleramlar2@gmail.com', 'perro69')
@@ -87,8 +109,10 @@ def inicioSesion(usuario, contraseña):
     print('El usuario o la contraseña son incorrectos')
     return False
 
-#metodo para añadir a la base de datos,tiene que preguntar que queremos añadir y los campos a añadir
-#tiene que comprobar que no se puede añadir un usuario con el mismo nombre de usuario y email usando la funcion comprobarUsuario
+# metodo para añadir a la base de datos,tiene que preguntar que queremos añadir y los campos a añadir
+# tiene que comprobar que no se puede añadir un usuario con el mismo nombre de usuario y email usando la funcion comprobarUsuario
+
+
 def añadir():
     print('¿Que quieres añadir?')
     print('1. Discoteca')
@@ -100,7 +124,7 @@ def añadir():
         nombre = input('Introduce el nombre: ')
         calle = input('Introduce la calle: ')
         zona = input('Introduce la zona: ')
-        codigo_postal = input ('Introduce codigo postal')
+        codigo_postal = input('Introduce codigo postal')
         insertarDiscoteca(nombre, calle, zona, codigo_postal)
     elif opcion == '2':
         usuario = input('Introduce el usuario: ')
@@ -116,7 +140,7 @@ def añadir():
         texto = input('Introduce el texto: ')
         insertarValoracion(nombre_discoteca, nota, texto)
     elif opcion == '4':
-        
+
         nombre = input('Introduce el nombre: ')
         calle = input('Introduce la calle: ')
         zona = input('Introduce la zona: ')
@@ -125,4 +149,4 @@ def añadir():
     else:
         print('Opcion incorrecta')
 
-añadir()
+# añadir()
