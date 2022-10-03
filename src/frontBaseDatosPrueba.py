@@ -37,6 +37,7 @@ frame2.pack()
 botonAceptar = Button(frame2, text="Aceptar", command=lambda:inicioSesion(usuarioEntry.get(), contrasenaEntry.get()) )
 botonAceptar.grid(column=0, row=0, padx=5, pady=10)
 
+
 botonRegistro = Button(frame2, text="Registro")
 botonRegistro.grid(column=1, row=0, padx=5, pady=10)
 
