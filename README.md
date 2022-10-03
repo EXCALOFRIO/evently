@@ -1,5 +1,13 @@
 # Eventos y discotecas
 
+
+### Instalación
+
+```bash
+pip install python-firebase
+pip install git+https://github.com/ozgur/python-firebase
+```
+
 ### Requisitos para el proyecto
 
 - [ ] Crear un repositorio para garantizar el control de versiones.
