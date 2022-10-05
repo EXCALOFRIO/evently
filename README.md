@@ -4,8 +4,8 @@
 ### Instalación
 
 ```bash
-pip install python-firebase
-pip install git+https://github.com/ozgur/python-firebase
+pip install firebase-admin
+
 ```
 
 ### Requisitos para el proyecto
