@@ -1,10 +1,13 @@
 # pip install git+https://github.com/ozgur/python-firebase
 # pip install python-firebase
 
-import re
-from firebase import firebase
-firebase = firebase.FirebaseApplication(
-    "https://evently-646a2-default-rtdb.firebaseio.com/", None)
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import db
+cred = credentials.Certificate("firebase\evently-key.json")
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://evently-646a2-default-rtdb.firebaseio.com/'
+})
 
 ##############################################################################
 #METODOS PARA INSERTAR LOS DIFERENTES DATOS EN LAS TABLAS DE LA BASE DE DATOS#
@@ -20,7 +23,8 @@ def insertarUsuario(usuario, nombre, apellido, edad, email, contraseña):
         'email': email,
         'contraseña': contraseña
     }
-    firebase.post('/data/usuarios', usuarios)
+
+    db.reference('data').child('usuarios').push(usuarios)
 
 
 def insertarDiscoteca(nombre, calle, numero, zona, codigo_postal):
@@ -31,7 +35,7 @@ def insertarDiscoteca(nombre, calle, numero, zona, codigo_postal):
         'zona': zona,
         'codigo_postal': codigo_postal
     }
-    firebase.post('/data/discotecas', discotecas)
+    db.reference('data').child('discotecas').push(discotecas)
 
 
 def insertarFiesta(nombre, calle, numero, zona, codigo_postal):
@@ -42,6 +46,7 @@ def insertarFiesta(nombre, calle, numero, zona, codigo_postal):
         'zona': zona,
         'codigo_postal': codigo_postal
     }
+    db.reference('data').child('fiestas').push(fiestas)
 
 
 def insertarValoracion(usuario, nombre_discoteca, nota, texto):
@@ -51,34 +56,46 @@ def insertarValoracion(usuario, nombre_discoteca, nota, texto):
         'nota': nota,
         'texto': texto
     }
-    firebase.post('/data/valoraciones', valoraciones)
+    db.reference('data').child('valoraciones').push(valoraciones)
 
 ################################################################
 #METODO PARA COMPROBAR SI EL USUARIO EXISTE EN LA BASE DE DATOS#
 ################################################################
 
 
-def comprobarUsuario(usuario, nombre, apellido, edad, email, contraseña):
-    usuarios = firebase.get('/data/usuarios', '')
-    for i in usuarios:
-        if usuarios[i]['usuario'] == usuario or usuarios[i]['email'] == email:
+def comprobarUsuario(usuario,nombre,apellido,edad,email,contraseña):
+    usuarios = db.reference('data/usuarios')
+    #comprueba que no estan en uso ni el usuario y el email introducidos por el usuario estan en la base de datos y tambien q los campos no esten vacios
+    for i in usuarios.get():
+        if usuarios.get()[i]['usuario'] == usuario:
             print('El usuario ya existe')
             return False
-
-    insertarUsuario(usuario, nombre, apellido, edad, email, contraseña)
+        elif usuarios.get()[i]['email'] == email:
+            print('El email ya existe')
+            return False
+        elif usuario == '' or nombre == '' or apellido == '' or edad == '' or email == '' or contraseña == '':
+            print('No puede haber campos vacios')
+            return False
+    insertarUsuario(usuario,nombre,apellido,edad,email,contraseña)
     return True
+
+    
 
 # metodo comprueba que el usuario y la contraseña son correctos
 
 
 def comprobarInicioSesion(usuario, contraseña):
-    usuarios = firebase.get('/data/usuarios', '')
-    for i in usuarios:
-        if usuarios[i]['usuario'] == usuario and usuarios[i]['contraseña'] == contraseña:
-            print('Inicio de sesion correcto, bienvenido: ', usuario)
+    usuarios = db.reference('data/usuarios')
+    #comprobar para cada usuario si el usuario y la contraseña son correctos
+    for i in usuarios.get():
+        #print(usuarios.get()[i]['usuario'])
+        #print(usuarios.get()[i]['contraseña'])
+        if usuarios.get()[i]['usuario'] == usuario and usuarios.get()[i]['contraseña'] == contraseña:
+            print('Inicio de sesion correcto, bienvenido: ', usuarios.get()[i]['usuario'])
             return True
     print('El usuario o la contraseña son incorrectos')
     return False
+
 
 
 #comprobarUsuario('EXCALOFRIO2', 'Alejandro', 'Ramirez',20, 'aleramlar2@gmail.com', 'perro69')
@@ -91,23 +108,23 @@ def comprobarInicioSesion(usuario, contraseña):
 
 
 def getNombre():
-    discotecas = firebase.get('/data/discotecas', '')
-    for i in discotecas:
-        print(discotecas[i]['nombre'])
+    discotecas = db.reference('data/discotecas')
+    for i in discotecas.get():
+        print(discotecas.get()[i]['nombre'])
+
 
 
 # getNombre()
 
 # metodo para iniciar sesion, pide el usuario y la contraseña y comprueba si existe en la base de datos
 def inicioSesion(usuario, contraseña):
-    usuarios = firebase.get('/data/usuarios', '')
-    for i in usuarios:
-        if usuarios[i]['usuario'] == usuario and usuarios[i]['contraseña'] == contraseña:
-            print('Inicio de sesion correcto, bienvenido: ',
-                  usuarios[i]['usuario'])
+    usuarios = db.reference('data/usuarios')
+    for i in usuarios.get():
+        if usuarios.get()[i]['usuario'] == usuario and usuarios.get()[i]['contraseña'] == contraseña:
+            print('Inicio de sesion correcto, bienvenido: ', usuarios.get()[i]['usuario'])
             return True
-    print('El usuario o la contraseña son incorrectos')
-    return False
+        print('El usuario o la contraseña son incorrectos')
+        return False
 
 # metodo para añadir a la base de datos,tiene que preguntar que queremos añadir y los campos a añadir
 # tiene que comprobar que no se puede añadir un usuario con el mismo nombre de usuario y email usando la funcion comprobarUsuario

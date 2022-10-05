@@ -73,10 +73,11 @@ botonAceptar.pack()
 #Acciones del boton Aceptar
 def botonAceptarClick():
     if comprobarUsuario(usuario.get(), nombre.get(), apellidos.get(), edad.get(), email.get(), contrasena.get()):
+        messagebox.showinfo("Registro", "Usuario registrado correctamente")
         raiz.destroy()
         import inicio
     else:
-        messagebox.showerror("Error", "El usuario o el correo ya estan en uso")
+        messagebox.showerror("Error", "El usuario ya existe, pruebe con otro o el email ya está registrado o hay campos vacíos")
 
 
 raiz.mainloop()
