@@ -60,6 +60,13 @@ def botonRegistroClick():
 def comprobarInicioSesion(usuario, contraseña):
     usuarios = db.reference('data/usuarios')
     #comprobar para cada usuario si el usuario y la contraseña son correctos
+    if usuario=='':
+        print('Necesita indicar el usuario')
+        return False
+    elif contraseña=='':
+        print('Necesita escribir la contraseña')
+        return False
+        
     for i in usuarios.get():
         if usuarios.get()[i]['usuario'] == usuario and usuarios.get()[i]['contraseña'] == contraseña:
             print('Inicio de sesion correcto, bienvenido: ', usuarios.get()[i]['usuario'])
