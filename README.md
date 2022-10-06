@@ -1,9 +1,9 @@
 # Eventos y discotecas
 
-
 ### Instalación
 
 ```bash
+pip install pyglet
 pip install firebase-admin
 
 ```
