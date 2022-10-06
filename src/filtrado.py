@@ -18,31 +18,25 @@ def filtrarDiscotecas(opcion, consulta):
         discotecas = db.reference('data/discotecas')
         for i in discotecas.get():
             if discotecas.get()[i]['zona'].lower().startswith(consulta):
-                print(discotecas.get()[i]['nombre'])
+                return(discotecas.get()[i]['nombre'])
     elif opcion == 2:
                 #nombre = input("Introduzca el nombre: ")
                 discotecas = db.reference('data/discotecas')
                 for i in discotecas.get():
                     if discotecas.get()[i]['nombre'].lower().startswith(consulta):
-                        lista = []
-                        lista.append(discotecas.get()[i]['nombre'])
-                        print(lista)
+                        return(discotecas.get()[i]['nombre'])
     elif opcion == 3:
                 #calle = input("Introduzca la calle: ")
                 discotecas = db.reference('data/discotecas')
                 for i in discotecas.get():
                     if discotecas.get()[i]['calle'].lower().startswith(consulta):
-                        lista = []
-                        lista.append(discotecas.get()[i]['nombre'])
-                        print(lista)
+                        return(discotecas.get()[i]['nombre'])
     elif opcion == 4:
                 #valoracion = input("Introduzca la valoracion: ")
                 valoraciones = db.reference('data/valoraciones')
                 for i in valoraciones.get():
                     if valoraciones.get()[i]['texto'].lower().__contains__(consulta):
-                        lista = []
-                        lista.append(valoraciones.get()[i]['nombre_discoteca'])
-                        print(lista)
+                        return(valoraciones.get()[i]['nombre_discoteca'])
     elif opcion == 5:
             #ESTA OPCION NO FUNCIONA
             #MODIFICAR
@@ -64,6 +58,8 @@ def filtrarDiscotecas(opcion, consulta):
                 lista.sort()
                 print(lista)
                 
+print(f"Independance Club\nJoy Eslava\nKapital\nMedias Puri\nShoko\nVelvet")
+
 filtrarDiscotecas(1, "centro")
 
                 
