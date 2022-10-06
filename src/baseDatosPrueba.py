@@ -4,7 +4,7 @@
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
-cred = credentials.Certificate("firebase\evently-key.json")
+cred = credentials.Certificate("firebase/evently-key.json")
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://evently-646a2-default-rtdb.firebaseio.com/'
 })
