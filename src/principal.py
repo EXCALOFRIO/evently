@@ -29,6 +29,11 @@ boton3 = Button(frame1, text="Añadir Valoraciones",
                 command=lambda: botonValoracionClick(), font=("ABeeZee", 10))
 boton3.grid(column=2, row=0, padx=20, pady=30)
 
+boton4 = Button(frame1, text = "Volver atrás",
+                command = lambda: botonVolverAtras(), font =("ABeeZee", 10))
+boton4.grid(column = 1, row = 1, padx=20, pady=30)
+
+
 
 # Acciones del botón Discoteca
 def botonDicotecaClick():
@@ -48,6 +53,10 @@ def botonFiestaClick():
 def botonValoracionClick():
     inicio.destroy()
     import reseñas
+
+def botonVolverAtras():
+    inicio.destroy()
+    import registro
 
 
 inicio.mainloop()
