@@ -4,18 +4,19 @@ from filtrado import *
 class TestFiltrado(unittest.TestCase):
 
     def test_filtro_zona(self):
+        print("empieza test 1\n")
         sentencia = filtrarDiscotecas(1, "centro")
-        resultado = (f"Independance Club\nJoy Eslava\nKapital\nMedias Puri\nShoko\nVelvet")
+        resultado = ['Independance Club', 'Joy Eslava', 'Kapital', 'Medias Puri', 'Shoko', 'Velvet']
         self.assertEqual(sentencia,resultado)
       
     def test_filtro_nombre(self):
-        print("empieza test2")
+        print("empieza test 2\n")
         sentencia = filtrarDiscotecas(2,"blackhouse")
         resultado = "Blackhouse"
         self.assertEqual(sentencia,resultado)
     
     def test_filtro_valoracion(self):
-        print("empieza test3")
+        print("empieza test 3\n")
         sentencia = filtrarDiscotecas(4, "buena")
         resultado = "cats"
         self.assertEqual(sentencia,resultado)

@@ -16,9 +16,13 @@ def filtrarDiscotecas(opcion, consulta):
     if opcion == 1:
         #zona = input("Introduzca la zona: ")
         discotecas = db.reference('data/discotecas')
+        temp = []
         for i in discotecas.get():
             if discotecas.get()[i]['zona'].lower().startswith(consulta):
-                return(discotecas.get()[i]['nombre'])
+                resultado = (discotecas.get()[i]['nombre'])
+                temp.append(resultado)
+        return temp
+                
     elif opcion == 2:
                 #nombre = input("Introduzca el nombre: ")
                 discotecas = db.reference('data/discotecas')
@@ -58,8 +62,6 @@ def filtrarDiscotecas(opcion, consulta):
                 lista.sort()
                 print(lista)
                 
-print(f"Independance Club\nJoy Eslava\nKapital\nMedias Puri\nShoko\nVelvet")
-
 filtrarDiscotecas(1, "centro")
 
                 
