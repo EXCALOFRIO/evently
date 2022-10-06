@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
+from turtle import bgcolor
 
 import firebase_admin
 from firebase_admin import credentials
@@ -13,18 +14,19 @@ firebase_admin.initialize_app(cred, {
 inicio = Tk()
 inicio.title("EVENTLY")
 inicio.geometry("300x350")
+inicio.config(bg='lightblue')
 inicio.resizable(0, 0)
 
-frame1 = Frame(inicio, width=300, height=500)
+frame1 = Frame(inicio, width=300, height=500, bg='lightblue')
 frame1.pack()
 
-inicioSesion = Label(frame1, text="Inicio de Sesión", font=("Arial", 20))
+inicioSesion = Label(frame1, text="Inicio de Sesión", font=("Arial", 20), bg='lightblue')
 inicioSesion.grid(row=0, padx=10, pady=10)
 
-usuarioLabel = Label(frame1, text="Usuario:", font=("Arial", 12))
+usuarioLabel = Label(frame1, text="Usuario:", font=("Arial", 12), bg='lightblue')
 usuarioLabel.grid(row=1, pady=5)
 
-contrasenaLabel = Label(frame1, text="Contraseña:", font=("Arial", 12))
+contrasenaLabel = Label(frame1, text="Contraseña:", font=("Arial", 12), bg='lightblue')
 contrasenaLabel.grid(row=3, pady=5)
 
 nombreUsuario = StringVar()
@@ -37,16 +39,18 @@ contrasenaEntry = Entry(
 contrasenaEntry.grid(row=4)
 contrasenaEntry.config(show="*")
 
-frame2 = Frame(inicio)
+frame2 = Frame(inicio, bg='lightblue')
 frame2.pack()
 
 botonAceptar = Button(frame2, text="Aceptar",
                       command=lambda: botonAceptarClick(), font=("Arial", 10))
+botonAceptar.config(bg='#4295f5')
 botonAceptar.grid(column=0, row=0, padx=5, pady=10)
 
 
 botonRegistro = Button(frame2, text="Registro",
                        command=lambda: botonRegistroClick(), font=("Arial", 10))
+botonRegistro.config(bg='#4295f5')
 botonRegistro.grid(column=1, row=0, padx=5, pady=10)
 
 

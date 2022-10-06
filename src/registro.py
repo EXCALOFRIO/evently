@@ -7,33 +7,34 @@ from firebase_admin import db
 
 raiz=Tk()
 raiz.geometry("600x300")
+raiz.config(bg='lightblue')
 raiz.title("REGISTRO")
 
 frame=Frame(raiz, bg="lightblue")
 frame.pack()
 
-eventlyLbl=Label(frame, text="EVENTLY", font=("Arial", 14), pady=10)
+eventlyLbl=Label(frame, text="EVENTLY", font=("Arial", 14), pady=10, bg="lightblue")
 eventlyLbl.pack()
 
-frame1=Frame(raiz)
+frame1=Frame(raiz, bg="lightblue")
 frame1.pack()
 
-usuarioLbl=Label(frame1, text="Usuario:", font=("Arial", 12))
+usuarioLbl=Label(frame1, text="Usuario:", font=("Arial", 12), bg="lightblue")
 usuarioLbl.grid(column=0, row=0, padx=5, pady=5)
 
-nombreLbl=Label(frame1, text="Nombre:", font=("Arial", 12))
+nombreLbl=Label(frame1, text="Nombre:", font=("Arial", 12), bg="lightblue")
 nombreLbl.grid(column=0, row=1, padx=5, pady=5)
 
-apellidosLbl=Label(frame1, text="Apellido:", font=("Arial", 12))
+apellidosLbl=Label(frame1, text="Apellido:", font=("Arial", 12), bg="lightblue")
 apellidosLbl.grid(column=0, row=2, padx=5, pady=5)
 
-contrasenaLbl=Label(frame1, text="Contraseña:", font=("Arial", 12))
+contrasenaLbl=Label(frame1, text="Contraseña:", font=("Arial", 12), bg="lightblue")
 contrasenaLbl.grid(column=2, row=0, padx=5, pady=5)
 
-emailLbl=Label(frame1, text="E-mail:", font=("Arial", 12))
+emailLbl=Label(frame1, text="E-mail:", font=("Arial", 12), bg="lightblue")
 emailLbl.grid(column=2, row=1, padx=5, pady=5)
 
-edadLbl=Label(frame1, text="Edad:", font=("Arial", 12))
+edadLbl=Label(frame1, text="Edad:", font=("Arial", 12), bg="lightblue")
 edadLbl.grid(column=2, row=2, padx=5, pady=5)
 
 usuario=StringVar()
@@ -61,11 +62,12 @@ edad=IntVar()
 edadEntry=Entry(frame1, text=edad, font=("Arial", 12))
 edadEntry.grid(column=3, row=2, padx=5, pady=5)
 
-frame2=Frame(raiz, pady=20)
+frame2=Frame(raiz, pady=20, bg="lightblue")
 frame2.pack()
 
 
 botonAceptar=Button(frame2, text="Aceptar",command=lambda:botonAceptarClick(), font=("Arial", 12))
+botonAceptar.config(bg='#4295f5')
 botonAceptar.pack()
 #botonAtrás=Button(frame2, text="Atrás",command=lambda:botonAceptarClick(), font=("Arial", 12))
 #botonAceptar.pack()
