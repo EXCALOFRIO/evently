@@ -16,7 +16,6 @@ class Resennas():
         self.main_window.columnconfigure(0, weight=1)
         self.main_window.columnconfigure(1, weight=3)
         self.main_window.rowconfigure(0, weight=100)
-        #self.main_window.rowconfigure(1, weight=1)
 
         # Creacion del cuadro de la izquierda que contiene las valoraciones
         self.leftframe = tk.Frame(
@@ -83,9 +82,6 @@ class Resennas():
         self.resennas = tk.Label(self.rightframe, text=str(
             self.getValoraciones()), font=('Arial', 18))
         self.resennas.pack(pady=10)
-        # Caja de texto en donde los usuarios pueden crear sus reseñas
-        #self.txtbox = tk.Text(self.main_window)
-        #self.txtbox.grid(row=1, column=0, sticky='nsew', columnspan=2)
 
         self.main_window.mainloop()
 
