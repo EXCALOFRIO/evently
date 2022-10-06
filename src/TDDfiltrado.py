@@ -1,6 +1,8 @@
 import unittest
 from filtrado import *
 
+#--------------NO TERMINADO--DA ERROR----------------------------#
+
 class TestFiltrado(unittest.TestCase):
 
     def test_filtro_zona(self):
