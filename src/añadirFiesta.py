@@ -59,10 +59,9 @@ botonAceptar = Button(frame2, text="Aceptar",
                       command=lambda: botonAceptarClick(), font=("ABeeZee", 12))
 botonAceptar.pack()
 
-boton4 = Button(frame1, text = "Volver atrás",
-                command = lambda: botonVolverAtras(), font =("ABeeZee", 10))
-boton4.grid(column = 2, row = 1, padx=20, pady=5)
-
+boton4 = Button(frame1, text="Volver atrás",
+                command=lambda: botonVolverAtras(), font=("ABeeZee", 10))
+boton4.grid(column=2, row=1, padx=20, pady=5)
 
 
 def comprobarDatos(nombre, zona, calle, numero):
@@ -79,10 +78,11 @@ def botonAceptarClick():
     if comprobarDatos(nombre.get(), zona.get(), calle.get(), numero.get()):
         messagebox.showinfo("Datos", "Fiesta registrada correctamente")
         raiz.destroy()
-        #import inicio
+        import inicio
     else:
         messagebox.showerror("Error",
                              "Los datos introducidos no son correctos, por favor inténtelo de nuevo.")
+
 
 def botonVolverAtras():
     raiz.destroy()
