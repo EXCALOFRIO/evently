@@ -6,43 +6,40 @@ firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://evently-646a2-default-rtdb.firebaseio.com/'
 })
 
-def filtrarDiscotecas():
-    print("1. Zona")
-    print("2. Nombre")
-    print("3. Calle")
-    print("4. Valoracion")
-    print("5. Nota")
-    opcion = int(input("Introduzca el numero de la opcion que desea: "))
+def filtrarDiscotecas(opcion, consulta):
+    #print("1. Zona")
+    #print("2. Nombre")
+    #print("3. Calle")
+    #print("4. Valoracion")
+    #print("5. Nota")
+    #opcion = int(input("Introduzca el numero de la opcion que desea: "))
     if opcion == 1:
-        zona = input("Introduzca la zona: ")
+        #zona = input("Introduzca la zona: ")
         discotecas = db.reference('data/discotecas')
         for i in discotecas.get():
-            if discotecas.get()[i]['zona'].lower().startswith(zona):
-                lista = []
-                lista.append(discotecas.get()[i]['nombre'])
-                lista.sort()
-                print(lista)
+            if discotecas.get()[i]['zona'].lower().startswith(consulta):
+                print(discotecas.get()[i]['nombre'])
     elif opcion == 2:
-                nombre = input("Introduzca el nombre: ")
+                #nombre = input("Introduzca el nombre: ")
                 discotecas = db.reference('data/discotecas')
                 for i in discotecas.get():
-                    if discotecas.get()[i]['nombre'].lower().startswith(nombre):
+                    if discotecas.get()[i]['nombre'].lower().startswith(consulta):
                         lista = []
                         lista.append(discotecas.get()[i]['nombre'])
                         print(lista)
     elif opcion == 3:
-                calle = input("Introduzca la calle: ")
+                #calle = input("Introduzca la calle: ")
                 discotecas = db.reference('data/discotecas')
                 for i in discotecas.get():
-                    if discotecas.get()[i]['calle'].lower().startswith(calle):
+                    if discotecas.get()[i]['calle'].lower().startswith(consulta):
                         lista = []
                         lista.append(discotecas.get()[i]['nombre'])
                         print(lista)
     elif opcion == 4:
-                valoracion = input("Introduzca la valoracion: ")
+                #valoracion = input("Introduzca la valoracion: ")
                 valoraciones = db.reference('data/valoraciones')
                 for i in valoraciones.get():
-                    if valoraciones.get()[i]['texto'].lower().__contains__(valoracion):
+                    if valoraciones.get()[i]['texto'].lower().__contains__(consulta):
                         lista = []
                         lista.append(valoraciones.get()[i]['nombre_discoteca'])
                         print(lista)
@@ -67,6 +64,6 @@ def filtrarDiscotecas():
                 lista.sort()
                 print(lista)
                 
-filtrarDiscotecas()
+filtrarDiscotecas(1, "centro")
 
                 
