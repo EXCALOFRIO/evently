@@ -27,24 +27,22 @@ def insertarUsuario(usuario, nombre, apellido, edad, email, contraseña):
     db.reference('data').child('usuarios').push(usuarios)
 
 
-def insertarDiscoteca(nombre, calle, numero, zona, codigo_postal):
+def insertarDiscoteca(nombre, zona, calle, numero):
     discotecas = {
         'nombre': nombre,
-        'calle': calle,
-        'numero': numero,
         'zona': zona,
-        'codigo_postal': codigo_postal
+        'calle': calle,
+        'numero': numero
     }
     db.reference('data').child('discotecas').push(discotecas)
 
 
-def insertarFiesta(nombre, calle, numero, zona, codigo_postal):
+def insertarFiesta(nombre, calle, numero, zona):
     fiestas = {
         'nombre': nombre,
         'calle': calle,
         'numero': numero,
-        'zona': zona,
-        'codigo_postal': codigo_postal
+        'zona': zona
     }
     db.reference('data').child('fiestas').push(fiestas)
 
@@ -63,9 +61,9 @@ def insertarValoracion(usuario, nombre_discoteca, nota, texto):
 ################################################################
 
 
-def comprobarUsuario(usuario,nombre,apellido,edad,email,contraseña):
+def comprobarUsuario(usuario, nombre, apellido, edad, email, contraseña):
     usuarios = db.reference('data/usuarios')
-    #comprueba que no estan en uso ni el usuario y el email introducidos por el usuario estan en la base de datos y tambien q los campos no esten vacios
+    # comprueba que no estan en uso ni el usuario y el email introducidos por el usuario estan en la base de datos y tambien q los campos no esten vacios
     for i in usuarios.get():
         if usuarios.get()[i]['usuario'] == usuario:
             print('El usuario ya existe')
@@ -76,26 +74,25 @@ def comprobarUsuario(usuario,nombre,apellido,edad,email,contraseña):
         elif usuario == '' or nombre == '' or apellido == '' or edad == '' or email == '' or contraseña == '':
             print('No puede haber campos vacios')
             return False
-    insertarUsuario(usuario,nombre,apellido,edad,email,contraseña)
+    insertarUsuario(usuario, nombre, apellido, edad, email, contraseña)
     return True
 
-    
 
 # metodo comprueba que el usuario y la contraseña son correctos
 
 
 def comprobarInicioSesion(usuario, contraseña):
     usuarios = db.reference('data/usuarios')
-    #comprobar para cada usuario si el usuario y la contraseña son correctos
+    # comprobar para cada usuario si el usuario y la contraseña son correctos
     for i in usuarios.get():
-        #print(usuarios.get()[i]['usuario'])
-        #print(usuarios.get()[i]['contraseña'])
+        # print(usuarios.get()[i]['usuario'])
+        # print(usuarios.get()[i]['contraseña'])
         if usuarios.get()[i]['usuario'] == usuario and usuarios.get()[i]['contraseña'] == contraseña:
-            print('Inicio de sesion correcto, bienvenido: ', usuarios.get()[i]['usuario'])
+            print('Inicio de sesion correcto, bienvenido: ',
+                  usuarios.get()[i]['usuario'])
             return True
     print('El usuario o la contraseña son incorrectos')
     return False
-
 
 
 #comprobarUsuario('EXCALOFRIO2', 'Alejandro', 'Ramirez',20, 'aleramlar2@gmail.com', 'perro69')
@@ -113,7 +110,6 @@ def getNombre():
         print(discotecas.get()[i]['nombre'])
 
 
-
 # getNombre()
 
 # metodo para iniciar sesion, pide el usuario y la contraseña y comprueba si existe en la base de datos
@@ -121,7 +117,8 @@ def inicioSesion(usuario, contraseña):
     usuarios = db.reference('data/usuarios')
     for i in usuarios.get():
         if usuarios.get()[i]['usuario'] == usuario and usuarios.get()[i]['contraseña'] == contraseña:
-            print('Inicio de sesion correcto, bienvenido: ', usuarios.get()[i]['usuario'])
+            print('Inicio de sesion correcto, bienvenido: ',
+                  usuarios.get()[i]['usuario'])
             return True
         print('El usuario o la contraseña son incorrectos')
         return False
