@@ -66,6 +66,7 @@ def filtrarDiscotecas():
                     lista.append(valoraciones.get()[i]['nota'])
                 lista.sort()
                 print(lista)
+                
 filtrarDiscotecas()
 
                 
