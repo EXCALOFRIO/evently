@@ -6,6 +6,9 @@ from firebase_admin import db
 from baseDatosPrueba import insertarValoracion
 cred = credentials.Certificate("firebase/evently-key.json")
 
+import pyglet
+
+pyglet.font.add_file('fuentes/productSans.ttf')  # ABeeZee
 
 class Resennas():
     def __init__(self):
@@ -24,12 +27,12 @@ class Resennas():
 
         # Titulo frame izquierdo
         self.leftTitle = tk.Label(
-            self.leftframe, text='Escriba una Reseña', font=('Arial', 30))
+            self.leftframe, text='Escriba una Reseña', font=('ABeeZee', 30))
         self.leftTitle.pack()
 
         # Usuario
         self.usuario = tk.Label(
-            self.leftframe, text='Usuario:', font=('Arial', 18))
+            self.leftframe, text='Usuario:', font=('ABeeZee', 18))
         self.usuario.pack()
 
         self.usuarioEntry = tk.Entry(self.leftframe)
@@ -37,14 +40,14 @@ class Resennas():
 
         # Discoteca
         self.discoteca = tk.Label(
-            self.leftframe, text='Discoteca:', font=('Arial', 18))
+            self.leftframe, text='Discoteca:', font=('ABeeZee', 18))
         self.discoteca.pack()
 
         self.discotecaEntry = tk.Entry(self.leftframe)
         self.discotecaEntry.pack()
         # Caja de texto para escribir reseñas
         self.txtbox = tk.Text(self.leftframe, height=15,
-                              width=30, font=('Arial', 22))
+                              width=30, font=('ABeeZee', 22))
         self.txtbox.pack(pady=10)
 
         # Botones de seleccion de valoración
@@ -68,7 +71,7 @@ class Resennas():
 
         # Boton para añadir reseña
         self.boton = tk.Button(self.leftframe, text='Añadir reseña', font=(
-            'Arial', 16), command=self.validarResenna)
+            'ABeeZee', 16), command=self.validarResenna)
         self.boton.pack(pady=10)
         # Creacion del cuadro de la derecha que contiene las reseñas
         self.rightframe = tk.Frame(
@@ -76,11 +79,11 @@ class Resennas():
         self.rightframe.grid(row=0, column=1, sticky='nsew')
 
         self.rightTitle = tk.Label(
-            self.rightframe, text='Reseñas de otros usuarios', font=('Arial', 30))
+            self.rightframe, text='Reseñas de otros usuarios', font=('ABeeZee', 30))
         self.rightTitle.pack()
 
         self.resennas = tk.Label(self.rightframe, text=str(
-            self.getValoraciones()), font=('Arial', 18))
+            self.getValoraciones()), font=('ABeeZee', 18))
         self.resennas.pack(pady=10)
 
         self.main_window.mainloop()
@@ -104,7 +107,7 @@ class Resennas():
             valoracion = self.opcion.get()
             discoteca = self.discotecaEntry.get()
             user = self.usuarioEntry.get()
-            insertarValoracion(user, discoteca, valoracion, message)
+            insertarValoracion(user, discoteca, valoracion, message,'data')
         else:
             messagebox.showinfo(
                 title='Message', message='Introduce todos los campos para añadir una reseña')

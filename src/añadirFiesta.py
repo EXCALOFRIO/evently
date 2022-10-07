@@ -66,7 +66,7 @@ boton4.grid(column=2, row=1, padx=20, pady=5)
 
 def comprobarDatos(nombre, zona, calle, numero):
     if nombre != "" and zona != "" and calle != "" and numero != "":
-        insertarFiesta(nombre, zona, calle, numero)
+        insertarFiesta(nombre, zona, calle, numero,'data')
         return True
     else:
         return False
