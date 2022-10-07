@@ -82,6 +82,17 @@ def comprobarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta):
     return True
 
 
+def variableUsuario(usuario, nombre, apellido, edad, email, contraseña):
+    global usuarioActual
+    usuarioActual = {
+        'usuario': usuario,
+        'nombre': nombre,
+        'apellido': apellido,
+        'edad': edad,
+        'email': email,
+        'contraseña': contraseña
+    }
+
 def comprobarInicioSesion(usuario, contraseña, ruta):
     # añade el valor de ruta a /usuarios
     rutaDatabase = ruta + '/usuarios'
@@ -96,11 +107,13 @@ def comprobarInicioSesion(usuario, contraseña, ruta):
 
     for i in usuarios.get():
         if usuarios.get()[i]['usuario'] == usuario and usuarios.get()[i]['contraseña'] == contraseña:
+            variableUsuario(usuarios.get()[i]['usuario'], usuarios.get()[i]['nombre'], usuarios.get()[i]['apellido'], usuarios.get()[i]['edad'], usuarios.get()[i]['email'], usuarios.get()[i]['contraseña'])
             print('Inicio de sesion correcto, bienvenido: ',
                   usuarios.get()[i]['usuario'])
             return True
     print('El usuario o la contraseña son incorrectos')
     return False
+
 
 
 def filtrarDiscotecas(opcion, consulta):
@@ -152,3 +165,9 @@ def filtrarDiscotecas(opcion, consulta):
                 lista.append(valoraciones.get()[i]['nota'])
             lista.sort()
             #print(lista)
+
+
+#metodo devuelve los datos que se piden de usuarioActual
+def datosUsuario(datos):
+    return usuarioActual[datos]
+

@@ -5,6 +5,8 @@ import tkinter as tk
 
 import pyglet
 
+from baseDatosPrueba import datosUsuario
+
 pyglet.font.add_file('fuentes/productSans.ttf')  # ABeeZee
 
 
@@ -16,6 +18,15 @@ inicio.resizable(0, 0)
 
 frame1 = Frame(inicio, width=300, height=500)
 frame1.pack()
+
+#añade un texto encima de los botonoes con el nombre de usuario de la sesion que lo obtien de usuarioActual
+def textoUsuario():
+    texto = Label(inicio, text='Bienvenido: ' + datosUsuario('usuario') )
+    texto.place(x=10, y=10)
+
+textoUsuario()
+
+
 # añade 3 botones de colore salmón, verde y azul para añadir discotecas añadir fiestas y valoraciones
 boton1 = Button(frame1, text="Añadir Discoteca",
                 command=lambda: botonDicotecaClick(), font=("ABeeZee", 10))
