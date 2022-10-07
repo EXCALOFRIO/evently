@@ -12,8 +12,6 @@ firebase_admin.initialize_app(cred, {
 ##############################################################################
 #METODOS PARA INSERTAR LOS DIFERENTES DATOS EN LAS TABLAS DE LA BASE DE DATOS#
 ##############################################################################
-
-
 def insertarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta):
     usuarios = {
         'usuario': usuario,
@@ -55,6 +53,7 @@ def insertarValoracion(usuario, nombre_discoteca, nota, texto, ruta):
         'texto': texto
     }
     db.reference(ruta).child('valoraciones').push(valoraciones)
+
 
 ################################################################
 #METODO PARA COMPROBAR SI EL USUARIO EXISTE EN LA BASE DE DATOS#
@@ -113,7 +112,7 @@ def filtrarDiscotecas(opcion, consulta):
             if discotecas.get()[i]['zona'].lower().startswith(consulta):
                 resultado = (discotecas.get()[i]['nombre'])
                 temp.append(resultado)
-        print (temp)
+        return temp
 
     elif opcion == 2:
         # FILTRADO DE NOMBRE
