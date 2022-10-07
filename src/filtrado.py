@@ -1,21 +1,6 @@
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
-import sys
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
-from PyQt5 import QtCore, QtWidgets
-from PyQt5.uic import loadUi
-
-
-class MainWindow(QMainWindow):
-    def __init__(self):
-        super(MainWindow, self).__init__()
-        loadUi("IG_FILTRADO.ui", self)
-        self.setWindowTitle("Filtrado")
-        self.pushButton.clicked.connect(self.filtrar)
-        self.show()
 
 
 def filtrarDiscotecas(opcion, consulta):
@@ -69,9 +54,3 @@ def filtrarDiscotecas(opcion, consulta):
             lista.sort()
             print(lista)
 
-
-if __name__ == '_main_':
-    app = QApplication(sys.argv)
-    mi_app = MainWindow()
-    mi_app.show()
-    sys.exit(app.exec_())

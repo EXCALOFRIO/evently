@@ -40,15 +40,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout.addWidget(self.label)
         spacerItem = QtWidgets.QSpacerItem(464, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
-        self.pushButton_4 = QtWidgets.QPushButton(self.frame_superior)
-        self.pushButton_4.setObjectName("pushButton_4")
-        self.horizontalLayout.addWidget(self.pushButton_4)
-        self.pushButton_2 = QtWidgets.QPushButton(self.frame_superior)
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.horizontalLayout.addWidget(self.pushButton_2)
-        self.pushButton = QtWidgets.QPushButton(self.frame_superior)
-        self.pushButton.setObjectName("pushButton")
-        self.horizontalLayout.addWidget(self.pushButton)
         self.verticalLayout_2.addWidget(self.frame_superior)
         self.frame_interior = QtWidgets.QFrame(self.frame)
         self.frame_interior.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -94,9 +85,6 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "FILTRADO"))
-        self.pushButton_4.setText(_translate("MainWindow", "expandir"))
-        self.pushButton_2.setText(_translate("MainWindow", "minimizar"))
-        self.pushButton.setText(_translate("MainWindow", "cerrar"))
         self.comboBox.setItemText(0, _translate("MainWindow", "NOMBRE"))
         self.comboBox.setItemText(1, _translate("MainWindow", "ZONA"))
         self.comboBox.setItemText(2, _translate("MainWindow", "NOTA"))
@@ -108,3 +96,13 @@ class Ui_MainWindow(object):
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">BÚSQUEDA</p></body></html>"))
         self.pushButton_3.setText(_translate("MainWindow", "BUSCAR"))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
