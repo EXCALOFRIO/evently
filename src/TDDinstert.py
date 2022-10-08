@@ -1,7 +1,6 @@
 import unittest
-from filtrado import *
 
-from baseDatosPrueba import comprobarInicioSesion, comprobarUsuario, insertarDiscoteca, insertarFiesta, insertarUsuario, insertarValoracion
+from baseDatosPrueba import borrarDatos, comprobarInicioSesion, getItemBaseDatos, insertarDiscoteca, insertarFiesta, insertarUsuario, insertarValoracion
 
 # test para ver si el metodo insertarUsuario de la clase baseDatosPrueba funciona correctamente
 
@@ -9,67 +8,73 @@ from baseDatosPrueba import comprobarInicioSesion, comprobarUsuario, insertarDis
 class TestInsertarUsuario(unittest.TestCase):
 
     def test_insertarUsuario(self):
-        db.reference('test').child('usuarios').delete()
-        print("empieza test 1\n")
+        borrarDatos('usuarios')
         insertarUsuario('usuario', 'nombre', 'apellido',
                         '8', 'email@email.es', 'contraseña', 'test')
-
-        # imprime los usuarios de la base de datos y comprueba que las variable son correctas
-        usuarios = db.reference('test/usuarios')
-        for i in usuarios.get():
-            self.assertEqual(usuarios.get()[i]['usuario'], 'usuario')
-            self.assertEqual(usuarios.get()[i]['nombre'], 'nombre')
-            self.assertEqual(usuarios.get()[i]['apellido'], 'apellido')
-            self.assertEqual(usuarios.get()[i]['edad'], '8')
-            self.assertEqual(usuarios.get()[i]['email'], 'email@email.es')
-            self.assertEqual(usuarios.get()[i]['contraseña'], 'contraseña')
-            db.reference('test').child(i).delete()
-
+        self.assertEqual(getItemBaseDatos(
+            'usuarios', 'usuario', 'test')[0], 'usuario')
+        self.assertEqual(getItemBaseDatos(
+            'usuarios', 'nombre', 'test')[0], 'nombre')
+        self.assertEqual(getItemBaseDatos(
+            'usuarios', 'apellido', 'test')[0], 'apellido')
+        self.assertEqual(getItemBaseDatos('usuarios', 'edad', 'test')[0], '8')
+        self.assertEqual(getItemBaseDatos(
+            'usuarios', 'email', 'test')[0], 'email@email.es')
+        self.assertEqual(getItemBaseDatos(
+            'usuarios', 'contraseña', 'test')[0], 'contraseña')
+        borrarDatos('usuarios')
 
     def test_insertarDiscoteca(self):
-        print("empieza test 2\n")
+        borrarDatos('discotecas')
         insertarDiscoteca('nombre', 'zona', 'calle', '8', 'test')
-        discotecas = db.reference('test/discotecas')
-        for i in discotecas.get():
-            self.assertEqual(discotecas.get()[i]['nombre'], 'nombre')
-            self.assertEqual(discotecas.get()[i]['zona'], 'zona')
-            self.assertEqual(discotecas.get()[i]['calle'], 'calle')
-            self.assertEqual(discotecas.get()[i]['numero'], '8')
-            db.reference('test').child('discotecas').delete()
+        self.assertEqual(getItemBaseDatos(
+            'discotecas', 'nombre', 'test')[0], 'nombre')
+        self.assertEqual(getItemBaseDatos(
+            'discotecas', 'zona', 'test')[0], 'zona')
+        self.assertEqual(getItemBaseDatos(
+            'discotecas', 'calle', 'test')[0], 'calle')
+        self.assertEqual(getItemBaseDatos(
+            'discotecas', 'numero', 'test')[0], '8')
+        borrarDatos('discotecas')
 
     def test_insertatFiesta(self):
-        print("empieza test 3\n")
         insertarFiesta('nombre', 'calle', 'numero', 'zona', 'test')
-        fiestas = db.reference('test/fiestas')
-        for i in fiestas.get():
-            self.assertEqual(fiestas.get()[i]['nombre'], 'nombre')
-            self.assertEqual(fiestas.get()[i]['zona'], 'zona')
-            self.assertEqual(fiestas.get()[i]['calle'], 'calle')
-            self.assertEqual(fiestas.get()[i]['numero'], 'numero')
-            db.reference('test').child('fiestas').delete()
+        self.assertEqual(getItemBaseDatos(
+            'fiestas', 'nombre', 'test')[0], 'nombre')
+        self.assertEqual(getItemBaseDatos(
+            'fiestas', 'calle', 'test')[0], 'calle')
+        self.assertEqual(getItemBaseDatos(
+            'fiestas', 'numero', 'test')[0], 'numero')
+        self.assertEqual(getItemBaseDatos(
+            'fiestas', 'zona', 'test')[0], 'zona')
+        borrarDatos('fiestas')
 
     def test_insertarValoracion(self):
-        print("empieza test 4\n")
         insertarValoracion('usuario', 'nombre_discoteca',
                            'nota', 'texto', 'test')
-        valoraciones = db.reference('test/valoraciones')
-        for i in valoraciones.get():
-            self.assertEqual(valoraciones.get()[i]['usuario'], 'usuario')
-            self.assertEqual(valoraciones.get()[
-                             i]['nombre_discoteca'], 'nombre_discoteca')
-            self.assertEqual(valoraciones.get()[i]['nota'], 'nota')
-            self.assertEqual(valoraciones.get()[i]['texto'], 'texto')
-            db.reference('test').child('valoraciones').delete()
+        self.assertEqual(getItemBaseDatos(
+            'valoraciones', 'usuario', 'test')[0], 'usuario')
+        self.assertEqual(getItemBaseDatos(
+            'valoraciones', 'nombre_discoteca', 'test')[0], 'nombre_discoteca')
+        self.assertEqual(getItemBaseDatos(
+            'valoraciones', 'nota', 'test')[0], 'nota')
+        self.assertEqual(getItemBaseDatos(
+            'valoraciones', 'texto', 'test')[0], 'texto')
+        borrarDatos('valoraciones')
 
     def test_inicioSession(self):
-        db.reference('test/usuarios').child('usuarios').delete()
-        print("empieza test 5\n")
-        insertarUsuario('usuario', 'nombre', 'apellido',
-                        '8', 'email@gmail.com', 'contraseña', 'test')
+        borrarDatos('usuarios')
+        insertarUsuario('usuario', 'nombre', 'apellido', '8',
+                        'email@gmail.com', 'contraseña', 'test')
         self.assertEqual(comprobarInicioSesion(
             'usuario', 'contraseña', 'test'), True)
-        db.reference('test').child('usuarios').delete()
+        borrarDatos('usuarios')
 
 
 if __name__ == '__main__':
     unittest.main()
+
+
+borrarDatos('usuarios')
+borrarDatos('discotecas')
+borrarDatos('fiestas')

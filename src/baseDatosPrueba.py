@@ -1,6 +1,10 @@
 # pip install git+https://github.com/ozgur/python-firebase
 # pip install python-firebase
 
+import itertools
+import time
+import email
+from operator import ge
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
@@ -12,6 +16,8 @@ firebase_admin.initialize_app(cred, {
 ##############################################################################
 #METODOS PARA INSERTAR LOS DIFERENTES DATOS EN LAS TABLAS DE LA BASE DE DATOS#
 ##############################################################################
+
+
 def insertarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta):
     usuarios = {
         'usuario': usuario,
@@ -55,31 +61,22 @@ def insertarValoracion(usuario, nombre_discoteca, nota, texto, ruta):
     db.reference(ruta).child('valoraciones').push(valoraciones)
 
 
+def borrarDatos(datos):
+    db.reference('test').child(datos).delete()
+
+
+def getItemBaseDatos(elemento, variable, ruta):
+    elemento = db.reference(ruta+'/'+elemento)
+    lista = []
+    for k, v in elemento.get().items():
+        lista.append(v[variable])
+    return lista
+
+# crea un metodo que devuelava la key sabiendo la posocion en el array
+
 ################################################################
 #METODO PARA COMPROBAR SI EL USUARIO EXISTE EN LA BASE DE DATOS#
 ################################################################
-
-
-def comprobarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta):
-
-    usuarios = db.reference('data/usuarios')
-    # comprueba que no estan en uso ni el usuario y el email introducidos por el usuario estan en la base de datos y tambien q los campos no esten vacios
-    for i in usuarios.get():
-        if usuarios.get()[i]['usuario'] == usuario:
-            print('El usuario ya existe')
-            return False
-        elif usuarios.get()[i]['email'] == email:
-            print('El email ya existe')
-            return False
-        elif usuario == '' or nombre == '' or apellido == '' or edad == '' or email == '' or contraseña == '':
-            print('No puede haber campos vacios')
-            return False
-        # comprobar que el email esta en buen formato con el @ y el . email
-        elif '@' not in email or '.' not in email:
-            print('El email no es correcto')
-            return False
-    insertarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta)
-    return True
 
 
 def variableUsuario(usuario, nombre, apellido, edad, email, contraseña):
@@ -93,27 +90,34 @@ def variableUsuario(usuario, nombre, apellido, edad, email, contraseña):
         'contraseña': contraseña
     }
 
+
+def variableUsuarioSimp(usuario):
+    global usuarioActualSimp
+    usuarioActualSimp = {
+        'usuario': usuario,
+    }
+
+
+def datosUsuario(datos):
+    return usuarioActualSimp[datos]
+
+
+def comprobarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta):
+    if usuario in getItemBaseDatos('usuarios', 'usuario', ruta) or email in getItemBaseDatos('usuarios', 'email', ruta) or '@' not in email or '.' not in email or usuario == '' or nombre == '' or apellido == '' or edad == '' or email == '' or contraseña == '':
+        print('El usuario o el email ya existen o no ha rellenado todos los campos o el email no es correcto')
+        return False
+    insertarUsuario(usuario, nombre, apellido,
+                    edad, email, contraseña, ruta)
+    return True
+
+
 def comprobarInicioSesion(usuario, contraseña, ruta):
-    # añade el valor de ruta a /usuarios
-    rutaDatabase = ruta + '/usuarios'
-    usuarios = db.reference(rutaDatabase)
-    # comprobar para cada usuario si el usuario y la contraseña son correctos
-    if usuario == '':
-        print('Necesita indicar el usuario')
-        return False
-    elif contraseña == '':
-        print('Necesita escribir la contraseña')
-        return False
-
-    for i in usuarios.get():
-        if usuarios.get()[i]['usuario'] == usuario and usuarios.get()[i]['contraseña'] == contraseña:
-            variableUsuario(usuarios.get()[i]['usuario'], usuarios.get()[i]['nombre'], usuarios.get()[i]['apellido'], usuarios.get()[i]['edad'], usuarios.get()[i]['email'], usuarios.get()[i]['contraseña'])
-            print('Inicio de sesion correcto, bienvenido: ',
-                  usuarios.get()[i]['usuario'])
-            return True
-    print('El usuario o la contraseña son incorrectos')
+    indice = getItemBaseDatos('usuarios', 'usuario', ruta).index(usuario)
+    if getItemBaseDatos('usuarios', 'contraseña', ruta)[indice] == contraseña:
+        variableUsuarioSimp(usuario)
+        return True
+    print('El usuario o la contraseña no son correctos, o no ha rellenado todos los campos')
     return False
-
 
 
 def filtrarDiscotecas(opcion, consulta):
@@ -121,53 +125,37 @@ def filtrarDiscotecas(opcion, consulta):
         # FILTRADO DE ZONA
         discotecas = db.reference('data/discotecas')
         temp = []
-        for i in discotecas.get():
-            if discotecas.get()[i]['zona'].lower().startswith(consulta):
-                resultado = (discotecas.get()[i]['nombre'])
+        for k, v in discotecas.get().items():
+            if v['zona'].lower().startswith(consulta):
+                resultado = v['nombre']
                 temp.append(resultado)
         return temp
 
     elif opcion == 2:
         # FILTRADO DE NOMBRE
         discotecas = db.reference('data/discotecas')
-        for i in discotecas.get():
-            if discotecas.get()[i]['nombre'].lower().startswith(consulta):
-                return(discotecas.get()[i]['nombre'])
+        temp = []
+        for k, v in discotecas.get().items():
+            if v['nombre'].lower().startswith(consulta):
+                resultado = v['nombre']
+                temp.append(resultado)
+        return temp
     elif opcion == 3:
         # FILTRADO DE CALLE
         discotecas = db.reference('data/discotecas')
-        for i in discotecas.get():
-            if discotecas.get()[i]['calle'].lower().startswith(consulta):
-                return(discotecas.get()[i]['nombre'])
+        temp = []
+        for k, v in discotecas.get().items():
+            if v['calle'].lower().startswith(consulta):
+                resultado = v['nombre']
+                temp.append(resultado)
+        return temp
+
     elif opcion == 4:
         # FILTRADO DE VALORACION
         valoraciones = db.reference('data/valoraciones')
-        for i in valoraciones.get():
-            if valoraciones.get()[i]['texto'].lower().__contains__(consulta):
-                return(valoraciones.get()[i]['nombre_discoteca'])
-    elif opcion == 5:
-        # ESTA OPCION NO FUNCIONA
-        # MODIFICAR
-        print("1. Mayor a menor")
-        print("2. Menor a mayor")
-        opcion = int(input("Introduzca el numero de la opcion que desea: "))
-        if opcion == 1:
-            valoraciones = db.reference('data/valoraciones')
-            lista = []
-            for i in valoraciones.get():
-                lista.append(valoraciones.get()[i]['nota'])
-            lista.sort(reverse=True)
-            print(lista)
-        elif opcion == 2:
-            valoraciones = db.reference('data/valoraciones')
-            lista = []
-            for i in valoraciones.get():
-                lista.append(valoraciones.get()[i]['nota'])
-            lista.sort()
-            #print(lista)
-
-
-#metodo devuelve los datos que se piden de usuarioActual
-def datosUsuario(datos):
-    return usuarioActual[datos]
-
+        temp = []
+        for k, v in valoraciones.get().items():
+            if v['texto'].lower().__contains__(consulta):
+                resultado = v['nombre_discoteca']
+                temp.append(resultado)
+        return temp
