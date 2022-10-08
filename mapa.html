@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_33b433eb28b230d7d517a1b2c477127d {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_33b433eb28b230d7d517a1b2c477127d" ></div>
+        
+</body>
+<script>    
+    
+            var map_33b433eb28b230d7d517a1b2c477127d = L.map(
+                "map_33b433eb28b230d7d517a1b2c477127d",
+                {
+                    center: [40.43518307438477, -3.719169233367488],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 10,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_c6d4877df8f65ed8142d1de8c2ae4b96 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_33b433eb28b230d7d517a1b2c477127d);
+        
+    
+            var marker_2607e549471eaafdd70834ab45292474 = L.marker(
+                [40.449073632580344, -3.695012540855487],
+                {}
+            ).addTo(map_33b433eb28b230d7d517a1b2c477127d);
+        
+    
+        var popup_cce4e69c7ed0a12843bdbfd19cc7b999 = L.popup({"maxWidth": 200});
+
+        
+            var html_998572214109330635747a6809949d96 = $(`<div id="html_998572214109330635747a6809949d96" style="width: 100.0%; height: 100.0%;"><p><strong>NUIT</strong> <br> <strong>Dirección:</strong> Calle de Orense, 10 </p></div>`)[0];
+            popup_cce4e69c7ed0a12843bdbfd19cc7b999.setContent(html_998572214109330635747a6809949d96);
+        
+
+        marker_2607e549471eaafdd70834ab45292474.bindPopup(popup_cce4e69c7ed0a12843bdbfd19cc7b999)
+        ;
+
+        
+    
+    
+            marker_2607e549471eaafdd70834ab45292474.bindTooltip(
+                `<div>
+                     Click For More Info
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_3e14524f174020a8786871b05b66b355 = L.marker(
+                [40.4612885534134, -3.766631098984334],
+                {}
+            ).addTo(map_33b433eb28b230d7d517a1b2c477127d);
+        
+    
+        var popup_014ac4948abe7e7415c3b700f29a2429 = L.popup({"maxWidth": 200});
+
+        
+            var html_1055332769422d73cc757b716d818326 = $(`<div id="html_1055332769422d73cc757b716d818326" style="width: 100.0%; height: 100.0%;"><p> <strong>BLACKHAUS</strong> <br> <strong>Dirección:</strong> Ctra. de La Coruña, Km. 8.700 </p></div>`)[0];
+            popup_014ac4948abe7e7415c3b700f29a2429.setContent(html_1055332769422d73cc757b716d818326);
+        
+
+        marker_3e14524f174020a8786871b05b66b355.bindPopup(popup_014ac4948abe7e7415c3b700f29a2429)
+        ;
+
+        
+    
+    
+            marker_3e14524f174020a8786871b05b66b355.bindTooltip(
+                `<div>
+                     Click For More Info
+                 </div>`,
+                {"sticky": true}
+            );
+        
+</script>
