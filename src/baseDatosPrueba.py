@@ -31,6 +31,14 @@ def insertarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta):
     db.reference(ruta).child('usuarios').push(usuarios)
 
 
+def insertarDiscotecaEficiente(nombre, ubicacion, ruta):
+    discotecas = {
+        'nombre': nombre,
+        'ubicacion': ubicacion
+    }
+    db.reference(ruta).child('discotecasEficientes').push(discotecas)
+
+
 def insertarDiscoteca(nombre, zona, calle, numero, ruta):
     discotecas = {
         'nombre': nombre,
@@ -39,6 +47,34 @@ def insertarDiscoteca(nombre, zona, calle, numero, ruta):
         'numero': numero
     }
     db.reference(ruta).child('discotecas').push(discotecas)
+    ubicacion = calle + ', ' + str(numero) + ', ' + zona + ', Madrid España'
+    ubicacion2 = ubicacion.replace('C ', 'Calle ').replace('Av ', 'Avenida ').replace(
+        'Avda ', 'Avenida ').replace('C.', 'Calle ').replace('PL ', 'Plaza ').replace('c', 'Calle ').replace('av', 'Avenida ').replace('avda', 'Avenida ').replace('c.', 'Calle ').replace('pl', 'Plaza ')
+    insertarDiscotecaEficiente(nombre, ubicacion2, ruta)
+
+# crea un metodo que de la base de datos extraiga todos los datos de las discotecas y llame a la funcion insertarDiscotecaEficiente
+
+
+def insertarDiscotecasEficientes(ruta):
+    discotecas = db.reference(ruta+'/discotecas')
+    for k, v in discotecas.get().items():
+        nombre = v['nombre']
+        calle = v['calle']
+        numero = v['numero']
+        zona = v['zona']
+        ubicacion = calle + ', ' + \
+            str(numero) + ', Madrid España'
+        ubicacion2 = ubicacion.replace('C ', 'Calle ').replace('Av ', 'Avenida ').replace(
+            'Avda ', 'Avenida ').replace('C.', 'Calle ').replace('PL ', 'Plaza ').replace('c ', 'Calle ').replace('av ', 'Avenida ').replace('avda ', 'Avenida ').replace('c.', 'Calle ').replace('pl ', 'Plaza ')
+        insertarDiscotecaEficiente(nombre, ubicacion2, ruta)
+
+
+def insertarFiestaEficiente(nombre, ubicacion, ruta):
+    fiestas = {
+        'nombre': nombre,
+        'ubicacion': ubicacion
+    }
+    db.reference(ruta).child('fiestasEficientes').push(fiestas)
 
 
 def insertarFiesta(nombre, calle, numero, zona, ruta):
@@ -49,6 +85,10 @@ def insertarFiesta(nombre, calle, numero, zona, ruta):
         'zona': zona
     }
     db.reference(ruta).child('fiestas').push(fiestas)
+    ubicacion = calle + ', ' + str(numero) + ', ' + zona + ', Madrid España'
+    ubicacion2 = ubicacion.replace('C ', 'Calle ').replace('Av ', 'Avenida ').replace(
+        'Avda ', 'Avenida ').replace('C.', 'Calle ').replace('PL ', 'Plaza ').replace('c', 'Calle ').replace('av', 'Avenida ').replace('avda', 'Avenida ').replace('c.', 'Calle ').replace('pl', 'Plaza ')
+    insertarFiestaEficiente(nombre, ubicacion2, ruta)
 
 
 def insertarValoracion(usuario, nombre_discoteca, nota, texto, ruta):
