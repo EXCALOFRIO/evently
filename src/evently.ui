@@ -419,7 +419,7 @@ QPushButton:hover{
              <item>
               <widget class="QStackedWidget" name="stackedWidget">
                <property name="currentIndex">
-                <number>4</number>
+                <number>1</number>
                </property>
                <widget class="QWidget" name="page_mapa"/>
                <widget class="QWidget" name="page_filtrado">
@@ -437,7 +437,8 @@ QPushButton:hover{
                  <item>
                   <widget class="QComboBox" name="comboBox">
                    <property name="styleSheet">
-                    <string notr="true">color: rgb(87, 227, 137);</string>
+                    <string notr="true">color: rgb(87, 227, 137);
+background-color: #000000ff;</string>
                    </property>
                    <item>
                     <property name="text">
