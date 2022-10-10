@@ -17,6 +17,7 @@ from PyQt5.uic import loadUi
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
+        """LA BASE DE TODO ES EL CENTRAL WIDGET, AQUI ESTÁN LOS COLORES Y COMO SE DISTRIBUYE NO TOCAR NADA DE AQUI"""
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(812, 533)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -49,6 +50,7 @@ class Ui_MainWindow(object):
 "    background-color: rgb(61, 61, 61);\n"
 "    border-radius: 20px\n"
 "}")
+        """FRAME SUPERIOR ES LA BARRA DE MENÚ DE ARRIBA DEL TODO"""
         self.frame_superior.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_superior.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_superior.setObjectName("frame_superior")
@@ -97,6 +99,8 @@ class Ui_MainWindow(object):
         self.pushButton.setObjectName("pushButton")
         self.horizontalLayout_3.addWidget(self.pushButton)
         self.verticalLayout_2.addWidget(self.frame_superior)
+        
+        """FRAME DONDE ESTA DODO MENOS LA BARRA DE ARRIBA"""
         self.frame_contenido = QtWidgets.QFrame(self.frame)
         self.frame_contenido.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_contenido.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -127,6 +131,7 @@ class Ui_MainWindow(object):
 "    color: rgb(0,0,0);\n"
 "    font: 77 12pt \"Arial Black\";\n"
 "}")
+        """FRAME DONDE ESTA EL MENU"""
         self.frame_control.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_control.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_control.setObjectName("frame_control")
@@ -193,6 +198,7 @@ class Ui_MainWindow(object):
 "\n"
 "\n"
 "")
+        """DONDE ESTA LO DE A LA DERECHA DE LA PARTE DONDE ESTÁ EL MENÚ, ES DECIR DONDE VA A APARECER EL RESTO DE PÁGINAS"""
         self.frame_paginas.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_paginas.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_paginas.setObjectName("frame_paginas")
@@ -203,9 +209,13 @@ class Ui_MainWindow(object):
         self.stackedWidget = QtWidgets.QStackedWidget(self.frame_paginas)
         self.stackedWidget.setObjectName("stackedWidget")
         self.page_mapa = QtWidgets.QWidget()
+        
+        """PAGINA DEL MAPA"""
         self.page_mapa.setObjectName("page_mapa")
         self.stackedWidget.addWidget(self.page_mapa)
         self.page_filtrado = QtWidgets.QWidget()
+        
+        """PAGINA DEL FILTRADO"""
         self.page_filtrado.setObjectName("page_filtrado")
         self.verticalLayout_13 = QtWidgets.QVBoxLayout(self.page_filtrado)
         self.verticalLayout_13.setObjectName("verticalLayout_13")
@@ -242,6 +252,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_13.addWidget(self.textBrowser_2)
         self.stackedWidget.addWidget(self.page_filtrado)
         self.page_AddDiscoteca = QtWidgets.QWidget()
+        
+        """PAGINA DE AÑADIR DISCOTECAS"""
         self.page_AddDiscoteca.setObjectName("page_AddDiscoteca")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.page_AddDiscoteca)
         self.verticalLayout.setObjectName("verticalLayout")
@@ -310,6 +322,8 @@ class Ui_MainWindow(object):
         self.verticalLayout.setStretch(2, 8)
         self.stackedWidget.addWidget(self.page_AddDiscoteca)
         self.page_AddFiesta = QtWidgets.QWidget()
+        
+        """PAGINA DE AÑADIR FIESTA"""
         self.page_AddFiesta.setObjectName("page_AddFiesta")
         self.verticalLayout_9 = QtWidgets.QVBoxLayout(self.page_AddFiesta)
         self.verticalLayout_9.setObjectName("verticalLayout_9")
@@ -412,6 +426,7 @@ class Ui_MainWindow(object):
 "    background-color: rgb(87, 227, 137);\n"
 "    font: 87 12pt \"Arial Black\";    \n"
 "}")
+        """PAGINA AÑADIR RESEÑA"""
         self.page_AddResenna.setObjectName("page_AddResenna")
         self.horizontalLayout_8 = QtWidgets.QHBoxLayout(self.page_AddResenna)
         self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
