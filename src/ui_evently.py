@@ -17,12 +17,26 @@ from PyQt5.uic import loadUi
 
 class Ui_MainWindow(object):
         
+        def buttonMapa(self):
+                self.stackedWidget.setCurrentWidget(self.page_mapa)
+                print("he selecionado el boton MAPA")
+        
         def buttonFiltrado(self):
                 self.stackedWidget.setCurrentWidget(self.page_filtrado)
                 print("he selecionado el boton FILTRADO")
 
-        def hola():
-                print ("hola")
+        def buttonDiscotecas(self):
+                self.stackedWidget.setCurrentWidget(self.page_AddDiscoteca)
+                print("he selecionado el boton DISCOTECAS")
+        
+        def buttonFiesta(self):
+                self.stackedWidget.setCurrentWidget(self.page_AddFiesta)
+                print("he selecionado el boton FIESTA")     
+                
+        
+        def buttonResenna(self):
+                self.stackedWidget.setCurrentWidget(self.page_AddResenna)
+                print("he selecionado el boton RESEÑA")
                 
         def setupUi(self, MainWindow):
                 """LA BASE DE TODO ES EL CENTRAL WIDGET, AQUI ESTÁN LOS COLORES Y COMO SE DISTRIBUYE NO TOCAR NADA DE AQUI"""
@@ -99,6 +113,7 @@ class Ui_MainWindow(object):
                 self.pushButton_Mapa = QtWidgets.QPushButton(self.frame_control)
                 self.pushButton_Mapa.setEnabled(True)
                 self.pushButton_Mapa.setMinimumSize(QtCore.QSize(0, 40))
+                self.pushButton_Mapa.clicked.connect(self.buttonMapa)
                 self.pushButton_Mapa.setObjectName("pushButton_Mapa")
                 self.verticalLayout_3.addWidget(self.pushButton_Mapa)
                 self.pushButton_Filtrado = QtWidgets.QPushButton(self.frame_control)
@@ -110,16 +125,19 @@ class Ui_MainWindow(object):
                 self.pushButton_Discoteca = QtWidgets.QPushButton(self.frame_control)
                 self.pushButton_Discoteca.setEnabled(True)
                 self.pushButton_Discoteca.setMinimumSize(QtCore.QSize(0, 40))
+                self.pushButton_Discoteca.clicked.connect(self.buttonDiscotecas)
                 self.pushButton_Discoteca.setObjectName("pushButton_Discoteca")
                 self.verticalLayout_3.addWidget(self.pushButton_Discoteca)
                 self.pushButton_Fiesta = QtWidgets.QPushButton(self.frame_control)
                 self.pushButton_Fiesta.setEnabled(True)
                 self.pushButton_Fiesta.setMinimumSize(QtCore.QSize(0, 40))
+                self.pushButton_Fiesta.clicked.connect(self.buttonFiesta)
                 self.pushButton_Fiesta.setObjectName("pushButton_Fiesta")
                 self.verticalLayout_3.addWidget(self.pushButton_Fiesta)
                 self.pushButton_Resenna = QtWidgets.QPushButton(self.frame_control)
                 self.pushButton_Resenna.setEnabled(True)
                 self.pushButton_Resenna.setMinimumSize(QtCore.QSize(0, 40))
+                self.pushButton_Resenna.clicked.connect(self.buttonResenna)
                 self.pushButton_Resenna.setObjectName("pushButton_Resenna")
                 self.verticalLayout_3.addWidget(self.pushButton_Resenna)
                 self.horizontalLayout.addWidget(self.frame_control)
