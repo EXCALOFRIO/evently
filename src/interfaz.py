@@ -8,9 +8,9 @@ from PyQt5.uic import loadUi
 class VentanaPrincipal(QMainWindow):
     def __init__(self):
         super(VentanaPrincipal, self).__init__()
-        loadUi('evently.ui', self)
+        loadUi('src/evently.ui', self)
         
-        self.pushButton_Menu.clicked.connect(self.mover_Menu)
+        #self.pushButton_Menu.clicked.connect(self.mover)
         
         #self.pushButton_Minimizar.hide()
         #self.pushButton_Mapa.clicked.connect(self.)
@@ -19,12 +19,13 @@ class VentanaPrincipal(QMainWindow):
         #self.pushButton_Fiesta.connect(self.)
         #self.pushButton_Resenna.connect(self.)
         """CONTROL BARRA TÍTULOS"""
-        self.pushButton_Aumetar.clicked.connect(self.control_pushButton_Aumentar)
+        self.pushButton_Aumetar.clicked.connect(self.control_pushButton_Aumentar())
         self.pushButton_Cerrar.clicked.connect(lambda: self.close())
-        self.pushButton_Minimizar.clicked.connect(self.control_pushButton_Minimizar)
+        self.pushButton_Minimizar.clicked.connect(self.control_pushButton_Minimizar())
         
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         self.setWindowOpacity(1)
+        
         
         
         self.gripSize = 10
