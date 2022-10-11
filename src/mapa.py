@@ -6,7 +6,7 @@ from geopy.geocoders import Nominatim
 from baseDatosPrueba import getItemBaseDatos
 geolocator = Nominatim(user_agent="evently")
 mapa = folium.Map(location=[40.43518307438477, -
-                  3.719169233367488], zoom_start=11)
+                  3.719169233367488], zoom_start=11,)
 
 tooltip = 'Click For More Info'
 
@@ -27,21 +27,6 @@ popupRiviera = folium.Popup(
     '<p><strong>RIVIERA CLUB</strong> <br> <strong>Dirección:</strong> P.º Bajo de la Virgen del Puerto, S/N, 28005 Madrid</p>', max_width=200)
 
 
-def getUbicacion():
-    lista = []
-    for i in range(len(getItemBaseDatos('discotecasEficientes', 'nombre', 'data'))):
-        lista.append(getItemBaseDatos(
-            'discotecasEficientes', 'ubicacion', 'data')[i])
-    return lista
-
-
-def getCoordenadas():
-    lista = []
-    for i in range(len(getUbicacion())):
-        location = geolocator.geocode(getUbicacion()[i])
-        # añaade las coordenadas al mapa
-        lista.append([location.latitude, location.longitude])
-    return lista
 
 
 coor = [[40.4461059, -3.6884419], [40.6433958, -4.0390833], [40.42256315, -3.690900189817708], [40.4096055, -3.6926831], [40.4292084, -3.7846342], [40.4096995, -3.6930939], [40.4146728, -3.7212828], [40.4483338, -3.695367], [40.4121176, -3.703293399641577], [40.4513098, -3.6949808],
@@ -49,14 +34,19 @@ coor = [[40.4461059, -3.6884419], [40.6433958, -4.0390833], [40.42256315, -3.690
 # metodo para agarrar lospares de coordenadas y añadirlos al mapa
 
 
-def pintarPuntos():
-    print(len(coor))
-    for i in range(len(coor)):
-        folium.Marker(coor[i], popup=getItemBaseDatos(
-            'discotecasEficientes', 'nombre', 'data')[i], tooltip=tooltip).add_to(mapa)
+def pintarPuntosDiscotecas():
+    longitud=getItemBaseDatos('discotecasEficientes', 'longitud', 'data')
+    latitud=getItemBaseDatos('discotecasEficientes', 'latitud', 'data')
+    for i in range(len(longitud)):
+        folium.Marker([latitud[i], longitud[i]], popup=getItemBaseDatos('discotecasEficientes', 'nombre', 'data')[i], tooltip=tooltip).add_to(mapa)
 
+def pintarPuntosFiestas():
+    longitud=getItemBaseDatos('fiestasEficientes', 'longitud', 'data')
+    latitud=getItemBaseDatos('fiestasEficientes', 'latitud', 'data')
+    for i in range(len(longitud)):
+        folium.Marker([latitud[i], longitud[i]], popup=getItemBaseDatos('fiestasEficientes', 'nombre', 'data')[i], tooltip=tooltip, icon=folium.Icon(color='red')).add_to(mapa)
 
-pintarPuntos()
-
+pintarPuntosDiscotecas()
+pintarPuntosFiestas()
 mapa.save('mapa.html')
 webbrowser.open('mapa.html')
