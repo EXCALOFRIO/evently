@@ -17,7 +17,22 @@ import pyglet
 
 pyglet.font.add_file('fuentes/productSans.ttf')  # ABeeZee
 
+#BOTON DE AÑADIR FIESTA
+def añadirFiesta():
+        print("añadir fiesta")
 
+#BOTON DE AÑADIR DISCOTECA
+def añadirDiscoteca():
+        print("añadir discoteca")
+
+#BOTON DE AÑADIR RESEÑA
+def añadirReseña():
+        print("añadir reseña")
+
+#BOTON DE BUSQUEDA
+def busquedaFilter():
+        print("busqueda filter")
+        
 class Ui_MainWindow(object):
         def buttonMapa(self):
                 self.stackedWidget.setCurrentWidget(self.page_mapa)
@@ -40,6 +55,8 @@ class Ui_MainWindow(object):
                 self.stackedWidget.setCurrentWidget(self.page_AddResenna)
                 print("he selecionado el boton RESEÑA")
     
+        
+
         def setupUi(self, MainWindow):
                 MainWindow.setObjectName("MainWindow")
                 MainWindow.resize(812, 533)
@@ -73,6 +90,14 @@ class Ui_MainWindow(object):
 "    background-color: rgb(61, 61, 61);\n"
 "    border-radius: 20px\n"
 "}")
+
+        
+#crea una funcion para cuando se pulse el boton pushButton_aceptarFiesta
+#llama a esa funcion cuando se pulsar pushButton_aceptarFiesta
+
+
+
+
                 """FRAME DONDE ESTA DODO MENOS LA BARRA DE ARRIBA"""
                 self.frame_contenido = QtWidgets.QFrame(self.frame)
                 self.frame_contenido.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -220,6 +245,7 @@ class Ui_MainWindow(object):
                 self.horizontalLayout_9.addItem(spacerItem1)
                 self.pushButton_BuscarFiltrado = QtWidgets.QPushButton(self.page_filtrado)
                 self.pushButton_BuscarFiltrado.setObjectName("pushButton_BuscarFiltrado")
+                self.pushButton_BuscarFiltrado.clicked.connect(busquedaFilter)
                 self.horizontalLayout_9.addWidget(self.pushButton_BuscarFiltrado)
                 spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
                 self.horizontalLayout_9.addItem(spacerItem2)
@@ -298,6 +324,7 @@ class Ui_MainWindow(object):
                 self.pushButton_aceptarDiscoteca = QtWidgets.QPushButton(self.page_AddDiscoteca)
                 self.pushButton_aceptarDiscoteca.setMaximumSize(QtCore.QSize(180, 16777215))
                 self.pushButton_aceptarDiscoteca.setObjectName("pushButton_aceptarDiscoteca")
+                self.pushButton_aceptarDiscoteca.clicked.connect(añadirDiscoteca)
                 self.horizontalLayout_5.addWidget(self.pushButton_aceptarDiscoteca)
                 spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
                 self.horizontalLayout_5.addItem(spacerItem7)
@@ -372,6 +399,8 @@ class Ui_MainWindow(object):
                 self.pushButton_aceptarFiesta = QtWidgets.QPushButton(self.page_AddFiesta)
                 self.pushButton_aceptarFiesta.setObjectName("pushButton_aceptarFiesta")
                 self.horizontalLayout_7.addWidget(self.pushButton_aceptarFiesta)
+                #pulsar boton aceptar
+                self.pushButton_aceptarFiesta.clicked.connect(añadirFiesta)
                 spacerItem12 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
                 self.horizontalLayout_7.addItem(spacerItem12)
                 self.verticalLayout_9.addLayout(self.horizontalLayout_7)
@@ -470,6 +499,7 @@ class Ui_MainWindow(object):
                 self.pushButton_AddResenna = QtWidgets.QPushButton(self.frame_2)
                 self.pushButton_AddResenna.setObjectName("pushButton_AddResenna")
                 self.verticalLayout_10.addWidget(self.pushButton_AddResenna)
+                self.pushButton_AddResenna.clicked.connect(añadirReseña)
                 self.horizontalLayout_8.addWidget(self.frame_2)
                 self.frame_3 = QtWidgets.QFrame(self.page_AddResenna)
                 self.frame_3.setStyleSheet("")
@@ -546,6 +576,12 @@ class Ui_MainWindow(object):
                 self.radioButton_5estrellas.setText(_translate("MainWindow", "5 ESTRELLAS"))
                 self.pushButton_AddResenna.setText(_translate("MainWindow", "AÑADIR"))
                 self.label_5.setText(_translate("MainWindow", "OTRAS RESEÑAS"))
+
+
+
+
+
+
 
 if __name__ == "__main__":
     import sys
