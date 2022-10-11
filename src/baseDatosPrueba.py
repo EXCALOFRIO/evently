@@ -8,6 +8,8 @@ from operator import ge
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
+from geopy.geocoders import Nominatim
+geolocator = Nominatim(user_agent="evently")
 cred = credentials.Certificate("firebase/evently-key.json")
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://evently-646a2-default-rtdb.firebaseio.com/'
@@ -31,10 +33,12 @@ def insertarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta):
     db.reference(ruta).child('usuarios').push(usuarios)
 
 
-def insertarDiscotecaEficiente(nombre, ubicacion, ruta):
+def insertarDiscotecaEficiente(nombre, ubicacion,longitud,latitud, ruta):
     discotecas = {
         'nombre': nombre,
-        'ubicacion': ubicacion
+        'ubicacion': ubicacion,
+        'longitud': longitud,
+        'latitud': latitud
     }
     db.reference(ruta).child('discotecasEficientes').push(discotecas)
 
@@ -50,7 +54,9 @@ def insertarDiscoteca(nombre, zona, calle, numero, ruta):
     ubicacion = calle + ', ' + str(numero) + ', ' + zona + ', Madrid España'
     ubicacion2 = ubicacion.replace('C ', 'Calle ').replace('Av ', 'Avenida ').replace(
         'Avda ', 'Avenida ').replace('C.', 'Calle ').replace('PL ', 'Plaza ').replace('c', 'Calle ').replace('av', 'Avenida ').replace('avda', 'Avenida ').replace('c.', 'Calle ').replace('pl', 'Plaza ')
-    insertarDiscotecaEficiente(nombre, ubicacion2, ruta)
+    
+    location = geolocator.geocode(ubicacion2)
+    insertarDiscotecaEficiente(nombre, ubicacion2,location.longitud,location.latitud, ruta)
 
 # crea un metodo que de la base de datos extraiga todos los datos de las discotecas y llame a la funcion insertarDiscotecaEficiente
 
@@ -66,13 +72,16 @@ def insertarDiscotecasEficientes(ruta):
             str(numero) + ', Madrid España'
         ubicacion2 = ubicacion.replace('C ', 'Calle ').replace('Av ', 'Avenida ').replace(
             'Avda ', 'Avenida ').replace('C.', 'Calle ').replace('PL ', 'Plaza ').replace('c ', 'Calle ').replace('av ', 'Avenida ').replace('avda ', 'Avenida ').replace('c.', 'Calle ').replace('pl ', 'Plaza ')
-        insertarDiscotecaEficiente(nombre, ubicacion2, ruta)
+        location = geolocator.geocode(ubicacion2)
+        insertarDiscotecaEficiente(nombre, ubicacion2,location.longitud,location.latitud, ruta)
 
 
-def insertarFiestaEficiente(nombre, ubicacion, ruta):
+def insertarFiestaEficiente(nombre, ubicacion,longitud,latitud, ruta):
     fiestas = {
         'nombre': nombre,
-        'ubicacion': ubicacion
+        'ubicacion': ubicacion,
+        'longitud': longitud,
+        'latitud': latitud
     }
     db.reference(ruta).child('fiestasEficientes').push(fiestas)
 
@@ -83,11 +92,13 @@ def insertarFiesta(nombre, calle, numero, zona, ruta):
         'calle': calle,
         'numero': numero,
         'zona': zona
+    
     }
     db.reference(ruta).child('fiestas').push(fiestas)
     ubicacion = calle + ', ' + str(numero) + ', ' + zona + ', Madrid España'
     ubicacion2 = ubicacion.replace('C ', 'Calle ').replace('Av ', 'Avenida ').replace(
         'Avda ', 'Avenida ').replace('C.', 'Calle ').replace('PL ', 'Plaza ').replace('c', 'Calle ').replace('av', 'Avenida ').replace('avda', 'Avenida ').replace('c.', 'Calle ').replace('pl', 'Plaza ')
+    location = geolocator.geocode(ubicacion2)
     insertarFiestaEficiente(nombre, ubicacion2, ruta)
 
 
@@ -195,7 +206,7 @@ def filtrarDiscotecas(opcion, consulta):
         valoraciones = db.reference('data/valoraciones')
         temp = []
         for k, v in valoraciones.get().items():
-            if v['texto'].lower().__contains__(consulta):
+            if v['texto'].lower()._contains_(consulta):
                 resultado = v['nombre_discoteca']
                 temp.append(resultado)
         return temp
