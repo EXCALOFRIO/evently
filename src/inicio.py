@@ -1,6 +1,16 @@
 from tkinter import *
 from tkinter import messagebox
 from turtle import bgcolor
+#from evently.src.ui_evently import Ui_MainWindow
+
+from ui_evently import Ui_MainWindow
+import sys
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QAction, QLineEdit, QMessageBox, QInputDialog, QFileDialog
+from PyQt5.QtCore import QPropertyAnimation, QEasingCurve
+from PyQt5.uic import loadUi
+import pyglet
+import webview
 
 from baseDatosPrueba import comprobarInicioSesion
 
@@ -67,7 +77,14 @@ def botonRegistroClick():
 def botonAceptarClick():
     if comprobarInicioSesion(usuarioEntry.get(), contrasenaEntry.get(),'data'):
         inicio.destroy()
-        import principal
+        if __name__ == "__main__":
+            import sys
+            app = QtWidgets.QApplication(sys.argv)
+            MainWindow = QtWidgets.QMainWindow()
+            ui = Ui_MainWindow()
+            ui.setupUi(MainWindow)
+            MainWindow.show()
+            sys.exit(app.exec_())
     else:
         messagebox.showerror(
             "Error", "El usuario o la contraseña son incorrectos")
