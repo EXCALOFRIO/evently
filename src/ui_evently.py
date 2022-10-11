@@ -14,6 +14,8 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QAc
 from PyQt5.QtCore import QPropertyAnimation, QEasingCurve
 from PyQt5.uic import loadUi
 import pyglet
+import webview
+
 
 pyglet.font.add_file('fuentes/productSans.ttf')  # ABeeZee
 
@@ -36,6 +38,9 @@ def busquedaFilter():
 class Ui_MainWindow(object):
         def buttonMapa(self):
                 self.stackedWidget.setCurrentWidget(self.page_mapa)
+                #import mapViewer
+                webview.create_window('Evently - Mapa de discotecas', '../mapa.html')
+                webview.start()
                 print("he selecionado el boton MAPA")
         
         def buttonFiltrado(self):
