@@ -11,22 +11,22 @@ pyglet.font.add_file('fuentes/productSans.ttf')  # ABeeZee
 inicio = Tk()
 inicio.title("EVENTLY")
 inicio.geometry("300x350")
-inicio.config(bg='lightblue')
+inicio.config(bg='#57E389')
 inicio.resizable(0, 0)
 
-frame1 = Frame(inicio, width=300, height=500, bg='lightblue')
+frame1 = Frame(inicio, width=300, height=500, bg='#57E389')
 frame1.pack()
 
 inicioSesion = Label(frame1, text="Inicio de Sesión",
-                     font=("ABeeZee", 20), bg='lightblue')
+                     font=("ABeeZee", 20), bg='#57E389')
 inicioSesion.grid(row=0, padx=10, pady=10)
 
 usuarioLabel = Label(frame1, text="Usuario:",
-                     font=("ABeeZee", 12), bg='lightblue')
+                     font=("ABeeZee", 12), bg='#57E389')
 usuarioLabel.grid(row=1, pady=5)
 
 contrasenaLabel = Label(frame1, text="Contraseña:",
-                        font=("ABeeZee", 12), bg='lightblue')
+                        font=("ABeeZee", 12), bg='#57E389')
 contrasenaLabel.grid(row=3, pady=5)
 
 nombreUsuario = StringVar()
@@ -39,7 +39,7 @@ contrasenaEntry = Entry(
 contrasenaEntry.grid(row=4)
 contrasenaEntry.config(show="*")
 
-frame2 = Frame(inicio, bg='lightblue')
+frame2 = Frame(inicio, bg='#57E389')
 frame2.pack()
 
 botonAceptar = Button(frame2, text="Aceptar",
