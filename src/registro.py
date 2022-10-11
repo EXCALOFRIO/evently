@@ -10,38 +10,38 @@ pyglet.font.add_file('fuentes/productSans.ttf')  # ABeeZee
 
 raiz = Tk()
 raiz.geometry("600x300")
-raiz.config(bg='lightblue')
+raiz.config(bg='#57E389')
 raiz.title("REGISTRO")
 
-frame = Frame(raiz, bg="lightblue")
+frame = Frame(raiz, bg="#57E389")
 frame.pack()
 
 eventlyLbl = Label(frame, text="EVENTLY", font=(
-    "ABeeZee", 14), pady=10, bg="lightblue")
+    "ABeeZee", 14), pady=10, bg="#57E389")
 eventlyLbl.pack()
 
-frame1 = Frame(raiz, bg="lightblue")
+frame1 = Frame(raiz, bg="#57E389")
 frame1.pack()
 
 usuarioLbl = Label(frame1, text="Usuario:",
-                   font=("ABeeZee", 12), bg="lightblue")
+                   font=("ABeeZee", 12), bg="#57E389")
 usuarioLbl.grid(column=0, row=0, padx=5, pady=5)
 
-nombreLbl = Label(frame1, text="Nombre:", font=("ABeeZee", 12), bg="lightblue")
+nombreLbl = Label(frame1, text="Nombre:", font=("ABeeZee", 12), bg="#57E389")
 nombreLbl.grid(column=0, row=1, padx=5, pady=5)
 
 apellidosLbl = Label(frame1, text="Apellido:",
-                     font=("ABeeZee", 12), bg="lightblue")
+                     font=("ABeeZee", 12), bg="#57E389")
 apellidosLbl.grid(column=0, row=2, padx=5, pady=5)
 
 contrasenaLbl = Label(frame1, text="Contraseña:",
-                      font=("ABeeZee", 12), bg="lightblue")
+                      font=("ABeeZee", 12), bg="#57E389")
 contrasenaLbl.grid(column=2, row=0, padx=5, pady=5)
 
-emailLbl = Label(frame1, text="E-mail:", font=("ABeeZee", 12), bg="lightblue")
+emailLbl = Label(frame1, text="E-mail:", font=("ABeeZee", 12), bg="#57E389")
 emailLbl.grid(column=2, row=1, padx=5, pady=5)
 
-edadLbl = Label(frame1, text="Edad:", font=("ABeeZee", 12), bg="lightblue")
+edadLbl = Label(frame1, text="Edad:", font=("ABeeZee", 12), bg="#57E389")
 edadLbl.grid(column=2, row=2, padx=5, pady=5)
 
 usuario = StringVar()
@@ -69,13 +69,13 @@ edad = IntVar()
 edadEntry = Entry(frame1, text=edad, font=("ABeeZee", 12))
 edadEntry.grid(column=3, row=2, padx=5, pady=5)
 
-frame2 = Frame(raiz, pady=20, bg="lightblue")
+frame2 = Frame(raiz, pady=20, bg="#57E389")
 frame2.pack()
 
 
 botonAceptar = Button(frame2, text="Aceptar",
                       command=lambda: botonAceptarClick(), font=("ABeeZee", 12))
-botonAceptar.config(bg='coral')
+botonAceptar.config(bg='white')
 botonAceptar.pack()
 #botonAtrás=Button(frame2, text="Atrás",command=lambda:botonAceptarClick(), font=("ABeeZee", 12))
 # botonAceptar.pack()

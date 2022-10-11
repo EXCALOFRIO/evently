@@ -44,13 +44,13 @@ frame2.pack()
 
 botonAceptar = Button(frame2, text="Aceptar",
                       command=lambda: botonAceptarClick(), font=("ABeeZee", 10))
-botonAceptar.config(bg='coral')
+botonAceptar.config(bg='white')
 botonAceptar.grid(column=0, row=0, padx=5, pady=10)
 
 
 botonRegistro = Button(frame2, text="Registro",
                        command=lambda: botonRegistroClick(), font=("ABeeZee", 10))
-botonRegistro.config(bg='#4295f5')
+botonRegistro.config(bg='white')
 botonRegistro.grid(column=1, row=0, padx=5, pady=10)
 
 
