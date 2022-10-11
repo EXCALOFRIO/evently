@@ -596,12 +596,6 @@ class Ui_MainWindow(object):
                 self.pushButton_AddResenna.setText(_translate("MainWindow", "AÑADIR"))
                 self.label_5.setText(_translate("MainWindow", "OTRAS RESEÑAS"))
 
-
-
-
-
-
-
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
