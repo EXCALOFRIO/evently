@@ -29,8 +29,8 @@ def insertarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta):
         'email': email,
         'contraseña': contraseña
     }
-
     db.reference(ruta).child('usuarios').push(usuarios)
+    
 
 
 def insertarDiscotecaEficiente(nombre, ubicacion,longitud,latitud, ruta):
@@ -59,6 +59,7 @@ def insertarDiscoteca(nombre, zona, calle, numero, ruta):
     insertarDiscotecaEficiente(nombre, ubicacion2,location.longitude,location.latitude, ruta)
 
 # crea un metodo que de la base de datos extraiga todos los datos de las discotecas y llame a la funcion insertarDiscotecaEficiente
+
 
 
 def insertarDiscotecasEficienteScript(ruta):
@@ -97,9 +98,10 @@ def insertarFiesta(nombre, calle, numero, zona, ruta):
     db.reference(ruta).child('fiestas').push(fiestas)
     ubicacion = calle + ', ' + str(numero) + ', ' + zona + ', Madrid España'
     ubicacion2 = ubicacion.replace('C ', 'Calle ').replace('Av ', 'Avenida ').replace(
-        'Avda ', 'Avenida ').replace('C.', 'Calle ').replace('PL ', 'Plaza ').replace('c', 'Calle ').replace('av', 'Avenida ').replace('avda', 'Avenida ').replace('c.', 'Calle ').replace('pl', 'Plaza ')
+            'Avda ', 'Avenida ').replace('C.', 'Calle ').replace('PL ', 'Plaza ').replace('c ', 'Calle ').replace('av ', 'Avenida ').replace('avda ', 'Avenida ').replace('c.', 'Calle ').replace('pl ', 'Plaza ')
     location = geolocator.geocode(ubicacion2)
-    insertarFiestaEficiente(nombre, ubicacion2,location.longitud,location.latitud, ruta)
+    print(ubicacion2)
+    insertarFiestaEficiente(nombre, ubicacion2,location.longitude,location.latitude, ruta)
 
 
 def insertarValoracion(usuario, nombre_discoteca, nota, texto, ruta):
@@ -110,7 +112,6 @@ def insertarValoracion(usuario, nombre_discoteca, nota, texto, ruta):
         'texto': texto
     }
     db.reference(ruta).child('valoraciones').push(valoraciones)
-
 
 def borrarDatos(datos):
     db.reference('test').child(datos).delete()
