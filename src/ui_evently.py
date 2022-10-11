@@ -16,26 +16,45 @@ from PyQt5.uic import loadUi
 import pyglet
 import webview
 
+from baseDatosPrueba import datosUsuario, insertarFiesta, insertarValoracion, variableUsuarioSimp
+
 
 pyglet.font.add_file('fuentes/productSans.ttf')  # ABeeZee
 
-#BOTON DE AÑADIR FIESTA
-def añadirFiesta():
-        print("añadir fiesta")
 
-#BOTON DE AÑADIR DISCOTECA
-def añadirDiscoteca():
-        print("añadir discoteca")
-
-#BOTON DE AÑADIR RESEÑA
-def añadirReseña():
-        print("añadir reseña")
-
-#BOTON DE BUSQUEDA
-def busquedaFilter():
-        print("busqueda filter")
         
 class Ui_MainWindow(object):
+        #BOTON DE AÑADIR DISCOTECA
+        def annadirDiscoteca(self):
+                insertarFiesta(self.lineEdit_nombreDiscoteca.text(), self.lineEdit_calleDiscoteca.text(),self.lineEdit_numeroDiscoteca.text(), self.lineEdit_zonaDiscoteca.text(), 'data')
+
+        #BOTON DE AÑADIR FIESTA
+        def annadirFiesta(self):
+                insertarFiesta(self.lineEdit_nombreFiesta.text(), self.lineEdit_calleFiesta.text(),self.lineEdit_numeroFiesta.text(), self.lineEdit_zonaFiesta.text(), 'data')
+
+        #BOTON DE AÑADIR RESEÑA
+        def annadirResenna(self):
+                #comprueba que radioButton_ esta seleccionado
+                if self.radioButton_1estrella.isChecked():
+                        valoracion = 1
+                elif self.radioButton_2estrellas .isChecked():
+                        valoracion = 2
+                elif self.radioButton_3estrellas.isChecked():
+                        valoracion = 3
+                elif self.radioButton_4estrellas.isChecked():
+                        valoracion = 4
+                elif self.radioButton_5estrellas.isChecked():
+                        valoracion = 5
+                else:
+                        valoracion = 0
+                insertarValoracion(datosUsuario('usuario'),self.lineEdit_2.text(),valoracion,self.textEdit.toPlainText(), 'data')
+
+
+        #BOTON DE BUSQUEDA
+        def busquedaFilter(self):
+                print("busqueda filter")
+
+
         def buttonMapa(self):
                 self.stackedWidget.setCurrentWidget(self.page_mapa)
                 #import mapViewer
@@ -250,7 +269,7 @@ class Ui_MainWindow(object):
                 self.horizontalLayout_9.addItem(spacerItem1)
                 self.pushButton_BuscarFiltrado = QtWidgets.QPushButton(self.page_filtrado)
                 self.pushButton_BuscarFiltrado.setObjectName("pushButton_BuscarFiltrado")
-                self.pushButton_BuscarFiltrado.clicked.connect(busquedaFilter)
+                self.pushButton_BuscarFiltrado.clicked.connect(self.busquedaFilter)
                 self.horizontalLayout_9.addWidget(self.pushButton_BuscarFiltrado)
                 spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
                 self.horizontalLayout_9.addItem(spacerItem2)
@@ -329,7 +348,7 @@ class Ui_MainWindow(object):
                 self.pushButton_aceptarDiscoteca = QtWidgets.QPushButton(self.page_AddDiscoteca)
                 self.pushButton_aceptarDiscoteca.setMaximumSize(QtCore.QSize(180, 16777215))
                 self.pushButton_aceptarDiscoteca.setObjectName("pushButton_aceptarDiscoteca")
-                self.pushButton_aceptarDiscoteca.clicked.connect(añadirDiscoteca)
+                self.pushButton_aceptarDiscoteca.clicked.connect(self.annadirDiscoteca)
                 self.horizontalLayout_5.addWidget(self.pushButton_aceptarDiscoteca)
                 spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
                 self.horizontalLayout_5.addItem(spacerItem7)
@@ -405,7 +424,7 @@ class Ui_MainWindow(object):
                 self.pushButton_aceptarFiesta.setObjectName("pushButton_aceptarFiesta")
                 self.horizontalLayout_7.addWidget(self.pushButton_aceptarFiesta)
                 #pulsar boton aceptar
-                self.pushButton_aceptarFiesta.clicked.connect(añadirFiesta)
+                self.pushButton_aceptarFiesta.clicked.connect(self.annadirFiesta)
                 spacerItem12 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
                 self.horizontalLayout_7.addItem(spacerItem12)
                 self.verticalLayout_9.addLayout(self.horizontalLayout_7)
@@ -466,10 +485,6 @@ class Ui_MainWindow(object):
                 self.label.setAlignment(QtCore.Qt.AlignCenter)
                 self.label.setObjectName("label")
                 self.verticalLayout_10.addWidget(self.label)
-                self.label_3 = QtWidgets.QLabel(self.frame_2)
-                self.label_3.setAlignment(QtCore.Qt.AlignCenter)
-                self.label_3.setObjectName("label_3")
-                self.verticalLayout_10.addWidget(self.label_3)
                 self.lineEdit_UsuarioResea = QtWidgets.QLineEdit(self.frame_2)
                 self.lineEdit_UsuarioResea.setObjectName("lineEdit_UsuarioResea")
                 self.verticalLayout_10.addWidget(self.lineEdit_UsuarioResea)
@@ -504,7 +519,7 @@ class Ui_MainWindow(object):
                 self.pushButton_AddResenna = QtWidgets.QPushButton(self.frame_2)
                 self.pushButton_AddResenna.setObjectName("pushButton_AddResenna")
                 self.verticalLayout_10.addWidget(self.pushButton_AddResenna)
-                self.pushButton_AddResenna.clicked.connect(añadirReseña)
+                self.pushButton_AddResenna.clicked.connect(self.annadirResenna)
                 self.horizontalLayout_8.addWidget(self.frame_2)
                 self.frame_3 = QtWidgets.QFrame(self.page_AddResenna)
                 self.frame_3.setStyleSheet("")
@@ -567,7 +582,7 @@ class Ui_MainWindow(object):
                 self.label_numeroFiesta.setText(_translate("MainWindow", "NÚMERO"))
                 self.pushButton_aceptarFiesta.setText(_translate("MainWindow", "ACEPTAR"))
                 self.label.setText(_translate("MainWindow", "ESCRIBIR RESEÑA"))
-                self.label_3.setText(_translate("MainWindow", "USUARIO"))
+                
                 self.label_4.setText(_translate("MainWindow", "DISCOTECA"))
                 self.textEdit.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"

@@ -43,12 +43,12 @@ def insertarDiscotecaEficiente(nombre, ubicacion,longitud,latitud, ruta):
     db.reference(ruta).child('discotecasEficientes').push(discotecas)
 
 
-def insertarDiscoteca(nombre, zona, calle, numero, ruta):
+def insertarDiscoteca(nombre, calle, numero, zona, ruta):
     discotecas = {
         'nombre': nombre,
-        'zona': zona,
         'calle': calle,
-        'numero': numero
+        'numero': numero,
+        'zona': zona
     }
     db.reference(ruta).child('discotecas').push(discotecas)
     ubicacion = calle + ', ' + str(numero) + ', ' + zona + ', Madrid España'
@@ -152,7 +152,6 @@ def variableUsuarioSimp(usuario):
 
 def datosUsuario(datos):
     return usuarioActualSimp[datos]
-
 
 def comprobarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta):
     if usuario in getItemBaseDatos('usuarios', 'usuario', ruta) or email in getItemBaseDatos('usuarios', 'email', ruta) or '@' not in email or '.' not in email or usuario == '' or nombre == '' or apellido == '' or edad == '' or email == '' or contraseña == '':
