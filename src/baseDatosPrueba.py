@@ -56,12 +56,12 @@ def insertarDiscoteca(nombre, zona, calle, numero, ruta):
         'Avda ', 'Avenida ').replace('C.', 'Calle ').replace('PL ', 'Plaza ').replace('c', 'Calle ').replace('av', 'Avenida ').replace('avda', 'Avenida ').replace('c.', 'Calle ').replace('pl', 'Plaza ')
     
     location = geolocator.geocode(ubicacion2)
-    insertarDiscotecaEficiente(nombre, ubicacion2,location.longitud,location.latitud, ruta)
+    insertarDiscotecaEficiente(nombre, ubicacion2,location.longitude,location.latitude, ruta)
 
 # crea un metodo que de la base de datos extraiga todos los datos de las discotecas y llame a la funcion insertarDiscotecaEficiente
 
 
-def insertarDiscotecasEficientes(ruta):
+def insertarDiscotecasEficienteScript(ruta):
     discotecas = db.reference(ruta+'/discotecas')
     for k, v in discotecas.get().items():
         nombre = v['nombre']
@@ -73,7 +73,7 @@ def insertarDiscotecasEficientes(ruta):
         ubicacion2 = ubicacion.replace('C ', 'Calle ').replace('Av ', 'Avenida ').replace(
             'Avda ', 'Avenida ').replace('C.', 'Calle ').replace('PL ', 'Plaza ').replace('c ', 'Calle ').replace('av ', 'Avenida ').replace('avda ', 'Avenida ').replace('c.', 'Calle ').replace('pl ', 'Plaza ')
         location = geolocator.geocode(ubicacion2)
-        insertarDiscotecaEficiente(nombre, ubicacion2,location.longitud,location.latitud, ruta)
+        insertarDiscotecaEficiente(nombre, ubicacion2,location.longitude,location.latitude, ruta)
 
 
 def insertarFiestaEficiente(nombre, ubicacion,longitud,latitud, ruta):
@@ -99,7 +99,7 @@ def insertarFiesta(nombre, calle, numero, zona, ruta):
     ubicacion2 = ubicacion.replace('C ', 'Calle ').replace('Av ', 'Avenida ').replace(
         'Avda ', 'Avenida ').replace('C.', 'Calle ').replace('PL ', 'Plaza ').replace('c', 'Calle ').replace('av', 'Avenida ').replace('avda', 'Avenida ').replace('c.', 'Calle ').replace('pl', 'Plaza ')
     location = geolocator.geocode(ubicacion2)
-    insertarFiestaEficiente(nombre, ubicacion2, ruta)
+    insertarFiestaEficiente(nombre, ubicacion2,location.longitud,location.latitud, ruta)
 
 
 def insertarValoracion(usuario, nombre_discoteca, nota, texto, ruta):
