@@ -419,7 +419,7 @@ QPushButton:hover{
              <item>
               <widget class="QStackedWidget" name="stackedWidget">
                <property name="currentIndex">
-                <number>1</number>
+                <number>3</number>
                </property>
                <widget class="QWidget" name="page_mapa"/>
                <widget class="QWidget" name="page_filtrado">
@@ -601,16 +601,38 @@ background-color: #000000ff;</string>
                       <number>60</number>
                      </property>
                      <item>
-                      <widget class="QLineEdit" name="lineEdit_nombreDiscoteca"/>
+                      <widget class="QLineEdit" name="lineEdit_nombreDiscoteca">
+                       <property name="styleSheet">
+                        <string notr="true">color: rgb(255, 255, 255);</string>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                      </widget>
                      </item>
                      <item>
-                      <widget class="QLineEdit" name="lineEdit_zonaDiscoteca"/>
+                      <widget class="QLineEdit" name="lineEdit_zonaDiscoteca">
+                       <property name="styleSheet">
+                        <string notr="true">color: rgb(255, 255, 255);</string>
+                       </property>
+                      </widget>
                      </item>
                      <item>
-                      <widget class="QLineEdit" name="lineEdit_calleDiscoteca"/>
+                      <widget class="QLineEdit" name="lineEdit_calleDiscoteca">
+                       <property name="styleSheet">
+                        <string notr="true">color: rgb(255, 255, 255);</string>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                      </widget>
                      </item>
                      <item>
-                      <widget class="QLineEdit" name="lineEdit_numeroDiscoteca"/>
+                      <widget class="QLineEdit" name="lineEdit_numeroDiscoteca">
+                       <property name="styleSheet">
+                        <string notr="true">color: rgb(255, 255, 255);</string>
+                       </property>
+                      </widget>
                      </item>
                     </layout>
                    </item>
@@ -767,16 +789,35 @@ background-color: #000000ff;</string>
                       <number>60</number>
                      </property>
                      <item>
-                      <widget class="QLineEdit" name="lineEdit_nombreFiesta"/>
+                      <widget class="QLineEdit" name="lineEdit_nombreFiesta">
+                       <property name="styleSheet">
+                        <string notr="true">color: rgb(255, 255, 255);</string>
+                       </property>
+                      </widget>
                      </item>
                      <item>
-                      <widget class="QLineEdit" name="lineEdit_zonaFiesta"/>
+                      <widget class="QLineEdit" name="lineEdit_zonaFiesta">
+                       <property name="styleSheet">
+                        <string notr="true">color: rgb(255, 255, 255);</string>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                      </widget>
                      </item>
                      <item>
-                      <widget class="QLineEdit" name="lineEdit_calleFiesta"/>
+                      <widget class="QLineEdit" name="lineEdit_calleFiesta">
+                       <property name="styleSheet">
+                        <string notr="true">color: rgb(255, 255, 255);</string>
+                       </property>
+                      </widget>
                      </item>
                      <item>
-                      <widget class="QLineEdit" name="lineEdit_numeroFiesta"/>
+                      <widget class="QLineEdit" name="lineEdit_numeroFiesta">
+                       <property name="styleSheet">
+                        <string notr="true">color: rgb(255, 255, 255);</string>
+                       </property>
+                      </widget>
                      </item>
                     </layout>
                    </item>
