@@ -15,42 +15,27 @@ from PyQt5.QtCore import QPropertyAnimation, QEasingCurve
 from PyQt5.uic import loadUi
 import pyglet
 import webview
-from baseDatosPrueba import *
 
 
 pyglet.font.add_file('fuentes/productSans.ttf')  # ABeeZee
 
+#BOTON DE AÑADIR FIESTA
+def añadirFiesta():
+        print("añadir fiesta")
+
+#BOTON DE AÑADIR DISCOTECA
+def añadirDiscoteca():
+        print("añadir discoteca")
+
+#BOTON DE AÑADIR RESEÑA
+def añadirReseña():
+        print("añadir reseña")
+
+#BOTON DE BUSQUEDA
+def busquedaFilter():
+        print("busqueda filter")
         
 class Ui_MainWindow(object):
-        
-        #BOTON DE AÑADIR FIESTA
-        def annadirFiesta(self):
-                nombre = self.lineEdit_nombreFiesta.text()
-                zona = self.lineEdit_zonaFiesta.text()
-                calle = self.lineEdit_calleFiesta.text()
-                numero = self.lineEdit_numeroFiesta.text()
-                insertarFiesta(nombre, calle, numero, zona, 'test')
-                print(nombre, zona, calle, numero)
-                print("añadir fiesta")
-
-        "BOTON DE AÑADIR DISCOTECA"
-        def annadirDiscoteca(self):
-                nombre = self.lineEdit_nombreDiscoteca.text()
-                zona = self.lineEdit_zonaDiscoteca.text()
-                calle = self.lineEdit_calleDiscoteca.text()
-                numero = self.lineEdit_numeroDiscoteca.text()
-                insertarDiscoteca(nombre, zona, calle, numero, 'test')
-                print(nombre, zona, calle, numero)
-                print("añadir discoteca")
-                
-        #BOTON DE AÑADIR RESEÑA
-        def annadirResenna():
-                print("añadir reseña")
-                
-         #BOTON DE BUSQUEDA
-        def busquedaFilter():
-                print("busqueda filter")
-                
         def buttonMapa(self):
                 self.stackedWidget.setCurrentWidget(self.page_mapa)
                 #import mapViewer
@@ -265,7 +250,7 @@ class Ui_MainWindow(object):
                 self.horizontalLayout_9.addItem(spacerItem1)
                 self.pushButton_BuscarFiltrado = QtWidgets.QPushButton(self.page_filtrado)
                 self.pushButton_BuscarFiltrado.setObjectName("pushButton_BuscarFiltrado")
-                self.pushButton_BuscarFiltrado.clicked.connect(self.busquedaFilter)
+                self.pushButton_BuscarFiltrado.clicked.connect(busquedaFilter)
                 self.horizontalLayout_9.addWidget(self.pushButton_BuscarFiltrado)
                 spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
                 self.horizontalLayout_9.addItem(spacerItem2)
@@ -344,7 +329,7 @@ class Ui_MainWindow(object):
                 self.pushButton_aceptarDiscoteca = QtWidgets.QPushButton(self.page_AddDiscoteca)
                 self.pushButton_aceptarDiscoteca.setMaximumSize(QtCore.QSize(180, 16777215))
                 self.pushButton_aceptarDiscoteca.setObjectName("pushButton_aceptarDiscoteca")
-                self.pushButton_aceptarDiscoteca.clicked.connect(self.annadirDiscoteca)
+                self.pushButton_aceptarDiscoteca.clicked.connect(añadirDiscoteca)
                 self.horizontalLayout_5.addWidget(self.pushButton_aceptarDiscoteca)
                 spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
                 self.horizontalLayout_5.addItem(spacerItem7)
@@ -420,7 +405,7 @@ class Ui_MainWindow(object):
                 self.pushButton_aceptarFiesta.setObjectName("pushButton_aceptarFiesta")
                 self.horizontalLayout_7.addWidget(self.pushButton_aceptarFiesta)
                 #pulsar boton aceptar
-                self.pushButton_aceptarFiesta.clicked.connect(self.annadirFiesta)
+                self.pushButton_aceptarFiesta.clicked.connect(añadirFiesta)
                 spacerItem12 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
                 self.horizontalLayout_7.addItem(spacerItem12)
                 self.verticalLayout_9.addLayout(self.horizontalLayout_7)
@@ -519,7 +504,7 @@ class Ui_MainWindow(object):
                 self.pushButton_AddResenna = QtWidgets.QPushButton(self.frame_2)
                 self.pushButton_AddResenna.setObjectName("pushButton_AddResenna")
                 self.verticalLayout_10.addWidget(self.pushButton_AddResenna)
-                self.pushButton_AddResenna.clicked.connect(self.annadirResenna)
+                self.pushButton_AddResenna.clicked.connect(añadirReseña)
                 self.horizontalLayout_8.addWidget(self.frame_2)
                 self.frame_3 = QtWidgets.QFrame(self.page_AddResenna)
                 self.frame_3.setStyleSheet("")
