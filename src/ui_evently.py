@@ -17,6 +17,8 @@ from PyQt5.uic import loadUi
 import pyglet
 from baseDatosPrueba import *
 
+import webview
+
 pyglet.font.add_file('fuentes/productSans.ttf')  # ABeeZee
        
 class Ui_MainWindow(object):
@@ -50,6 +52,9 @@ class Ui_MainWindow(object):
         
         def buttonMapa(self):
                 self.stackedWidget.setCurrentWidget(self.page_mapa)
+                #import mapViewer
+                webview.create_window('Evently - Mapa de discotecas', '../mapa.html')
+                webview.start()
                 print("he selecionado el boton MAPA")
         
         def buttonFiltrado(self):
