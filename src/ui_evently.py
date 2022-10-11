@@ -83,8 +83,10 @@ class Ui_MainWindow(object):
                 self.horizontalLayout.setSpacing(0)
                 self.horizontalLayout.setObjectName("horizontalLayout")
                 self.frame_control = QtWidgets.QFrame(self.frame_contenido)
-                self.frame_control.setMinimumSize(QtCore.QSize(200, 0))
-                self.frame_control.setMaximumSize(QtCore.QSize(0, 16777215))
+                #self.frame_control.setMinimumSize(QtCore.QSize(200, 0))
+                self.frame_control.setMinimumSize(QtCore.QSize(300, 0))
+                self.frame_control.setMaximumSize(QtCore.QSize(1000, 16777215))
+                #self.frame_control.setMaximumSize(QtCore.QSize(0, 16777215))
                 self.frame_control.setStyleSheet("QFrame{\n"
 "    background-color: rgb(87, 227, 137);\n"
 "}\n"
@@ -155,7 +157,7 @@ class Ui_MainWindow(object):
 "\n"
 "QLineEdit{\n"
 "    border:0px;\n"
-"    color: rbg(87, 227, 137);\n"
+"    color: rbg(255,255,255);\n"
 "    border-bottom: 2px solid rgb(87, 227, 137);\n"
 "    font: 75 12pt \"Times New Roman\";\n"
 "}\n"
@@ -381,7 +383,7 @@ class Ui_MainWindow(object):
 "\n"
 "QLineEdit{\n"
 "    border:0px;\n"
-"    color: rbg(87, 227, 137);\n"
+"    color: rbg(255,255,255);\n"
 "    border-bottom: 2px solid rgb(87, 227, 137);\n"
 "    font: 75 12pt \"Times New Roman\";\n"
 "}\n"
