@@ -13,6 +13,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QAction, QLineEdit, QMessageBox, QInputDialog, QFileDialog
 from PyQt5.QtCore import QPropertyAnimation, QEasingCurve
 from PyQt5.uic import loadUi
+import pyglet
+
+pyglet.font.add_file('fuentes/productSans.ttf')  # ABeeZee
 
 
 class Ui_MainWindow(object):
@@ -154,7 +157,7 @@ class Ui_MainWindow(object):
 "    border:0px;\n"
 "    color: rbg(255,255,255);\n"
 "    border-bottom: 2px solid rgb(0,0,0);\n"
-"    font: 75 12pt \"Times New Roman\";\n"
+"    font: 75 12pt \"ABeeZee\";\n"
 "}\n"
 "\n"
 "QPushButton{\n"
@@ -293,7 +296,7 @@ class Ui_MainWindow(object):
                 spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
                 self.horizontalLayout_5.addItem(spacerItem6)
                 self.pushButton_aceptarDiscoteca = QtWidgets.QPushButton(self.page_AddDiscoteca)
-                self.pushButton_aceptarDiscoteca.setMaximumSize(QtCore.QSize(80, 16777215))
+                self.pushButton_aceptarDiscoteca.setMaximumSize(QtCore.QSize(180, 16777215))
                 self.pushButton_aceptarDiscoteca.setObjectName("pushButton_aceptarDiscoteca")
                 self.horizontalLayout_5.addWidget(self.pushButton_aceptarDiscoteca)
                 spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -391,7 +394,7 @@ class Ui_MainWindow(object):
 "    border:0px;\n"
 "    color: rbg(255,255,255);\n"
 "    border-bottom: 2px solid rgb(0,0,0);\n"
-"    font: 75 12pt \"Times New Roman\";\n"
+"    font: 75 12pt \"ABeeZee\";\n"
 "}\n"
 "\n"
 "QPushButton{\n"
@@ -497,6 +500,9 @@ class Ui_MainWindow(object):
                 self.retranslateUi(MainWindow)
                 self.stackedWidget.setCurrentIndex(3)
                 QtCore.QMetaObject.connectSlotsByName(MainWindow)
+                #cambia el color del texto a blanco lineEdit_UsuarioResea
+                self.lineEdit_UsuarioResea.setStyleSheet("color: rgb(255, 255, 255);")
+                self.lineEdit_2.setStyleSheet("color: rgb(255, 255, 255);")
 
         def retranslateUi(self, MainWindow):
                 _translate = QtCore.QCoreApplication.translate
