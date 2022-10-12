@@ -4,6 +4,7 @@
 import itertools
 import time
 import email
+import yaml  # pip install pyyaml
 from operator import ge
 import firebase_admin
 from firebase_admin import credentials
@@ -30,10 +31,9 @@ def insertarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta):
         'contraseña': contraseña
     }
     db.reference(ruta).child('usuarios').push(usuarios)
-    
 
 
-def insertarDiscotecaEficiente(nombre, ubicacion,longitud,latitud, ruta):
+def insertarDiscotecaEficiente(nombre, ubicacion, longitud, latitud, ruta):
     discotecas = {
         'nombre': nombre,
         'ubicacion': ubicacion,
@@ -54,12 +54,12 @@ def insertarDiscoteca(nombre, calle, numero, zona, ruta):
     ubicacion = calle + ', ' + str(numero) + ', ' + zona + ', Madrid España'
     ubicacion2 = ubicacion.replace('C ', 'Calle ').replace('Av ', 'Avenida ').replace(
         'Avda ', 'Avenida ').replace('C.', 'Calle ').replace('PL ', 'Plaza ').replace('c', 'Calle ').replace('av', 'Avenida ').replace('avda', 'Avenida ').replace('c.', 'Calle ').replace('pl', 'Plaza ')
-    
+
     location = geolocator.geocode(ubicacion2)
-    insertarDiscotecaEficiente(nombre, ubicacion2,location.longitude,location.latitude, ruta)
+    insertarDiscotecaEficiente(
+        nombre, ubicacion2, location.longitude, location.latitude, ruta)
 
 # crea un metodo que de la base de datos extraiga todos los datos de las discotecas y llame a la funcion insertarDiscotecaEficiente
-
 
 
 def insertarDiscotecasEficienteScript(ruta):
@@ -74,10 +74,11 @@ def insertarDiscotecasEficienteScript(ruta):
         ubicacion2 = ubicacion.replace('C ', 'Calle ').replace('Av ', 'Avenida ').replace(
             'Avda ', 'Avenida ').replace('C.', 'Calle ').replace('PL ', 'Plaza ').replace('c ', 'Calle ').replace('av ', 'Avenida ').replace('avda ', 'Avenida ').replace('c.', 'Calle ').replace('pl ', 'Plaza ')
         location = geolocator.geocode(ubicacion2)
-        insertarDiscotecaEficiente(nombre, ubicacion2,location.longitude,location.latitude, ruta)
+        insertarDiscotecaEficiente(
+            nombre, ubicacion2, location.longitude, location.latitude, ruta)
 
 
-def insertarFiestaEficiente(nombre, ubicacion,longitud,latitud, ruta):
+def insertarFiestaEficiente(nombre, ubicacion, longitud, latitud, ruta):
     fiestas = {
         'nombre': nombre,
         'ubicacion': ubicacion,
@@ -93,15 +94,16 @@ def insertarFiesta(nombre, calle, numero, zona, ruta):
         'calle': calle,
         'numero': numero,
         'zona': zona
-    
+
     }
     db.reference(ruta).child('fiestas').push(fiestas)
     ubicacion = calle + ', ' + str(numero) + ', ' + zona + ', Madrid España'
     ubicacion2 = ubicacion.replace('C ', 'Calle ').replace('Av ', 'Avenida ').replace(
-            'Avda ', 'Avenida ').replace('C.', 'Calle ').replace('PL ', 'Plaza ').replace('c ', 'Calle ').replace('av ', 'Avenida ').replace('avda ', 'Avenida ').replace('c.', 'Calle ').replace('pl ', 'Plaza ')
+        'Avda ', 'Avenida ').replace('C.', 'Calle ').replace('PL ', 'Plaza ').replace('c ', 'Calle ').replace('av ', 'Avenida ').replace('avda ', 'Avenida ').replace('c.', 'Calle ').replace('pl ', 'Plaza ')
     location = geolocator.geocode(ubicacion2)
     print(ubicacion2)
-    insertarFiestaEficiente(nombre, ubicacion2,location.longitude,location.latitude, ruta)
+    insertarFiestaEficiente(
+        nombre, ubicacion2, location.longitude, location.latitude, ruta)
 
 
 def insertarValoracion(usuario, nombre_discoteca, nota, texto, ruta):
@@ -113,6 +115,7 @@ def insertarValoracion(usuario, nombre_discoteca, nota, texto, ruta):
     }
     db.reference(ruta).child('valoraciones').push(valoraciones)
 
+
 def borrarDatos(datos):
     db.reference('test').child(datos).delete()
 
@@ -122,6 +125,14 @@ def getItemBaseDatos(elemento, variable, ruta):
     lista = []
     for k, v in elemento.get().items():
         lista.append(v[variable])
+    return lista
+
+
+def getTodosLosDatos(elemento, ruta):
+    elemento = db.reference(ruta+'/'+elemento)
+    lista = []
+    for k, v in elemento.get().items():
+        lista.append(v)
     return lista
 
 # crea un metodo que devuelava la key sabiendo la posocion en el array
@@ -152,6 +163,7 @@ def variableUsuarioSimp(usuario):
 
 def datosUsuario(datos):
     return usuarioActualSimp[datos]
+
 
 def comprobarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta):
     if usuario in getItemBaseDatos('usuarios', 'usuario', ruta) or email in getItemBaseDatos('usuarios', 'email', ruta) or '@' not in email or '.' not in email or usuario == '' or nombre == '' or apellido == '' or edad == '' or email == '' or contraseña == '':
