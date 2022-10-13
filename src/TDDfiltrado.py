@@ -16,6 +16,10 @@ class TestFiltrado(unittest.TestCase):
                      'Kapital', 'Medias Puri', 'Shoko', 'Velvet']
         self.assertEqual(sentencia, resultado)
 
+    def test_filtro_zona_false(self):
+        sentencia = filtrarDiscotecas(1, 'carabanchel')
+        self.assertEqual(sentencia, [])
+
     def test_filtro_nombre_minuscula(self):
         sentencia = filtrarDiscotecas(2, "blackhouse")
         resultado = ['Blackhouse']
@@ -26,6 +30,10 @@ class TestFiltrado(unittest.TestCase):
         resultado = ['Blackhouse']
         self.assertEqual(sentencia, resultado)
 
+    def test_filtro_nombre_false(self):
+        sentencia = filtrarDiscotecas(2, 'evently')
+        self.assertEqual(sentencia, [])
+
     def test_filtro_calle_con_mayusculas(self):
         sentencia = filtrarDiscotecas(3, "Calle de Atocha")
         resultado = ['Independance Club', 'Kapital']
@@ -35,6 +43,10 @@ class TestFiltrado(unittest.TestCase):
         sentencia = filtrarDiscotecas(3, "calle de atocha")
         resultado = ['Independance Club', 'Kapital']
         self.assertEqual(sentencia, resultado)
+
+    def test_filtro_calle_false(self):
+        sentencia = filtrarDiscotecas(3, 'Calle de las cariñosas')
+        self.assertEqual(sentencia, [])
 
     def test_filtro_valoracion(self):
         sentencia = filtrarDiscotecas(4, "ambiente")
