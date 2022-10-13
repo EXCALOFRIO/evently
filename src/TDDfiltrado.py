@@ -15,7 +15,12 @@ class TestFiltrado(unittest.TestCase):
         resultado = ['Blackhouse']
         self.assertEqual(sentencia, resultado)
 
-    def test_filtro_calle(self):
+    def test_filtro_calle_con_mayusculas(self):
+        sentencia = filtrarDiscotecas(3, "Calle de Atocha")
+        resultado = ['Independance Club', 'Kapital']
+        self.assertEqual(sentencia, resultado)
+
+    def test_filtro_calle_con_minusculas(self):
         sentencia = filtrarDiscotecas(3, "calle de atocha")
         resultado = ['Independance Club', 'Kapital']
         self.assertEqual(sentencia, resultado)
