@@ -1,6 +1,6 @@
 import unittest
 
-from baseDatosPrueba import borrarDatos, borrarTodo, comprobarInicioSesion, getItemBaseDatos, insertarDiscoteca, insertarFiesta, insertarUsuario, insertarValoracion
+from baseDatosPrueba import borrarDatos, borrarTodo, comprobarInicioSesion, getItemBaseDatos, insertarDiscoteca, insertarFiesta, insertarUsuario, insertarValoracion, comprobarUsuario
 
 # test para ver si el metodo insertarUsuario de la clase baseDatosPrueba funciona correctamente
 
@@ -23,6 +23,18 @@ class TestInsertarUsuario(unittest.TestCase):
         self.assertEqual(getItemBaseDatos(
             'usuarios', 'contraseña', 'test')[0], 'contraseña')
         borrarDatos('usuarios')
+        
+    def test_registroUsuarioExistente(self):
+        borrarDatos('usuarios')
+        insertarUsuario('usuario', 'nombre', 'apellido',
+                        '8', 'email@email.es', 'contraseña', 'test')
+        usuarioValido = comprobarUsuario('usuario', 'nombre', 'apellido',
+                        '8', 'email@email.es', 'contraseña', 'test')
+        self.assertFalse(usuarioValido)
+        
+    def test_inicioSesionCamposVacios(self):
+        datosValidos = comprobarInicioSesion('', '', 'test')
+        self.assertFalse(datosValidos)
 
     def test_insertarDiscoteca(self):
         borrarDatos('discotecas')
