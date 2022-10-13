@@ -177,6 +177,9 @@ def comprobarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta):
 
 
 def comprobarInicioSesion(usuario, contraseña, ruta):
+    if usuario == '' or contraseña == '':
+        print('Todos los campos deben estar completos.')
+        return False
     indice = getItemBaseDatos('usuarios', 'usuario', ruta).index(usuario)
     if getItemBaseDatos('usuarios', 'contraseña', ruta)[indice] == contraseña:
         variableUsuarioSimp(usuario)

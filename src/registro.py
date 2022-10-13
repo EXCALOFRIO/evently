@@ -92,7 +92,7 @@ def botonAceptarClick():
     if comprobarUsuario(usuario.get(), nombre.get(), apellidos.get(), edad.get(), email.get(), contrasena.get(), 'data'):
         messagebox.showinfo("Registro", "Usuario registrado correctamente")
         raiz.destroy()
-        #import inicio
+        import inicio
     else:
         messagebox.showerror("Error",
                              "Los datos introducidos no son correctos, por favor inténtelo de nuevo.")
