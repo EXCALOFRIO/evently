@@ -41,6 +41,12 @@ class TestInsertarUsuario(unittest.TestCase):
     def test_inicioSesionCamposVacios(self):
         datosValidos = comprobarInicioSesion('', '', 'test')
         self.assertFalse(datosValidos)
+        
+    def test_inicioSesionContrasenaIncorrecta(self):
+        borrarDatos('usuarios')
+        insertarUsuario('usuario', 'nombre', 'apellido', '10', 'usuario@gmail.com', 'contraseña', 'test')
+        inicio_sesion_correcto = comprobarInicioSesion('usuario', 'contraseñaIncorrecta', 'test')
+        self.assertFalse(inicio_sesion_correcto)
 
     def test_insertarDiscoteca(self):
         borrarDatos('discotecas')
