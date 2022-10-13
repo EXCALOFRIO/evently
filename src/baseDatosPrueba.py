@@ -204,6 +204,7 @@ def filtrarDiscotecas(opcion, consulta):
     elif opcion == 2:
         # FILTRADO DE NOMBRE
         discotecas = db.reference('data/discotecas')
+        consulta = consulta.lower()
         temp = []
         for k, v in discotecas.get().items():
             if v['nombre'].lower().startswith(consulta):

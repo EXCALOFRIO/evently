@@ -16,8 +16,13 @@ class TestFiltrado(unittest.TestCase):
                      'Kapital', 'Medias Puri', 'Shoko', 'Velvet']
         self.assertEqual(sentencia, resultado)
 
-    def test_filtro_nombre(self):
+    def test_filtro_nombre_minuscula(self):
         sentencia = filtrarDiscotecas(2, "blackhouse")
+        resultado = ['Blackhouse']
+        self.assertEqual(sentencia, resultado)
+
+    def test_filtro_nombre_mayuscula(self):
+        sentencia = filtrarDiscotecas(2, "BLACKHOUSE")
         resultado = ['Blackhouse']
         self.assertEqual(sentencia, resultado)
 
