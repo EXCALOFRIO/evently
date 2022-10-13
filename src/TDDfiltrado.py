@@ -1,6 +1,7 @@
 import unittest
 from baseDatosPrueba import filtrarDiscotecas, insertarUsuario
 
+
 class TestFiltrado(unittest.TestCase):
 
     def test_filtro_zona(self):
@@ -12,6 +13,11 @@ class TestFiltrado(unittest.TestCase):
     def test_filtro_nombre(self):
         sentencia = filtrarDiscotecas(2, "blackhouse")
         resultado = ['Blackhouse']
+        self.assertEqual(sentencia, resultado)
+
+    def test_filtro_calle(self):
+        sentencia = filtrarDiscotecas(3, "calle de atocha")
+        resultado = ['Independance Club', 'Kapital']
         self.assertEqual(sentencia, resultado)
 
     def test_filtro_valoracion(self):
