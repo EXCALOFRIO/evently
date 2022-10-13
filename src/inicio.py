@@ -82,6 +82,8 @@ def botonAceptarClick():
             ui.setupUi(MainWindow)
             MainWindow.show()
             sys.exit(app.exec_())
+    elif ValueError:
+        messagebox.showerror("Error", "Usuario o contraseña incorrectos")
     else:
         messagebox.showerror(
             "Error", "El usuario o la contraseña son incorrectos")
