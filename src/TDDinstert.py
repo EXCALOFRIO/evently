@@ -28,9 +28,15 @@ class TestInsertarUsuario(unittest.TestCase):
         borrarDatos('usuarios')
         insertarUsuario('usuario', 'nombre', 'apellido',
                         '8', 'email@email.es', 'contraseña', 'test')
-        usuarioValido = comprobarUsuario('usuario', 'nombre', 'apellido',
+        usuario_valido = comprobarUsuario('usuario', 'nombre', 'apellido',
                         '8', 'email@email.es', 'contraseña', 'test')
-        self.assertFalse(usuarioValido)
+        self.assertFalse(usuario_valido)
+        
+    def test_registroEmailIncorrecto(self):
+        borrarDatos('usuarios')
+        insertarUsuario('usuario', 'nombre', 'apellido', '10', 'usuario', 'contraseña', 'test')
+        usuario_valido = comprobarUsuario('usuario', 'nombre', 'apellido', '10', 'usuario', 'contraseña', 'test')
+        self.assertFalse(usuario_valido)
         
     def test_inicioSesionCamposVacios(self):
         datosValidos = comprobarInicioSesion('', '', 'test')
