@@ -1,6 +1,6 @@
 import unittest
 
-from baseDatosPrueba import borrarDatos, comprobarInicioSesion, getItemBaseDatos, insertarDiscoteca, insertarFiesta, insertarUsuario, insertarValoracion
+from baseDatosPrueba import borrarDatos, borrarTodo, comprobarInicioSesion, getItemBaseDatos, insertarDiscoteca, insertarFiesta, insertarUsuario, insertarValoracion
 
 # test para ver si el metodo insertarUsuario de la clase baseDatosPrueba funciona correctamente
 
@@ -26,27 +26,27 @@ class TestInsertarUsuario(unittest.TestCase):
 
     def test_insertarDiscoteca(self):
         borrarDatos('discotecas')
-        insertarDiscoteca('nombre', 'zona', 'calle', '8', 'test')
+        insertarDiscoteca('B12', 'Calle de Joaquín Costa', '27', 'Tetuán', 'test')
         self.assertEqual(getItemBaseDatos(
-            'discotecas', 'nombre', 'test')[0], 'nombre')
+            'discotecas', 'nombre', 'test')[0], 'B12')
         self.assertEqual(getItemBaseDatos(
-            'discotecas', 'zona', 'test')[0], 'zona')
+            'discotecas', 'zona', 'test')[0], 'Tetuán')
         self.assertEqual(getItemBaseDatos(
-            'discotecas', 'calle', 'test')[0], 'calle')
+            'discotecas', 'calle', 'test')[0], 'Calle de Joaquín Costa')
         self.assertEqual(getItemBaseDatos(
-            'discotecas', 'numero', 'test')[0], '8')
+            'discotecas', 'numero', 'test')[0], '27')
         borrarDatos('discotecas')
 
     def test_insertatFiesta(self):
-        insertarFiesta('nombre', 'calle', 'numero', 'zona', 'test')
+        insertarFiesta('Mana', 'Calle de Maldonado', '55', 'Castellana', 'test')
         self.assertEqual(getItemBaseDatos(
-            'fiestas', 'nombre', 'test')[0], 'nombre')
+            'fiestas', 'nombre', 'test')[0], 'Mana')
         self.assertEqual(getItemBaseDatos(
-            'fiestas', 'calle', 'test')[0], 'calle')
+            'fiestas', 'calle', 'test')[0], 'Calle de Maldonado')
         self.assertEqual(getItemBaseDatos(
-            'fiestas', 'numero', 'test')[0], 'numero')
+            'fiestas', 'numero', 'test')[0], '55')
         self.assertEqual(getItemBaseDatos(
-            'fiestas', 'zona', 'test')[0], 'zona')
+            'fiestas', 'zona', 'test')[0], 'Castellana')
         borrarDatos('fiestas')
 
     def test_insertarValoracion(self):
@@ -73,8 +73,5 @@ class TestInsertarUsuario(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+    borrarTodo('test')
 
-
-borrarDatos('usuarios')
-borrarDatos('discotecas')
-borrarDatos('fiestas')

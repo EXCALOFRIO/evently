@@ -4,7 +4,6 @@
 import itertools
 import time
 import email
-import yaml  # pip install pyyaml
 from operator import ge
 import firebase_admin
 from firebase_admin import credentials
@@ -119,6 +118,9 @@ def insertarValoracion(usuario, nombre_discoteca, nota, texto, ruta):
 def borrarDatos(datos):
     db.reference('test').child(datos).delete()
 
+def borrarTodo(ruta):
+    db.reference(ruta).delete()
+
 
 def getItemBaseDatos(elemento, variable, ruta):
     elemento = db.reference(ruta+'/'+elemento)
@@ -218,7 +220,7 @@ def filtrarDiscotecas(opcion, consulta):
         valoraciones = db.reference('data/valoraciones')
         temp = []
         for k, v in valoraciones.get().items():
-            if v['texto'].lower()._contains_(consulta):
+            if v['texto'].lower().__contains__(consulta):
                 resultado = v['nombre_discoteca']
                 temp.append(resultado)
         return temp

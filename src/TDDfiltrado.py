@@ -15,8 +15,8 @@ class TestFiltrado(unittest.TestCase):
         self.assertEqual(sentencia, resultado)
 
     def test_filtro_valoracion(self):
-        sentencia = filtrarDiscotecas(4, "buen ambiente")
-        resultado = ['cats']
+        sentencia = filtrarDiscotecas(4, "ambiente")
+        resultado = ['Kapital']
         self.assertEqual(sentencia, resultado)
 
 

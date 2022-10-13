@@ -15,7 +15,6 @@ from PyQt5.QtCore import QPropertyAnimation, QEasingCurve
 from PyQt5.uic import loadUi
 import pyglet
 import webview
-import yaml  # pip install pyyaml
 
 from baseDatosPrueba import datosUsuario, filtrarDiscotecas, getItemBaseDatos, getTodosLosDatos, insertarDiscoteca, insertarFiesta, insertarValoracion, variableUsuarioSimp
 
