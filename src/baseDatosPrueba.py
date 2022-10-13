@@ -118,6 +118,7 @@ def insertarValoracion(usuario, nombre_discoteca, nota, texto, ruta):
 def borrarDatos(datos):
     db.reference('test').child(datos).delete()
 
+
 def borrarTodo(ruta):
     db.reference(ruta).delete()
 
@@ -211,6 +212,7 @@ def filtrarDiscotecas(opcion, consulta):
     elif opcion == 3:
         # FILTRADO DE CALLE
         discotecas = db.reference('data/discotecas')
+        consulta = consulta.lower()
         temp = []
         for k, v in discotecas.get().items():
             if v['calle'].lower().startswith(consulta):
