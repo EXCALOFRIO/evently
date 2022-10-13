@@ -1,11 +1,17 @@
 # Eventos y discotecas
 
 ### Instalación
-
+#### Requisitos
 ```bash
 pip install pyglet
 pip install firebase-admin
-
+pip install PyQt5
+pip install branca
+pip install Jinja2
+pip install requests
+pip install folium
+pip install geopy
+pip install pywebview
 ```
 
 ### Requisitos para el proyecto
