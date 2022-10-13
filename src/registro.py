@@ -76,18 +76,14 @@ frame2.pack()
 botonAceptar = Button(frame2, text="Aceptar",
                       command=lambda: botonAceptarClick(), font=("ABeeZee", 12))
 botonAceptar.config(bg='white')
-botonAceptar.pack()
-#botonAtrás=Button(frame2, text="Atrás",command=lambda:botonAceptarClick(), font=("ABeeZee", 12))
-# botonAceptar.pack()
+botonAceptar.grid(column=0, row=0, pady=5)
 
-# Método para comprobar que los datos escritos son correctos: el usuario no existe, el email no está vinculado a otro usuario y todos los campos están llenos
-
-# Método para insertar un usuario nuevo en la base de datos
+botonAtras=Button(frame2, text="Atrás",command=lambda:botonAtrasClick(), font=("ABeeZee", 12))
+botonAtras.config(bg='white')
+botonAtras.grid(column=0, row=1, pady=5)
 
 
 # Acciones del boton Aceptar
-
-
 def botonAceptarClick():
     if comprobarUsuario(usuario.get(), nombre.get(), apellidos.get(), edad.get(), email.get(), contrasena.get(), 'data'):
         messagebox.showinfo("Registro", "Usuario registrado correctamente")
@@ -97,5 +93,8 @@ def botonAceptarClick():
         messagebox.showerror("Error",
                              "Los datos introducidos no son correctos, por favor inténtelo de nuevo.")
 
+def botonAtrasClick():
+    raiz.destroy()
+    import inicio
 
 raiz.mainloop()

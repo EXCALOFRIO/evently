@@ -70,9 +70,6 @@ def botonRegistroClick():
     import registro
 
 
-# metodo comprueba que el usuario y la contraseña son correctos
-
-
 # Acciones del botón Aceptar
 def botonAceptarClick():
     if comprobarInicioSesion(usuarioEntry.get(), contrasenaEntry.get(),'data'):
