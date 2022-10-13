@@ -193,6 +193,7 @@ def filtrarDiscotecas(opcion, consulta):
     if opcion == 1:
         # FILTRADO DE ZONA
         discotecas = db.reference('data/discotecas')
+        consulta = consulta.lower()
         temp = []
         for k, v in discotecas.get().items():
             if v['zona'].lower().startswith(consulta):

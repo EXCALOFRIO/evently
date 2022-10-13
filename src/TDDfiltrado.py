@@ -4,8 +4,14 @@ from baseDatosPrueba import filtrarDiscotecas, insertarUsuario
 
 class TestFiltrado(unittest.TestCase):
 
-    def test_filtro_zona(self):
+    def test_filtro_zona_minuscula(self):
         sentencia = filtrarDiscotecas(1, "centro")
+        resultado = ['Independance Club', 'Joy Eslava',
+                     'Kapital', 'Medias Puri', 'Shoko', 'Velvet']
+        self.assertEqual(sentencia, resultado)
+
+    def test_filtro_zona_mayuscula(self):
+        sentencia = filtrarDiscotecas(1, "CENTRO")
         resultado = ['Independance Club', 'Joy Eslava',
                      'Kapital', 'Medias Puri', 'Shoko', 'Velvet']
         self.assertEqual(sentencia, resultado)
