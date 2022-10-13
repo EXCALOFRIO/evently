@@ -1,8 +1,8 @@
 # Eventos y discotecas
 
-### Instalación
+## Instalación
 #### Requisitos
-```bash
+```python
 pip install pyglet
 pip install firebase-admin
 pip install PyQt5
@@ -13,9 +13,9 @@ pip install folium
 pip install geopy
 pip install pywebview
 ```
-### EXPLICACIÓN METODOS
+## EXPLICACIÓN METODOS
 
-#### Insertar usuario a la base de datos
+### Insertar usuario a la base de datos
 ##### Se comprueba que el usuario no exista en la base de datos, si no existe se inserta al usuario en la base de datos llamando al metodo insertarUsuario.
 
 ##### El argumento ruta, sirve para especificar si queremos insertar un usuario en la base de datos [data] o si lo queremos insertar en [test] para hacer pruebas.
@@ -43,9 +43,10 @@ pip install pywebview
 
 ```
 
-#### Inicio de sesión
 
-##### 1º Se comprueba que el usuario exista en la base de datos con el metodo comprobarInicioSesion.
+### Inicio de sesión
+
+##### Se comprueba que el usuario exista en la base de datos con el metodo comprobarInicioSesion.
 ```python
     def comprobarInicioSesion(usuario,      contraseña, ruta):
     if usuario == '' or contraseña == '':
@@ -58,15 +59,15 @@ pip install pywebview
     print('El usuario o la contraseña no son correctos, o no ha rellenado todos los campos')
     return False
 ```
-#### Si es correcto el usuario y la contraseña se llama al metodo variableUsuarioSimp para guardar el usuario en una variable global y asi poderlo usar más adelante.
+##### Si es correcto el usuario y la contraseña se llama al metodo variableUsuarioSimp para guardar el usuario en una variable global y asi poderlo usar más adelante.
 ```python
     def variableUsuarioSimp(usuario):
     global usuarioSimp
     usuarioSimp = usuario
 ```
 
-#### Insertar Discoteca a la base de datos
-##### 1º Se llama al metodo insertarDiscoteca para insertar la discoteca en la base de datos. Se vuelve a usar el argumento ruta para la misma funcion antes mencionada. Creamos un String llamado ubicacion que combina los campos calle, numero y zona, para asi generar correctamente y de forma más eficiente las coordenadas. Para generar las coordenadas usamos la libreria geolocator.
+### Insertar Discoteca a la base de datos
+##### Se llama al metodo insertarDiscoteca para insertar la discoteca en la base de datos. Se vuelve a usar el argumento ruta para la misma funcion antes mencionada. Creamos un String llamado ubicacion que combina los campos calle, numero y zona, para asi generar correctamente y de forma más eficiente las coordenadas. Para generar las coordenadas usamos la libreria geolocator.
 ###### Ejemplo de codigo.
 ```python
 location = geolocator.geocode(ubicacion2)
@@ -89,7 +90,7 @@ location = geolocator.geocode(ubicacion2)
         nombre, ubicacion2, location.longitude, location.latitude, ruta)
 
 ```
-##### 2º Se llama al metodo insertarDiscotecaEficiente para insertar la discoteca en la base de datos de forma eficiente, es decir, con las coordenadas ya generadas, para luego generar el mapa. Se vuelve a usar el argumento ruta para la misma funcion antes mencionada.
+##### Se llama al metodo insertarDiscotecaEficiente para insertar la discoteca en la base de datos de forma eficiente, es decir, con las coordenadas ya generadas, para luego generar el mapa. Se vuelve a usar el argumento ruta para la misma funcion antes mencionada.
 ```python
     def insertarDiscotecaEficiente(nombre, ubicacion, longitud, latitud, ruta):
     discotecas = {
