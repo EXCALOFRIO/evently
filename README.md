@@ -13,6 +13,95 @@ pip install folium
 pip install geopy
 pip install pywebview
 ```
+### EXPLICACIÓN METODOS
+
+#### Insertar usuario a la base de datos
+##### Se comprueba que el usuario no exista en la base de datos, si no existe se inserta al usuario en la base de datos llamando al metodo insertarUsuario.
+
+##### El argumento ruta, sirve para especificar si queremos insertar un usuario en la base de datos [data] o si lo queremos insertar en [test] para hacer pruebas.
+```python	
+    def comprobarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta):
+    if usuario in getItemBaseDatos('usuarios', 'usuario', ruta) or email in getItemBaseDatos('usuarios', 'email', ruta) or '@' not in email or '.' not in email or usuario == '' or nombre == '' or apellido == '' or edad == '' or email == '' or contraseña == '':
+        print('El usuario o el email ya existen o no ha rellenado todos los campos o el email no es correcto')
+        return False
+    insertarUsuario(usuario, nombre, apellido,
+                    edad, email, contraseña, ruta)
+    return True
+```
+#### Insertar usuario a la base de datos
+```python
+    def insertarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta):
+    usuarios = {
+        'usuario': usuario,
+        'nombre': nombre,
+        'apellido': apellido,
+        'edad': edad,
+        'email': email,
+        'contraseña': contraseña
+    }
+    db.reference(ruta).child('usuarios').push(usuarios)
+
+```
+
+#### Inicio de sesión
+
+##### 1º Se comprueba que el usuario exista en la base de datos con el metodo comprobarInicioSesion.
+```python
+    def comprobarInicioSesion(usuario,      contraseña, ruta):
+    if usuario == '' or contraseña == '':
+        print('Todos los campos deben estar completos.')
+        return False
+    indice = getItemBaseDatos('usuarios', 'usuario', ruta).index(usuario)
+    if getItemBaseDatos('usuarios', 'contraseña', ruta)[indice] == contraseña:
+        variableUsuarioSimp(usuario)
+        return True
+    print('El usuario o la contraseña no son correctos, o no ha rellenado todos los campos')
+    return False
+```
+#### Si es correcto el usuario y la contraseña se llama al metodo variableUsuarioSimp para guardar el usuario en una variable global y asi poderlo usar más adelante.
+```python
+    def variableUsuarioSimp(usuario):
+    global usuarioSimp
+    usuarioSimp = usuario
+```
+
+#### Insertar Discoteca a la base de datos
+##### 1º Se llama al metodo insertarDiscoteca para insertar la discoteca en la base de datos. Se vuelve a usar el argumento ruta para la misma funcion antes mencionada. Creamos un String llamado ubicacion que combina los campos calle, numero y zona, para asi generar correctamente y de forma más eficiente las coordenadas. Para generar las coordenadas usamos la libreria geolocator.
+###### Ejemplo de codigo.
+```python
+location = geolocator.geocode(ubicacion2)
+```
+```python
+    def insertarDiscoteca(nombre, calle, numero, zona, ruta):
+    discotecas = {
+        'nombre': nombre,
+        'calle': calle,
+        'numero': numero,
+        'zona': zona
+    }
+    db.reference(ruta).child('discotecas').push(discotecas)
+    ubicacion = calle + ', ' + str(numero) + ', ' + zona + ', Madrid España'
+    ubicacion2 = ubicacion.replace('C ', 'Calle ').replace('Av ', 'Avenida ').replace(
+        'Avda ', 'Avenida ').replace('C.', 'Calle ').replace('PL ', 'Plaza ').replace('c', 'Calle ').replace('av', 'Avenida ').replace('avda', 'Avenida ').replace('c.', 'Calle ').replace('pl', 'Plaza ')
+
+    location = geolocator.geocode(ubicacion2)
+    insertarDiscotecaEficiente(
+        nombre, ubicacion2, location.longitude, location.latitude, ruta)
+
+```
+##### 2º Se llama al metodo insertarDiscotecaEficiente para insertar la discoteca en la base de datos de forma eficiente, es decir, con las coordenadas ya generadas, para luego generar el mapa. Se vuelve a usar el argumento ruta para la misma funcion antes mencionada.
+```python
+    def insertarDiscotecaEficiente(nombre, ubicacion, longitud, latitud, ruta):
+    discotecas = {
+        'nombre': nombre,
+        'ubicacion': ubicacion,
+        'longitud': longitud,
+        'latitud': latitud
+    }
+    db.reference(ruta).child('discotecasEficientes').push(discotecas)
+```
+
+
 
 ### Requisitos para el proyecto
 
