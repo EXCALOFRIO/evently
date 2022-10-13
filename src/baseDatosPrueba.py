@@ -225,6 +225,7 @@ def filtrarDiscotecas(opcion, consulta):
     elif opcion == 4:
         # FILTRADO DE VALORACION
         valoraciones = db.reference('data/valoraciones')
+        consulta = consulta.lower()
         temp = []
         for k, v in valoraciones.get().items():
             if v['texto'].lower().__contains__(consulta):

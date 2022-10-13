@@ -48,10 +48,19 @@ class TestFiltrado(unittest.TestCase):
         sentencia = filtrarDiscotecas(3, 'Calle de las cariñosas')
         self.assertEqual(sentencia, [])
 
-    def test_filtro_valoracion(self):
+    def test_filtro_valoracion_minuscula(self):
         sentencia = filtrarDiscotecas(4, "ambiente")
         resultado = ['Kapital']
         self.assertEqual(sentencia, resultado)
+
+    def test_filtro_valoracion_mayuscula(self):
+        sentencia = filtrarDiscotecas(4, "AMBIENTE")
+        resultado = ['Kapital']
+        self.assertEqual(sentencia, resultado)
+
+    def test_filtro_valoracion_false(self):
+        sentencia = filtrarDiscotecas(4, "cariñosas")
+        self.assertEqual(sentencia, [])
 
 
 if __name__ == '__main__':
