@@ -81,6 +81,15 @@ class Ui_MainWindow(object):
             out = str(out).replace('[', '').replace(']', '').replace(
                 "'", '').replace(', ', '\n')
             self.textBrowser_Fltrado.setText(out)
+        
+        elif self.comboBox.currentText() == "VALORACIÓN":
+            out = filtrarDiscotecas(
+                4, self.lineEdit_BusquedaFiltrado.text())
+            # quita de los caracteres de out [  ] y ' , '
+            out = str(out).replace('[', '').replace(']', '').replace(
+                "'", '').replace(', ', '\n')
+            self.textBrowser_Fltrado.setText(out)
+            
 
     def buttonMapa(self):
         self.stackedWidget.setCurrentWidget(self.page_mapa)
