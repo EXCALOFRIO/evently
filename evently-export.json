@@ -1,0 +1,448 @@
+{
+  "data": {
+    "discotecas": {
+      "-NDRyzfTwu9xAjRA7XWa": {
+        "calle": "Calle de Joaquín Costa",
+        "nombre": "B12",
+        "numero": "27",
+        "zona": "Tetuán"
+      },
+      "-NDRyzfTwu9xAjRA7XWb": {
+        "calle": "Carretera de La Coruña",
+        "nombre": "Blackhouse",
+        "numero": "0",
+        "zona": "Moncloa Aravaca"
+      },
+      "-NDRyzfTwu9xAjRA7XWc": {
+        "calle": "Paseo de Recoletos",
+        "nombre": "Gunilla Club",
+        "numero": "16",
+        "zona": "Salamanca"
+      },
+      "-NDRyzfTwu9xAjRA7XWd": {
+        "calle": "Calle de Atocha",
+        "nombre": "Independance Club",
+        "numero": "127",
+        "zona": "Centro"
+      },
+      "-NDRyzfTwu9xAjRA7XWe": {
+        "calle": "Calle del Arenal",
+        "nombre": "Joy Eslava",
+        "numero": "11",
+        "zona": "Centro"
+      },
+      "-NDRyzfTwu9xAjRA7XWf": {
+        "calle": "Calle de Atocha",
+        "nombre": "Kapital",
+        "numero": "125",
+        "zona": "Centro"
+      },
+      "-NDRyzfTwu9xAjRA7XWg": {
+        "calle": "Paseo Bajo de la Virgen del Puerto",
+        "nombre": "La Riviera",
+        "numero": "0",
+        "zona": "Moncloa Aravaca"
+      },
+      "-NDRyzfTwu9xAjRA7XWh": {
+        "calle": "Calle de Orense",
+        "nombre": "Lemon",
+        "numero": "14",
+        "zona": "Tetuán"
+      },
+      "-NDRyzfTwu9xAjRA7XWi": {
+        "calle": "Pl de Tirso de Molina",
+        "nombre": "Medias Puri",
+        "numero": "1",
+        "zona": "Centro"
+      },
+      "-NDRyzfTwu9xAjRA7XWj": {
+        "calle": "Calle de Orense",
+        "nombre": "Nazca",
+        "numero": "24",
+        "zona": "Tetuán"
+      },
+      "-NDRyzfTwu9xAjRA7XWk": {
+        "calle": "Calle de Orense",
+        "nombre": "Nuit",
+        "numero": "10",
+        "zona": "Tetuán"
+      },
+      "-NDRyzfTwu9xAjRA7XWl": {
+        "calle": "Calle de Jose Abascal",
+        "nombre": "Opium",
+        "numero": "56",
+        "zona": "Castellana"
+      },
+      "-NDRyzfTwu9xAjRA7XWm": {
+        "calle": "Calle de Hernani",
+        "nombre": "Panda",
+        "numero": "75",
+        "zona": "Tetuán"
+      },
+      "-NDRyzfTwu9xAjRA7XWo": {
+        "calle": "Calle de Orense",
+        "nombre": "Posh Club",
+        "numero": "18",
+        "zona": "Tetuán"
+      },
+      "-NDRyzfTwu9xAjRA7XWp": {
+        "calle": "Calle de Toledo",
+        "nombre": "Shoko",
+        "numero": "86",
+        "zona": "Centro"
+      },
+      "-NDRyzfTwu9xAjRA7XWq": {
+        "calle": "Calle de Barceló",
+        "nombre": "Teatro Barceló",
+        "numero": "11",
+        "zona": "Chamberi"
+      },
+      "-NDRyzfTwu9xAjRA7XWr": {
+        "calle": "Calle de Campoamor",
+        "nombre": "Thundercart Club",
+        "numero": "11",
+        "zona": "Chamberi"
+      },
+      "-NDRyzfTwu9xAjRA7XWs": {
+        "calle": "Avenida del Dr Arce",
+        "nombre": "Tiffanys",
+        "numero": "10",
+        "zona": "Tetuán"
+      },
+      "-NDRyzfTwu9xAjRA7XWt": {
+        "calle": "Calle de Jacometrezo",
+        "nombre": "Velvet",
+        "numero": "6",
+        "zona": "Centro"
+      },
+      "-NDRyzfTwu9xAjRA7XWtr": {
+        "calle": "Calle de Hilarión Eslava",
+        "nombre": "Uñas Chung Lee",
+        "numero": "38",
+        "zona": "Chamberi"
+      },
+      "-NDRyzfTwu9xAjRA7XWx": {
+        "calle": "Avenida de la Industria",
+        "nombre": "Fabrik",
+        "numero": "82",
+        "zona": "Humanes"
+      },
+      "-NEKq8xi6PZuqxxDdt3W": {
+        "calle": "msj",
+        "nombre": "Prueba",
+        "numero": "3",
+        "zona": "jjskakh"
+      }
+    },
+    "discotecasEficientes": {
+      "-NE65IKM9qC9iYth_bpo": {
+        "latitud": 40.4461059,
+        "longitud": -3.6884419,
+        "nombre": "B12",
+        "ubicacion": "Calle de Joaquín Costa, 27, Madrid España"
+      },
+      "-NE65IRuLDFPnbnll6Sd": {
+        "latitud": 40.6433958,
+        "longitud": -4.0390833,
+        "nombre": "Blackhouse",
+        "ubicacion": "Carretera de La Coruña, 0, Madrid España"
+      },
+      "-NE65IaT2NStzxQdiy78": {
+        "latitud": 40.42256315,
+        "longitud": -3.690900189817708,
+        "nombre": "Gunilla Club",
+        "ubicacion": "Paseo de Recoletos, 16, Madrid España"
+      },
+      "-NE65IgUZE2xu2oPQibG": {
+        "latitud": 40.4096055,
+        "longitud": -3.6926831,
+        "nombre": "Independance Club",
+        "ubicacion": "Calle de Atocha, 127, Madrid España"
+      },
+      "-NE65IoWEseZbrp_tbJO": {
+        "latitud": 40.4292084,
+        "longitud": -3.7846342,
+        "nombre": "Joy Eslava",
+        "ubicacion": "Calle del Arenal, 11, Madrid España"
+      },
+      "-NE65Ivu8x4M65UF80kw": {
+        "latitud": 40.4096995,
+        "longitud": -3.6930939,
+        "nombre": "Kapital",
+        "ubicacion": "Calle de Atocha, 125, Madrid España"
+      },
+      "-NE65J3PTySZksK2wWDz": {
+        "latitud": 40.4146728,
+        "longitud": -3.7212828,
+        "nombre": "La Riviera",
+        "ubicacion": "Paseo Bajo de la Virgen del Puerto, 0, Madrid España"
+      },
+      "-NE65JBadrXO110cs9gh": {
+        "latitud": 40.4483338,
+        "longitud": -3.695367,
+        "nombre": "Lemon",
+        "ubicacion": "Calle de Orense, 14, Madrid España"
+      },
+      "-NE65JITKg0rT0n3eAO7": {
+        "latitud": 40.4121176,
+        "longitud": -3.703293399641577,
+        "nombre": "Medias Puri",
+        "ubicacion": "Pl de Tirso de Molina, 1, Madrid España"
+      },
+      "-NE65JQ6KWyL6E8DjWIe": {
+        "latitud": 40.4513098,
+        "longitud": -3.6949808,
+        "nombre": "Nazca",
+        "ubicacion": "Calle de Orense, 24, Madrid España"
+      },
+      "-NE65JZYpGARbL6uVbEY": {
+        "latitud": 40.4483338,
+        "longitud": -3.695367,
+        "nombre": "Nuit",
+        "ubicacion": "Calle de Orense, 10, Madrid España"
+      },
+      "-NE65JgPBcYUohtEckI4": {
+        "latitud": 40.4379481,
+        "longitud": -3.6921857,
+        "nombre": "Opium",
+        "ubicacion": "Calle de Jose Abascal, 56, Madrid España"
+      },
+      "-NE65JmviWqzSi4JqZZx": {
+        "latitud": 40.4480236,
+        "longitud": -3.6969828,
+        "nombre": "Panda",
+        "ubicacion": "Calle de Hernani, 75, Madrid España"
+      },
+      "-NE65Jui2s4Z_i0c6T83": {
+        "latitud": 40.4483338,
+        "longitud": -3.695367,
+        "nombre": "Posh Club",
+        "ubicacion": "Calle de Orense, 18, Madrid España"
+      },
+      "-NE65K2AC9w_Xx97C7_h": {
+        "latitud": 40.40881795,
+        "longitud": -3.7108497418300646,
+        "nombre": "Shoko",
+        "ubicacion": "Calle de Toledo, 86, Madrid España"
+      },
+      "-NE65K9wGFduHcfuoTBt": {
+        "latitud": 40.4269645,
+        "longitud": -3.6995815,
+        "nombre": "Teatro Barceló",
+        "ubicacion": "Calle de Barceló, 11, Madrid España"
+      },
+      "-NE65KI1DuNVzWFZm29G": {
+        "latitud": 40.4262559,
+        "longitud": -3.6957287,
+        "nombre": "Thundercart Club",
+        "ubicacion": "Calle de Campoamor, 11, Madrid España"
+      },
+      "-NE65KPs8LvOHrImGQna": {
+        "latitud": 40.4485507,
+        "longitud": -3.6791346,
+        "nombre": "Tiffanys",
+        "ubicacion": "Avenida del Dr Arce, 10, Madrid España"
+      },
+      "-NE65KwH_Tt2yOhziuF2": {
+        "latitud": 40.4203055,
+        "longitud": -3.7074769,
+        "nombre": "Velvet",
+        "ubicacion": "Calle de Jacometrezo, 6, Madrid España"
+      },
+      "-NE65Kzy0KiW2KgK0OAI": {
+        "latitud": 40.4361601,
+        "longitud": -3.7165013,
+        "nombre": "Uñas Chung Lee",
+        "ubicacion": "Calle de Hilarión Eslava, 38, Madrid España"
+      },
+      "-NE65L8FMxw3LI-f8KaG": {
+        "latitud": 40.5975457,
+        "longitud": -3.695774,
+        "nombre": "Fabrik",
+        "ubicacion": "Avenida de la Industria, 82, Madrid España"
+      }
+    },
+    "fiestas": {
+      "-NE6DHc-RlFzwJyAWs8E": {
+        "calle": "Calle de la brujula",
+        "nombre": "Fiesta de pijamas casa Dani",
+        "numero": "37",
+        "zona": "Aravaca"
+      },
+      "-NE75awenI9qkiWdosTM": {
+        "calle": "Calle de Maldonado",
+        "nombre": "Mana",
+        "numero": "55",
+        "zona": "Castellana"
+      }
+    },
+    "fiestasEficientes": {
+      "-NE6DHjQbvp8OD3zG8eJ": {
+        "latitud": 40.4548601,
+        "longitud": -3.7872385,
+        "nombre": "Fiesta de pijamas casa Dani",
+        "ubicacion": "Calle de la brujula, 37, Aravaca, Madrid España"
+      },
+      "-NE75b8ctwGDm8jDwd5g": {
+        "latitud": 40.4338117,
+        "longitud": -3.681945,
+        "nombre": "Mana",
+        "ubicacion": "Calle de Maldonado, 55, Castellana, Madrid España"
+      }
+    },
+    "usuarios": {
+      "-NE67MbvBv2h7f97xTyz": {
+        "apellido": "Ramirez",
+        "contraseña": "moco",
+        "edad": "21",
+        "email": "aleramlar@gmail.com",
+        "nombre": "Alejandro",
+        "usuario": "EXCALOFRIO"
+      },
+      "-NE67ZKrXnJZVY5zVOAG": {
+        "apellido": "Moreno",
+        "contraseña": "1234",
+        "edad": 20,
+        "email": "juaki@gmail.com",
+        "nombre": "Joaquin",
+        "usuario": "Juaki"
+      },
+      "-NE74djx05HlygRBThVs": {
+        "apellido": "Bermudez",
+        "contraseña": "alejandroelmejor",
+        "edad": 18,
+        "email": "sara30@gmail.com",
+        "nombre": "Sara",
+        "usuario": "Sarabn30"
+      },
+      "-NEFv12ejBFso3kpFRMV": {
+        "apellido": "Blanco",
+        "contraseña": "1234",
+        "edad": 20,
+        "email": "serena@gmail.com",
+        "nombre": "Serena",
+        "usuario": "serena"
+      },
+      "-NEFy6H16fItiOyNyUAo": {
+        "apellido": "b",
+        "contraseña": "12",
+        "edad": 0,
+        "email": "usr@gmail.com",
+        "nombre": "a",
+        "usuario": "usr"
+      },
+      "-NEHBR20kIbPvQJCfFyN": {
+        "apellido": "bc",
+        "contraseña": "12",
+        "edad": 0,
+        "email": "abc@gmail.com",
+        "nombre": "a",
+        "usuario": "abc"
+      },
+      "-NEHchIurKT6nOd5a0jI": {
+        "apellido": "Daguerre",
+        "contraseña": "1234",
+        "edad": 0,
+        "email": "eldepreuba@gmail.com",
+        "nombre": "Alberto",
+        "usuario": "Daguerre"
+      }
+    },
+    "valoraciones": {
+      "-NE6BVok1QaH0UrKbYrX": {
+        "nombre_discoteca": "La Riviera",
+        "nota": "4",
+        "texto": "Muy buena discoteca pero hace calor",
+        "usuario": "EXCALOFRIO·º·"
+      },
+      "-NE6Qs-6HQQfZ-pcbwPK": {
+        "nombre_discoteca": "BlackHouse",
+        "nota": 3,
+        "texto": "Hace calor y es muy cara",
+        "usuario": "EXCALOFRIO·º·"
+      },
+      "-NE7560INxAzV2q24F6J": {
+        "nombre_discoteca": "Cats",
+        "nota": 2,
+        "texto": "Mucha gente",
+        "usuario": "Sarabn30·º·"
+      },
+      "-NEC5FxAj0oEAPazJtV0": {
+        "nombre_discoteca": "Nuit",
+        "nota": 5,
+        "texto": "Nunca defrauda",
+        "usuario": "EXCALOFRIO·º·"
+      },
+      "-NEFhirrwRG1NeDzq7Hp": {
+        "nombre_discoteca": "Kapital",
+        "nota": 3,
+        "texto": "Buen ambiente",
+        "usuario": "EXCALOFRIO·º·"
+      },
+      "-NEKqRofg5cYoKEEh0_H": {
+        "nombre_discoteca": "Fabrik",
+        "nota": 5,
+        "texto": "Esta muy lejos",
+        "usuario": "Daguerre·º·"
+      },
+      "-NEKqSbphom420g2oXpj": {
+        "nombre_discoteca": "Fabrik",
+        "nota": 5,
+        "texto": "Esta muy lejos",
+        "usuario": "Daguerre·º·"
+      }
+    }
+  },
+  "test": {
+    "discotecasEficientes": {
+      "-NEKn-HMWbdVhECp3S6_": {
+        "latitud": 40.4463532,
+        "longitud": -3.6915202,
+        "nombre": "B12",
+        "ubicacion": "Calle de Joaquín Costa, 27, Tetuán, Madrid España"
+      },
+      "-NEKrgjHqRrDO5zPmzNL": {
+        "latitud": 40.4463532,
+        "longitud": -3.6915202,
+        "nombre": "B12",
+        "ubicacion": "Calle de Joaquín Costa, 27, Tetuán, Madrid España"
+      },
+      "-NEKs3YRTVAGnvL1mEM-": {
+        "latitud": 40.4463532,
+        "longitud": -3.6915202,
+        "nombre": "B12",
+        "ubicacion": "Calle de Joaquín Costa, 27, Tetuán, Madrid España"
+      }
+    },
+    "fiestasEficientes": {
+      "-NEKn0QPcjHFuMwoRYca": {
+        "latitud": 40.4338117,
+        "longitud": -3.681945,
+        "nombre": "Mana",
+        "ubicacion": "Calle de Maldonado, 55, Castellana, Madrid España"
+      },
+      "-NEKrh_H7DICB8_8MZU-": {
+        "latitud": 40.4338117,
+        "longitud": -3.681945,
+        "nombre": "Mana",
+        "ubicacion": "Calle de Maldonado, 55, Castellana, Madrid España"
+      },
+      "-NEKs4NNz7ZZ313qrfVD": {
+        "latitud": 40.4338117,
+        "longitud": -3.681945,
+        "nombre": "Mana",
+        "ubicacion": "Calle de Maldonado, 55, Castellana, Madrid España"
+      }
+    },
+    "usuarios": {
+      "-NEKs4jWvkqJSFRb8KaK": {
+        "apellido": "apellido",
+        "contraseña": "contraseña",
+        "edad": "8",
+        "email": "email@email.es",
+        "nombre": "nombre",
+        "usuario": "usuario"
+      }
+    }
+  }
+}
