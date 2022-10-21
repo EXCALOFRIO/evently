@@ -16,7 +16,7 @@ from PyQt5.uic import loadUi
 import pyglet
 import webview
 
-from baseDatosPrueba import datosUsuario, filtrarDiscotecas, getItemBaseDatos, getTodosLosDatos, insertarDiscoteca, insertarFiesta, insertarValoracion, variableUsuarioSimp,color
+from baseDatosPrueba import datosUsuario, filtrarDiscotecas, getItemBaseDatos, getTodosLosDatos, insertarDiscoteca, insertarFiesta, insertarValoracion, variableUsuarioSimp,color, color2
 
 
 pyglet.font.add_file('fuentes/productSans.ttf')  # ABeeZee
@@ -131,7 +131,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_12.setSpacing(0)
         self.verticalLayout_12.setObjectName("verticalLayout_12")
         self.frame = QtWidgets.QFrame(self.centralwidget)
-        self.frame.setStyleSheet("background-color: rgb(36, 31, 49);")
+        self.frame.setStyleSheet("background-color: "+color2+";")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
@@ -228,8 +228,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.addWidget(self.pushButton_Resenna)
         self.horizontalLayout.addWidget(self.frame_control)
         self.frame_paginas = QtWidgets.QFrame(self.frame_contenido)
+        ##ESTE ES EL DE FILTRADO
         self.frame_paginas.setStyleSheet("QFrame{\n"
-                                           "    background-color:"+color+";\n"
+                                           "    background-color:"+color2+";\n"
                                          "}\n"
                                          "\n"
                                          "QLabel{\n"
@@ -319,12 +320,14 @@ class Ui_MainWindow(object):
         self.horizontalLayout_9.addItem(spacerItem2)
         self.verticalLayout_13.addLayout(self.horizontalLayout_9)
         self.textBrowser_Fltrado = QtWidgets.QTextBrowser(self.page_filtrado)
-        self.textBrowser_Fltrado.setStyleSheet(
-            "background-color: rgb(255, 255, 255);")
+
         # aumenta el tamaño de la letra
         self.textBrowser_Fltrado.setFontPointSize(23)
         self.textBrowser_Fltrado.setObjectName("textBrowser_Fltrado")
         self.verticalLayout_13.addWidget(self.textBrowser_Fltrado)
+        #cambia el color de fondo de textoBrowser
+        self.textBrowser_Fltrado.setStyleSheet("background-color:"+color2)
+        self.textBrowser_Fltrado.setStyleSheet("color:"+color)
         self.stackedWidget.addWidget(self.page_filtrado)
 
         """PÁGINA DE DISCOTECAS"""
@@ -571,8 +574,9 @@ class Ui_MainWindow(object):
             self.comboBoxDisco.addItem(i)
 
         self.textEdit = QtWidgets.QTextEdit(self.frame_2)
-        self.textEdit.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-                                    "")
+        ##Añadir reseña 
+        self.textEdit.setStyleSheet("background-color:"+color2+";\n")
+        self.textEdit.setStyleSheet("color:  "+color+";\n")
         self.textEdit.setObjectName("textEdit")
         self.verticalLayout_10.addWidget(self.textEdit)
         self.radioButton_1estrella = QtWidgets.QRadioButton(self.frame_2)
@@ -607,7 +611,9 @@ class Ui_MainWindow(object):
         self.label_5.setObjectName("label_5")
         self.verticalLayout_11.addWidget(self.label_5)
         self.textBrowser = QtWidgets.QTextBrowser(self.frame_3)
-        self.textBrowser.setStyleSheet("background-color: rgb(255, 255, 255);")
+        #Añadir reseña
+        self.textBrowser.setStyleSheet("background-color:"+color2+";\n")
+        self.textBrowser.setStyleSheet("color:  "+color+";\n")
         self.textBrowser.setObjectName("textBrowser")
         self.verticalLayout_11.addWidget(self.textBrowser)
         self.horizontalLayout_8.addWidget(self.frame_3)

@@ -12,7 +12,7 @@ from PyQt5.uic import loadUi
 import pyglet
 import webview
 
-from baseDatosPrueba import comprobarInicioSesion, color, fuentePrincipal
+from baseDatosPrueba import comprobarInicioSesion, color,color2, fuentePrincipal
 
 import pyglet
 
@@ -42,6 +42,7 @@ contrasenaLabel.grid(row=3, pady=5)
 
 nombreUsuario = StringVar()
 usuarioEntry = Entry(frame1, textvariable=nombreUsuario, font=(fuentePrincipal, 12))
+
 usuarioEntry.grid(row=2)
 
 contrasenaUsuario = StringVar()
