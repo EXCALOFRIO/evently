@@ -22,10 +22,10 @@ firebase_admin.initialize_app(cred, {
 #metodo para cambiar el tema
 fuentePrincipal = "ABeeZee"
 def colorTema(numero):
-    listaColores=["#2f415e","#57E389","#F2A365","#E3F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3"]
+    listaColores=["#8b9dc3","#57E389","#F2A365","#E3F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3"]
     return listaColores[numero]
 
-color=colorTema(3)
+color=colorTema(0)
 
 
 ##############################################################################

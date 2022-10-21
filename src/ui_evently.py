@@ -16,7 +16,7 @@ from PyQt5.uic import loadUi
 import pyglet
 import webview
 
-from baseDatosPrueba import datosUsuario, filtrarDiscotecas, getItemBaseDatos, getTodosLosDatos, insertarDiscoteca, insertarFiesta, insertarValoracion, variableUsuarioSimp
+from baseDatosPrueba import datosUsuario, filtrarDiscotecas, getItemBaseDatos, getTodosLosDatos, insertarDiscoteca, insertarFiesta, insertarValoracion, variableUsuarioSimp,color
 
 
 pyglet.font.add_file('fuentes/productSans.ttf')  # ABeeZee
@@ -142,7 +142,7 @@ class Ui_MainWindow(object):
         self.frame_superior = QtWidgets.QFrame(self.frame)
         self.frame_superior.setMinimumSize(QtCore.QSize(0, 42))
         self.frame_superior.setStyleSheet("QFrame{\n"
-                                          "    background-color: rgb(87, 227, 137);\n"
+                                          "    background-color:"+color+";\n"
                                           "}\n"
                                           "\n"
                                           "QPushButton{\n"
@@ -172,7 +172,7 @@ class Ui_MainWindow(object):
         self.frame_control.setMinimumSize(QtCore.QSize(300, 0))
         self.frame_control.setMaximumSize(QtCore.QSize(1000, 16777215))
         self.frame_control.setStyleSheet("QFrame{\n"
-                                         "    background-color: rgb(87, 227, 137);\n"
+                                         "    background-color:"+color+";\n"
                                          "}\n"
                                          "\n"
                                          " QPushButton{\n"
@@ -229,13 +229,13 @@ class Ui_MainWindow(object):
         self.horizontalLayout.addWidget(self.frame_control)
         self.frame_paginas = QtWidgets.QFrame(self.frame_contenido)
         self.frame_paginas.setStyleSheet("QFrame{\n"
-                                         "    background-color: rgb(87, 227, 137);\n"
+                                           "    background-color:"+color+";\n"
                                          "}\n"
                                          "\n"
                                          "QLabel{\n"
                                          "    font: 87 12pt \"Arial Black\";    \n"
                                          "    background-color:#000000ff;\n"
-                                         "    color: rgb(87, 227, 137);\n"
+                                         "    color:  "+color+";\n"
                                          "    border: 0px solid #14C8DC;\n"
                                          "}\n"
                                          "\n"
@@ -254,7 +254,7 @@ class Ui_MainWindow(object):
                                          "}\n"
                                          "\n"
                                          "QPushButton:hover{\n"
-                                         "    background-color: rgb(87, 227, 137);\n"
+                                           "    background-color:"+color+";\n"
                                          "    border-radius: 15px;\n"
                                          "    color: rgb(0,0,0);\n"
                                          "    font: 77 10pt \"Arial Black\";\n"
@@ -288,7 +288,7 @@ class Ui_MainWindow(object):
         self.label_6.setObjectName("label_6")
         self.verticalLayout_13.addWidget(self.label_6)
         self.comboBox = QtWidgets.QComboBox(self.page_filtrado)
-        self.comboBox.setStyleSheet("color: rgb(87, 227, 137);\n"
+        self.comboBox.setStyleSheet("color:  "+color+";\n"
                                     "background-color: #000000ff;")
         self.comboBox.setObjectName("comboBox")
         self.comboBox.addItem("")
@@ -301,7 +301,7 @@ class Ui_MainWindow(object):
         self.lineEdit_BusquedaFiltrado = QtWidgets.QLineEdit(
             self.page_filtrado)
         self.lineEdit_BusquedaFiltrado.setStyleSheet(
-            "color: rgb(87, 227, 137);")
+            "color:  "+color+";")
         self.lineEdit_BusquedaFiltrado.setObjectName(
             "lineEdit_BusquedaFiltrado")
         self.horizontalLayout_9.addWidget(self.lineEdit_BusquedaFiltrado)
@@ -507,7 +507,7 @@ class Ui_MainWindow(object):
                                            "QLabel{\n"
                                            "    font: 87 12pt \"Arial Black\";    \n"
                                            "    background-color:#000000ff;\n"
-                                           "    color: rgb(87, 227, 137);\n"
+                                           "    color:  "+color+";\n"
                                            "    border: 0px solid #14C8DC;\n"
                                            "}\n"
                                            "\n"
@@ -526,14 +526,14 @@ class Ui_MainWindow(object):
                                            "}\n"
                                            "\n"
                                            "QPushButton:hover{\n"
-                                           "    background-color: rgb(87, 227, 137);\n"
+                                             "    background-color:"+color+";\n"
                                            "    border-radius: 15px;\n"
                                            "    color: rgb(0,0,0);\n"
                                            "    font: 77 10pt \"Arial Black\";\n"
                                            "}\n"
                                            "\n"
                                            "QRadioButton{\n"
-                                           "    background-color: rgb(87, 227, 137);\n"
+                                             "    background-color:"+color+";\n"
                                            "    font: 87 12pt \"Arial Black\";    \n"
                                            "}")
         """PÁGINA DE AGREGAR RESEÑA"""
@@ -564,7 +564,7 @@ class Ui_MainWindow(object):
         self.comboBoxDisco = QtWidgets.QComboBox(self.frame_2)
         self.comboBoxDisco.setObjectName("comboBoxDisco")
         self.verticalLayout_10.addWidget(self.comboBoxDisco)
-        self.comboBoxDisco.setStyleSheet("color: rgb(87, 227, 137);\n"
+        self.comboBoxDisco.setStyleSheet("color:  "+color+";\n"
                                          "background-color: #000000ff;")
         discotecas = getItemBaseDatos('discotecas', 'nombre', 'data')
         for i in discotecas:
