@@ -2,9 +2,11 @@
 # pip install python-firebase
 
 import itertools
+import re
 import time
 import email
 from operator import ge
+from turtle import color
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
@@ -14,6 +16,17 @@ cred = credentials.Certificate("firebase/evently-key.json")
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://evently-646a2-default-rtdb.firebaseio.com/'
 })
+
+#THEME
+#Array de colores
+#metodo para cambiar el tema
+fuentePrincipal = "ABeeZee"
+def colorTema(numero):
+    listaColores=["#2f415e","#57E389","#F2A365","#E3F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3"]
+    return listaColores[numero]
+
+color=colorTema(3)
+
 
 ##############################################################################
 #METODOS PARA INSERTAR LOS DIFERENTES DATOS EN LAS TABLAS DE LA BASE DE DATOS#
