@@ -353,6 +353,19 @@ QPushButton: hover{
                </property>
               </widget>
              </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_MiPerfil">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>40</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>MI PERFIL</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </widget>
           </item>
@@ -419,7 +432,7 @@ QPushButton:hover{
              <item>
               <widget class="QStackedWidget" name="stackedWidget">
                <property name="currentIndex">
-                <number>4</number>
+                <number>5</number>
                </property>
                <widget class="QWidget" name="page_mapa"/>
                <widget class="QWidget" name="page_filtrado">
@@ -1007,7 +1020,7 @@ QRadioButton{
                        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Ubuntu'; font-size:11pt; font-style:italic;&quot;&gt;Escriba aquí su reseña&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                       </property>
                      </widget>
@@ -1090,6 +1103,202 @@ p, li { white-space: pre-wrap; }
                   </widget>
                  </item>
                 </layout>
+               </widget>
+               <widget class="QWidget" name="page_MiPerfil">
+                <widget class="QLabel" name="label_7">
+                 <property name="geometry">
+                  <rect>
+                   <x>6</x>
+                   <y>10</y>
+                   <width>591</width>
+                   <height>20</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>MI PERFIL</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+                <widget class="QWidget" name="verticalLayoutWidget">
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>40</y>
+                   <width>111</width>
+                   <height>141</height>
+                  </rect>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_14">
+                  <item>
+                   <widget class="QLabel" name="label_usuario">
+                    <property name="text">
+                     <string>USUARIO:</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_nombre">
+                    <property name="text">
+                     <string>NOMBRE:</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_apellido">
+                    <property name="text">
+                     <string>APELLIDO:</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QTextBrowser" name="textBrowser_usuario">
+                 <property name="geometry">
+                  <rect>
+                   <x>130</x>
+                   <y>50</y>
+                   <width>151</width>
+                   <height>31</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(255, 255, 255)</string>
+                 </property>
+                </widget>
+                <widget class="QTextBrowser" name="textBrowser_nombre">
+                 <property name="geometry">
+                  <rect>
+                   <x>130</x>
+                   <y>100</y>
+                   <width>151</width>
+                   <height>31</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(255, 255, 255)</string>
+                 </property>
+                </widget>
+                <widget class="QTextBrowser" name="textBrowser_apellido">
+                 <property name="geometry">
+                  <rect>
+                   <x>130</x>
+                   <y>150</y>
+                   <width>151</width>
+                   <height>31</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(255, 255, 255)</string>
+                 </property>
+                </widget>
+                <widget class="QWidget" name="verticalLayoutWidget_2">
+                 <property name="geometry">
+                  <rect>
+                   <x>290</x>
+                   <y>40</y>
+                   <width>91</width>
+                   <height>141</height>
+                  </rect>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_15">
+                  <item>
+                   <widget class="QLabel" name="label_email">
+                    <property name="text">
+                     <string>EMAIL:</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_edad">
+                    <property name="text">
+                     <string>EDAD:</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QTextBrowser" name="textBrowser_email">
+                 <property name="geometry">
+                  <rect>
+                   <x>390</x>
+                   <y>60</y>
+                   <width>201</width>
+                   <height>31</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(255, 255, 255)</string>
+                 </property>
+                </widget>
+                <widget class="QTextBrowser" name="textBrowser_edad">
+                 <property name="geometry">
+                  <rect>
+                   <x>390</x>
+                   <y>130</y>
+                   <width>201</width>
+                   <height>31</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(255, 255, 255)</string>
+                 </property>
+                </widget>
+                <widget class="QTextBrowser" name="textBrowser_MiPerfil">
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>230</y>
+                   <width>581</width>
+                   <height>221</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(255, 255, 255)</string>
+                 </property>
+                </widget>
+                <widget class="QPushButton" name="pushButton_MisResennas">
+                 <property name="geometry">
+                  <rect>
+                   <x>190</x>
+                   <y>200</y>
+                   <width>111</width>
+                   <height>23</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>Mis reseñas</string>
+                 </property>
+                </widget>
+                <widget class="QPushButton" name="pushButton_MisFiestas">
+                 <property name="geometry">
+                  <rect>
+                   <x>310</x>
+                   <y>200</y>
+                   <width>101</width>
+                   <height>23</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>Mis fiestas</string>
+                 </property>
+                </widget>
                </widget>
               </widget>
              </item>
