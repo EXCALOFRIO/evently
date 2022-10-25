@@ -1,11 +1,66 @@
 import unittest
-
-from baseDatosPrueba import borrarDatos, borrarTodo, comprobarInicioSesion, getItemBaseDatos, insertarDiscoteca, insertarFiesta, insertarUsuario, insertarValoracion, comprobarUsuario
-
-# test para ver si el metodo insertarUsuario de la clase baseDatosPrueba funciona correctamente
+from baseDatosPrueba import filtrarDiscotecas, insertarUsuario, borrarDatos, borrarTodo, comprobarInicioSesion, getItemBaseDatos, insertarDiscoteca, insertarFiesta, insertarUsuario, insertarValoracion, comprobarUsuario
 
 
-class TestInsertarUsuario(unittest.TestCase):
+class TestFiltrado(unittest.TestCase):
+
+    def test_filtro_zona_minuscula(self):
+        sentencia = filtrarDiscotecas(1, "centro")
+        resultado = ['Independance Club', 'Joy Eslava',
+                     'Kapital', 'Medias Puri', 'Shoko', 'Velvet']
+        self.assertEqual(sentencia, resultado)
+
+    def test_filtro_zona_mayuscula(self):
+        sentencia = filtrarDiscotecas(1, "CENTRO")
+        resultado = ['Independance Club', 'Joy Eslava',
+                     'Kapital', 'Medias Puri', 'Shoko', 'Velvet']
+        self.assertEqual(sentencia, resultado)
+
+    def test_filtro_zona_false(self):
+        sentencia = filtrarDiscotecas(1, 'carabanchel')
+        self.assertEqual(sentencia, [])
+
+    def test_filtro_nombre_minuscula(self):
+        sentencia = filtrarDiscotecas(2, "blackhouse")
+        resultado = ['Blackhouse']
+        self.assertEqual(sentencia, resultado)
+
+    def test_filtro_nombre_mayuscula(self):
+        sentencia = filtrarDiscotecas(2, "BLACKHOUSE")
+        resultado = ['Blackhouse']
+        self.assertEqual(sentencia, resultado)
+
+    def test_filtro_nombre_false(self):
+        sentencia = filtrarDiscotecas(2, 'evently')
+        self.assertEqual(sentencia, [])
+
+    def test_filtro_calle_con_mayusculas(self):
+        sentencia = filtrarDiscotecas(3, "Calle de Atocha")
+        resultado = ['Independance Club', 'Kapital']
+        self.assertEqual(sentencia, resultado)
+
+    def test_filtro_calle_con_minusculas(self):
+        sentencia = filtrarDiscotecas(3, "calle de atocha")
+        resultado = ['Independance Club', 'Kapital']
+        self.assertEqual(sentencia, resultado)
+
+    def test_filtro_calle_false(self):
+        sentencia = filtrarDiscotecas(3, 'Calle de las cariñosas')
+        self.assertEqual(sentencia, [])
+
+    def test_filtro_valoracion_minuscula(self):
+        sentencia = filtrarDiscotecas(4, "ambiente")
+        resultado = ['Kapital']
+        self.assertEqual(sentencia, resultado)
+
+    def test_filtro_valoracion_mayuscula(self):
+        sentencia = filtrarDiscotecas(4, "AMBIENTE")
+        resultado = ['Kapital']
+        self.assertEqual(sentencia, resultado)
+
+    def test_filtro_valoracion_false(self):
+        sentencia = filtrarDiscotecas(4, "cariñosas")
+        self.assertEqual(sentencia, [])
 
     def test_insertarUsuario(self):
         borrarDatos('usuarios')
@@ -94,8 +149,5 @@ class TestInsertarUsuario(unittest.TestCase):
             'usuario', 'contraseña', 'test'), True)
         borrarDatos('usuarios')
 
-
 if __name__ == '__main__':
     unittest.main()
-    borrarTodo('test')
-
