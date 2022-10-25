@@ -21,7 +21,7 @@ from PyQt5.QtGui import QIcon
 import pyglet
 import webview
 
-from baseDatosPrueba import datosUsuario, filtrarDiscotecas, getItemBaseDatos, getTodosLosDatos, insertarDiscoteca, insertarFiesta, insertarValoracion, variableUsuarioSimp,color, color2
+from baseDatosPrueba import datosUsuario, nombreUsuario, apellidoUsuario, emailUsuario, edadUsuario, filtrarDiscotecas, getItemBaseDatos, getTodosLosDatos, insertarDiscoteca, insertarFiesta, insertarValoracion, variableUsuarioSimp,color, color2
 
 
 pyglet.font.add_file('fuentes/productSans.ttf')  # ABeeZee
@@ -134,6 +134,16 @@ class Ui_MainWindow(object):
         
     def buttonPerfil(self):
         self.stackedWidget.setCurrentWidget(self.page_MiPerfil)
+        self.usuario = datosUsuario('usuario')
+        self.textBrowser_usuario.setText(self.usuario)
+        self.nombre = nombreUsuario('nombre')
+        self.textBrowser_nombre.setText(self.nombre)
+        self.apellido = apellidoUsuario('apellido')
+        self.textBrowser_apellido.setText(self.apellido)
+        self.email = emailUsuario('email')
+        self.textBrowser_email.setText(self.email)
+        self.edad = edadUsuario('edad')
+        self.textBrowser_edad.setText(str(self.edad))
         print("he seleccionado el boton MI PERFIL")
     
     def setupUi(self, MainWindow):

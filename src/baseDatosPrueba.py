@@ -187,10 +187,46 @@ def variableUsuarioSimp(usuario):
     usuarioActualSimp = {
         'usuario': usuario,
     }
+    
+def variableNombreUsuario(nombre):
+    global nombreUsuarioActual
+    nombreUsuarioActual = {
+        'nombre': nombre,
+    }
+    
+def variableApellidoUsuario(apellido):
+    global apellidoUsuarioActual
+    apellidoUsuarioActual = {
+        'apellido': apellido,
+    }
+    
+def variableEmailUsuario(email):
+    global emailUsuarioActual
+    emailUsuarioActual = {
+        'email': email,
+    }
+    
+def variableEdadUsuario(edad):
+    global edadUsuarioActual
+    edadUsuarioActual = {
+        'edad': edad,
+    }
 
 
 def datosUsuario(datos):
     return usuarioActualSimp[datos]
+
+def nombreUsuario(datos):
+    return nombreUsuarioActual[datos]
+
+def apellidoUsuario(datos):
+    return apellidoUsuarioActual[datos]
+
+def emailUsuario(datos):
+    return emailUsuarioActual[datos]
+
+def edadUsuario(datos):
+    return edadUsuarioActual[datos]
 
 
 def comprobarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta):
@@ -209,6 +245,14 @@ def comprobarInicioSesion(usuario, contraseña, ruta):
     indice = getItemBaseDatos('usuarios', 'usuario', ruta).index(usuario)
     if getItemBaseDatos('usuarios', 'contraseña', ruta)[indice] == contraseña:
         variableUsuarioSimp(usuario)
+        nombreUsr = getItemBaseDatos('usuarios', 'nombre', ruta)[indice]
+        variableNombreUsuario(nombreUsr)
+        apellidoUsr = getItemBaseDatos('usuarios', 'apellido', ruta)[indice]
+        variableApellidoUsuario(apellidoUsr)
+        emailUsr = getItemBaseDatos('usuarios', 'email', ruta)[indice]
+        variableEmailUsuario(emailUsr)
+        edadUsr = getItemBaseDatos('usuarios', 'edad', ruta)[indice]
+        variableEdadUsuario(edadUsr)
         return True
     print('El usuario o la contraseña no son correctos, o no ha rellenado todos los campos')
     return False
