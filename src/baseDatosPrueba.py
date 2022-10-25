@@ -129,12 +129,13 @@ def insertarFiesta(nombre, calle, numero, zona, ruta):
         nombre, ubicacion2, location.longitude, location.latitude, ruta)
 
 
-def insertarValoracion(usuario, nombre_discoteca, nota, texto, ruta):
+def insertarValoracion(usuario, nombre_discoteca, nota, texto, fecha ,ruta):
     valoraciones = {
         'usuario': usuario,
         'nombre_discoteca': nombre_discoteca,
         'nota': nota,
-        'texto': texto
+        'texto': texto,
+        time : fecha
     }
     db.reference(ruta).child('valoraciones').push(valoraciones)
 

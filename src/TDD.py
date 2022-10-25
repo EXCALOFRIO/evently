@@ -130,7 +130,7 @@ class TestFiltrado(unittest.TestCase):
 
     def test_insertarValoracion(self):
         insertarValoracion('usuario', 'nombre_discoteca',
-                           'nota', 'texto', 'test')
+                           'nota', 'texto', 'fecha', 'test')
         self.assertEqual(getItemBaseDatos(
             'valoraciones', 'usuario', 'test')[0], 'usuario')
         self.assertEqual(getItemBaseDatos(
@@ -148,6 +148,11 @@ class TestFiltrado(unittest.TestCase):
         self.assertEqual(comprobarInicioSesion(
             'usuario', 'contraseña', 'test'), True)
         borrarDatos('usuarios')
-
+        
+    def test_insertar_valoracion_fecha(self):
+        insertarValoracion('usuario', 'nombre_discoteca', 'nota', 'texto', 'fecha', 'test')
+        self.assertEqual(getItemBaseDatos('valoraciones', 'fecha', 'test')[0], 'fecha')
+        borrarDatos('fecha')
+        
 if __name__ == '__main__':
     unittest.main()
