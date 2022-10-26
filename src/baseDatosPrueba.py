@@ -6,6 +6,7 @@ import re
 import time
 import email
 from operator import ge
+from tkinter import N
 from turtle import color
 import firebase_admin
 from firebase_admin import credentials
@@ -129,13 +130,14 @@ def insertarFiesta(nombre, calle, numero, zona, ruta):
         nombre, ubicacion2, location.longitude, location.latitude, ruta)
 
 
-def insertarValoracion(usuario, nombre_discoteca, nota, texto, fecha ,ruta):
+def insertarValoracion(fecha ,usuario, nombre_discoteca, nota, texto, ruta):
     valoraciones = {
+        'fecha' : fecha,
         'usuario': usuario,
         'nombre_discoteca': nombre_discoteca,
         'nota': nota,
-        'texto': texto,
-        time : fecha
+        'texto': texto
+        
     }
     db.reference(ruta).child('valoraciones').push(valoraciones)
 
@@ -301,3 +303,5 @@ def filtrarDiscotecas(opcion, consulta):
                 resultado = v['nombre_discoteca']
                 temp.append(resultado)
         return temp
+
+insertarValoracion('yo','prueba', '5', 'esto es una prueba de fecha', '26 octube', 'test')

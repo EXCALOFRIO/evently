@@ -20,6 +20,8 @@ from PyQt5.uic import loadUi
 from PyQt5.QtGui import QIcon
 import pyglet
 import webview
+from datetime import date
+from datetime import datetime
 
 from baseDatosPrueba import datosUsuario, nombreUsuario, apellidoUsuario, emailUsuario, edadUsuario, filtrarDiscotecas, getItemBaseDatos, getTodosLosDatos, insertarDiscoteca, insertarFiesta, insertarValoracion, variableUsuarioSimp,color, color2
 
@@ -59,7 +61,8 @@ class Ui_MainWindow(object):
 
         resenna = self.textEdit.toPlainText().replace(',', ',@[[')
         usuarioParaSaltoLinea = datosUsuario('usuario')+'·º·'
-        insertarValoracion(usuarioParaSaltoLinea, self.comboBoxDisco.currentText(
+        fecha_actual = date.today().strftime("%d/%m/%Y")
+        insertarValoracion(fecha_actual,usuarioParaSaltoLinea, self.comboBoxDisco.currentText(
         ), valoracion, resenna, 'data')
 
 
