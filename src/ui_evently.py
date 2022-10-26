@@ -22,6 +22,8 @@ import pyglet
 import webview
 from datetime import date
 from datetime import datetime
+from tkinter import *
+from tkinter import messagebox
 
 from baseDatosPrueba import datosUsuario, nombreUsuario, apellidoUsuario, emailUsuario, edadUsuario, filtrarDiscotecas, getItemBaseDatos, getTodosLosDatos, insertarDiscoteca, insertarFiesta, insertarValoracion, variableUsuarioSimp,color, color2
 
@@ -44,6 +46,7 @@ class Ui_MainWindow(object):
         ), self.lineEdit_numeroFiesta.text(), self.lineEdit_zonaFiesta.text(), 'data')
 
     # BOTON DE AÑADIR RESEÑA
+    contador_valoracion = 0
     def annadirResenna(self):
         # comprueba que radioButton_ esta seleccionado
         if self.radioButton_1estrella.isChecked():
@@ -58,14 +61,17 @@ class Ui_MainWindow(object):
             valoracion = 5
         else:
             valoracion = 0
-
-        resenna = self.textEdit.toPlainText().replace(',', ',@[[')
-        usuarioParaSaltoLinea = datosUsuario('usuario')+'·º·'
-        fecha_actual = date.today().strftime("%d/%m/%Y")
-        insertarValoracion(fecha_actual,usuarioParaSaltoLinea, self.comboBoxDisco.currentText(
-        ), valoracion, resenna, 'data')
-
-
+            
+        if self.contador_valoracion == 0:    
+            resenna = self.textEdit.toPlainText().replace(',', ',@[[')
+            usuarioParaSaltoLinea = datosUsuario('usuario')+'·º·'
+            fecha_actual = date.today().strftime("%d/%m/%Y")                 
+            insertarValoracion(fecha_actual,usuarioParaSaltoLinea, self.comboBoxDisco.currentText(
+            ), valoracion, resenna, 'data')
+            self.contador_valoracion += 1
+        else:
+            print("ya has valorado esta discoteca hoy")
+            
         #metodo crea botones al filtrar
     def crearBotonesDiscotecasFiltradas(self,numeroFiltro):
         out = filtrarDiscotecas(
