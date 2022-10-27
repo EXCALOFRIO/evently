@@ -167,11 +167,14 @@ def getTodosLosDatos(elemento, ruta):
 
 # Metodo de para mostrar la carta de las discotecas
 
-def mostrar_carta():
-    return 'En B12 encontrarás una lista de los mejores alcoholes. Ron: Barceló, Cacique, Legendario, Brugal. Whisky: J&B, Johnny Walker, Jack Daniels. Ginebra: Larios, Beefeater, Tanquerai. Cervezas: Águila, Alhambra, Mahou, Estrella Galicia, Cruzcampo. Vinos: Sangre de Judas, Catena, Torres, 19 Crimes, Antinori'
+def mostrar_carta(elemento, variable, ruta):
+    elemento = db.reference(ruta+'/'+elemento)
+    lista = []
+    for v in elemento.get().items():
+        lista.append(v)
+    return lista
 
-
-# crea un metodo que devuelava la key sabiendo la posocion en el array
+# TODO  crea un metodo que devuelava la key sabiendo la posocion en el array
 
 ################################################################
 #METODO PARA COMPROBAR SI EL USUARIO EXISTE EN LA BASE DE DATOS#
