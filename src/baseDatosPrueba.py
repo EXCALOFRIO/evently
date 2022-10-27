@@ -112,12 +112,13 @@ def insertarFiestaEficiente(nombre, ubicacion, longitud, latitud, ruta):
     db.reference(ruta).child('fiestasEficientes').push(fiestas)
 
 
-def insertarFiesta(nombre, calle, numero, zona, ruta):
+def insertarFiesta(nombre, calle, numero, zona, usuario, ruta):
     fiestas = {
         'nombre': nombre,
         'calle': calle,
         'numero': numero,
-        'zona': zona
+        'zona': zona,
+        'usuario': usuario
 
     }
     db.reference(ruta).child('fiestas').push(fiestas)
@@ -270,14 +271,22 @@ def comprobarInicioSesion(usuario, contraseña, ruta):
     return False
 
 def valoracionesUsuario(usuario):
-        valoraciones = db.reference('data/valoraciones')
-        temp = []
-        for k, v in valoraciones.get().items():
-            if v['usuario'].lower().__contains__(str(usuario)+'·º·'):
-                resultado = 'DISCOTECA: ', v['nombre_discoteca'], 'RESEÑA: ', v['texto'], 'ESTRELLAS: ', v['nota']
-                temp.append(resultado)
-        return temp
+    valoraciones = db.reference('data/valoraciones')
+    temp = []
+    for k, v in valoraciones.get().items():
+        if v['usuario'].lower().__contains__(str(usuario)+'·º·'):
+            resultado = 'DISCOTECA: ', v['nombre_discoteca'], 'RESEÑA: ', v['texto'], 'ESTRELLAS: ', v['nota']
+            temp.append(resultado)
+    return temp
 
+def fiestasUsuario(usuario):
+    fiestas = db.reference('data/fiestas')
+    temp = []
+    for k, v in fiestas.get().items():
+        if v['usuario'].lower().__contains__(str(usuario)+'·º·'):
+            resultado = 'FIESTA: ', v['nombre'], 'ZONA: ', v['zona'], 'CALLE: ', v['calle'], 'NÚMERO: ', v['numero']
+            temp.append(resultado)
+    return temp
 
 def filtrarDiscotecas(opcion, consulta):
     if opcion == 1:

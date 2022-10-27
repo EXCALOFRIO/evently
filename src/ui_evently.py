@@ -25,7 +25,7 @@ from datetime import datetime
 from tkinter import *
 from tkinter import messagebox
 
-from baseDatosPrueba import datosUsuario, valoracionesUsuario, nombreUsuario, apellidoUsuario, emailUsuario, edadUsuario, filtrarDiscotecas, getItemBaseDatos, getTodosLosDatos, insertarDiscoteca, insertarFiesta, insertarValoracion, variableUsuarioSimp,color, color2
+from baseDatosPrueba import datosUsuario, valoracionesUsuario, fiestasUsuario, nombreUsuario, apellidoUsuario, emailUsuario, edadUsuario, filtrarDiscotecas, getItemBaseDatos, getTodosLosDatos, insertarDiscoteca, insertarFiesta, insertarValoracion, variableUsuarioSimp,color, color2
 
 
 pyglet.font.add_file('fuentes/productSans.ttf')  # ABeeZee
@@ -42,8 +42,9 @@ class Ui_MainWindow(object):
 
     # BOTON DE AÑADIR FIESTA
     def annadirFiesta(self):
+        self.usuario = datosUsuario('usuario')+'·º·'
         insertarFiesta(self.lineEdit_nombreFiesta.text(), self.lineEdit_calleFiesta.text(
-        ), self.lineEdit_numeroFiesta.text(), self.lineEdit_zonaFiesta.text(), 'data')
+        ), self.lineEdit_numeroFiesta.text(), self.lineEdit_zonaFiesta.text(), self.usuario, 'data')
 
     # BOTON DE AÑADIR RESEÑA
     contador_valoracion = 0
@@ -160,6 +161,11 @@ class Ui_MainWindow(object):
         print(self.usr)
         self.mis_resennas = str(valoracionesUsuario(self.usr))
         self.textBrowser_MiPerfil.setText(self.mis_resennas)
+        
+    def buttonMisFiestas(self):
+        self.usr = datosUsuario('usuario')
+        self.mis_fiestas = str(fiestasUsuario(self.usr))
+        self.textBrowser_MiPerfil.setText(self.mis_fiestas)
         
     
     def setupUi(self, MainWindow):
@@ -916,6 +922,7 @@ class Ui_MainWindow(object):
         self.pushButton_MisResennas.setGeometry(QRect(190, 200, 111, 23))
         self.pushButton_MisFiestas = QPushButton(self.page_MiPerfil)
         self.pushButton_MisFiestas.setObjectName(u"pushButton_MisFiestas")
+        self.pushButton_MisFiestas.clicked.connect(self.buttonMisFiestas)
         self.pushButton_MisFiestas.setGeometry(QRect(310, 200, 101, 23))
         self.stackedWidget.addWidget(self.page_MiPerfil)
 
