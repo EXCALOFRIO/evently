@@ -269,6 +269,15 @@ def comprobarInicioSesion(usuario, contraseña, ruta):
     print('El usuario o la contraseña no son correctos, o no ha rellenado todos los campos')
     return False
 
+def valoracionesUsuario(usuario):
+        valoraciones = db.reference('data/valoraciones')
+        temp = []
+        for k, v in valoraciones.get().items():
+            if v['usuario'].lower().__contains__(str(usuario)+'·º·'):
+                resultado = 'DISCOTECA: ', v['nombre_discoteca'], 'RESEÑA: ', v['texto'], 'ESTRELLAS: ', v['nota']
+                temp.append(resultado)
+        return temp
+
 
 def filtrarDiscotecas(opcion, consulta):
     if opcion == 1:

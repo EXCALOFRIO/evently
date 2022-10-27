@@ -25,7 +25,7 @@ from datetime import datetime
 from tkinter import *
 from tkinter import messagebox
 
-from baseDatosPrueba import datosUsuario, nombreUsuario, apellidoUsuario, emailUsuario, edadUsuario, filtrarDiscotecas, getItemBaseDatos, getTodosLosDatos, insertarDiscoteca, insertarFiesta, insertarValoracion, variableUsuarioSimp,color, color2
+from baseDatosPrueba import datosUsuario, valoracionesUsuario, nombreUsuario, apellidoUsuario, emailUsuario, edadUsuario, filtrarDiscotecas, getItemBaseDatos, getTodosLosDatos, insertarDiscoteca, insertarFiesta, insertarValoracion, variableUsuarioSimp,color, color2
 
 
 pyglet.font.add_file('fuentes/productSans.ttf')  # ABeeZee
@@ -154,6 +154,13 @@ class Ui_MainWindow(object):
         self.edad = edadUsuario('edad')
         self.textBrowser_edad.setText(str(self.edad))
         print("he seleccionado el boton MI PERFIL")
+        
+    def buttonMisResennas(self):
+        self.usr = datosUsuario('usuario')
+        print(self.usr)
+        self.mis_resennas = str(valoracionesUsuario(self.usr))
+        self.textBrowser_MiPerfil.setText(self.mis_resennas)
+        
     
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
@@ -905,6 +912,7 @@ class Ui_MainWindow(object):
         self.textBrowser_MiPerfil.setStyleSheet(u"background-color: rgb(255, 255, 255)")
         self.pushButton_MisResennas = QPushButton(self.page_MiPerfil)
         self.pushButton_MisResennas.setObjectName(u"pushButton_MisResennas")
+        self.pushButton_MisResennas.clicked.connect(self.buttonMisResennas)
         self.pushButton_MisResennas.setGeometry(QRect(190, 200, 111, 23))
         self.pushButton_MisFiestas = QPushButton(self.page_MiPerfil)
         self.pushButton_MisFiestas.setObjectName(u"pushButton_MisFiestas")
