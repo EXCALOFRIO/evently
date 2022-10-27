@@ -40,7 +40,7 @@ class Ui_SecondWindow(object):
         self.frame = QtWidgets.QFrame(self.centralwidget)
         self.frame.setAutoFillBackground(False)
         self.frame.setStyleSheet("QFrame{\n"
-"    background-color: rgb(87, 227, 137);\n"
+"    background-color: " + color +";\n"
 "}\n"
 "\n"
 "QTextBrowser{\n"
@@ -60,8 +60,8 @@ class Ui_SecondWindow(object):
         self.comboBoxDisco = QtWidgets.QComboBox(self.frame)
         self.comboBoxDisco.setObjectName("comboBoxDisco")
         self.verticalLayout.addWidget(self.comboBoxDisco)
-        self.comboBoxDisco.setStyleSheet("color:  "+color+";\n"
-                                         "background-color: #000000ff;")
+        self.comboBoxDisco.setStyleSheet("color:  "+color2+";\n"
+                                         "background-color: rgb(255, 255, 255)")
         discotecas = getItemBaseDatos('discotecas', 'nombre', 'data')
         for i in discotecas:
             self.comboBoxDisco.addItem(i)
