@@ -156,7 +156,7 @@ class TestFiltrado(unittest.TestCase):
 
     def test_mostrar_carta(self):
         discoteca = 'B12'
-        resultado = mostrar_carta('carta', 'B12', 'data')
+        resultado = mostrar_carta('carta', discoteca,  'data')
         esperado = 'En B12 encontrarás una lista de los mejores alcoholes. Ron: Barceló, Cacique, Legendario, Brugal. Whisky: J&B, Johnny Walker, Jack Daniels. Ginebra: Larios, Beefeater, Tanquerai. Cervezas: Águila, Alhambra, Mahou, Estrella Galicia, Cruzcampo. Vinos: Sangre de Judas, Catena, Torres, 19 Crimes, Antinori'
         self.assertEqual(resultado, esperado)
         

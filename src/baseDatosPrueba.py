@@ -170,9 +170,10 @@ def getTodosLosDatos(elemento, ruta):
 def mostrar_carta(elemento, variable, ruta):
     elemento = db.reference(ruta+'/'+elemento)
     lista = []
-    for v in elemento.get().items():
-        lista.append(v)
-    return lista
+    for v, k in elemento.get().items():
+        if v == variable: 
+            lista.append(k)
+    return lista[0]
 
 # TODO  crea un metodo que devuelava la key sabiendo la posocion en el array
 
