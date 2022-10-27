@@ -1,5 +1,5 @@
 import unittest
-from baseDatosPrueba import filtrarDiscotecas, insertarUsuario, borrarDatos, borrarTodo, comprobarInicioSesion, getItemBaseDatos, insertarDiscoteca, insertarFiesta, insertarUsuario, insertarValoracion, comprobarUsuario
+from baseDatosPrueba import filtrarDiscotecas, insertarUsuario, borrarDatos, borrarTodo, comprobarInicioSesion, getItemBaseDatos, insertarDiscoteca, insertarFiesta, insertarUsuario, insertarValoracion, comprobarUsuario, mostrar_carta
 
 
 class TestFiltrado(unittest.TestCase):
@@ -153,6 +153,11 @@ class TestFiltrado(unittest.TestCase):
         insertarValoracion('usuario', 'nombre_discoteca', 'nota', 'texto', 'fecha', 'test')
         self.assertEqual(getItemBaseDatos('valoraciones', 'fecha', 'test')[0], 'fecha')
         borrarDatos('fecha')
+
+    def test_mostrar_carta(self):
+        resultado = mostrar_carta('B12','data')
+        esperado = 'En B12 encontrarás una lista de los mejores alcoholes. Ron: Barceló, Cacique, Legendario, Brugal. Whisky: J&B, Johnny Walker, Jack Daniels. Ginebra: Larios, Beefeater, Tanquerai. Cervezas: Águila, Alhambra, Mahou, Estrella Galicia, Cruzcampo. Vinos: Sangre de Judas, Catena, Torres, 19 Crimes, Antinori'
+        self.assertEqual(resultado, esperado)
         
 if __name__ == '__main__':
     unittest.main()

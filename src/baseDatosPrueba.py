@@ -165,6 +165,16 @@ def getTodosLosDatos(elemento, ruta):
         lista.append(v)
     return lista
 
+# Metodo de para mostrar la carta de las discotecas
+
+def mostrar_carta(elemento, ruta):
+    elemento = db.reference(ruta+'/'+elemento)
+    lista = []
+    for k, v in elemento.get().items():
+        lista.append(v)
+    return lista
+
+
 # crea un metodo que devuelava la key sabiendo la posocion en el array
 
 ################################################################
