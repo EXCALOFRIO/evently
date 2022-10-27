@@ -128,9 +128,9 @@ class TestFiltrado(unittest.TestCase):
             'fiestas', 'zona', 'test')[0], 'Castellana')
         borrarDatos('fiestas')
 
-    '''def test_insertarValoracion(self):
-        insertarValoracion('usuario', 'nombre_discoteca',
-                           'nota', 'texto', 'fecha', 'test')
+    def test_insertarValoracion(self):
+        insertarValoracion('fecha','usuario', 'nombre_discoteca',
+                           'nota', 'texto', 'test')
         self.assertEqual(getItemBaseDatos(
             'valoraciones', 'usuario', 'test')[0], 'usuario')
         self.assertEqual(getItemBaseDatos(
@@ -139,7 +139,7 @@ class TestFiltrado(unittest.TestCase):
             'valoraciones', 'nota', 'test')[0], 'nota')
         self.assertEqual(getItemBaseDatos(
             'valoraciones', 'texto', 'test')[0], 'texto')
-        borrarDatos('valoraciones')'''
+        borrarDatos('valoraciones')
 
     def test_inicioSession(self):
         borrarDatos('usuarios')
