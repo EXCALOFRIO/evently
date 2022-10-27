@@ -342,6 +342,15 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.pushButton_MiPerfil)
 
+        self.pushButton_Carta = QPushButton(self.frame_control)
+        self.pushButton_Carta.setObjectName(u"pushButton_Carta")
+        #self.pushButton_Carta.clicked.connect(self.buttonCarta)
+        self.pushButton_Carta.setText('CARTA')
+        self.pushButton_Carta.setEnabled(True)
+        self.pushButton_Carta.setMinimumSize(QSize(0, 40))
+
+        self.verticalLayout_3.addWidget(self.pushButton_Carta)
+
 
         self.horizontalLayout.addWidget(self.frame_control)
 
