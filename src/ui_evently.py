@@ -24,6 +24,7 @@ from datetime import date
 from datetime import datetime
 from tkinter import *
 from tkinter import messagebox
+import ui_carta
 
 from baseDatosPrueba import datosUsuario, valoracionesUsuario, fiestasUsuario, nombreUsuario, apellidoUsuario, emailUsuario, edadUsuario, filtrarDiscotecas, getItemBaseDatos, getTodosLosDatos, insertarDiscoteca, insertarFiesta, insertarValoracion, variableUsuarioSimp,color, color2
 
@@ -141,7 +142,13 @@ class Ui_MainWindow(object):
         self.textBrowser.setText(out)
 
         print("he seleccionado el boton RESEÑA")
-        
+
+    def abrir_ventana_carta(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = ui_carta.Ui_SecondWindow()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
     def buttonPerfil(self):
         self.stackedWidget.setCurrentWidget(self.page_MiPerfil)
         self.usuario = datosUsuario('usuario')
@@ -166,8 +173,9 @@ class Ui_MainWindow(object):
         self.usr = datosUsuario('usuario')
         self.mis_fiestas = str(fiestasUsuario(self.usr))
         self.textBrowser_MiPerfil.setText(self.mis_fiestas)
-        
-    
+
+
+
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
@@ -342,7 +350,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.pushButton_MiPerfil)
 
-        self.pushButton_Carta = QPushButton(self.frame_control)
+        self.pushButton_Carta = QPushButton(self.frame_control, clicked = lambda: self.abrir_ventana_carta())
         self.pushButton_Carta.setObjectName(u"pushButton_Carta")
         #self.pushButton_Carta.clicked.connect(self.buttonCarta)
         self.pushButton_Carta.setText('CARTA')
