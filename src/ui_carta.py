@@ -23,13 +23,14 @@ from datetime import datetime
 from tkinter import *
 from tkinter import messagebox
 
-from baseDatosPrueba import datosUsuario, valoracionesUsuario, fiestasUsuario, nombreUsuario, apellidoUsuario, emailUsuario, edadUsuario, filtrarDiscotecas, getItemBaseDatos, getTodosLosDatos, insertarDiscoteca, insertarFiesta, insertarValoracion, variableUsuarioSimp, color, color2
+from baseDatosPrueba import datosUsuario, mostrar_carta, valoracionesUsuario, fiestasUsuario, nombreUsuario, apellidoUsuario, emailUsuario, edadUsuario, filtrarDiscotecas, getItemBaseDatos, getTodosLosDatos, insertarDiscoteca, insertarFiesta, insertarValoracion, variableUsuarioSimp, color, color2
 
 
 pyglet.font.add_file('fuentes/productSans.ttf')  # ABeeZee
 
-
 class Ui_SecondWindow(object):
+    
+
     def setupUi(self, SecondWindow):
         SecondWindow.setObjectName("SecondWindow")
         SecondWindow.resize(772, 352)
@@ -107,13 +108,21 @@ class Ui_SecondWindow(object):
         self.menubar.setObjectName("menubar")
         SecondWindow.setMenuBar(self.menubar)
 
+        def funcion_mostrar_carta():
+            self.textEdit.setText(mostrar_carta('carta', self.comboBoxDisco.currentText(), 'data'))
+
         self.retranslateUi(SecondWindow)
         QtCore.QMetaObject.connectSlotsByName(SecondWindow)
+
+        self.PushButton.clicked.connect(funcion_mostrar_carta)
+
 
     def retranslateUi(self, SecondWindow):
         _translate = QtCore.QCoreApplication.translate
         SecondWindow.setWindowTitle(_translate("SecondWindow", "MainWindow"))
         self.PushButton.setText(_translate("SecondWindow", "Buscar"))
+
+    
 
 
 if __name__ == "__main__":
