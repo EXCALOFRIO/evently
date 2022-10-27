@@ -117,7 +117,7 @@ class TestFiltrado(unittest.TestCase):
         borrarDatos('discotecas')
 
     def test_insertatFiesta(self):
-        insertarFiesta('Mana', 'Calle de Maldonado', '55', 'Castellana', 'test')
+        insertarFiesta('Mana', 'Calle de Maldonado', '55', 'Castellana', 'usuario','test')
         self.assertEqual(getItemBaseDatos(
             'fiestas', 'nombre', 'test')[0], 'Mana')
         self.assertEqual(getItemBaseDatos(
@@ -149,10 +149,10 @@ class TestFiltrado(unittest.TestCase):
             'usuario', 'contraseña', 'test'), True)
         borrarDatos('usuarios')
         
-    '''def test_insertar_valoracion_fecha(self):
-        insertarValoracion('usuario', 'nombre_discoteca', 'nota', 'texto', 'fecha', 'test')
+    def test_insertar_valoracion_fecha(self):
+        insertarValoracion('fecha', 'usuario', 'nombre_discoteca', 'nota', 'texto', 'test')
         self.assertEqual(getItemBaseDatos('valoraciones', 'fecha', 'test')[0], 'fecha')
-        borrarDatos('fecha')'''
+        borrarDatos('valoraciones')
 
     def test_mostrar_carta(self):
         discoteca = 'B12'

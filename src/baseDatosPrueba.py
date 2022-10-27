@@ -331,5 +331,3 @@ def filtrarDiscotecas(opcion, consulta):
                 resultado = v['nombre_discoteca']
                 temp.append(resultado)
         return temp
-
-insertarValoracion('yo','prueba', '5', 'esto es una prueba de fecha', '26 octube', 'test')
