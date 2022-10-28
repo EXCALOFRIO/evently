@@ -178,5 +178,11 @@ class TestFiltrado(unittest.TestCase):
         esperado = 'En Lemon encontrarás una lista de los mejores alcoholes. Ron: Barceló, Cacique, Legendario, Brugal. Whisky: J&B, Johnny Walker, Jack Daniels. Ginebra: Larios, Beefeater, Tanquerai. Cervezas: Águila, Alhambra, Mahou, Estrella Galicia, Cruzcampo. Vinos: Sangre de Judas, Catena, Torres, 19 Crimes, Antinori. Regalamos un limon con cada consumicion.'
         self.assertEqual(resultado, esperado)
 
+    def test_mostrar_carta5(self):
+        discoteca = 'Kapital'
+        resultado = mostrar_carta('carta', discoteca,  'data')
+        esperado = 'En Kapital encontrarás una lista de los mejores alcoholes. Ron: Barceló, Cacique, Legendario, Brugal. Whisky: J&B, Johnny Walker, Jack Daniels. Ginebra: Larios, Beefeater, Tanquerai. Cervezas: Águila, Alhambra, Mahou, Estrella Galicia, Cruzcampo. Vinos: Sangre de Judas, Catena, Torres, 19 Crimes, Antinori'
+        self.assertEqual(resultado, esperado)
+
 if __name__ == '__main__':
     unittest.main()
