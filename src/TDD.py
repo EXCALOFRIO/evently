@@ -163,7 +163,19 @@ class TestFiltrado(unittest.TestCase):
     def test_mostrar_carta2(self):
         discoteca = 'Nuit'
         resultado = mostrar_carta('carta', discoteca,  'data')
-        esperado = 'En Nuit encontrarás una lista de los mejores alcoholes. Ron: Barceló, Cacique, Legendario, Brugal. Whisky: J&B, Johnny Walker, Jack Daniels. Ginebra: Larios, Beefeater, Tanquerai. Cervezas: Águila, Alhambra, Mahou, Estrella Galicia, Cruzcampo. Vinos: Sangre de Judas, Catena, Torres, 19 Crimes, Antinori'
+        esperado = 'En Nuit encontrarás una lista de los mejores alcoholes. Ron: Barceló, Cacique, Legendario, Brugal. Whisky: J&B, Johnny Walker, Jack Daniels. Ginebra: Larios, Beefeater, Tanquerai. Cervezas: Águila, Alhambra, Mahou, Estrella Galicia, Cruzcampo. Vinos: Sangre de Judas, Catena, Torres, 19 Crimes, Antinori. Repartimos platos con jamón queso y picos hasta que se agote la pata de jamón de cada noche.'
+        self.assertEqual(resultado, esperado)
+
+    def test_mostrar_carta(self):
+        discoteca = 'Blackhouse'
+        resultado = mostrar_carta('carta', discoteca,  'data')
+        esperado = 'En Blackhouse encontrarás una lista de los mejores alcoholes. Ron: Barceló, Cacique, Legendario, Brugal. Whisky: J&B, Johnny Walker, Jack Daniels. Ginebra: Larios, Beefeater, Tanquerai. Cervezas: Águila, Alhambra, Mahou, Estrella Galicia, Cruzcampo. Vinos: Sangre de Judas, Catena, Torres, 19 Crimes, Antinori'
+        self.assertEqual(resultado, esperado)
+
+    def test_mostrar_carta2(self):
+        discoteca = 'Lemon'
+        resultado = mostrar_carta('carta', discoteca,  'data')
+        esperado = 'En Lemon encontrarás una lista de los mejores alcoholes. Ron: Barceló, Cacique, Legendario, Brugal. Whisky: J&B, Johnny Walker, Jack Daniels. Ginebra: Larios, Beefeater, Tanquerai. Cervezas: Águila, Alhambra, Mahou, Estrella Galicia, Cruzcampo. Vinos: Sangre de Judas, Catena, Torres, 19 Crimes, Antinori. Regalamos un limon con cada consumicion.'
         self.assertEqual(resultado, esperado)
 
 if __name__ == '__main__':
