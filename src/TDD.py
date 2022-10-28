@@ -166,13 +166,13 @@ class TestFiltrado(unittest.TestCase):
         esperado = 'En Nuit encontrarás una lista de los mejores alcoholes. Ron: Barceló, Cacique, Legendario, Brugal. Whisky: J&B, Johnny Walker, Jack Daniels. Ginebra: Larios, Beefeater, Tanquerai. Cervezas: Águila, Alhambra, Mahou, Estrella Galicia, Cruzcampo. Vinos: Sangre de Judas, Catena, Torres, 19 Crimes, Antinori. Repartimos platos con jamón queso y picos hasta que se agote la pata de jamón de cada noche.'
         self.assertEqual(resultado, esperado)
 
-    def test_mostrar_carta(self):
+    def test_mostrar_carta3(self):
         discoteca = 'Blackhouse'
         resultado = mostrar_carta('carta', discoteca,  'data')
         esperado = 'En Blackhouse encontrarás una lista de los mejores alcoholes. Ron: Barceló, Cacique, Legendario, Brugal. Whisky: J&B, Johnny Walker, Jack Daniels. Ginebra: Larios, Beefeater, Tanquerai. Cervezas: Águila, Alhambra, Mahou, Estrella Galicia, Cruzcampo. Vinos: Sangre de Judas, Catena, Torres, 19 Crimes, Antinori'
         self.assertEqual(resultado, esperado)
 
-    def test_mostrar_carta2(self):
+    def test_mostrar_carta4(self):
         discoteca = 'Lemon'
         resultado = mostrar_carta('carta', discoteca,  'data')
         esperado = 'En Lemon encontrarás una lista de los mejores alcoholes. Ron: Barceló, Cacique, Legendario, Brugal. Whisky: J&B, Johnny Walker, Jack Daniels. Ginebra: Larios, Beefeater, Tanquerai. Cervezas: Águila, Alhambra, Mahou, Estrella Galicia, Cruzcampo. Vinos: Sangre de Judas, Catena, Torres, 19 Crimes, Antinori. Regalamos un limon con cada consumicion.'
