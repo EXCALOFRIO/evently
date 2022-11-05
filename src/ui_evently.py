@@ -24,15 +24,17 @@ from tkinter import messagebox
 import ui_carta
 from datetime import timedelta
 
-from baseDatosPrueba import datosUsuario, valoracionesUsuario, fiestasUsuario, nombreUsuario, apellidoUsuario, emailUsuario, edadUsuario, filtrarDiscotecas, getItemBaseDatos, getTodosLosDatos, insertarDiscoteca, insertarFiesta, insertarValoracion, variableUsuarioSimp,color, color2
+from baseDatosPrueba import datosUsuario, valoracionesUsuario, fiestasUsuario, nombreUsuario, apellidoUsuario, emailUsuario, edadUsuario, filtrarDiscotecas, getItemBaseDatos, getTodosLosDatos, insertarDiscoteca, insertarFiesta, insertarValoracion, variableUsuarioSimp, color, color2
 
 
 pyglet.font.add_file('fuentes/productSans.ttf')  # ABeeZee
 
 
 class Ui_MainWindow(object):
-    filtrado=True
+    filtrado = True
+    botonesDiscotecas = {}
     # BOTON DE AÑADIR DISCOTECA
+
     def annadirDiscoteca(self):
         insertarDiscoteca(self.lineEdit_nombreDiscoteca.text(), self.lineEdit_calleDiscoteca.text(
         ), self.lineEdit_numeroDiscoteca.text(), self.lineEdit_zonaDiscoteca.text(), 'data')
@@ -45,6 +47,7 @@ class Ui_MainWindow(object):
 
     # BOTON DE AÑADIR RESEÑA
     contador_valoracion = 0
+
     def annadirResenna(self):
         # comprueba que radioButton_ esta seleccionado
         if self.radioButton_1estrella.isChecked():
@@ -59,55 +62,55 @@ class Ui_MainWindow(object):
             valoracion = 5
         else:
             valoracion = 0
-            
+
         fecha_mañana = (date.today() + timedelta(days=1)).strftime("%d/%m/%Y")
-        fecha_actual = date.today().strftime("%d/%m/%Y")    
-        if self.contador_valoracion == 0:    
+        fecha_actual = date.today().strftime("%d/%m/%Y")
+        if self.contador_valoracion == 0:
             resenna = self.textEdit.toPlainText().replace(',', ',@[[')
             usuarioParaSaltoLinea = datosUsuario('usuario')+'·º·'
-            insertarValoracion(fecha_actual,usuarioParaSaltoLinea, self.comboBoxDisco.currentText(
+            insertarValoracion(fecha_actual, usuarioParaSaltoLinea, self.comboBoxDisco.currentText(
             ), valoracion, resenna, 'data')
             self.contador_valoracion += 1
         else:
             print("ya has valorado esta discoteca hoy")
-            
-        #metodo crea botones al filtrar
-    def crearBotonesDiscotecasFiltradas(self,numeroFiltro):
+
+        # metodo crea botones al filtrar
+    def crearBotonesDiscotecasFiltradas(self, numeroFiltro):
         out = filtrarDiscotecas(
-                numeroFiltro, self.lineEdit_BusquedaFiltrado.text())
-        if(self.filtrado==False):
+            numeroFiltro, self.lineEdit_BusquedaFiltrado.text())
+        if(self.filtrado == False):
             for i in self.scrollAreaWidgetContents.children():
                 if isinstance(i, QPushButton):
                     i.deleteLater()
-            
-            self.filtrado=True
+
+            self.filtrado = True
 
         if(self.filtrado):
             for i in range(len(out)):
-                self.discotecas_filtradas = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
-                self.discotecas_filtradas.setObjectName("discotecas_filtradas")
-                self.discotecas_filtradas.setText(out[i])
-                self.discotecas_filtradas.setFixedHeight(80)
-                self.verticalLayout_14.addWidget(self.discotecas_filtradas)
-                self.filtrado=False
-
-    # BOTON DE BUSQUEDA
+                self.botonesDiscotecas[out[i]] = QtWidgets.QPushButton(
+                    self.scrollAreaWidgetContents)
+                self.botonesDiscotecas[out[i]].setObjectName(out[i])
+                self.botonesDiscotecas[out[i]].setText(out[i])
+                self.botonesDiscotecas[out[i]].setFixedHeight(80)
+                self.verticalLayout_14.addWidget(
+                    self.botonesDiscotecas[out[i]])
+                self.botonesDiscotecas[out[i]].clicked.connect(
+                    self.abrir_ventana_carta)
+                self.filtrado = False
 
     def busquedaFilter(self):
         print("busqueda filter")
         if self.comboBox.currentText() == "ZONA":
             self.crearBotonesDiscotecasFiltradas(1)
-            
+
         elif self.comboBox.currentText() == "NOMBRE":
             self.crearBotonesDiscotecasFiltradas(2)
-            
+
         elif self.comboBox.currentText() == "CALLE":
             self.crearBotonesDiscotecasFiltradas(3)
-            
+
         elif self.comboBox.currentText() == "VALORACIÓN":
             self.crearBotonesDiscotecasFiltradas(4)
-            
-            
 
     def buttonMapa(self):
         self.stackedWidget.setCurrentWidget(self.page_mapa)
@@ -158,13 +161,13 @@ class Ui_MainWindow(object):
         self.edad = edadUsuario('edad')
         self.textBrowser_edad.setText(str(self.edad))
         print("he seleccionado el boton MI PERFIL")
-        
+
     def buttonMisResennas(self):
         self.usr = datosUsuario('usuario')
         print(self.usr)
         self.mis_resennas = str(valoracionesUsuario(self.usr))
         self.textBrowser_MiPerfil.setText(self.mis_resennas)
-        
+
     def buttonMisFiestas(self):
         self.usr = datosUsuario('usuario')
         self.mis_fiestas = str(fiestasUsuario(self.usr))
@@ -260,10 +263,12 @@ class Ui_MainWindow(object):
         self.pushButton_Discoteca.clicked.connect(self.buttonDiscotecas)
         self.pushButton_Discoteca.setObjectName("pushButton_Discoteca")
         self.verticalLayout_3.addWidget(self.pushButton_Discoteca)
+
         self.pushButton_Fiesta = QtWidgets.QPushButton(self.frame_control)
         self.pushButton_Fiesta.setEnabled(True)
         self.pushButton_Fiesta.setMinimumSize(QtCore.QSize(0, 40))
         self.pushButton_Fiesta.clicked.connect(self.buttonFiesta)
+
         self.pushButton_Fiesta.setObjectName("pushButton_Fiesta")
         self.verticalLayout_3.addWidget(self.pushButton_Fiesta)
         self.pushButton_Resenna = QtWidgets.QPushButton(self.frame_control)
@@ -281,17 +286,18 @@ class Ui_MainWindow(object):
         self.pushButton_MiPerfil.setEnabled(True)
         self.pushButton_MiPerfil.setMinimumSize(QtCore.QSize(0, 40))
         self.verticalLayout_3.addWidget(self.pushButton_MiPerfil)
-        self.pushButton_Carta = QPushButton(self.frame_control, clicked = lambda: self.abrir_ventana_carta())
+        self.pushButton_Carta = QPushButton(
+            self.frame_control, clicked=lambda: self.abrir_ventana_carta())
         self.pushButton_Carta.setObjectName(u"pushButton_Carta")
-        #self.pushButton_Carta.clicked.connect(self.buttonCarta)
+        # self.pushButton_Carta.clicked.connect(self.buttonCarta)
         self.pushButton_Carta.setText('CARTA')
         self.pushButton_Carta.setEnabled(True)
         self.pushButton_Carta.setMinimumSize(QSize(0, 40))
         self.verticalLayout_3.addWidget(self.pushButton_Carta)
 
-        ##ESTE ES EL DE FILTRADO
+        # ESTE ES EL DE FILTRADO
         self.frame_paginas.setStyleSheet("QFrame{\n"
-                                           "    background-color:"+color2+";\n"
+                                         "    background-color:"+color2+";\n"
                                          "}\n"
                                          "\n"
                                          "QLabel{\n"
@@ -316,7 +322,7 @@ class Ui_MainWindow(object):
                                          "}\n"
                                          "\n"
                                          "QPushButton:hover{\n"
-                                           "    background-color:"+color+";\n"
+                                         "    background-color:"+color+";\n"
                                          "    border-radius: 15px;\n"
                                          "    color: rgb(0,0,0);\n"
                                          "    font: 77 10pt \"Arial Black\";\n"
@@ -324,7 +330,7 @@ class Ui_MainWindow(object):
                                          "\n"
                                          "\n"
                                          "")
-        
+
         """DONDE ESTA LO DE A LA DERECHA DE LA PARTE DONDE ESTÁ EL MENÚ, ES DECIR DONDE VA A APARECER EL RESTO DE PÁGINAS"""
         self.frame_paginas.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_paginas.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -335,13 +341,13 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.stackedWidget = QtWidgets.QStackedWidget(self.frame_paginas)
         self.stackedWidget.setObjectName("stackedWidget")
-        
+
         """PÁGINA DEL MAPA"""
         self.page_mapa = QtWidgets.QWidget()
         self.page_mapa.setObjectName("page_mapa")
         self.stackedWidget.addWidget(self.page_mapa)
         self.page_filtrado = QtWidgets.QWidget()
-        
+
         """PÁGINA DEL FILTRADO"""
         self.page_filtrado.setObjectName("page_filtrado")
         self.verticalLayout_13 = QtWidgets.QVBoxLayout(self.page_filtrado)
@@ -381,9 +387,9 @@ class Ui_MainWindow(object):
             40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_9.addItem(spacerItem2)
         self.verticalLayout_13.addLayout(self.horizontalLayout_9)
-        
-        #AQUIIIII
-        #añade para poder añadir un boton por cada discoteca, y poder desplazarte con un scroll bar por los botones
+
+        # AQUIIIII
+        # añade para poder añadir un boton por cada discoteca, y poder desplazarte con un scroll bar por los botones
         self.scrollArea = QtWidgets.QScrollArea(self.page_filtrado)
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
@@ -391,12 +397,13 @@ class Ui_MainWindow(object):
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
         self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 100, 100))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
-        self.verticalLayout_14 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
+        self.verticalLayout_14 = QtWidgets.QVBoxLayout(
+            self.scrollAreaWidgetContents)
         self.verticalLayout_14.setObjectName("verticalLayout_14")
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.verticalLayout_13.addWidget(self.scrollArea)
-        #añade un boton dentro del scroll area
-        #self.verticalLayout_13.addWidget(
+        # añade un boton dentro del scroll area
+        # self.verticalLayout_13.addWidget(
         self.stackedWidget.addWidget(self.page_filtrado)
 
         """PÁGINA DE DISCOTECAS"""
@@ -490,7 +497,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.setStretch(0, 1)
         self.verticalLayout.setStretch(2, 8)
         self.stackedWidget.addWidget(self.page_AddDiscoteca)
-        
+
         """PAGINA DE FIESTAS"""
         self.page_AddFiesta = QtWidgets.QWidget()
         self.page_AddFiesta.setObjectName("page_AddFiesta")
@@ -598,17 +605,17 @@ class Ui_MainWindow(object):
                                            "}\n"
                                            "\n"
                                            "QPushButton:hover{\n"
-                                             "    background-color:"+color+";\n"
+                                           "    background-color:"+color+";\n"
                                            "    border-radius: 15px;\n"
                                            "    color: rgb(0,0,0);\n"
                                            "    font: 77 10pt \"Arial Black\";\n"
                                            "}\n"
                                            "\n"
                                            "QRadioButton{\n"
-                                             "    background-color:"+color+";\n"
+                                           "    background-color:"+color+";\n"
                                            "    font: 87 12pt \"Arial Black\";    \n"
                                            "}")
-        
+
         """PÁGINA DE AGREGAR RESEÑA"""
         self.page_AddResenna.setObjectName("page_AddResenna")
         self.horizontalLayout_8 = QtWidgets.QHBoxLayout(self.page_AddResenna)
@@ -641,8 +648,8 @@ class Ui_MainWindow(object):
         for i in discotecas:
             self.comboBoxDisco.addItem(i)
         self.textEdit = QtWidgets.QTextEdit(self.frame_2)
-        
-        ##AÑADIR RESEÑA
+
+        # AÑADIR RESEÑA
         self.textEdit.setStyleSheet("background-color:"+color2+";\n")
         self.textEdit.setStyleSheet("color:  "+color+";\n")
         self.textEdit.setObjectName("textEdit")
@@ -679,8 +686,8 @@ class Ui_MainWindow(object):
         self.label_5.setObjectName("label_5")
         self.verticalLayout_11.addWidget(self.label_5)
         self.textBrowser = QtWidgets.QTextBrowser(self.frame_3)
-        
-        #Añadir reseña
+
+        # Añadir reseña
         self.textBrowser.setStyleSheet("background-color:"+color2+";\n")
         self.textBrowser.setStyleSheet("color:  "+color+";\n")
         self.textBrowser.setObjectName("textBrowser")
@@ -696,10 +703,10 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.setStretch(1, 8)
         self.verticalLayout_12.addWidget(self.frame)
         MainWindow.setCentralWidget(self.centralwidget)
-        #self.retranslateUi(MainWindow)
+        # self.retranslateUi(MainWindow)
         self.stackedWidget.setCurrentIndex(3)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        
+
         """PÁGINA MI PERFIL """
         self.page_MiPerfil = QtWidgets.QWidget()
         self.page_MiPerfil.setObjectName("page_MiPerfil")
@@ -715,28 +722,34 @@ class Ui_MainWindow(object):
         self.verticalLayout_15.setContentsMargins(0, 0, 0, 0)
         self.label_usuario = QLabel(self.verticalLayoutWidget)
         self.label_usuario.setObjectName("label_usuario")
-        self.label_usuario.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)    
-        self.verticalLayout_15.addWidget(self.label_usuario)    
+        self.label_usuario.setAlignment(
+            QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.verticalLayout_15.addWidget(self.label_usuario)
         self.label_nombre = QLabel(self.verticalLayoutWidget)
         self.label_nombre.setObjectName("label_nombre")
-        self.label_nombre.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter) 
-        self.verticalLayout_15.addWidget(self.label_nombre) 
+        self.label_nombre.setAlignment(
+            QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.verticalLayout_15.addWidget(self.label_nombre)
         self.label_apellido = QLabel(self.verticalLayoutWidget)
         self.label_apellido.setObjectName("label_apellido")
-        self.label_apellido.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)   
-        self.verticalLayout_15.addWidget(self.label_apellido)   
+        self.label_apellido.setAlignment(
+            QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.verticalLayout_15.addWidget(self.label_apellido)
         self.textBrowser_usuario = QTextBrowser(self.page_MiPerfil)
         self.textBrowser_usuario.setObjectName("textBrowser_usuario")
         self.textBrowser_usuario.setGeometry(QtCore.QRect(130, 50, 151, 31))
-        self.textBrowser_usuario.setStyleSheet("background-color: rgb(255, 255, 255)")
+        self.textBrowser_usuario.setStyleSheet(
+            "background-color: rgb(255, 255, 255)")
         self.textBrowser_nombre = QTextBrowser(self.page_MiPerfil)
         self.textBrowser_nombre.setObjectName("textBrowser_nombre")
         self.textBrowser_nombre.setGeometry(QRect(130, 100, 151, 31))
-        self.textBrowser_nombre.setStyleSheet("background-color: rgb(255, 255, 255)")
+        self.textBrowser_nombre.setStyleSheet(
+            "background-color: rgb(255, 255, 255)")
         self.textBrowser_apellido = QTextBrowser(self.page_MiPerfil)
         self.textBrowser_apellido.setObjectName("textBrowser_apellido")
         self.textBrowser_apellido.setGeometry(QRect(130, 150, 151, 31))
-        self.textBrowser_apellido.setStyleSheet("background-color: rgb(255, 255, 255)")
+        self.textBrowser_apellido.setStyleSheet(
+            "background-color: rgb(255, 255, 255)")
         self.verticalLayoutWidget_2 = QWidget(self.page_MiPerfil)
         self.verticalLayoutWidget_2.setObjectName("verticalLayoutWidget_2")
         self.verticalLayoutWidget_2.setGeometry(QRect(290, 40, 91, 141))
@@ -745,24 +758,29 @@ class Ui_MainWindow(object):
         self.verticalLayout_15.setContentsMargins(0, 0, 0, 0)
         self.label_email = QLabel(self.verticalLayoutWidget_2)
         self.label_email.setObjectName("label_email")
-        self.label_email.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)   
-        self.verticalLayout_15.addWidget(self.label_email)  
+        self.label_email.setAlignment(
+            Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
+        self.verticalLayout_15.addWidget(self.label_email)
         self.label_edad = QLabel(self.verticalLayoutWidget_2)
         self.label_edad.setObjectName("label_edad")
-        self.label_edad.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)    
-        self.verticalLayout_15.addWidget(self.label_edad)   
+        self.label_edad.setAlignment(
+            Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
+        self.verticalLayout_15.addWidget(self.label_edad)
         self.textBrowser_email = QTextBrowser(self.page_MiPerfil)
         self.textBrowser_email.setObjectName("textBrowser_email")
         self.textBrowser_email.setGeometry(QRect(390, 60, 201, 31))
-        self.textBrowser_email.setStyleSheet("background-color: rgb(255, 255, 255)")
+        self.textBrowser_email.setStyleSheet(
+            "background-color: rgb(255, 255, 255)")
         self.textBrowser_edad = QTextBrowser(self.page_MiPerfil)
         self.textBrowser_edad.setObjectName("textBrowser_edad")
         self.textBrowser_edad.setGeometry(QRect(390, 130, 201, 31))
-        self.textBrowser_edad.setStyleSheet("background-color: rgb(255, 255, 255)")
+        self.textBrowser_edad.setStyleSheet(
+            "background-color: rgb(255, 255, 255)")
         self.textBrowser_MiPerfil = QTextBrowser(self.page_MiPerfil)
         self.textBrowser_MiPerfil.setObjectName("textBrowser_MiPerfil")
         self.textBrowser_MiPerfil.setGeometry(QRect(10, 230, 581, 221))
-        self.textBrowser_MiPerfil.setStyleSheet("background-color: rgb(255, 255, 255)")
+        self.textBrowser_MiPerfil.setStyleSheet(
+            "background-color: rgb(255, 255, 255)")
         self.pushButton_MisResennas = QPushButton(self.page_MiPerfil)
         self.pushButton_MisResennas.setObjectName("pushButton_MisResennas")
         self.pushButton_MisResennas.clicked.connect(self.buttonMisResennas)
@@ -771,19 +789,18 @@ class Ui_MainWindow(object):
         self.pushButton_MisFiestas.setObjectName("pushButton_MisFiestas")
         self.pushButton_MisFiestas.clicked.connect(self.buttonMisFiestas)
         self.pushButton_MisFiestas.setGeometry(QRect(310, 200, 101, 23))
-        self.stackedWidget.addWidget(self.page_MiPerfil)    
-        self.verticalLayout_4.addWidget(self.stackedWidget) 
-        self.horizontalLayout.addWidget(self.frame_paginas) 
-        self.verticalLayout_2.addWidget(self.frame_contenido)   
+        self.stackedWidget.addWidget(self.page_MiPerfil)
+        self.verticalLayout_4.addWidget(self.stackedWidget)
+        self.horizontalLayout.addWidget(self.frame_paginas)
+        self.verticalLayout_2.addWidget(self.frame_contenido)
         self.verticalLayout_2.setStretch(0, 1)
-        self.verticalLayout_2.setStretch(1, 8)  
-        self.verticalLayout_12.addWidget(self.frame)    
-        MainWindow.setCentralWidget(self.centralwidget) 
-        self.retranslateUi(MainWindow)  
-        self.stackedWidget.setCurrentIndex(5)   
+        self.verticalLayout_2.setStretch(1, 8)
+        self.verticalLayout_12.addWidget(self.frame)
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.retranslateUi(MainWindow)
+        self.stackedWidget.setCurrentIndex(5)
         QMetaObject.connectSlotsByName(MainWindow)
-       
-            
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -846,13 +863,17 @@ class Ui_MainWindow(object):
         self.label_apellido.setText(_translate("MainWindow", "APELLIDO:"))
         self.label_email.setText(_translate("MainWindow", "EMAIL:"))
         self.label_edad.setText(_translate("MainWindow", "EDAD:"))
-        self.pushButton_MisResennas.setText(_translate("MainWindow", "Mis rese\u00f1as"))
-        self.pushButton_MisFiestas.setText(_translate("MainWindow", "Mis fiestas"))
-        
+        self.pushButton_MisResennas.setText(
+            _translate("MainWindow", "Mis rese\u00f1as"))
+        self.pushButton_MisFiestas.setText(
+            _translate("MainWindow", "Mis fiestas"))
+
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
+    MainWindow.showMaximized()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
