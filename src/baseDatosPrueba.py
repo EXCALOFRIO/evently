@@ -275,7 +275,7 @@ def valoracionesUsuario(usuario):
     temp = []
     for k, v in valoraciones.get().items():
         if v['usuario'].lower().__contains__(str(usuario)+'·º·'):
-            resultado = 'DISCOTECA: ', v['nombre_discoteca'], 'RESEÑA: ', v['texto'], 'ESTRELLAS: ', v['nota']
+            resultado = 'FECHA: ', v['fecha'] , 'DISCOTECA: ', v['nombre_discoteca'], 'RESEÑA: ', v['texto'], 'ESTRELLAS: ', v['nota']
             temp.append(resultado)
     return temp
 
@@ -331,3 +331,4 @@ def filtrarDiscotecas(opcion, consulta):
                 resultado = v['nombre_discoteca']
                 temp.append(resultado)
         return temp
+    

@@ -46,7 +46,6 @@ class Ui_MainWindow(object):
         ), self.lineEdit_numeroFiesta.text(), self.lineEdit_zonaFiesta.text(), self.usuario, 'data')
 
     # BOTON DE AÑADIR RESEÑA
-    contador_valoracion = 0
 
     def annadirResenna(self):
         # comprueba que radioButton_ esta seleccionado
@@ -63,16 +62,12 @@ class Ui_MainWindow(object):
         else:
             valoracion = 0
 
-        fecha_mañana = (date.today() + timedelta(days=1)).strftime("%d/%m/%Y")
         fecha_actual = date.today().strftime("%d/%m/%Y")
-        if self.contador_valoracion == 0:
-            resenna = self.textEdit.toPlainText().replace(',', ',@[[')
-            usuarioParaSaltoLinea = datosUsuario('usuario')+'·º·'
-            insertarValoracion(fecha_actual, usuarioParaSaltoLinea, self.comboBoxDisco.currentText(
-            ), valoracion, resenna, 'data')
-            self.contador_valoracion += 1
-        else:
-            print("ya has valorado esta discoteca hoy")
+        resenna = self.textEdit.toPlainText().replace(',', ',@[[')
+        usuarioParaSaltoLinea = datosUsuario('usuario')+'·º·'
+        insertarValoracion(fecha_actual, usuarioParaSaltoLinea, self.comboBoxDisco.currentText(
+        ), valoracion, resenna, 'data')
+        
 
         # metodo crea botones al filtrar
     def crearBotonesDiscotecasFiltradas(self, numeroFiltro):
