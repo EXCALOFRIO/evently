@@ -18,26 +18,33 @@ firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://evently-646a2-default-rtdb.firebaseio.com/'
 })
 
-#THEME
-#Array de colores
-#metodo para cambiar el tema
+# THEME
+# Array de colores
+# metodo para cambiar el tema
 fuentePrincipal = "ABeeZee"
+
+
 def colorTema(numero):
-    listaColores=["#8b9dc3","#57E389","#F2A365","#E3F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3","#A6F2A6","#F2A6A6","#A6F2F2","#E3A6F2","#A6E3F2","#F2E3A6","#F2A6E3"]
+    listaColores = ["#8b9dc3", "#57E389", "#F2A365", "#E3F2A6", "#F2A6A6", "#A6F2F2", "#E3A6F2", "#A6E3F2", "#F2E3A6", "#F2A6E3", "#A6F2A6", "#F2A6A6", "#A6F2F2", "#E3A6F2", "#A6E3F2", "#F2E3A6", "#F2A6E3", "#A6F2A6", "#F2A6A6", "#A6F2F2", "#E3A6F2", "#A6E3F2", "#F2E3A6", "#F2A6E3", "#A6F2A6", "#F2A6A6", "#A6F2F2", "#E3A6F2", "#A6E3F2", "#F2E3A6", "#F2A6E3", "#A6F2A6", "#F2A6A6", "#A6F2F2", "#E3A6F2", "#A6E3F2",
+                    "#F2E3A6", "#F2A6E3", "#A6F2A6", "#F2A6A6", "#A6F2F2", "#E3A6F2", "#A6E3F2", "#F2E3A6", "#F2A6E3", "#A6F2A6", "#F2A6A6", "#A6F2F2", "#E3A6F2", "#A6E3F2", "#F2E3A6", "#F2A6E3", "#A6F2A6", "#F2A6A6", "#A6F2F2", "#E3A6F2", "#A6E3F2", "#F2E3A6", "#F2A6E3", "#A6F2A6", "#F2A6A6", "#A6F2F2", "#E3A6F2", "#A6E3F2", "#F2E3A6", "#F2A6E3", "#A6F2A6", "#F2A6A6", "#A6F2F2", "#E3A6F2", "#A6E3F2", "#F2E3A6", "#F2A6E3"]
     return listaColores[numero]
+
 
 def color2Tema(numero):
-    listaColores=["#241f31","#16151a"]
+    listaColores = ["#241f31", "#16151a"]
     return listaColores[numero]
 
-#funcion cambiar de hex a rgb
+# funcion cambiar de hex a rgb
+
+
 def hex_to_rgb(value):
     value = value.lstrip('#')
     lv = len(value)
     return tuple(int(value[i:i + lv // 3], 16) for i in range(0, lv, lv // 3))
 
-color=colorTema(0)
-color2=color2Tema(1)
+
+color = colorTema(0)
+color2 = color2Tema(1)
 
 
 ##############################################################################
@@ -131,18 +138,6 @@ def insertarFiesta(nombre, calle, numero, zona, usuario, ruta):
         nombre, ubicacion2, location.longitude, location.latitude, ruta)
 
 
-def insertarValoracion(fecha ,usuario, nombre_discoteca, nota, texto, ruta):
-    valoraciones = {
-        'fecha' : fecha,
-        'usuario': usuario,
-        'nombre_discoteca': nombre_discoteca,
-        'nota': nota,
-        'texto': texto
-        
-    }
-    db.reference(ruta).child('valoraciones').push(valoraciones)
-
-
 def borrarDatos(datos):
     db.reference('test').child(datos).delete()
 
@@ -168,11 +163,12 @@ def getTodosLosDatos(elemento, ruta):
 
 # Metodo de para mostrar la carta de las discotecas
 
+
 def mostrar_carta(elemento, variable, ruta):
     elemento = db.reference(ruta+'/'+elemento)
     lista = []
     for v, k in elemento.get().items():
-        if v == variable: 
+        if v == variable:
             lista.append(k)
     return lista[0]
 
@@ -200,25 +196,29 @@ def variableUsuarioSimp(usuario):
     usuarioActualSimp = {
         'usuario': usuario,
     }
-    
+
+
 def variableNombreUsuario(nombre):
     global nombreUsuarioActual
     nombreUsuarioActual = {
         'nombre': nombre,
     }
-    
+
+
 def variableApellidoUsuario(apellido):
     global apellidoUsuarioActual
     apellidoUsuarioActual = {
         'apellido': apellido,
     }
-    
+
+
 def variableEmailUsuario(email):
     global emailUsuarioActual
     emailUsuarioActual = {
         'email': email,
     }
-    
+
+
 def variableEdadUsuario(edad):
     global edadUsuarioActual
     edadUsuarioActual = {
@@ -229,17 +229,50 @@ def variableEdadUsuario(edad):
 def datosUsuario(datos):
     return usuarioActualSimp[datos]
 
+
 def nombreUsuario(datos):
     return nombreUsuarioActual[datos]
+
 
 def apellidoUsuario(datos):
     return apellidoUsuarioActual[datos]
 
+
 def emailUsuario(datos):
     return emailUsuarioActual[datos]
 
+
 def edadUsuario(datos):
     return edadUsuarioActual[datos]
+
+
+def comprobarValoracion(fecha, usuario, nombre_discoteca, ruta):
+
+    fechasArray = getItemBaseDatos('valoraciones', 'fecha', 'data')
+    nombresArray = getItemBaseDatos('valoraciones', 'nombre_discoteca', 'data')
+    usuarioArray = getItemBaseDatos('valoraciones', 'usuario', 'data')
+    print(fechasArray, nombresArray, usuarioArray)
+    posicionesNombres = ([indice for indice, dato in enumerate(
+        nombresArray) if dato == nombre_discoteca])
+    for posicion in posicionesNombres:
+        if(usuarioArray[posicion] == usuario):
+            if(fechasArray[posicion] == fecha):
+                return False
+
+    return True
+
+
+def insertarValoracion(fecha, usuario, nombre_discoteca, nota, texto, ruta):
+    if(comprobarValoracion(fecha, usuario, nombre_discoteca, ruta)):
+        valoraciones = {
+            'fecha': fecha,
+            'usuario': usuario,
+            'nombre_discoteca': nombre_discoteca,
+            'nota': nota,
+            'texto': texto
+
+        }
+        db.reference(ruta).child('valoraciones').push(valoraciones)
 
 
 def comprobarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta):
@@ -270,14 +303,16 @@ def comprobarInicioSesion(usuario, contraseña, ruta):
     print('El usuario o la contraseña no son correctos, o no ha rellenado todos los campos')
     return False
 
+
 def valoracionesUsuario(usuario):
     valoraciones = db.reference('data/valoraciones')
     temp = []
     for k, v in valoraciones.get().items():
         if v['usuario'].lower().__contains__(str(usuario)+'·º·'):
-            resultado = 'FECHA: ', v['fecha'] , 'DISCOTECA: ', v['nombre_discoteca'], 'RESEÑA: ', v['texto'], 'ESTRELLAS: ', v['nota']
+            resultado = 'FECHA: ', v['fecha'], 'DISCOTECA: ', v['nombre_discoteca'], 'RESEÑA: ', v['texto'], 'ESTRELLAS: ', v['nota']
             temp.append(resultado)
     return temp
+
 
 def fiestasUsuario(usuario):
     fiestas = db.reference('data/fiestas')
@@ -287,6 +322,7 @@ def fiestasUsuario(usuario):
             resultado = 'FIESTA: ', v['nombre'], 'ZONA: ', v['zona'], 'CALLE: ', v['calle'], 'NÚMERO: ', v['numero']
             temp.append(resultado)
     return temp
+
 
 def filtrarDiscotecas(opcion, consulta):
     if opcion == 1:
@@ -331,4 +367,3 @@ def filtrarDiscotecas(opcion, consulta):
                 resultado = v['nombre_discoteca']
                 temp.append(resultado)
         return temp
-    
