@@ -24,7 +24,7 @@ from tkinter import messagebox
 import ui_carta
 from datetime import timedelta
 
-from baseDatosPrueba import datosUsuario, valoracionesUsuario, fiestasUsuario, nombreUsuario, apellidoUsuario, emailUsuario, edadUsuario, filtrarDiscotecas, getItemBaseDatos, getTodosLosDatos, insertarDiscoteca, insertarFiesta, insertarValoracion, variableUsuarioSimp, color, color2
+from baseDatosPrueba import datosUsuario, valoracionesUsuario, fiestasUsuario, nombreUsuario, apellidoUsuario, emailUsuario, edadUsuario, filtrarDiscotecas, getItemBaseDatos, getTodosLosDatos, insertarDiscoteca, insertarFiesta, insertarValoracion, mostrar_carta, color, color2
 
 
 pyglet.font.add_file('fuentes/productSans.ttf')  # ABeeZee
@@ -68,16 +68,18 @@ class Ui_MainWindow(object):
         insertarValoracion(fecha_actual, usuarioParaSaltoLinea, self.comboBoxDisco.currentText(
         ), valoracion, resenna, 'data')
         
-
-        # metodo crea botones al filtrar
-    def crearBotonesDiscotecasFiltradas(self, numeroFiltro):
-        out = filtrarDiscotecas(
-            numeroFiltro, self.lineEdit_BusquedaFiltrado.text())
-        if(self.filtrado == False):
-            for i in self.scrollAreaWidgetContents.children():
+    def borrarBotonesFiltrado(self):
+        for i in self.scrollAreaWidgetContents.children():
                 if isinstance(i, QPushButton):
                     i.deleteLater()
-
+    def borrarTextFiltrado(self):
+        self.textEditCarta.clear()
+        self.textEditCarta.hide()
+        # metodo crea botones al filtrar
+    def crearBotonesDiscotecasFiltradas(self, numeroFiltro):
+        out = filtrarDiscotecas(numeroFiltro, self.lineEdit_BusquedaFiltrado.text())
+        if(self.filtrado == False):
+            self.borrarBotonesFiltrado()
             self.filtrado = True
 
         if(self.filtrado):
@@ -92,11 +94,24 @@ class Ui_MainWindow(object):
                 self.botonesDiscotecas[out[i]].clicked.connect(
                     lambda checked, out=out, i=i: self.imprimirNombreDiscoteca(out[i]))
                 self.filtrado = False
-                
+
+
     def imprimirNombreDiscoteca(self, nombreDiscoteca):
-        print(nombreDiscoteca)
+        self.borrarBotonesFiltrado()
+        #crea textEditCarta y lo añade al layout verticalLayout_14
+        self.textEditCarta = QtWidgets.QTextEdit(self.scrollAreaWidgetContents)
+        self.textEditCarta.setObjectName("textEditCarta")
+        self.textEditCarta.setReadOnly(True)
+        self.textEditCarta.setFixedHeight(500)
+        self.textEditCarta.setStyleSheet("color:  "+color+";\n")
+        self.verticalLayout_14.addWidget(self.textEditCarta)
+        self.textEditCarta.setText(mostrar_carta('carta', nombreDiscoteca, 'data'))
 
     def busquedaFilter(self):
+        #comprueba si existe textEditCarta y lo borra
+        if hasattr(self, 'textEditCarta'):
+            self.borrarTextFiltrado()
+
         print("busqueda filter")
         if self.comboBox.currentText() == "ZONA":
             self.crearBotonesDiscotecasFiltradas(1)
