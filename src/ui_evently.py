@@ -63,10 +63,11 @@ class Ui_MainWindow(object):
             valoracion = 0
 
         fecha_actual = date.today().strftime("%d/%m/%Y")
-        resenna = self.textEdit.toPlainText().replace(',', ',@[[')
+        resenna = self.textEdit.toPlainText()
         usuarioParaSaltoLinea = datosUsuario('usuario')+'·º·'
         insertarValoracion(fecha_actual, usuarioParaSaltoLinea, self.comboBoxDisco.currentText(
         ), valoracion, resenna, 'data')
+        self.buttonResenna()
         
     def borrarBotonesFiltrado(self):
         for i in self.scrollAreaWidgetContents.children():
@@ -75,6 +76,11 @@ class Ui_MainWindow(object):
     def borrarTextFiltrado(self):
         self.textEditCarta.clear()
         self.textEditCarta.hide()
+
+    def borrarTablaResennas(self):
+        self.tablaResennas.deleteLater()
+
+
         # metodo crea botones al filtrar
     def crearBotonesDiscotecasFiltradas(self, numeroFiltro):
         out = filtrarDiscotecas(numeroFiltro, self.lineEdit_BusquedaFiltrado.text())
@@ -113,7 +119,7 @@ class Ui_MainWindow(object):
         if hasattr(self, 'textEditCarta'):
             self.borrarTextFiltrado()
 
-        print("busqueda filter")
+        #print("busqueda filter")
         if self.comboBox.currentText() == "ZONA":
             self.crearBotonesDiscotecasFiltradas(1)
 
@@ -131,31 +137,88 @@ class Ui_MainWindow(object):
         # import mapViewer
         webview.create_window('Evently - Mapa de discotecas', '../mapa.html')
         webview.start()
-        print("he seleccionado el boton MAPA")
+        #print("he seleccionado el boton MAPA")
 
     def buttonFiltrado(self):
         self.stackedWidget.setCurrentWidget(self.page_filtrado)
-        print("he seleccionado el boton FILTRADO")
+        #print("he seleccionado el boton FILTRADO")
 
     def buttonDiscotecas(self):
         self.stackedWidget.setCurrentWidget(self.page_AddDiscoteca)
-        print("he selecionado el boton DISCOTECAS")
+        #print("he selecionado el boton DISCOTECAS")
 
     def buttonFiesta(self):
         self.stackedWidget.setCurrentWidget(self.page_AddFiesta)
-        print("he seleccionado el boton FIESTA")
+        #print("he seleccionado el boton FIESTA")
 
     def buttonResenna(self):
+        #comprueba si existe tablaResenna y la borra
+        if hasattr(self, 'tablaResennas'):
+            #print("borrar tabla")
+            self.borrarTablaResennas()
+
         self.stackedWidget.setCurrentWidget(self.page_AddResenna)
-        out = str(getTodosLosDatos('valoraciones', 'data'))
+        #crear una tabla con las valoraciones de todas las discotecas haciendo colmnas de fecha, usuario, disco, valoracion y resenna y mostrarla en el textEdit
+        self.tablaResennas = QTableWidget()
+        self.tablaResennas.setColumnCount(5)
+        self.tablaResennas.setHorizontalHeaderLabels(
+            ["Fecha", "Usuario", "Discoteca", "Estrellas", "Reseña"])
 
-        out = out.replace('[{', '').replace(']', '').replace(
-            '}', '').replace(', ', '').replace('{', '').replace('nombre_discoteca', 'Discoteca').replace('nota', '  Estrellas').replace('texto', '  Comentario').replace(',@[[', ',').replace('·º·', '\n\n').replace('"', '').replace('', '')
-        print(out)
-        self.textBrowser.setText(out)
+        #cambiar el align de Header de Fecha, Usuario, Discoteca, Estrellas
+        self.tablaResennas.horizontalHeaderItem(0).setTextAlignment(Qt.AlignCenter)
+        self.tablaResennas.horizontalHeaderItem(1).setTextAlignment(Qt.AlignCenter)
+        self.tablaResennas.horizontalHeaderItem(2).setTextAlignment(Qt.AlignCenter)
+        self.tablaResennas.horizontalHeaderItem(3).setTextAlignment(Qt.AlignCenter)
+        self.tablaResennas.horizontalHeaderItem(4).setTextAlignment(Qt.AlignLeft)
 
-        print("he seleccionado el boton RESEÑA")
 
+        
+
+
+        self.tablaResennas.setShowGrid(True)
+        self.tablaResennas.setGridStyle(Qt.SolidLine)
+
+        self.tablaResennas.setRowCount(0)
+        self.tablaResennas.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.tablaResennas.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tablaResennas.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.tablaResennas.setShowGrid(False)
+        self.tablaResennas.setStyleSheet("color:  "+color+";\n")
+        self.tablaResennas.horizontalHeader().setSectionResizeMode(0,QHeaderView.Fixed)
+        self.tablaResennas.horizontalHeader().setSectionResizeMode(1,QHeaderView.Fixed)
+        self.tablaResennas.horizontalHeader().setSectionResizeMode(2,QHeaderView.Fixed)
+        self.tablaResennas.horizontalHeader().setSectionResizeMode(3,QHeaderView.ResizeToContents)
+        self.tablaResennas.horizontalHeader().setSectionResizeMode(4,QHeaderView.ResizeToContents)
+        
+
+        self.tablaResennas.verticalHeader().setVisible(False)
+        self.verticalLayout_11.addWidget(self.tablaResennas)
+
+        fechasArray=getItemBaseDatos('valoraciones', 'fecha', 'data')
+        usuariosArray=getItemBaseDatos('valoraciones', 'usuario', 'data')
+        #de usuariosArray quitar de cada elemento estos caracteres:'·º·'
+        for i in range(len(usuariosArray)):
+            usuariosArray[i]=usuariosArray[i].replace('·º·', '')
+        discotecasArray=getItemBaseDatos('valoraciones', 'nombre_discoteca', 'data')
+        valoracionesArray=getItemBaseDatos('valoraciones', 'nota', 'data')
+        resennasArray=getItemBaseDatos('valoraciones', 'texto', 'data')
+
+        for i in range(len(fechasArray)):
+            self.tablaResennas.insertRow(i)
+            self.tablaResennas.setItem(i, 0, QTableWidgetItem(fechasArray[i]))
+            self.tablaResennas.setItem(i, 1, QTableWidgetItem(usuariosArray[i]))
+            self.tablaResennas.setItem(i, 2, QTableWidgetItem(discotecasArray[i]))
+            self.tablaResennas.setItem(i, 3, QTableWidgetItem(str(valoracionesArray[i])))
+            
+            self.tablaResennas.setItem(i, 4, QTableWidgetItem(resennasArray[i]))
+
+        #centrar el texto de la tabla
+        for i in range(self.tablaResennas.rowCount()):
+            for j in range(self.tablaResennas.columnCount()-1):
+                self.tablaResennas.item(i, j).setTextAlignment(Qt.AlignCenter)
+
+        
+    
     def abrir_ventana_carta(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = ui_carta.Ui_SecondWindow()
@@ -174,11 +237,11 @@ class Ui_MainWindow(object):
         self.textBrowser_email.setText(self.email)
         self.edad = edadUsuario('edad')
         self.textBrowser_edad.setText(str(self.edad))
-        print("he seleccionado el boton MI PERFIL")
+        #print("he seleccionado el boton MI PERFIL")
 
     def buttonMisResennas(self):
         self.usr = datosUsuario('usuario')
-        print(self.usr)
+        #print(self.usr)
         self.mis_resennas = str(valoracionesUsuario(self.usr))
         self.textBrowser_MiPerfil.setText(self.mis_resennas)
 
@@ -699,13 +762,14 @@ class Ui_MainWindow(object):
         self.label_5.setAlignment(QtCore.Qt.AlignCenter)
         self.label_5.setObjectName("label_5")
         self.verticalLayout_11.addWidget(self.label_5)
-        self.textBrowser = QtWidgets.QTextBrowser(self.frame_3)
-
-        # Añadir reseña
-        self.textBrowser.setStyleSheet("background-color:"+color2+";\n")
-        self.textBrowser.setStyleSheet("color:  "+color+";\n")
-        self.textBrowser.setObjectName("textBrowser")
-        self.verticalLayout_11.addWidget(self.textBrowser)
+        
+        #self.textBrowser = QtWidgets.QTextBrowser(self.frame_3)
+#
+        ## Añadir reseña
+        #self.textBrowser.setStyleSheet("background-color:"+color2+";\n")
+        #self.textBrowser.setStyleSheet("color:  "+color+";\n")
+        #self.textBrowser.setObjectName("textBrowser")
+        #self.verticalLayout_11.addWidget(self.textBrowser)
         self.horizontalLayout_8.addWidget(self.frame_3)
         self.horizontalLayout_8.setStretch(0, 3)
         self.horizontalLayout_8.setStretch(1, 6)

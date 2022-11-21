@@ -133,7 +133,7 @@ def insertarFiesta(nombre, calle, numero, zona, usuario, ruta):
     ubicacion2 = ubicacion.replace('C ', 'Calle ').replace('Av ', 'Avenida ').replace(
         'Avda ', 'Avenida ').replace('C.', 'Calle ').replace('PL ', 'Plaza ').replace('c ', 'Calle ').replace('av ', 'Avenida ').replace('avda ', 'Avenida ').replace('c.', 'Calle ').replace('pl ', 'Plaza ')
     location = geolocator.geocode(ubicacion2)
-    print(ubicacion2)
+    #print(ubicacion2)
     insertarFiestaEficiente(
         nombre, ubicacion2, location.longitude, location.latitude, ruta)
 
@@ -251,7 +251,6 @@ def comprobarValoracion(fecha, usuario, nombre_discoteca, ruta):
     fechasArray = getItemBaseDatos('valoraciones', 'fecha', 'data')
     nombresArray = getItemBaseDatos('valoraciones', 'nombre_discoteca', 'data')
     usuarioArray = getItemBaseDatos('valoraciones', 'usuario', 'data')
-    print(fechasArray, nombresArray, usuarioArray)
     posicionesNombres = ([indice for indice, dato in enumerate(
         nombresArray) if dato == nombre_discoteca])
     for posicion in posicionesNombres:
@@ -277,7 +276,7 @@ def insertarValoracion(fecha, usuario, nombre_discoteca, nota, texto, ruta):
 
 def comprobarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta):
     if usuario in getItemBaseDatos('usuarios', 'usuario', ruta) or email in getItemBaseDatos('usuarios', 'email', ruta) or '@' not in email or '.' not in email or usuario == '' or nombre == '' or apellido == '' or edad == '' or email == '' or contraseña == '':
-        print('El usuario o el email ya existen o no ha rellenado todos los campos o el email no es correcto')
+        #print('El usuario o el email ya existen o no ha rellenado todos los campos o el email no es correcto')
         return False
     insertarUsuario(usuario, nombre, apellido,
                     edad, email, contraseña, ruta)
@@ -286,7 +285,7 @@ def comprobarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta):
 
 def comprobarInicioSesion(usuario, contraseña, ruta):
     if usuario == '' or contraseña == '':
-        print('Todos los campos deben estar completos.')
+        #print('Todos los campos deben estar completos.')
         return False
     indice = getItemBaseDatos('usuarios', 'usuario', ruta).index(usuario)
     if getItemBaseDatos('usuarios', 'contraseña', ruta)[indice] == contraseña:
@@ -300,7 +299,7 @@ def comprobarInicioSesion(usuario, contraseña, ruta):
         edadUsr = getItemBaseDatos('usuarios', 'edad', ruta)[indice]
         variableEdadUsuario(edadUsr)
         return True
-    print('El usuario o la contraseña no son correctos, o no ha rellenado todos los campos')
+    #print('El usuario o la contraseña no son correctos, o no ha rellenado todos los campos')
     return False
 
 
