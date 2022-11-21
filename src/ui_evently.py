@@ -96,6 +96,7 @@ class Ui_MainWindow(object):
                 self.filtrado = False
 
 
+
     def imprimirNombreDiscoteca(self, nombreDiscoteca):
         self.borrarBotonesFiltrado()
         #crea textEditCarta y lo añade al layout verticalLayout_14
