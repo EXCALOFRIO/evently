@@ -90,8 +90,11 @@ class Ui_MainWindow(object):
                 self.verticalLayout_14.addWidget(
                     self.botonesDiscotecas[out[i]])
                 self.botonesDiscotecas[out[i]].clicked.connect(
-                    self.abrir_ventana_carta)
+                    lambda checked, out=out, i=i: self.imprimirNombreDiscoteca(out[i]))
                 self.filtrado = False
+                
+    def imprimirNombreDiscoteca(self, nombreDiscoteca):
+        print(nombreDiscoteca)
 
     def busquedaFilter(self):
         print("busqueda filter")
