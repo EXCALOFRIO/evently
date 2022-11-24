@@ -1,6 +1,7 @@
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager
 from kivy.lang import Builder
+from kivy.uix.image import Image
 
 
 class Ui(ScreenManager):
