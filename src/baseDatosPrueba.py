@@ -63,6 +63,20 @@ def insertarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta):
     }
     db.reference(ruta).child('usuarios').push(usuarios)
 
+def insertarMensaje(usuario,mensaje,chat, ruta):
+    mensajes = {
+        'usuario': usuario,
+        'chat': chat,
+        'mensaje': mensaje
+    }
+    db.reference(ruta).child('chats').child(chat).child('mensajes').push(mensajes)
+
+
+#envia un mensaje a un chat
+def enviarMensaje(usuario,mensaje,chat):
+    insertarMensaje(usuario,mensaje,chat, 'test')
+
+enviarMensaje('Daguerre','hola','DaguerreAlejandro')
 
 def insertarDiscotecaEficiente(nombre, ubicacion, longitud, latitud, ruta):
     discotecas = {
