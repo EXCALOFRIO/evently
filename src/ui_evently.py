@@ -151,6 +151,9 @@ class Ui_MainWindow(object):
         self.stackedWidget.setCurrentWidget(self.page_AddFiesta)
         #print("he seleccionado el boton FIESTA")
 
+    def buttonChat(self):
+        self.stackedWidget.setCurrentWidget(self.page_chat)
+
     def buttonResenna(self):
         #comprueba si existe tablaResenna y la borra
         if hasattr(self, 'tablaResennas'):
@@ -340,6 +343,7 @@ class Ui_MainWindow(object):
         self.pushButton_Discoteca.clicked.connect(self.buttonDiscotecas)
         self.pushButton_Discoteca.setObjectName("pushButton_Discoteca")
         self.verticalLayout_3.addWidget(self.pushButton_Discoteca)
+        
 
         self.pushButton_Fiesta = QtWidgets.QPushButton(self.frame_control)
         self.pushButton_Fiesta.setEnabled(True)
@@ -363,6 +367,14 @@ class Ui_MainWindow(object):
         self.pushButton_MiPerfil.setEnabled(True)
         self.pushButton_MiPerfil.setMinimumSize(QtCore.QSize(0, 40))
         self.verticalLayout_3.addWidget(self.pushButton_MiPerfil)
+        self.pushButton_Chat = QtWidgets.QPushButton(self.frame_control)
+        self.pushButton_Chat.setEnabled(True)
+        self.pushButton_Chat.setMinimumSize(QtCore.QSize(0, 40))
+        self.pushButton_Chat.clicked.connect(self.buttonChat)
+        self.pushButton_Chat.setObjectName("pushButton_Chat")
+        self.verticalLayout_3.addWidget(self.pushButton_Chat)
+        
+        
         self.pushButton_Carta = QPushButton(
             self.frame_control, clicked=lambda: self.abrir_ventana_carta())
         self.pushButton_Carta.setObjectName(u"pushButton_Carta")
@@ -874,6 +886,58 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.setStretch(0, 1)
         self.verticalLayout_2.setStretch(1, 8)
         self.verticalLayout_12.addWidget(self.frame)
+       
+        
+        #Añadir CHAT
+        self.page_chat = QtWidgets.QWidget()
+        self.page_chat.setObjectName("page_chat")
+        self.verticalLayout_20 = QtWidgets.QVBoxLayout(self.page_chat)
+        self.verticalLayout_20.setObjectName("verticalLayout_20")
+        self.label_20 = QtWidgets.QLabel(self.page_chat)
+        self.label_20.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_20.setObjectName("label_20")
+        self.verticalLayout_20.addWidget(self.label_20)
+        self.horizontalLayout_21 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_21.setObjectName("horizontalLayout_21")
+        self.lineEdit_BusquedaChat = QtWidgets.QLineEdit(
+            self.page_chat)
+        self.lineEdit_BusquedaChat.setStyleSheet(
+            "color:  "+color+";")
+        self.lineEdit_BusquedaChat.setObjectName(
+            "lineEdit_BusquedaChat")
+        self.horizontalLayout_21.addWidget(self.lineEdit_BusquedaChat)
+        spacerItem1 = QtWidgets.QSpacerItem(
+            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_21.addItem(spacerItem1)
+        self.pushButton_BuscarChat = QtWidgets.QPushButton(
+            self.page_chat)
+        self.pushButton_BuscarChat.setObjectName(
+            "pushButton_BuscarChat")
+        self.pushButton_BuscarChat.clicked.connect(self.busquedaFilter) #AÑADIR LA FUNCIONALIDAD
+        self.horizontalLayout_21.addWidget(self.pushButton_BuscarChat)
+        spacerItem2 = QtWidgets.QSpacerItem(
+            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_21.addItem(spacerItem2)
+        self.verticalLayout_20.addLayout(self.horizontalLayout_9)
+
+        # AQUIIIII
+        # añade para poder añadir un boton por cada discoteca, y poder desplazarte con un scroll bar por los botones
+        self.scrollArea = QtWidgets.QScrollArea(self.page_filtrado)
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setObjectName("scrollArea")
+
+        self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 100, 100))
+        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+        self.verticalLayout_14 = QtWidgets.QVBoxLayout(
+            self.scrollAreaWidgetContents)
+        self.verticalLayout_14.setObjectName("verticalLayout_14")
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+        self.verticalLayout_13.addWidget(self.scrollArea)
+        # añade un boton dentro del scroll area
+        # self.verticalLayout_13.addWidget(
+        self.stackedWidget.addWidget(self.page_filtrado)
+        
         MainWindow.setCentralWidget(self.centralwidget)
         self.retranslateUi(MainWindow)
         self.stackedWidget.setCurrentIndex(5)
@@ -900,6 +964,13 @@ class Ui_MainWindow(object):
         self.lineEdit_BusquedaFiltrado.setText(
             _translate("MainWindow", "BÚSQUEDA"))
         self.pushButton_BuscarFiltrado.setText(
+            _translate("MainWindow", "BUSCAR"))
+        self.pushButton_Chat.setText(
+            _translate("MainWindow", "CHAT"))
+        self.label_20.setText(_translate("MainWindow", "CHAT"))
+        self.lineEdit_BusquedaChat.setText(
+            _translate("MainWindow", "BÚSQUEDA"))
+        self.pushButton_BuscarChat.setText(
             _translate("MainWindow", "BUSCAR"))
         self.label_9.setText(_translate("MainWindow", "AÑADIR DISCOTECA"))
         self.label_nombreDiscoteca.setText(_translate("MainWindow", "NOMBRE"))
