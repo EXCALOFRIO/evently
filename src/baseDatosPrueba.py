@@ -76,7 +76,7 @@ def insertarMensaje(usuario,mensaje,chat, ruta):
 def enviarMensaje(usuario,mensaje,chat):
     insertarMensaje(usuario,mensaje,chat, 'test')
 
-enviarMensaje('Daguerre','hola','DaguerreAlejandro')
+#enviarMensaje('Daguerre','hola','DaguerreAlejandro')
 
 def insertarDiscotecaEficiente(nombre, ubicacion, longitud, latitud, ruta):
     discotecas = {
@@ -166,6 +166,7 @@ def getItemBaseDatos(elemento, variable, ruta):
     for k, v in elemento.get().items():
         lista.append(v[variable])
     return lista
+
 
 
 def getTodosLosDatos(elemento, ruta):
@@ -380,3 +381,14 @@ def filtrarDiscotecas(opcion, consulta):
                 resultado = v['nombre_discoteca']
                 temp.append(resultado)
         return temp
+    elif opcion == 5:
+        # FILTRADO DE NOMBRE DE USUARIO, filtra los usuarios que hay en la base de datos
+        usuarios = db.reference('data/usuarios')
+        consulta = consulta.lower()
+        temp = []
+        for k, v in usuarios.get().items():
+            if v['usuario'].lower().startswith(consulta):
+                resultado = v['usuario']
+                temp.append(resultado)
+        return temp
+
