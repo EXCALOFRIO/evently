@@ -63,18 +63,17 @@ def insertarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta):
     }
     db.reference(ruta).child('usuarios').push(usuarios)
 
-def insertarMensaje(usuario,mensaje,chat, ruta):
+
+def insertarMensaje(usuario, mensaje, chat, ruta):
     mensajes = {
         'usuario': usuario,
-        #'chat': chat,
+        # 'chat': chat,
         'mensaje': mensaje
     }
-    db.reference(ruta).child('chats').child(chat).child('mensajes').push(mensajes)
+    db.reference(ruta).child('chats').child(chat).push(mensajes)
 
 
-
-
-#enviarMensaje('Daguerre','hola','DaguerreAlejandro')
+# enviarMensaje('Daguerre','hola','DaguerreAlejandro')
 
 def insertarDiscotecaEficiente(nombre, ubicacion, longitud, latitud, ruta):
     discotecas = {
@@ -145,7 +144,7 @@ def insertarFiesta(nombre, calle, numero, zona, usuario, ruta):
     ubicacion2 = ubicacion.replace('C ', 'Calle ').replace('Av ', 'Avenida ').replace(
         'Avda ', 'Avenida ').replace('C.', 'Calle ').replace('PL ', 'Plaza ').replace('c ', 'Calle ').replace('av ', 'Avenida ').replace('avda ', 'Avenida ').replace('c.', 'Calle ').replace('pl ', 'Plaza ')
     location = geolocator.geocode(ubicacion2)
-    #print(ubicacion2)
+    # print(ubicacion2)
     insertarFiestaEficiente(
         nombre, ubicacion2, location.longitude, location.latitude, ruta)
 
@@ -159,20 +158,23 @@ def borrarTodo(ruta):
 
 
 def getItemBaseDatos(elemento, variable, ruta):
-    elemento = db.reference(ruta+'/'+elemento)
     lista = []
-    for k, v in elemento.get().items():
-        lista.append(v[variable])
-    return lista
-
+    if db.reference(ruta).child(elemento).get() != None:
+        for k, v in db.reference(ruta).child(elemento).get().items():
+            lista.append(v[variable])
+        return lista
+    else:
+        return lista
 
 
 def getTodosLosDatos(elemento, ruta):
-    elemento = db.reference(ruta+'/'+elemento)
     lista = []
-    for k, v in elemento.get().items():
-        lista.append(v)
-    return lista
+    if db.reference(ruta).child(elemento).get() != None:
+        for k, v in db.reference(ruta).child(elemento).get().items():
+            lista.append(v)
+        return lista
+    else:
+        return lista
 
 # Metodo de para mostrar la carta de las discotecas
 
@@ -289,7 +291,7 @@ def insertarValoracion(fecha, usuario, nombre_discoteca, nota, texto, ruta):
 
 def comprobarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta):
     if usuario in getItemBaseDatos('usuarios', 'usuario', ruta) or email in getItemBaseDatos('usuarios', 'email', ruta) or '@' not in email or '.' not in email or usuario == '' or nombre == '' or apellido == '' or edad == '' or email == '' or contraseña == '':
-        #print('El usuario o el email ya existen o no ha rellenado todos los campos o el email no es correcto')
+        # print('El usuario o el email ya existen o no ha rellenado todos los campos o el email no es correcto')
         return False
     insertarUsuario(usuario, nombre, apellido,
                     edad, email, contraseña, ruta)
@@ -298,7 +300,7 @@ def comprobarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta):
 
 def comprobarInicioSesion(usuario, contraseña, ruta):
     if usuario == '' or contraseña == '':
-        #print('Todos los campos deben estar completos.')
+        # print('Todos los campos deben estar completos.')
         return False
     indice = getItemBaseDatos('usuarios', 'usuario', ruta).index(usuario)
     if getItemBaseDatos('usuarios', 'contraseña', ruta)[indice] == contraseña:
@@ -312,7 +314,7 @@ def comprobarInicioSesion(usuario, contraseña, ruta):
         edadUsr = getItemBaseDatos('usuarios', 'edad', ruta)[indice]
         variableEdadUsuario(edadUsr)
         return True
-    #print('El usuario o la contraseña no son correctos, o no ha rellenado todos los campos')
+    # print('El usuario o la contraseña no son correctos, o no ha rellenado todos los campos')
     return False
 
 
@@ -389,4 +391,3 @@ def filtrarDiscotecas(opcion, consulta):
                 resultado = v['usuario']
                 temp.append(resultado)
         return temp
-

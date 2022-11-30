@@ -13,7 +13,7 @@ from PyQt5.uic import loadUi
 import pyglet
 import webview
 
-from baseDatosPrueba import comprobarInicioSesion, color,color2, fuentePrincipal
+from baseDatosPrueba import comprobarInicioSesion, color, color2, fuentePrincipal
 
 import pyglet
 
@@ -42,7 +42,8 @@ contrasenaLabel = Label(frame1, text="Contraseña:",
 contrasenaLabel.grid(row=3, pady=5)
 
 nombreUsuario = StringVar()
-usuarioEntry = Entry(frame1, textvariable=nombreUsuario, font=(fuentePrincipal, 12))
+usuarioEntry = Entry(frame1, textvariable=nombreUsuario,
+                     font=(fuentePrincipal, 12))
 
 usuarioEntry.grid(row=2)
 
@@ -75,7 +76,7 @@ def botonRegistroClick():
 
 # Acciones del botón Aceptar
 def botonAceptarClick():
-    if comprobarInicioSesion(usuarioEntry.get(), contrasenaEntry.get(),'data'):
+    if comprobarInicioSesion(usuarioEntry.get(), contrasenaEntry.get(), 'data'):
         inicio.destroy()
         if __name__ == "__main__":
             import sys

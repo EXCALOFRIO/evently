@@ -9,6 +9,7 @@
 
 from re import T
 import sys
+import threading
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QAction, QLineEdit, QMessageBox, QInputDialog, QFileDialog, QVBoxLayout, QFrame, QHBoxLayout, QSpacerItem, QSizePolicy
 from PyQt5.QtWidgets import *
@@ -32,10 +33,10 @@ pyglet.font.add_file('fuentes/productSans.ttf')  # ABeeZee
 
 class Ui_MainWindow(object):
     filtrado = True
-    busquedaUsuarios =True
+    busquedaUsuarios = True
     tablaChatCreada = False
     botonesDiscotecas = {}
-    botonesChatUsuarios={}
+    botonesChatUsuarios = {}
     # BOTON DE AÑADIR DISCOTECA
 
     def annadirDiscoteca(self):
@@ -71,28 +72,23 @@ class Ui_MainWindow(object):
         insertarValoracion(fecha_actual, usuarioParaSaltoLinea, self.comboBoxDisco.currentText(
         ), valoracion, resenna, 'data')
         self.buttonResenna()
-        
+
     def borrarBotonesFiltrado(self):
         for i in self.scrollAreaWidgetContents.children():
-                if isinstance(i, QPushButton):
-                    i.deleteLater()
-
+            if isinstance(i, QPushButton):
+                i.deleteLater()
 
     def borrarBotonesChatUsuarios(self):
-        #comprueba que existe tabla de chat
+        # comprueba que existe tabla de chat
         if(self.tablaChatCreada):
             self.tablaChat.deleteLater()
             self.textEditChat.deleteLater()
             self.botonEnviar.deleteLater()
             self.tablaChatCreada = False
-        else:   
+        else:
             for i in self.scrollAreaWidgetContents2.children():
-                    if isinstance(i, QPushButton):
-                        i.deleteLater()
-        
-        
-
-
+                if isinstance(i, QPushButton):
+                    i.deleteLater()
 
     def borrarTextFiltrado(self):
         self.textEditCarta.clear()
@@ -101,10 +97,11 @@ class Ui_MainWindow(object):
     def borrarTablaResennas(self):
         self.tablaResennas.deleteLater()
 
-
         # metodo crea botones al filtrar
+
     def crearBotonesDiscotecasFiltradas(self, numeroFiltro):
-        out = filtrarDiscotecas(numeroFiltro, self.lineEdit_BusquedaFiltrado.text())
+        out = filtrarDiscotecas(
+            numeroFiltro, self.lineEdit_BusquedaFiltrado.text())
         if(self.filtrado == False):
             self.borrarBotonesFiltrado()
             self.filtrado = True
@@ -122,8 +119,6 @@ class Ui_MainWindow(object):
                     lambda checked, out=out, i=i: self.imprimirNombreDiscoteca(out[i]))
                 self.filtrado = False
 
-
-
     def imprimirNombreDiscoteca(self, nombreDiscoteca):
         self.borrarBotonesFiltrado()
         self.textEditCarta = QtWidgets.QTextEdit(self.scrollAreaWidgetContents)
@@ -132,12 +127,11 @@ class Ui_MainWindow(object):
         self.textEditCarta.setFixedHeight(500)
         self.textEditCarta.setStyleSheet("color:  "+color+";\n")
         self.verticalLayout_14.addWidget(self.textEditCarta)
-        self.textEditCarta.setText(mostrar_carta('carta', nombreDiscoteca, 'data'))
+        self.textEditCarta.setText(mostrar_carta(
+            'carta', nombreDiscoteca, 'data'))
 
-#nuevo
- # metodo crea botones al filtrar
     def crearBotonesChatUsuarios(self):
-        out = filtrarDiscotecas(5,self.lineEdit_BusquedaChat.text())
+        out = filtrarDiscotecas(5, self.lineEdit_BusquedaChat.text())
         if(self.busquedaUsuarios == False):
             self.borrarBotonesChatUsuarios()
             self.busquedaUsuarios = True
@@ -152,93 +146,110 @@ class Ui_MainWindow(object):
                 self.verticalLayout_14Chat.addWidget(
                     self.botonesChatUsuarios[out[i]])
                 self.botonesChatUsuarios[out[i]].clicked.connect(
-                    lambda checked, out=out, i=i: self.imprimirNombreUsuarios(out[i]))
+                    lambda checked, out=out, i=i: self.crearChat(out[i]))
                 self.busquedaUsuarios = False
 
-
-
-    def imprimirNombreUsuarios(self, nombreUsuario):
+    def crearChat(self, nombreUsuario):
         self.borrarBotonesChatUsuarios()
         self.tablaChatCreada = True
-        #CREACION DEL CHAT, con un textEdit abajo y un boton de enviar a la derecha circular con un icono de enviar
-        #Para el chat vamos a usar una tabla en la que hay 2 columnas, la de la izquierda los mensajes del usuario con el que estamos hablando y la de la derecha los mensajes del usuario que esta usando la aplicacion
-        #cada mensaje que se envia se inserta un espacio en blanco, por ejemplo si el usuario con el que hablamos es el usuario 1 y el usuario que esta usando la aplicacion es el usuario 2, el mensaje del usuario 1 se inserta en la columna 1 y el mensaje del usuario 2 se inserta en la columna 2
-        #si recibimos un mensaje del usuario 1, se inserta en la columna 1 y un espacio en blanco en la columna 2
-        #si recibimos un mensaje del usuario 2, se inserta en la columna 2 y un espacio en blanco en la columna 1
-        
-        #creamos la tabla que va a contener el chat justo debajo de la barra de busqueda, poner la tabla lo mas arriba posible,y ocupar todo el espacio posible, debajo de la tabla poner un textEdit y un boton circular a la derecha del textEdit con un boton circular con un icono de enviar
-        #añadir la tabla en un vertcal layout y el textEdit y el boton circular en otro horizontal layout, y poner los dos en el vertical layouts
         self.tablaChat = QTableWidget()
 
         self.tablaChat.setObjectName("tablaChat")
         self.tablaChat.setRowCount(0)
         self.tablaChat.setColumnCount(2)
-        self.tablaChat.setStyleSheet("color:  "+color+";\n")
-        #disminuye el tamaño de el texto de la tabla
-        self.tablaChat.setStyleSheet("QHeaderView::section { font-size: 10pt; }")
+        self.tablaChat.setStyleSheet(
+            "QHeaderView::section { font-size: 12pt; }")
         self.verticalLayout_14Chat.addWidget(self.tablaChat)
-        #creamos el textEdit y el boton circular
+        # creamos el textEdit y el boton circular
         self.textEditChat = QtWidgets.QTextEdit(self.scrollAreaWidgetContents2)
         self.textEditChat.setObjectName("textEditChat")
         self.textEditChat.setFixedHeight(80)
         self.textEditChat.setStyleSheet("color:  "+color+";\n")
         self.horizontalLayout_15Chat = QtWidgets.QHBoxLayout()
-        self.tablaChat.horizontalHeader().setStretchLastSection(True)
-        self.tablaChat.horizontalHeader().setSectionResizeMode(
-            QtWidgets.QHeaderView.Stretch)
-        self.tablaChat.verticalHeader().setStretchLastSection(True)
-        self.tablaChat.verticalHeader().setSectionResizeMode(
-            QtWidgets.QHeaderView.Stretch)
         self.tablaChat.setHorizontalHeaderLabels([nombreUsuario, "YO"])
-        #cambiar tamaño texto del header
-        self.tablaChat.horizontalHeader().setFont(QtGui.QFont("Times", 10, QtGui.QFont.Bold))
-        self.botonEnviar = QtWidgets.QPushButton(self.scrollAreaWidgetContents2)
+        # cambiar tamaño texto del header
+        self.tablaChat.horizontalHeader().setFont(
+            QtGui.QFont("Times", 10, QtGui.QFont.Bold))
+        self.botonEnviar = QtWidgets.QPushButton(
+            self.scrollAreaWidgetContents2)
         self.botonEnviar.setObjectName("botonEnviar")
         self.botonEnviar.setFixedHeight(80)
         self.textEditChat.setFixedHeight(80)
         self.botonEnviar.setStyleSheet("color:  "+color+";\n")
         self.botonEnviar.setIcon(QtGui.QIcon("enviar.png"))
         self.botonEnviar.setIconSize(QtCore.QSize(80, 80))
-        self.botonEnviar.clicked.connect(lambda checked: self.enviarMensaje(self.textEditChat,chat,usuario2,usuario1))
+        self.botonEnviar.clicked.connect(lambda checked: self.enviarMensaje(
+            self.textEditChat, chat, usuario2, usuario1))
         self.horizontalLayout_15Chat.addWidget(self.textEditChat)
         self.horizontalLayout_15Chat.addWidget(self.botonEnviar)
         self.verticalLayout_14Chat.addLayout(self.horizontalLayout_15Chat)
 
-        self.tablaChat.setFixedHeight(self.scrollAreaWidgetContents2.height()-200)
-        
-        usuario2=datosUsuario('usuario')
-        usuario1=nombreUsuario
-        if usuario1<usuario2:
-            chat=usuario1+usuario2
+        usuario2 = datosUsuario('usuario')
+
+        usuario1 = nombreUsuario
+        if usuario1 < usuario2:
+            chat = usuario1+usuario2
         else:
-            chat=usuario2+usuario1
-        
-        #llena la tabla con los mensajes que ya se han enviado
-        insertarMensaje(usuario1,'',chat,'data')
-        #añadir chat/ delante de chat
-        rutaChat='chats/'+chat
-        chatsAnteriores=getTodosLosDatos(rutaChat,'data')
-        print(chatsAnteriores)
+            chat = usuario2+usuario1
 
-        
-        
+        rutaChat = 'chats/'+chat
+        chatsAnteriores = getTodosLosDatos(rutaChat, 'data')
+        # comprueba si chatsAnteriores es una lista vacia, si lo es añade un mensaje de bienvenida
+        if chatsAnteriores == []:
+            insertarMensaje(
+                usuario2, 'Hola, quieres usar Evently conmigo :)', chat, 'data')
+        else:
+            for chatAnterior in chatsAnteriores:
+                if chatAnterior['usuario'] == usuario1:
+                    fila = self.tablaChat.rowCount()
+                    self.tablaChat.insertRow(fila)
+                    self.tablaChat.setItem(
+                        fila, 0, QTableWidgetItem(chatAnterior['mensaje']))
+                    self.tablaChat.setItem(fila, 1, QTableWidgetItem(''))
+                    self.tablaChat.item(fila, 0).setTextAlignment(
+                        QtCore.Qt.AlignVCenter)
+
+                else:
+                    fila = self.tablaChat.rowCount()
+                    self.tablaChat.insertRow(fila)
+                    self.tablaChat.setItem(fila, 0, QTableWidgetItem(''))
+                    self.tablaChat.setItem(
+                        fila, 1, QTableWidgetItem(chatAnterior['mensaje']))
+                    # cada elemento alinea el texto a la derecha y centrado
+                    self.tablaChat.item(fila, 1).setTextAlignment(
+                        QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+
+        # recorrer la tabla, si una celda no tiene texto el color del fondeo es color2, si tiene texto el color del fondo es color
+        for i in range(self.tablaChat.rowCount()):
+            for j in range(self.tablaChat.columnCount()):
+                if self.tablaChat.item(i, j).text() == '':
+                    self.tablaChat.item(i, j).setBackground(
+                        QtGui.QColor(color2))
+
+                else:
+                    self.tablaChat.item(i, j).setBackground(
+                        QtGui.QColor(color))
+
+        self.tablaChat.resizeRowsToContents()
+        self.tablaChat.horizontalHeader().setStretchLastSection(True)
+
+        self.tablaChat.horizontalHeader().setSectionResizeMode(
+            0, QtWidgets.QHeaderView.Stretch)
+        self.tablaChat.horizontalHeader().setSectionResizeMode(
+            1, QtWidgets.QHeaderView.Stretch)
+        self.tablaChat.verticalHeader().setVisible(False)
+
+    def enviarMensaje(self, mensaje, chat, usuario2, usuario1):
+        rutaChat = 'chats/'+chat
+        insertarMensaje(usuario2, mensaje.toPlainText(), chat, 'data')
+        self.crearChat(usuario1)
 
 
-        
+# nuevo fin
 
-        
-    def enviarMensaje(self,mensaje,chat,usuario2,usuario1):
-        rutaChat='chats/'+chat
-        insertarMensaje(usuario1,mensaje.toPlainText(),chat,'data')
-        chatsAnteriores=getItemBaseDatos(rutaChat,'mensaje','data')
 
-        print(chatsAnteriores)
-        
-        
-
-#nuevo fin
     def busquedaFilter(self):
-        #comprueba si existe textEditCarta y lo borra
+        # comprueba si existe textEditCarta y lo borra
         if hasattr(self, 'textEditCarta'):
             self.borrarTextFiltrado()
 
@@ -275,28 +286,29 @@ class Ui_MainWindow(object):
         #print("he seleccionado el boton FIESTA")
 
     def buttonResenna(self):
-        #comprueba si existe tablaResenna y la borra
+        # comprueba si existe tablaResenna y la borra
         if hasattr(self, 'tablaResennas'):
             #print("borrar tabla")
             self.borrarTablaResennas()
 
         self.stackedWidget.setCurrentWidget(self.page_AddResenna)
-        #crear una tabla con las valoraciones de todas las discotecas haciendo colmnas de fecha, usuario, disco, valoracion y resenna y mostrarla en el textEdit
+        # crear una tabla con las valoraciones de todas las discotecas haciendo colmnas de fecha, usuario, disco, valoracion y resenna y mostrarla en el textEdit
         self.tablaResennas = QTableWidget()
         self.tablaResennas.setColumnCount(5)
         self.tablaResennas.setHorizontalHeaderLabels(
             ["Fecha", "Usuario", "Discoteca", "Estrellas", "Reseña"])
 
-        #cambiar el align de Header de Fecha, Usuario, Discoteca, Estrellas
-        self.tablaResennas.horizontalHeaderItem(0).setTextAlignment(Qt.AlignCenter)
-        self.tablaResennas.horizontalHeaderItem(1).setTextAlignment(Qt.AlignCenter)
-        self.tablaResennas.horizontalHeaderItem(2).setTextAlignment(Qt.AlignCenter)
-        self.tablaResennas.horizontalHeaderItem(3).setTextAlignment(Qt.AlignCenter)
-        self.tablaResennas.horizontalHeaderItem(4).setTextAlignment(Qt.AlignLeft)
-
-
-        
-
+        # cambiar el align de Header de Fecha, Usuario, Discoteca, Estrellas
+        self.tablaResennas.horizontalHeaderItem(
+            0).setTextAlignment(Qt.AlignCenter)
+        self.tablaResennas.horizontalHeaderItem(
+            1).setTextAlignment(Qt.AlignCenter)
+        self.tablaResennas.horizontalHeaderItem(
+            2).setTextAlignment(Qt.AlignCenter)
+        self.tablaResennas.horizontalHeaderItem(
+            3).setTextAlignment(Qt.AlignCenter)
+        self.tablaResennas.horizontalHeaderItem(
+            4).setTextAlignment(Qt.AlignLeft)
 
         self.tablaResennas.setShowGrid(True)
         self.tablaResennas.setGridStyle(Qt.SolidLine)
@@ -307,44 +319,49 @@ class Ui_MainWindow(object):
         self.tablaResennas.setSelectionMode(QAbstractItemView.SingleSelection)
         self.tablaResennas.setShowGrid(False)
         self.tablaResennas.setStyleSheet("color:  "+color+";\n")
-        self.tablaResennas.horizontalHeader().setSectionResizeMode(0,QHeaderView.Fixed)
-        self.tablaResennas.horizontalHeader().setSectionResizeMode(1,QHeaderView.Fixed)
-        self.tablaResennas.horizontalHeader().setSectionResizeMode(2,QHeaderView.Fixed)
-        self.tablaResennas.horizontalHeader().setSectionResizeMode(3,QHeaderView.ResizeToContents)
-        self.tablaResennas.horizontalHeader().setSectionResizeMode(4,QHeaderView.ResizeToContents)
-        
+        self.tablaResennas.horizontalHeader().setSectionResizeMode(0, QHeaderView.Fixed)
+        self.tablaResennas.horizontalHeader().setSectionResizeMode(1, QHeaderView.Fixed)
+        self.tablaResennas.horizontalHeader().setSectionResizeMode(2, QHeaderView.Fixed)
+        self.tablaResennas.horizontalHeader().setSectionResizeMode(
+            3, QHeaderView.ResizeToContents)
+        self.tablaResennas.horizontalHeader().setSectionResizeMode(
+            4, QHeaderView.ResizeToContents)
 
         self.tablaResennas.verticalHeader().setVisible(False)
         self.verticalLayout_11.addWidget(self.tablaResennas)
 
-        fechasArray=getItemBaseDatos('valoraciones', 'fecha', 'data')
-        usuariosArray=getItemBaseDatos('valoraciones', 'usuario', 'data')
-        #de usuariosArray quitar de cada elemento estos caracteres:'·º·'
+        fechasArray = getItemBaseDatos('valoraciones', 'fecha', 'data')
+        usuariosArray = getItemBaseDatos('valoraciones', 'usuario', 'data')
+        # de usuariosArray quitar de cada elemento estos caracteres:'·º·'
         for i in range(len(usuariosArray)):
-            usuariosArray[i]=usuariosArray[i].replace('·º·', '')
-        discotecasArray=getItemBaseDatos('valoraciones', 'nombre_discoteca', 'data')
-        valoracionesArray=getItemBaseDatos('valoraciones', 'nota', 'data')
-        resennasArray=getItemBaseDatos('valoraciones', 'texto', 'data')
+            usuariosArray[i] = usuariosArray[i].replace('·º·', '')
+        discotecasArray = getItemBaseDatos(
+            'valoraciones', 'nombre_discoteca', 'data')
+        valoracionesArray = getItemBaseDatos('valoraciones', 'nota', 'data')
+        resennasArray = getItemBaseDatos('valoraciones', 'texto', 'data')
 
         for i in range(len(fechasArray)):
             self.tablaResennas.insertRow(i)
             self.tablaResennas.setItem(i, 0, QTableWidgetItem(fechasArray[i]))
-            self.tablaResennas.setItem(i, 1, QTableWidgetItem(usuariosArray[i]))
-            self.tablaResennas.setItem(i, 2, QTableWidgetItem(discotecasArray[i]))
-            self.tablaResennas.setItem(i, 3, QTableWidgetItem(str(valoracionesArray[i])))
-            
-            self.tablaResennas.setItem(i, 4, QTableWidgetItem(resennasArray[i]))
+            self.tablaResennas.setItem(
+                i, 1, QTableWidgetItem(usuariosArray[i]))
+            self.tablaResennas.setItem(
+                i, 2, QTableWidgetItem(discotecasArray[i]))
+            self.tablaResennas.setItem(
+                i, 3, QTableWidgetItem(str(valoracionesArray[i])))
 
-        #centrar el texto de la tabla
+            self.tablaResennas.setItem(
+                i, 4, QTableWidgetItem(resennasArray[i]))
+
+        # centrar el texto de la tabla
         for i in range(self.tablaResennas.rowCount()):
             for j in range(self.tablaResennas.columnCount()-1):
                 self.tablaResennas.item(i, j).setTextAlignment(Qt.AlignCenter)
 
-        
-    #SE ABRE EL CHAT
+    # SE ABRE EL CHAT
+
     def abrir_ventana_chat(self):
         self.stackedWidget.setCurrentWidget(self.page_chat)
-
 
     def buttonPerfil(self):
         self.stackedWidget.setCurrentWidget(self.page_MiPerfil)
@@ -362,7 +379,7 @@ class Ui_MainWindow(object):
 
     def buttonMisResennas(self):
         self.usr = datosUsuario('usuario')
-        #print(self.usr)
+        # print(self.usr)
         self.mis_resennas = str(valoracionesUsuario(self.usr))
         self.textBrowser_MiPerfil.setText(self.mis_resennas)
 
@@ -485,7 +502,7 @@ class Ui_MainWindow(object):
         self.pushButton_MiPerfil.setMinimumSize(QtCore.QSize(0, 40))
         self.verticalLayout_3.addWidget(self.pushButton_MiPerfil)
 
-        #BOTON CHAT
+        # BOTON CHAT
         self.pushButton_Chat = QPushButton(
             self.frame_control, clicked=lambda: self.abrir_ventana_chat())
         self.pushButton_Chat.setObjectName(u"pushButton_Chat")
@@ -606,7 +623,6 @@ class Ui_MainWindow(object):
         # self.verticalLayout_13.addWidget(
         self.stackedWidget.addWidget(self.page_filtrado)
 
-
         """PÁGINA DE CHAT"""
 
         self.page_chat = QtWidgets.QWidget()
@@ -634,7 +650,8 @@ class Ui_MainWindow(object):
             self.page_chat)
         self.pushButton_BuscarChat.setObjectName(
             "pushButton_BuscarChat")
-        self.pushButton_BuscarChat.clicked.connect(self.crearBotonesChatUsuarios)
+        self.pushButton_BuscarChat.clicked.connect(
+            self.crearBotonesChatUsuarios)
         self.horizontalLayout_9Chat.addWidget(self.pushButton_BuscarChat)
         spacerItem2Chat = QtWidgets.QSpacerItem(
             40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -648,8 +665,10 @@ class Ui_MainWindow(object):
         self.scrollAreaChat.setObjectName("scrollAreaChat")
 
         self.scrollAreaWidgetContents2 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents2.setGeometry(QtCore.QRect(0, 0, 100, 100))
-        self.scrollAreaWidgetContents2.setObjectName("scrollAreaWidgetContents2")
+        self.scrollAreaWidgetContents2.setGeometry(
+            QtCore.QRect(0, 0, 100, 100))
+        self.scrollAreaWidgetContents2.setObjectName(
+            "scrollAreaWidgetContents2")
         self.verticalLayout_14Chat = QtWidgets.QVBoxLayout(
             self.scrollAreaWidgetContents2)
         self.verticalLayout_14Chat.setObjectName("verticalLayout_14Chat")
@@ -658,8 +677,6 @@ class Ui_MainWindow(object):
         # añade un boton dentro del scroll area
         # self.verticalLayout_13.addWidget(
         self.stackedWidget.addWidget(self.page_chat)
-
-
 
         """PÁGINA DE DISCOTECAS"""
         self.page_AddDiscoteca = QtWidgets.QWidget()
@@ -940,14 +957,14 @@ class Ui_MainWindow(object):
         self.label_5.setAlignment(QtCore.Qt.AlignCenter)
         self.label_5.setObjectName("label_5")
         self.verticalLayout_11.addWidget(self.label_5)
-        
+
         #self.textBrowser = QtWidgets.QTextBrowser(self.frame_3)
 #
-        ## Añadir reseña
-        #self.textBrowser.setStyleSheet("background-color:"+color2+";\n")
+        # Añadir reseña
+        # self.textBrowser.setStyleSheet("background-color:"+color2+";\n")
         #self.textBrowser.setStyleSheet("color:  "+color+";\n")
-        #self.textBrowser.setObjectName("textBrowser")
-        #self.verticalLayout_11.addWidget(self.textBrowser)
+        # self.textBrowser.setObjectName("textBrowser")
+        # self.verticalLayout_11.addWidget(self.textBrowser)
         self.horizontalLayout_8.addWidget(self.frame_3)
         self.horizontalLayout_8.setStretch(0, 3)
         self.horizontalLayout_8.setStretch(1, 6)
