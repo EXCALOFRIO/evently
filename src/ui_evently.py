@@ -24,7 +24,7 @@ from tkinter import messagebox
 import ui_carta
 from datetime import timedelta
 
-from baseDatosPrueba import datosUsuario, valoracionesUsuario, fiestasUsuario, nombreUsuario, apellidoUsuario, emailUsuario, edadUsuario, filtrarDiscotecas, getItemBaseDatos, getTodosLosDatos, insertarDiscoteca, insertarFiesta, insertarValoracion, mostrar_carta, color, color2
+from baseDatosPrueba import datosUsuario, getTodosLosDatos, valoracionesUsuario, fiestasUsuario, nombreUsuario, apellidoUsuario, emailUsuario, edadUsuario, filtrarDiscotecas, getItemBaseDatos, insertarMensaje, insertarDiscoteca, insertarFiesta, insertarValoracion, mostrar_carta, color, color2
 
 
 pyglet.font.add_file('fuentes/productSans.ttf')  # ABeeZee
@@ -33,6 +33,7 @@ pyglet.font.add_file('fuentes/productSans.ttf')  # ABeeZee
 class Ui_MainWindow(object):
     filtrado = True
     busquedaUsuarios =True
+    tablaChatCreada = False
     botonesDiscotecas = {}
     botonesChatUsuarios={}
     # BOTON DE AÑADIR DISCOTECA
@@ -76,10 +77,22 @@ class Ui_MainWindow(object):
                 if isinstance(i, QPushButton):
                     i.deleteLater()
 
+
     def borrarBotonesChatUsuarios(self):
-        for i in self.scrollAreaWidgetContents2.children():
-                if isinstance(i, QPushButton):
-                    i.deleteLater()
+        #comprueba que existe tabla de chat
+        if(self.tablaChatCreada):
+            self.tablaChat.deleteLater()
+            self.textEditChat.deleteLater()
+            self.botonEnviar.deleteLater()
+            self.tablaChatCreada = False
+        else:   
+            for i in self.scrollAreaWidgetContents2.children():
+                    if isinstance(i, QPushButton):
+                        i.deleteLater()
+        
+        
+
+
 
     def borrarTextFiltrado(self):
         self.textEditCarta.clear()
@@ -146,8 +159,83 @@ class Ui_MainWindow(object):
 
     def imprimirNombreUsuarios(self, nombreUsuario):
         self.borrarBotonesChatUsuarios()
-        #CREACION DEL CHAT 
+        self.tablaChatCreada = True
+        #CREACION DEL CHAT, con un textEdit abajo y un boton de enviar a la derecha circular con un icono de enviar
+        #Para el chat vamos a usar una tabla en la que hay 2 columnas, la de la izquierda los mensajes del usuario con el que estamos hablando y la de la derecha los mensajes del usuario que esta usando la aplicacion
+        #cada mensaje que se envia se inserta un espacio en blanco, por ejemplo si el usuario con el que hablamos es el usuario 1 y el usuario que esta usando la aplicacion es el usuario 2, el mensaje del usuario 1 se inserta en la columna 1 y el mensaje del usuario 2 se inserta en la columna 2
+        #si recibimos un mensaje del usuario 1, se inserta en la columna 1 y un espacio en blanco en la columna 2
+        #si recibimos un mensaje del usuario 2, se inserta en la columna 2 y un espacio en blanco en la columna 1
         
+        #creamos la tabla que va a contener el chat justo debajo de la barra de busqueda, poner la tabla lo mas arriba posible,y ocupar todo el espacio posible, debajo de la tabla poner un textEdit y un boton circular a la derecha del textEdit con un boton circular con un icono de enviar
+        #añadir la tabla en un vertcal layout y el textEdit y el boton circular en otro horizontal layout, y poner los dos en el vertical layouts
+        self.tablaChat = QTableWidget()
+
+        self.tablaChat.setObjectName("tablaChat")
+        self.tablaChat.setRowCount(0)
+        self.tablaChat.setColumnCount(2)
+        self.tablaChat.setStyleSheet("color:  "+color+";\n")
+        #disminuye el tamaño de el texto de la tabla
+        self.tablaChat.setStyleSheet("QHeaderView::section { font-size: 10pt; }")
+        self.verticalLayout_14Chat.addWidget(self.tablaChat)
+        #creamos el textEdit y el boton circular
+        self.textEditChat = QtWidgets.QTextEdit(self.scrollAreaWidgetContents2)
+        self.textEditChat.setObjectName("textEditChat")
+        self.textEditChat.setFixedHeight(80)
+        self.textEditChat.setStyleSheet("color:  "+color+";\n")
+        self.horizontalLayout_15Chat = QtWidgets.QHBoxLayout()
+        self.tablaChat.horizontalHeader().setStretchLastSection(True)
+        self.tablaChat.horizontalHeader().setSectionResizeMode(
+            QtWidgets.QHeaderView.Stretch)
+        self.tablaChat.verticalHeader().setStretchLastSection(True)
+        self.tablaChat.verticalHeader().setSectionResizeMode(
+            QtWidgets.QHeaderView.Stretch)
+        self.tablaChat.setHorizontalHeaderLabels([nombreUsuario, "YO"])
+        #cambiar tamaño texto del header
+        self.tablaChat.horizontalHeader().setFont(QtGui.QFont("Times", 10, QtGui.QFont.Bold))
+        self.botonEnviar = QtWidgets.QPushButton(self.scrollAreaWidgetContents2)
+        self.botonEnviar.setObjectName("botonEnviar")
+        self.botonEnviar.setFixedHeight(80)
+        self.textEditChat.setFixedHeight(80)
+        self.botonEnviar.setStyleSheet("color:  "+color+";\n")
+        self.botonEnviar.setIcon(QtGui.QIcon("enviar.png"))
+        self.botonEnviar.setIconSize(QtCore.QSize(80, 80))
+        self.botonEnviar.clicked.connect(lambda checked: self.enviarMensaje(self.textEditChat,chat,usuario2,usuario1))
+        self.horizontalLayout_15Chat.addWidget(self.textEditChat)
+        self.horizontalLayout_15Chat.addWidget(self.botonEnviar)
+        self.verticalLayout_14Chat.addLayout(self.horizontalLayout_15Chat)
+
+        self.tablaChat.setFixedHeight(self.scrollAreaWidgetContents2.height()-200)
+        
+        usuario2=datosUsuario('usuario')
+        usuario1=nombreUsuario
+        if usuario1<usuario2:
+            chat=usuario1+usuario2
+        else:
+            chat=usuario2+usuario1
+        
+        #llena la tabla con los mensajes que ya se han enviado
+        insertarMensaje(usuario1,'',chat,'data')
+        #añadir chat/ delante de chat
+        rutaChat='chats/'+chat
+        chatsAnteriores=getTodosLosDatos(rutaChat,'data')
+        print(chatsAnteriores)
+
+        
+        
+
+
+        
+
+        
+    def enviarMensaje(self,mensaje,chat,usuario2,usuario1):
+        rutaChat='chats/'+chat
+        insertarMensaje(usuario1,mensaje.toPlainText(),chat,'data')
+        chatsAnteriores=getItemBaseDatos(rutaChat,'mensaje','data')
+
+        print(chatsAnteriores)
+        
+        
+
 #nuevo fin
     def busquedaFilter(self):
         #comprueba si existe textEditCarta y lo borra
