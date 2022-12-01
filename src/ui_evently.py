@@ -245,9 +245,9 @@ class Ui_MainWindow(object):
         #esperar10 seg y si acaba el tiempo se actualiza el chat, pero si se cambai el text edit se resetea el tiempo
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(lambda: self.crearChat(usuario1,self.textEditChat.toPlainText()))
-        self.timer.start(10000)
+        self.timer.start(2000)
         self.textEditChat.textChanged.connect(self.timer.stop)
-        self.textEditChat.textChanged.connect(lambda: self.timer.start(10000))
+        self.textEditChat.textChanged.connect(lambda: self.timer.start(2000))
 
     def enviarMensaje(self, mensaje, chat, usuario2, usuario1):
         rutaChat = 'chats/'+chat
