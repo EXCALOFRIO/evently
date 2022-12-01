@@ -166,12 +166,17 @@ class Ui_MainWindow(object):
         self.textEditChat = QtWidgets.QTextEdit(self.scrollAreaWidgetContents2)
         self.textEditChat.setObjectName("textEditChat")
         self.textEditChat.setFixedHeight(80)
+        
         self.textEditChat.setStyleSheet("color:  "+color+";\n")
+        #color del fondo blanco con poca opacidad
+        self.textEditChat.setStyleSheet("background-color: rgba(255, 255, 255, 0.8);")
         self.textEditChat.setText(textoMensaje)
+        #set focus al final del texto
         self.textEditChat.setFocus()
+        
+
         self.horizontalLayout_15Chat = QtWidgets.QHBoxLayout()
         self.tablaChat.setHorizontalHeaderLabels([nombreUsuario, "YO"])
-        # cambiar tamaño texto del header
         self.tablaChat.horizontalHeader().setFont(
             QtGui.QFont("Times", 10, QtGui.QFont.Bold))
         self.botonEnviar = QtWidgets.QPushButton(
@@ -180,8 +185,8 @@ class Ui_MainWindow(object):
         self.botonEnviar.setFixedHeight(80)
         self.textEditChat.setFixedHeight(80)
         self.botonEnviar.setStyleSheet("color:  "+color+";\n")
-        self.botonEnviar.setIcon(QtGui.QIcon("enviar.png"))
-        self.botonEnviar.setIconSize(QtCore.QSize(80, 80))
+        self.botonEnviar.setIcon(QtGui.QIcon("imágenes/enviar.png"))
+        self.botonEnviar.setIconSize(QtCore.QSize(60, 60))
         self.botonEnviar.clicked.connect(lambda checked: self.enviarMensaje(
             self.textEditChat, chat, usuario2, usuario1))
         self.horizontalLayout_15Chat.addWidget(self.textEditChat)
@@ -247,9 +252,8 @@ class Ui_MainWindow(object):
         #esperar10 seg y si acaba el tiempo se actualiza el chat, pero si se cambai el text edit se resetea el tiempo
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(lambda: self.crearChat(usuario1,self.textEditChat.toPlainText()))
-        self.timer.start(2000)
+        self.timer.start(5000)
         self.textEditChat.textChanged.connect(self.timer.stop)
-
         self.pushButton_BuscarChat.clicked.connect(self.timer.stop)
         self.pushButton_Mapa.clicked.connect(self.timer.stop)
         self.pushButton_Filtrado.clicked.connect(self.timer.stop)
@@ -258,7 +262,7 @@ class Ui_MainWindow(object):
         self.pushButton_Resenna.clicked.connect(self.timer.stop)
         self.pushButton_MiPerfil.clicked.connect(self.timer.stop)
 
-        self.textEditChat.textChanged.connect(lambda: self.timer.start(2000))
+        self.textEditChat.textChanged.connect(lambda: self.timer.start(5000))
 
     def enviarMensaje(self, mensaje, chat, usuario2, usuario1):
         rutaChat = 'chats/'+chat
