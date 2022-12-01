@@ -266,8 +266,11 @@ class Ui_MainWindow(object):
 
     def enviarMensaje(self, mensaje, chat, usuario2, usuario1):
         rutaChat = 'chats/'+chat
-        insertarMensaje(usuario2, mensaje.toPlainText(), chat, 'data')
-        self.crearChat(usuario1,'')
+        if(mensaje.toPlainText() != ''):
+            insertarMensaje(usuario2, mensaje.toPlainText(), chat, 'data')
+            self.crearChat(usuario1,'')
+        else:
+            self.crearChat(usuario1,'')
 
 
 # nuevo fin
