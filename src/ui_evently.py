@@ -168,6 +168,7 @@ class Ui_MainWindow(object):
         self.textEditChat.setFixedHeight(80)
         self.textEditChat.setStyleSheet("color:  "+color+";\n")
         self.textEditChat.setText(textoMensaje)
+        self.textEditChat.setFocus()
         self.horizontalLayout_15Chat = QtWidgets.QHBoxLayout()
         self.tablaChat.setHorizontalHeaderLabels([nombreUsuario, "YO"])
         # cambiar tamaño texto del header
@@ -221,6 +222,7 @@ class Ui_MainWindow(object):
                     # cada elemento alinea el texto a la derecha y centrado
                     self.tablaChat.item(fila, 1).setTextAlignment(
                         QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+                    
 
         # recorrer la tabla, si una celda no tiene texto el color del fondeo es color2, si tiene texto el color del fondo es color
         for i in range(self.tablaChat.rowCount()):
@@ -233,7 +235,7 @@ class Ui_MainWindow(object):
                     self.tablaChat.item(i, j).setBackground(
                         QtGui.QColor(color))
 
-        self.tablaChat.resizeRowsToContents()
+        #self.tablaChat.resizeRowsToContents()
         self.tablaChat.horizontalHeader().setStretchLastSection(True)
 
         self.tablaChat.horizontalHeader().setSectionResizeMode(
@@ -247,6 +249,15 @@ class Ui_MainWindow(object):
         self.timer.timeout.connect(lambda: self.crearChat(usuario1,self.textEditChat.toPlainText()))
         self.timer.start(2000)
         self.textEditChat.textChanged.connect(self.timer.stop)
+
+        self.pushButton_BuscarChat.clicked.connect(self.timer.stop)
+        self.pushButton_Mapa.clicked.connect(self.timer.stop)
+        self.pushButton_Filtrado.clicked.connect(self.timer.stop)
+        self.pushButton_Discoteca.clicked.connect(self.timer.stop)
+        self.pushButton_Fiesta.clicked.connect(self.timer.stop)
+        self.pushButton_Resenna.clicked.connect(self.timer.stop)
+        self.pushButton_MiPerfil.clicked.connect(self.timer.stop)
+
         self.textEditChat.textChanged.connect(lambda: self.timer.start(2000))
 
     def enviarMensaje(self, mensaje, chat, usuario2, usuario1):
