@@ -10,6 +10,7 @@
 from re import T
 import sys
 import threading
+import time
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QAction, QLineEdit, QMessageBox, QInputDialog, QFileDialog, QVBoxLayout, QFrame, QHBoxLayout, QSpacerItem, QSizePolicy
 from PyQt5.QtWidgets import *
@@ -146,10 +147,11 @@ class Ui_MainWindow(object):
                 self.verticalLayout_14Chat.addWidget(
                     self.botonesChatUsuarios[out[i]])
                 self.botonesChatUsuarios[out[i]].clicked.connect(
-                    lambda checked, out=out, i=i: self.crearChat(out[i]))
+                    lambda checked, out=out, i=i: self.crearChat(out[i],''))
                 self.busquedaUsuarios = False
 
-    def crearChat(self, nombreUsuario):
+
+    def crearChat(self, nombreUsuario,textoMensaje):
         self.borrarBotonesChatUsuarios()
         self.tablaChatCreada = True
         self.tablaChat = QTableWidget()
@@ -165,6 +167,7 @@ class Ui_MainWindow(object):
         self.textEditChat.setObjectName("textEditChat")
         self.textEditChat.setFixedHeight(80)
         self.textEditChat.setStyleSheet("color:  "+color+";\n")
+        self.textEditChat.setText(textoMensaje)
         self.horizontalLayout_15Chat = QtWidgets.QHBoxLayout()
         self.tablaChat.setHorizontalHeaderLabels([nombreUsuario, "YO"])
         # cambiar tamaño texto del header
@@ -239,10 +242,17 @@ class Ui_MainWindow(object):
             1, QtWidgets.QHeaderView.Stretch)
         self.tablaChat.verticalHeader().setVisible(False)
 
+        #esperar10 seg y si acaba el tiempo se actualiza el chat, pero si se cambai el text edit se resetea el tiempo
+        self.timer = QtCore.QTimer()
+        self.timer.timeout.connect(lambda: self.crearChat(usuario1,self.textEditChat.toPlainText()))
+        self.timer.start(10000)
+        self.textEditChat.textChanged.connect(self.timer.stop)
+        self.textEditChat.textChanged.connect(lambda: self.timer.start(10000))
+
     def enviarMensaje(self, mensaje, chat, usuario2, usuario1):
         rutaChat = 'chats/'+chat
         insertarMensaje(usuario2, mensaje.toPlainText(), chat, 'data')
-        self.crearChat(usuario1)
+        self.crearChat(usuario1,'')
 
 
 # nuevo fin
