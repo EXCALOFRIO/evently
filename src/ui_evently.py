@@ -11,12 +11,14 @@ from re import T
 import sys
 import threading
 import time
+import cv2
+import imutils
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QAction, QLineEdit, QMessageBox, QInputDialog, QFileDialog, QVBoxLayout, QFrame, QHBoxLayout, QSpacerItem, QSizePolicy
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QPropertyAnimation, QEasingCurve, QSize, Qt, QRect, QCoreApplication, QMetaObject
 from PyQt5.uic import loadUi
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QIcon, QImage
 import pyglet
 import webview
 from datetime import date
@@ -28,11 +30,12 @@ from datetime import timedelta
 
 from baseDatosPrueba import datosUsuario, getTodosLosDatos, valoracionesUsuario, fiestasUsuario, nombreUsuario, apellidoUsuario, emailUsuario, edadUsuario, filtrarDiscotecas, getItemBaseDatos, insertarMensaje, insertarDiscoteca, insertarFiesta, insertarValoracion, mostrar_carta, color, color2
 
+from Interfaz_Imagenes import Interfaz_Imagenes
 
 pyglet.font.add_file('fuentes/productSans.ttf')  # ABeeZee
 
 
-class Ui_MainWindow(object):
+class Ui_MainWindow(QMainWindow):
     filtrado = True
     busquedaUsuarios = True
     tablaChatCreada = False
@@ -385,6 +388,13 @@ class Ui_MainWindow(object):
         for i in range(self.tablaResennas.rowCount()):
             for j in range(self.tablaResennas.columnCount()-1):
                 self.tablaResennas.item(i, j).setTextAlignment(Qt.AlignCenter)
+                
+    def boton_subir_foto(self):
+        self.file_name = QFileDialog.getOpenFileName(filter="Imagen (*.*)")[0]
+        self.image = cv2.imread(self.file_name)
+        print(self.file_name)
+        
+
 
     # SE ABRE EL CHAT
 
@@ -1085,11 +1095,19 @@ class Ui_MainWindow(object):
         self.pushButton_MisResennas = QPushButton(self.page_MiPerfil)
         self.pushButton_MisResennas.setObjectName("pushButton_MisResennas")
         self.pushButton_MisResennas.clicked.connect(self.buttonMisResennas)
-        self.pushButton_MisResennas.setGeometry(QRect(190, 200, 111, 23))
+        self.pushButton_MisResennas.setGeometry(QRect(250, 200, 111, 23))
         self.pushButton_MisFiestas = QPushButton(self.page_MiPerfil)
         self.pushButton_MisFiestas.setObjectName("pushButton_MisFiestas")
         self.pushButton_MisFiestas.clicked.connect(self.buttonMisFiestas)
-        self.pushButton_MisFiestas.setGeometry(QRect(310, 200, 101, 23))
+        self.pushButton_MisFiestas.setGeometry(QRect(370, 200, 101, 23))
+        self.pushButton_SubirFotos = QPushButton(self.page_MiPerfil)
+        self.pushButton_SubirFotos.setObjectName("pushButton_SubirFotos")
+        self.pushButton_SubirFotos.clicked.connect(self.boton_subir_foto)
+        self.pushButton_SubirFotos.setGeometry(20, 200, 115, 23)
+        self.pushButton_MisFotos = QPushButton(self.page_MiPerfil)
+        self.pushButton_MisFotos.setObjectName("pushButton_MisFotos")
+        self.pushButton_MisFotos.setGeometry(QRect(145, 200, 101, 23))
+        
         self.stackedWidget.addWidget(self.page_MiPerfil)
         self.verticalLayout_4.addWidget(self.stackedWidget)
         self.horizontalLayout.addWidget(self.frame_paginas)
@@ -1173,7 +1191,10 @@ class Ui_MainWindow(object):
             _translate("MainWindow", "Mis rese\u00f1as"))
         self.pushButton_MisFiestas.setText(
             _translate("MainWindow", "Mis fiestas"))
-
+        self.pushButton_SubirFotos.setText(
+            _translate("MainWindow", "Subir fotos"))
+        self.pushButton_MisFotos.setText(
+            _translate("MainWindow", "Mis fotos"))
 
 if __name__ == "__main__":
     import sys

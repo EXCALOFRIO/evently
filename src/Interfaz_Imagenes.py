@@ -34,7 +34,7 @@ config = {
 firebase = pyrebase.initialize_app(config)
 
 
-class Ui_MainWindow(object):
+class Interfaz_Imagenes(object):
     
     imagen = QImage()
     
@@ -86,7 +86,7 @@ class Ui_MainWindow(object):
         self.image = cv2.imread(self.file_name)
         print(self.file_name)
         self.setImagen(self.image)
-        
+       
     def setImagen(self, image):
         self.tmp = image
         image = imutils.resize(image, width=640)
@@ -138,7 +138,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
+    ui = Interfaz_Imagenes()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
