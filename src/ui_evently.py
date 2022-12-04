@@ -153,7 +153,6 @@ class Ui_MainWindow(QMainWindow):
                     lambda checked, out=out, i=i: self.crearChat(out[i],''))
                 self.busquedaUsuarios = False
 
-
     def crearChat(self, nombreUsuario,textoMensaje):
         self.borrarBotonesChatUsuarios()
         self.tablaChatCreada = True
@@ -275,6 +274,24 @@ class Ui_MainWindow(QMainWindow):
         else:
             self.crearChat(usuario1,'')
 
+    def crearBotonesUsuarios(self):
+        out = filtrarDiscotecas(5, self.lineEdit_BusquedaUsuarios.text())
+        if(self.busquedaUsuarios == False):
+            self.borrarBotonesChatUsuarios()
+            self.busquedaUsuarios = True
+
+        if(self.busquedaUsuarios):
+            for i in range(len(out)):
+                self.botonesChatUsuarios[out[i]] = QtWidgets.QPushButton(
+                    self.scrollAreaWidgetContents2)
+                self.botonesChatUsuarios[out[i]].setObjectName(out[i])
+                self.botonesChatUsuarios[out[i]].setText(out[i])
+                self.botonesChatUsuarios[out[i]].setFixedHeight(80)
+                self.verticalLayout_14Usuarios.addWidget(
+                    self.botonesChatUsuarios[out[i]])
+                self.botonesChatUsuarios[out[i]].clicked.connect(
+                    lambda checked, out=out, i=i: self.crearChat(out[i],''))
+                self.busquedaUsuarios = False
 
 # nuevo fin
 
@@ -400,6 +417,9 @@ class Ui_MainWindow(QMainWindow):
 
     def abrir_ventana_chat(self):
         self.stackedWidget.setCurrentWidget(self.page_chat)
+    
+    def abrir_ventana_usuarios(self):
+        self.stackedWidget.setCurrentWidget(self.page_usuarios)
 
     def buttonPerfil(self):
         self.stackedWidget.setCurrentWidget(self.page_MiPerfil)
@@ -500,7 +520,7 @@ class Ui_MainWindow(QMainWindow):
         self.verticalLayout_3.setObjectName("verticalLayout_3")
        #BOTON USUARIOS
         self.pushButton_Usuarios = QPushButton(
-            self.frame_control, clicked=lambda: self.abrir_ventana_chat())
+            self.frame_control, clicked=lambda: self.abrir_ventana_usuarios())
         self.pushButton_Usuarios.setObjectName(u"pushButton_Usuarios")
         self.pushButton_Usuarios.setText('USUARIOS')
         self.pushButton_Usuarios.setEnabled(True)
@@ -754,7 +774,7 @@ class Ui_MainWindow(QMainWindow):
         self.pushButton_BuscarUsuarios.setObjectName(
             "pushButton_BuscarUsuarios")
         self.pushButton_BuscarUsuarios.clicked.connect(
-            self.crearBotonesChatUsuarios)
+            self.crearBotonesUsuarios)
         self.horizontalLayout_9Usuarios.addWidget(self.pushButton_BuscarUsuarios)
         spacerItem2Usuarios = QtWidgets.QSpacerItem(
             40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -1211,10 +1231,9 @@ class Ui_MainWindow(QMainWindow):
             _translate("MainWindow", "BÚSQUEDA"))
         self.pushButton_BuscarFiltrado.setText(
             _translate("MainWindow", "BUSCAR"))
-        self.pushButton_BuscarChat.setText(
-            _translate("MainWindow", "BUSCAR"))
         self.pushButton_BuscarUsuarios.setText(
             _translate("MainWindow", "BUSCAR"))
+        self.pushButton_BuscarChat.setText(_translate("MainWindow", "BUSCAR"))
         self.label_9.setText(_translate("MainWindow", "AÑADIR DISCOTECA"))
         self.label_nombreDiscoteca.setText(_translate("MainWindow", "NOMBRE"))
         self.label_zonaDiscoteca.setText(_translate("MainWindow", "ZONA"))
