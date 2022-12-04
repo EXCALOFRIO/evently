@@ -726,6 +726,7 @@ class Ui_MainWindow(QMainWindow):
         # añade un boton dentro del scroll area
         # self.verticalLayout_13.addWidget(
         self.stackedWidget.addWidget(self.page_chat)
+    
         #PAGINA DE USUARIOS
         self.page_usuarios = QtWidgets.QWidget()
         self.page_usuarios.setObjectName("page_usuarios")
@@ -1199,6 +1200,7 @@ class Ui_MainWindow(QMainWindow):
             _translate("MainWindow", "MI PERFIL"))
         self.label_6.setText(_translate("MainWindow", "FILTRADO"))
         self.label_6Chat.setText(_translate("MainWindow", "CHAT"))
+        self.label_6Usuarios.setText(_translate("MainWindow", "USUARIOS"))
         self.comboBox.setItemText(0, _translate("MainWindow", "ZONA"))
         self.comboBox.setItemText(1, _translate("MainWindow", "NOMBRE"))
         self.comboBox.setItemText(2, _translate("MainWindow", "CALLE"))
@@ -1210,6 +1212,8 @@ class Ui_MainWindow(QMainWindow):
         self.pushButton_BuscarFiltrado.setText(
             _translate("MainWindow", "BUSCAR"))
         self.pushButton_BuscarChat.setText(
+            _translate("MainWindow", "BUSCAR"))
+        self.pushButton_BuscarUsuarios.setText(
             _translate("MainWindow", "BUSCAR"))
         self.label_9.setText(_translate("MainWindow", "AÑADIR DISCOTECA"))
         self.label_nombreDiscoteca.setText(_translate("MainWindow", "NOMBRE"))
