@@ -16,6 +16,10 @@ pip install requests
 pip install folium
 pip install geopy
 pip install pywebview
+pip3 install opencv-python
+pip install imutils
+pip install PySide2
+pip install Pyrebase4
 ```
 
 ## EXPLICACIÓN METODOS
@@ -171,8 +175,8 @@ location = geolocator.geocode(ubicacion2)
 
 ### Autores
 
-- <span style="color:grey">**@serenablanco -> Serena Blanco García**</span>
-- <span style="color:grey">**@Daguerre45 -> Alberto Daguerre Torres**</span>
-- <span style="color:grey">**@EXCALOFRIO -> Alejandro Ramírez Larena**</span>
-- <span style="color:grey">**@pblrvo -> Pablo Rivero**</span>
-- <span style="color:grey">**@juaki0315 -> Joaquin Moreno Guzman**</span>
+- `<span style="color:grey">`**@serenablanco -> Serena Blanco García**
+- `<span style="color:grey">`**@Daguerre45 -> Alberto Daguerre Torres**
+- `<span style="color:grey">`**@EXCALOFRIO -> Alejandro Ramírez Larena**
+- `<span style="color:grey">`**@pblrvo -> Pablo Rivero**
+- `<span style="color:grey">`**@juaki0315 -> Joaquin Moreno Guzman**
