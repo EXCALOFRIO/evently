@@ -498,32 +498,43 @@ class Ui_MainWindow(QMainWindow):
         self.frame_control.setObjectName("frame_control")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.frame_control)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
+       #BOTON USUARIOS
+        self.pushButton_Usuarios = QPushButton(
+            self.frame_control, clicked=lambda: self.abrir_ventana_chat())
+        self.pushButton_Usuarios.setObjectName(u"pushButton_Usuarios")
+        self.pushButton_Usuarios.setText('USUARIOS')
+        self.pushButton_Usuarios.setEnabled(True)
+        self.pushButton_Usuarios.setMinimumSize(QSize(0, 40))
+        self.verticalLayout_3.addWidget(self.pushButton_Usuarios)
+        #BOTON MAPA
         self.pushButton_Mapa = QtWidgets.QPushButton(self.frame_control)
         self.pushButton_Mapa.setEnabled(True)
         self.pushButton_Mapa.setMinimumSize(QtCore.QSize(0, 40))
         self.pushButton_Mapa.clicked.connect(self.buttonMapa)
         self.pushButton_Mapa.setObjectName("pushButton_Mapa")
         self.verticalLayout_3.addWidget(self.pushButton_Mapa)
+        #BOTON FILTRADO
         self.pushButton_Filtrado = QtWidgets.QPushButton(self.frame_control)
         self.pushButton_Filtrado.setEnabled(True)
         self.pushButton_Filtrado.setMinimumSize(QtCore.QSize(0, 40))
         self.pushButton_Filtrado.clicked.connect(self.buttonFiltrado)
         self.pushButton_Filtrado.setObjectName("pushButton_Filtrado")
         self.verticalLayout_3.addWidget(self.pushButton_Filtrado)
+        #BOTON DICOTECA
         self.pushButton_Discoteca = QtWidgets.QPushButton(self.frame_control)
         self.pushButton_Discoteca.setEnabled(True)
         self.pushButton_Discoteca.setMinimumSize(QtCore.QSize(0, 40))
         self.pushButton_Discoteca.clicked.connect(self.buttonDiscotecas)
         self.pushButton_Discoteca.setObjectName("pushButton_Discoteca")
         self.verticalLayout_3.addWidget(self.pushButton_Discoteca)
-
+        #BOTON FIESTA
         self.pushButton_Fiesta = QtWidgets.QPushButton(self.frame_control)
         self.pushButton_Fiesta.setEnabled(True)
         self.pushButton_Fiesta.setMinimumSize(QtCore.QSize(0, 40))
         self.pushButton_Fiesta.clicked.connect(self.buttonFiesta)
-
         self.pushButton_Fiesta.setObjectName("pushButton_Fiesta")
         self.verticalLayout_3.addWidget(self.pushButton_Fiesta)
+        #BOTON RESEÑA
         self.pushButton_Resenna = QtWidgets.QPushButton(self.frame_control)
         self.pushButton_Resenna.setEnabled(True)
         self.pushButton_Resenna.setMinimumSize(QtCore.QSize(0, 40))
@@ -532,6 +543,7 @@ class Ui_MainWindow(QMainWindow):
         self.verticalLayout_3.addWidget(self.pushButton_Resenna)
         self.horizontalLayout.addWidget(self.frame_control)
         self.frame_paginas = QtWidgets.QFrame(self.frame_contenido)
+        #BOTON PERFIL
         self.pushButton_MiPerfil = QPushButton(self.frame_control)
         self.pushButton_MiPerfil.setObjectName(u"pushButton_MiPerfil")
         self.pushButton_MiPerfil.clicked.connect(self.buttonPerfil)
@@ -539,7 +551,6 @@ class Ui_MainWindow(QMainWindow):
         self.pushButton_MiPerfil.setEnabled(True)
         self.pushButton_MiPerfil.setMinimumSize(QtCore.QSize(0, 40))
         self.verticalLayout_3.addWidget(self.pushButton_MiPerfil)
-
         # BOTON CHAT
         self.pushButton_Chat = QPushButton(
             self.frame_control, clicked=lambda: self.abrir_ventana_chat())
@@ -548,7 +559,7 @@ class Ui_MainWindow(QMainWindow):
         self.pushButton_Chat.setEnabled(True)
         self.pushButton_Chat.setMinimumSize(QSize(0, 40))
         self.verticalLayout_3.addWidget(self.pushButton_Chat)
-
+        
         # ESTE ES EL DE FILTRADO
         self.frame_paginas.setStyleSheet("QFrame{\n"
                                          "    background-color:"+color2+";\n"
@@ -715,6 +726,59 @@ class Ui_MainWindow(QMainWindow):
         # añade un boton dentro del scroll area
         # self.verticalLayout_13.addWidget(
         self.stackedWidget.addWidget(self.page_chat)
+        #PAGINA DE USUARIOS
+        self.page_usuarios = QtWidgets.QWidget()
+        self.page_usuarios.setObjectName("page_usuarios")
+        self.verticalLayout_13Usuarios = QtWidgets.QVBoxLayout(self.page_usuarios)
+        self.verticalLayout_13Usuarios.setObjectName("verticalLayout_13Usuarios")
+        self.label_6Usuarios = QtWidgets.QLabel(self.page_usuarios)
+        self.label_6Usuarios.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_6Usuarios.setObjectName("label_6Usuarios")   
+        self.verticalLayout_13Usuarios.addWidget(self.label_6Usuarios)
+        self.horizontalLayout_9Usuarios = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_9Usuarios.setObjectName("horizontalLayout_9Usuarios")
+
+        self.lineEdit_BusquedaUsuarios = QtWidgets.QLineEdit(
+            self.page_usuarios)
+        self.lineEdit_BusquedaUsuarios.setStyleSheet(
+            "color:  "+color+";")
+        self.lineEdit_BusquedaUsuarios.setObjectName(
+            "lineEdit_BusquedaUsuarios")
+        self.horizontalLayout_9Usuarios.addWidget(self.lineEdit_BusquedaUsuarios)
+        spacerItem1 = QtWidgets.QSpacerItem(
+            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_9Usuarios.addItem(spacerItem1)
+        self.pushButton_BuscarUsuarios = QtWidgets.QPushButton(
+            self.page_usuarios)
+        self.pushButton_BuscarUsuarios.setObjectName(
+            "pushButton_BuscarUsuarios")
+        self.pushButton_BuscarUsuarios.clicked.connect(
+            self.crearBotonesChatUsuarios)
+        self.horizontalLayout_9Usuarios.addWidget(self.pushButton_BuscarUsuarios)
+        spacerItem2Usuarios = QtWidgets.QSpacerItem(
+            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_9Usuarios.addItem(spacerItem2Usuarios)
+        self.verticalLayout_13Usuarios.addLayout(self.horizontalLayout_9Usuarios)
+
+        # AQUIIIII
+        # añade para poder añadir un boton por cada discoteca, y poder desplazarte con un scroll bar por los botones
+        self.scrollAreaUsuarios = QtWidgets.QScrollArea(self.page_usuarios)
+        self.scrollAreaUsuarios.setWidgetResizable(True)
+        self.scrollAreaUsuarios.setObjectName("scrollAreaUsuarios")
+
+        self.scrollAreaWidgetContents3 = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents3.setGeometry(
+            QtCore.QRect(0, 0, 100, 100))
+        self.scrollAreaWidgetContents3.setObjectName(
+            "scrollAreaWidgetContents3")
+        self.verticalLayout_14Usuarios = QtWidgets.QVBoxLayout(
+            self.scrollAreaWidgetContents3)
+        self.verticalLayout_14Usuarios.setObjectName("verticalLayout_14Usuarios")
+        self.scrollAreaUsuarios.setWidget(self.scrollAreaWidgetContents3)
+        self.verticalLayout_13Usuarios.addWidget(self.scrollAreaUsuarios)
+        # añade un boton dentro del scroll area
+        # self.verticalLayout_13.addWidget(
+        self.stackedWidget.addWidget(self.page_usuarios)
 
         """PÁGINA DE DISCOTECAS"""
         self.page_AddDiscoteca = QtWidgets.QWidget()
