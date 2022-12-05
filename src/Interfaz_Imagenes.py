@@ -33,6 +33,12 @@ config = {
 
 firebase = pyrebase.initialize_app(config)
 
+def subir_foto(foto, usuario):
+    indice_separador = foto.rfind("/")
+    nombre_fichero = foto[indice_separador+1 : ]
+    storage = firebase.storage()
+    storage.child(str(usuario) + "/" + str(nombre_fichero)).put(foto)
+
 
 class Interfaz_Imagenes(object):
     

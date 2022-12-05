@@ -18,6 +18,7 @@ firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://evently-646a2-default-rtdb.firebaseio.com/'
 })
 
+
 # THEME
 # Array de colores
 # metodo para cambiar el tema
@@ -147,7 +148,7 @@ def insertarFiesta(nombre, calle, numero, zona, usuario, ruta):
     # print(ubicacion2)
     insertarFiestaEficiente(
         nombre, ubicacion2, location.longitude, location.latitude, ruta)
-
+    
 
 def borrarDatos(datos):
     db.reference('test').child(datos).delete()

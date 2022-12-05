@@ -30,7 +30,7 @@ from datetime import timedelta
 
 from baseDatosPrueba import datosUsuario, getTodosLosDatos, valoracionesUsuario, fiestasUsuario, nombreUsuario, apellidoUsuario, emailUsuario, edadUsuario, filtrarDiscotecas, getItemBaseDatos, insertarMensaje, insertarDiscoteca, insertarFiesta, insertarValoracion, mostrar_carta, color, color2
 
-from Interfaz_Imagenes import Interfaz_Imagenes
+from Interfaz_Imagenes import subir_foto
 
 pyglet.font.add_file('fuentes/productSans.ttf')  # ABeeZee
 
@@ -407,11 +407,24 @@ class Ui_MainWindow(QMainWindow):
                 self.tablaResennas.item(i, j).setTextAlignment(Qt.AlignCenter)
                 
     def boton_subir_foto(self):
-        self.file_name = QFileDialog.getOpenFileName(filter="Imagen (*.*)")[0]
-        self.image = cv2.imread(self.file_name)
-        print(self.file_name)
+        self.usuario = datosUsuario('usuario')
+        try:
+            self.file_name = QFileDialog.getOpenFileName(filter="Imagen (*.*)")[0]
+            self.image = cv2.imread(self.file_name)
+            print(self.file_name)
+            subir_foto(self.file_name, self.usuario)
+            self.show_popup_imagen_subida()
+        except FileNotFoundError:
+            pass
+            
         
-
+    def show_popup_imagen_subida(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("EVENTLY")
+        msg.setText("Imagen subida correctamente.")
+        
+        x = msg.exec_()
+        
 
     # SE ABRE EL CHAT
 
