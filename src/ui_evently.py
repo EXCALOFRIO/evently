@@ -41,6 +41,7 @@ class Ui_MainWindow(QMainWindow):
     tablaChatCreada = False
     botonesDiscotecas = {}
     botonesChatUsuarios = {}
+    botonesBusquedaUsuarios = {}
     # BOTON DE AÑADIR DISCOTECA
 
     def annadirDiscoteca(self):
@@ -277,19 +278,19 @@ class Ui_MainWindow(QMainWindow):
     def crearBotonesUsuarios(self):
         out = filtrarDiscotecas(5, self.lineEdit_BusquedaUsuarios.text())
         if(self.busquedaUsuarios == False):
-            self.borrarBotonesChatUsuarios()
+            self. botonesBusquedaUsuarios()
             self.busquedaUsuarios = True
 
         if(self.busquedaUsuarios):
             for i in range(len(out)):
-                self.botonesChatUsuarios[out[i]] = QtWidgets.QPushButton(
+                self. botonesBusquedaUsuarios[out[i]] = QtWidgets.QPushButton(
                     self.scrollAreaWidgetContents2)
-                self.botonesChatUsuarios[out[i]].setObjectName(out[i])
-                self.botonesChatUsuarios[out[i]].setText(out[i])
-                self.botonesChatUsuarios[out[i]].setFixedHeight(80)
+                self. botonesBusquedaUsuarios[out[i]].setObjectName(out[i])
+                self. botonesBusquedaUsuarios[out[i]].setText(out[i])
+                self. botonesBusquedaUsuarios[out[i]].setFixedHeight(80)
                 self.verticalLayout_14Usuarios.addWidget(
-                    self.botonesChatUsuarios[out[i]])
-                self.botonesChatUsuarios[out[i]].clicked.connect(
+                    self. botonesBusquedaUsuarios[out[i]])
+                self. botonesBusquedaUsuarios[out[i]].clicked.connect(
                     lambda checked, out=out, i=i: self.crearChat(out[i],''))
                 self.busquedaUsuarios = False
 
