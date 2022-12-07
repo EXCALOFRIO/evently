@@ -94,6 +94,11 @@ class Ui_MainWindow(QMainWindow):
             for i in self.scrollAreaWidgetContents2.children():
                 if isinstance(i, QPushButton):
                     i.deleteLater()
+    
+    def borrarBotonesBusquedaUsuarios(self):
+        for i in self.scrollAreaWidgetContents3.children():
+            if isinstance(i, QPushButton):
+                i.deleteLater()
 
     def borrarTextFiltrado(self):
         self.textEditCarta.clear()
@@ -291,9 +296,49 @@ class Ui_MainWindow(QMainWindow):
                 self.verticalLayout_14Usuarios.addWidget(
                     self. botonesBusquedaUsuarios[out[i]])
                 self. botonesBusquedaUsuarios[out[i]].clicked.connect(
-                    lambda checked, out=out, i=i: self.crearChat(out[i],''))
+                    lambda checked, out=out, i=i: self.abrirUsuario(out[i]))
                 self.busquedaUsuarios = False
 
+    def abrirUsuario(self, nombreUsuario):
+       self.borrarBotonesBusquedaUsuarios()
+       self.tablaChatCreada = True
+       self.tablaChat = QTableWidget()   
+       self.tablaChat.setObjectName("tablaChat")
+       self.tablaChat.setRowCount(0)
+       self.tablaChat.setColumnCount(2)
+       self.tablaChat.setStyleSheet(
+           "QHeaderView::section { font-size: 12pt; }")
+       self.verticalLayout_14Chat.addWidget(self.tablaChat)
+       # creamos el textEdit y el boton circular
+       self.textEditChat = QtWidgets.QTextEdit(self.scrollAreaWidgetContents3)
+       self.textEditChat.setObjectName("textEditChat")
+       self.textEditChat.setFixedHeight(80)
+       
+       self.textEditChat.setStyleSheet("color:  "+color+";\n")
+       #color del fondo blanco con poca opacidad
+       self.textEditChat.setStyleSheet("background-color: rgba(255, 255, 255, 0.8);")
+       #set focus al final del texto
+       self.textEditChat.setFocus()
+       
+       self.horizontalLayout_15Usuarios = QtWidgets.QHBoxLayout()
+       self.tablaChat.setHorizontalHeaderLabels([nombreUsuario, "YO"])
+       self.tablaChat.horizontalHeader().setFont(
+           QtGui.QFont("Times", 10, QtGui.QFont.Bold))
+       self.botonEnviar = QtWidgets.QPushButton(
+           self.scrollAreaWidgetContents2)
+       self.botonEnviar.setObjectName("botonEnviar")
+       self.botonEnviar.setFixedHeight(80)
+       self.textEditChat.setFixedHeight(80)
+       self.botonEnviar.setStyleSheet("color:  "+color+";\n")
+       self.botonEnviar.setIcon(QtGui.QIcon("imágenes/enviar.png"))
+       self.botonEnviar.setIconSize(QtCore.QSize(60, 60))
+       self.horizontalLayout_15Usuarios.addWidget(self.textEditChat)
+       self.horizontalLayout_15Usuarios.addWidget(self.botonEnviar)
+       self.verticalLayout_14Usuarios.addLayout(self.horizontalLayout_15Usuarios)
+       
+       
+        
+        
 # nuevo fin
 
 
