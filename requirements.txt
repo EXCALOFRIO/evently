@@ -1,0 +1,13 @@
+pip install pyglet
+pip install firebase-admin
+pip install PyQt5
+pip install branca
+pip install Jinja2
+pip install requests
+pip install folium
+pip install geopy
+pip install pywebview
+pip3 install opencv-python
+pip install imutils
+pip install PySide2
+pip install Pyrebase4
