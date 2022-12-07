@@ -4,7 +4,38 @@
 
 ![QR](qr.png)
 
+
+
 #### Requisitos
+##### Instalar Python 3.10 #####
+###### Comando para instalar Python 3.10 ######
+-Windows
+```python
+choco install python
+```
+-Linux
+```python
+sudo apt install python3.10
+```
+-Mac
+```python
+brew install python3.10
+```
+##### Instalar pip #####
+###### Comando para instalar pip ######
+-Windows
+```python
+python -m pip install --upgrade pip
+```
+-Linux
+```python
+sudo apt install python3-pip
+```
+-Mac
+```python
+brew install pip
+```
+
 
 ```python
 pip install pyglet
