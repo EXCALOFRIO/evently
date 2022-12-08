@@ -84,7 +84,7 @@
                 
                 ElementCard:  #Boton de Busqueda
                     on_release:
-                        root.current = 'screen2'
+                        root.current = 'BuscarDiscoteca'
                     MDBoxLayout:
                         orientation: 'vertical'
                         MDLabel:
@@ -204,7 +204,7 @@
             text: 'Pantalla uno'
         
     MDScreen:
-        name: 'screen2'
+        name: 'BuscarDiscoteca'
         MDBoxLayout:
             orientation: 'vertical'
             MDBoxLayout:
@@ -230,7 +230,7 @@
 
                     MDIconButton:
                         icon: 'images/iconoBusqueda.png'
-                        md_bg_color: 0, .5, 1, 1
+                        md_bg_color: g0, .5, 1, 1
                         pos_hint: {'center_y': .95}
 
             MDFillRoundFlatButton:
