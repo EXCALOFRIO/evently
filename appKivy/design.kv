@@ -210,6 +210,7 @@
             MDBoxLayout:
                 orientation: 'vertical'
                 Spinner:
+                    id: spinnerFiltrado
                     size_hint: None, None
                     size: 400, 50
                     pos_hint: {'center_x': .5, 'center_y': .5}
@@ -217,26 +218,41 @@
                     values: 'Zona', 'Nombre', 'Calle', 'Valoracion'
                     on_text:
                         print("The spinner {} has text {}".format(self, self.text))
+                
+                
+                
                 MDBoxLayout:
                     orientation: 'horizontal'
                     
                     MDTextField:
+                        id: MDTextFieldFiltrado
                         size_hint_x: .5
                         hint_text: "Introducir texto"
                         size: 200, 50
                         mode: "fill"
                         fill_color: 0, 0, 0, .4
-                        pos_hint: {"center_x": .5, 'center_y': .95}
+                        pos_hint: {"center_x": .25, 'center_y': .95}
 
                     MDIconButton:
                         icon: 'images/iconoBusqueda.png'
-                        md_bg_color: g0, .5, 1, 1
+                        md_bg_color: 0, .5, 1, 1
                         pos_hint: {'center_y': .95}
+                        on_press: root.botonBusquedaFiltrado(MDTextFieldFiltrado.text, spinnerFiltrado.text)
+                MDList:
+                    id: MDListFiltrado
+                    size_hint_y: None
+                    height: self.minimum_height
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+                    scroll_type: ['bars']
+                    bar_width: '12dp'
+
+
 
             MDFillRoundFlatButton:
                 text: 'Regresar'
                 pos_hint: {'center_x': .5, 'center_y': .5}
                 on_release:
+                    root.borrarBusquedaFiltrado()
                     app.root.current = 'screen_principal'
                     app.root.transition = SlideTransition(direction= 'left')
     
