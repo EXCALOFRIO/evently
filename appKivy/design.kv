@@ -2,7 +2,7 @@
 #: import RiseInTransition kivy.uix.screenmanager.RiseInTransition
 #: import SlideTransition kivy.uix.screenmanager.SlideTransition
 
-<ElementCard@MDCard>:
+<ElementCard@MDCard>:   #Esquema base de botones en pantalla principal
     radius: '10dp'
     spacing: '10dp'
     padding: '10dp'
@@ -39,7 +39,7 @@
 <ui>:
     MDScreen:
         name: 'screen_principal'
-        md_bg_color: 0, .5, .5, 1
+        md_bg_color: 0, .5, 1, 1 #color del fondo
         MDBoxLayout:
             orientation: 'vertical'
             MDBoxLayout:
@@ -66,7 +66,7 @@
                 padding: ['10dp', '10dp', '10dp', '10dp']
                 spacing: '10dp'
 
-                ElementCard:
+                ElementCard:  #Boton de Mapa
                     on_release:
                         root.current = 'screen1'
                     MDBoxLayout:
@@ -82,7 +82,7 @@
                     
                     
                 
-                ElementCard:
+                ElementCard:  #Boton de Busqueda
                     on_release:
                         root.current = 'screen2'
                     MDBoxLayout:
@@ -96,7 +96,7 @@
                             text: 'Filtrado de discotecas'
                             halign: 'center'
 
-                ElementCard:
+                ElementCard: #Boton de Discoteca
                     on_release:
                         root.current = 'screen3'
                     MDBoxLayout:
@@ -109,8 +109,24 @@
                         MDLabel:
                             text: 'Añadir discoteca a la lista'
                             halign: 'center'
+ 
 
-                ElementCard:
+                ElementCard:  #Boton de buscar Perfiles
+                    on_release:
+                        root.current = 'screen7'
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        MDLabel:
+                            text: 'Usuarios'
+                            halign: 'center'
+                        Image: 
+                            source: 'images/perfiles.png'
+                        MDLabel:
+                            text: 'Buscar otros usuarios'
+                            halign: 'center'
+
+
+                ElementCard:  #Boton de Fiesta
                     on_release:
                         root.current = 'screen4'
                     MDBoxLayout:
@@ -125,7 +141,7 @@
                             halign: 'center'
                     
 
-                ElementCard:
+                ElementCard:  #Boton de Perfil
                     on_release:
                         root.current = 'screen5'
                     MDBoxLayout:
@@ -134,12 +150,12 @@
                             text: 'Perfil'
                             halign: 'center'
                         Image: 
-                            source: 'images/iconoPerfil.jpeg'
+                            source: 'images/iconoDePerfil.png'
                         MDLabel:
                             text: 'Ver tu perfil'
                             halign: 'center'
 
-                ElementCard:
+                ElementCard:  #Boton de Reseña
                     on_release:
                         root.current = 'screen6'
                     MDBoxLayout:
@@ -152,6 +168,36 @@
                         MDLabel:
                             text: 'Ver y añadir reseñas'
                             halign: 'center'
+
+
+                ElementCard:  #Boton de Chats
+                    on_release:
+                        root.current = 'screen8'
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        MDLabel:
+                            text: 'Chats'
+                            halign: 'center'
+                        Image: 
+                            source: 'images/iconoChat.png'
+                        MDLabel:
+                            text: 'Chatea con otros usuarios'
+                            halign: 'center'
+
+                ElementCard:  #Boton de ajustes
+                    on_release:
+                        root.current = 'screen9'
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        MDLabel:
+                            text: 'Ajustes'
+                            halign: 'center'
+                        Image: 
+                            source: 'images/iconoAjustes.png'
+                        MDLabel:
+                            text: 'Personaliza evently'
+                            halign: 'center'
+
     MDScreen:
         name: 'screen1'
         CustomizeScreen:
@@ -181,5 +227,20 @@
         name: 'screen6'
         CustomizeScreen:
             text: 'Pantalla seis'
+
+    MDScreen:
+        name: 'screen7'
+        CustomizeScreen:
+            text: 'Pantalla siete'
+
+    MDScreen:
+        name: 'screen8'
+        CustomizeScreen:
+            text: 'Pantalla ocho'
+
+    MDScreen:
+        name: 'screen9'
+        CustomizeScreen:
+            text: 'Pantalla nueve'
 
 
