@@ -211,40 +211,40 @@
                 orientation: 'vertical'
                 Spinner:
                     id: spinnerFiltrado
-                    size_hint: None, None
-                    size: 400, 50
+                    adaptative_width: True
+                    size_hint_max_y: 60
                     pos_hint: {'center_x': .5, 'center_y': .5}
                     text: 'Zona'
                     values: 'Zona', 'Nombre', 'Calle', 'Valoracion'
                     on_text:
                         print("The spinner {} has text {}".format(self, self.text))
-                
-                
-                
                 MDBoxLayout:
                     orientation: 'horizontal'
-                    
+                    size_hint_max_y: 50
                     MDTextField:
                         id: MDTextFieldFiltrado
-                        size_hint_x: .5
                         hint_text: "Introducir texto"
-                        size: 200, 50
+                        size: 200, 40
                         mode: "fill"
                         fill_color: 0, 0, 0, .4
-                        pos_hint: {"center_x": .25, 'center_y': .95}
+                        pos_hint: {"center_x": .25, 'center_y': .90}
 
-                    MDIconButton:
+                    MDFloatingActionButton:
                         icon: 'images/iconoBusqueda.png'
                         md_bg_color: 0, .5, 1, 1
-                        pos_hint: {'center_y': .95}
+                        pos_hint: {'center_y': .90}
                         on_press: root.botonBusquedaFiltrado(MDTextFieldFiltrado.text, spinnerFiltrado.text)
-                MDList:
-                    id: MDListFiltrado
-                    size_hint_y: None
-                    height: self.minimum_height
-                    pos_hint: {'center_x': .5, 'center_y': .5}
-                    scroll_type: ['bars']
-                    bar_width: '12dp'
+                
+                ScrollView:
+                    do_scroll_y: True
+                    MDList:
+                        id: MDListFiltrado
+                        adaptative_height: True
+                        padding: 0, 0
+                        pos_hint: {'center_x': .5, 'center_y': 1}
+                        size: 200, 400
+                        scroll_type: 'bars'
+                        bar_width: '12dp'
 
 
 
