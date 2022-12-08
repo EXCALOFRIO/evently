@@ -30,7 +30,7 @@ from datetime import timedelta
 
 from baseDatosPrueba import datosUsuario, getTodosLosDatos, valoracionesUsuario, fiestasUsuario, nombreUsuario, apellidoUsuario, emailUsuario, edadUsuario, filtrarDiscotecas, getItemBaseDatos, insertarMensaje, insertarDiscoteca, insertarFiesta, insertarValoracion, mostrar_carta, color, color2
 
-from Interfaz_Imagenes import subir_foto
+from Interfaz_Imagenes import subir_foto, ver_mis_fotos
 
 pyglet.font.add_file('fuentes/productSans.ttf')  # ABeeZee
 
@@ -463,13 +463,17 @@ class Ui_MainWindow(QMainWindow):
         except FileNotFoundError:
             pass
             
-        
     def show_popup_imagen_subida(self):
         msg = QMessageBox()
         msg.setWindowTitle("EVENTLY")
         msg.setText("Imagen subida correctamente.")
         
         x = msg.exec_()
+        
+    def boton_mis_fotos(self):
+        self.usuario = datosUsuario('usuario')
+        url_fotos = ver_mis_fotos(self.usuario)
+        print(url_fotos)
         
 
     # SE ABRE EL CHAT
@@ -1223,17 +1227,17 @@ class Ui_MainWindow(QMainWindow):
         self.verticalLayout_15.addWidget(self.label_edad)
         self.textBrowser_email = QTextBrowser(self.page_MiPerfil)
         self.textBrowser_email.setObjectName("textBrowser_email")
-        self.textBrowser_email.setGeometry(QRect(390, 60, 201, 31))
+        self.textBrowser_email.setGeometry(QRect(390, 60, 150, 31))
         self.textBrowser_email.setStyleSheet(
             "background-color: rgb(255, 255, 255)")
         self.textBrowser_edad = QTextBrowser(self.page_MiPerfil)
         self.textBrowser_edad.setObjectName("textBrowser_edad")
-        self.textBrowser_edad.setGeometry(QRect(390, 130, 201, 31))
+        self.textBrowser_edad.setGeometry(QRect(390, 130, 150, 31))
         self.textBrowser_edad.setStyleSheet(
             "background-color: rgb(255, 255, 255)")
         self.textBrowser_MiPerfil = QTextBrowser(self.page_MiPerfil)
         self.textBrowser_MiPerfil.setObjectName("textBrowser_MiPerfil")
-        self.textBrowser_MiPerfil.setGeometry(QRect(10, 230, 581, 221))
+        self.textBrowser_MiPerfil.setGeometry(QRect(10, 230, 520, 280))
         self.textBrowser_MiPerfil.setStyleSheet(
             "background-color: rgb(255, 255, 255)")
         self.pushButton_MisResennas = QPushButton(self.page_MiPerfil)
@@ -1250,6 +1254,7 @@ class Ui_MainWindow(QMainWindow):
         self.pushButton_SubirFotos.setGeometry(20, 200, 115, 23)
         self.pushButton_MisFotos = QPushButton(self.page_MiPerfil)
         self.pushButton_MisFotos.setObjectName("pushButton_MisFotos")
+        self.pushButton_MisFotos.clicked.connect(self.boton_mis_fotos)
         self.pushButton_MisFotos.setGeometry(QRect(145, 200, 101, 23))
         
         self.stackedWidget.addWidget(self.page_MiPerfil)

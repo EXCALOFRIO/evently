@@ -18,6 +18,9 @@ from PyQt5.QtGui import QImage
 import cv2
 import imutils
 
+from urllib.request import urlopen
+import numpy as np
+
 import pyrebase
 
 config = {
@@ -28,7 +31,8 @@ config = {
     "storageBucket": "evently-646a2.appspot.com",
     "messagingSenderId": "906232807040",
     "appId": "1:906232807040:web:79d5b6f0faea348d647065",
-    "measurementId": "G-7SBMVQG52S"
+    "measurementId": "G-7SBMVQG52S",
+    "serviceAccount": "serviceAcc.json"
 }
 
 firebase = pyrebase.initialize_app(config)
@@ -38,6 +42,20 @@ def subir_foto(foto, usuario):
     nombre_fichero = foto[indice_separador+1 : ]
     storage = firebase.storage()
     storage.child(str(usuario) + "/" + str(nombre_fichero)).put(foto)
+    
+def ver_mis_fotos(usuario):
+    storage = firebase.storage()
+    all_files = storage.child('').list_files() 
+    urls = []   
+    for file in all_files:  
+        indice_separador = file.name.rfind("/")
+        nombre_fichero = file.name[ : indice_separador]
+        if nombre_fichero == usuario:           
+            z=storage.child(file.name).get_url(None)    
+            #print(z)
+            urls.append(z)
+
+    return urls
 
 
 class Interfaz_Imagenes(object):
