@@ -6,6 +6,7 @@ from kivy.uix.image import Image
 from kivy.uix.button import Button
 from kivymd.uix.list import OneLineListItem
 from baseDatosPruebaApp import *
+import webview
 
 class Ui(ScreenManager):
     def botonBusquedaFiltrado(self, texto, textoFiltro):
@@ -29,6 +30,10 @@ class Ui(ScreenManager):
             self.ids.MDListFiltrado.clear_widgets()
         except AttributeError:
             pass
+    
+    def mostrar_mapa(self):
+        webview.create_window('Evently - Mapa de discotecas', '../mapa.html')
+        webview.start()
 
 
 class MainApp(MDApp):
