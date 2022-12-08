@@ -68,7 +68,7 @@
 
                 ElementCard:  #Boton de Mapa
                     on_release:
-                        root.current = 'screen1'
+                        root.current = 'mapa'
                     MDBoxLayout:
                         orientation: 'vertical'
                         MDLabel:
@@ -98,7 +98,7 @@
 
                 ElementCard: #Boton de Discoteca
                     on_release:
-                        root.current = 'screen3'
+                        root.current = 'añadirDiscoteca'
                     MDBoxLayout:
                         orientation: 'vertical'
                         MDLabel:
@@ -113,7 +113,7 @@
 
                 ElementCard:  #Boton de buscar Perfiles
                     on_release:
-                        root.current = 'screen7'
+                        root.current = 'usuarios'
                     MDBoxLayout:
                         orientation: 'vertical'
                         MDLabel:
@@ -128,7 +128,7 @@
 
                 ElementCard:  #Boton de Fiesta
                     on_release:
-                        root.current = 'screen4'
+                        root.current = 'fiesta'
                     MDBoxLayout:
                         orientation: 'vertical'
                         MDLabel:
@@ -143,7 +143,7 @@
 
                 ElementCard:  #Boton de Perfil
                     on_release:
-                        root.current = 'screen5'
+                        root.current = 'perfil'
                     MDBoxLayout:
                         orientation: 'vertical'
                         MDLabel:
@@ -157,7 +157,7 @@
 
                 ElementCard:  #Boton de Reseña
                     on_release:
-                        root.current = 'screen6'
+                        root.current = 'reseña'
                     MDBoxLayout:
                         orientation: 'vertical'
                         MDLabel:
@@ -172,7 +172,7 @@
 
                 ElementCard:  #Boton de Chats
                     on_release:
-                        root.current = 'screen8'
+                        root.current = 'chat'
                     MDBoxLayout:
                         orientation: 'vertical'
                         MDLabel:
@@ -186,7 +186,7 @@
 
                 ElementCard:  #Boton de ajustes
                     on_release:
-                        root.current = 'screen9'
+                        root.current = 'ajustes'
                     MDBoxLayout:
                         orientation: 'vertical'
                         MDLabel:
@@ -199,7 +199,7 @@
                             halign: 'center'
 
     MDScreen:
-        name: 'screen1'
+        name: 'mapa'
         CustomizeScreen:
             text: 'Pantalla uno'
         
@@ -256,38 +256,50 @@
                     app.root.current = 'screen_principal'
                     app.root.transition = SlideTransition(direction= 'left')
     
-    MDScreen:
-        name: 'screen3'
-        CustomizeScreen:
-            text: 'Pantalla tres'
 
     MDScreen:
-        name: 'screen4'
+        name: 'añadirDiscoteca'
+        
+        BoxLayout:
+            orientation: 'vertical'
+
+            MDLabel:
+                text: 'Añadir Discoteca'
+                halign: 'center'
+            MDFillRoundFlatButton:
+                text: 'Regresar'
+                pos_hint: {'center_x': .5, 'center_y': .5}
+                on_release:
+                    app.root.current = 'screen_principal'
+                    app.root.transition = SlideTransition(direction= 'left')
+
+    MDScreen:
+        name: 'fiesta'
         CustomizeScreen:
             text: 'Pantalla cuatro'
 
     MDScreen:
-        name: 'screen5'
+        name: 'perfil'
         CustomizeScreen:
             text: 'Pantalla cinco'
 
     MDScreen:
-        name: 'screen6'
+        name: 'reseña'
         CustomizeScreen:
             text: 'Pantalla seis'
 
     MDScreen:
-        name: 'screen7'
+        name: 'usuarios'
         CustomizeScreen:
             text: 'Pantalla siete'
 
     MDScreen:
-        name: 'screen8'
+        name: 'chat'
         CustomizeScreen:
             text: 'Pantalla ocho'
 
     MDScreen:
-        name: 'screen9'
+        name: 'ajustes'
         CustomizeScreen:
             text: 'Pantalla nueve'
 
