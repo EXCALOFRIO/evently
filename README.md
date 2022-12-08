@@ -4,38 +4,51 @@
 
 ![QR](qr.png)
 
-
-
 #### Requisitos
-##### Instalar Python 3.10 #####
-###### Comando para instalar Python 3.10 ######
+
+##### Instalar Python 3.10
+
+###### Comando para instalar Python 3.10
+
 -Windows
+
 ```python
 choco install python
 ```
+
 -Linux
+
 ```python
 sudo apt install python3.10
 ```
+
 -Mac
+
 ```python
 brew install python3.10
 ```
-##### Instalar pip #####
-###### Comando para instalar pip ######
+
+##### Instalar pip
+
+###### Comando para instalar pip
+
 -Windows
+
 ```python
 python -m pip install --upgrade pip
 ```
+
 -Linux
+
 ```python
 sudo apt install python3-pip
 ```
+
 -Mac
+
 ```python
 brew install pip
 ```
-
 
 ```python
 pip install pyglet
@@ -203,6 +216,27 @@ location = geolocator.geocode(ubicacion2)
 ### Descripción del proyecto
 
 - [ ] Crear una aplicación movil que permita a los usuarios ver los eventos y discotecas disponibles y la creación de eventos privados o públicos.
+
+### KIVY DEBUG
+
+- Hay que tener instalado el ADB de Android Studio
+- Con esto nos muestra los errores de Kivy
+
+#### WINDOWS
+
+```shell
+	adb devices
+	adb disconnect 172.22.63.148:5555
+	adb tcpip 5555
+```
+
+#### UBUNTU
+
+```shell
+	adb connect 192.168.31.143:5555
+	adb devices
+	adb -s 192.168.31.143:5555 logcat *:S python:D
+```
 
 ### Autores
 
