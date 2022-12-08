@@ -233,7 +233,7 @@
 
                 ElementCard:  #Boton de Mapa
                     on_release:
-                        root.current = 'mapa'
+                        root.mostrar_mapa()
                     MDBoxLayout:
                         orientation: 'vertical'
                         MDLabel:
@@ -365,8 +365,7 @@
 
     MDScreen:
         name: 'mapa'
-        CustomizeScreen:
-            text: 'Pantalla uno'
+        
         
     MDScreen:
         name: 'BuscarDiscoteca'
