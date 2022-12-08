@@ -37,6 +37,171 @@
 
 
 <ui>:
+
+    MDScreen:
+        name: 'login'
+        md_bg_color: 0, 0, 0, 1
+        MDBoxLayout:
+            orientation: 'vertical'
+            spacing:dp(12)
+            padding:dp(12)
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_y: 0.3
+                Image:
+                    source: 'logo.png'
+                    pos_hint: {'center_x':0.5}
+                MDLabel:
+                    text: 'Iniciar Sesion'
+                    halign: 'center'
+                    color: 'FF5A1E'
+                    font_size:dp(28)
+                    bold: True
+                    pos_hint: {'center_y': 0.5}
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_y: 0.3
+                spacing: dp(12)
+                MDTextField:
+                    id: user
+                    hint_text: 'Nombre de usuario'
+                    icon_right: 'account'
+                    font_size: dp(20)
+                    icon_right_color: '#FF5A1E'
+                    pos_hint: {'center_x': 0.5}
+                MDTextField:
+                    id: password
+                    password: True
+                    icon_right: 'key-variant'
+                    icon_right_color: '#FF5A1E'
+                    hint_text: 'Contrasena'
+                    font_size:dp(20)
+                    pos_hint: {'center_x':0.5}
+
+                MDLabel:
+                    id: signal_login
+                    text: ''
+                    halign:'center'
+                    color:'#FF5A1E'
+                    font_size:dp(15)
+            
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_y: 0.4
+                spacing: dp(15)
+                MDFillRoundFlatButton:
+                    id: bt_ingresar
+                    text: 'Acceder'
+                    pos_hint:{'center_x':0.5}
+                    on_release:
+                        #x = app.login_data()
+                        root.current = 'screen_principal' 
+                MDFillRoundFlatButton:
+                    md_bg_color: '#000000'
+                    text_color: 255/255, 90/255, 30/255,1
+                    text: 'Crear cuenta'
+                    font_size: dp(20)
+                    pos_hint: {'center_x':0.5}
+                    on_release: root.current = 'screen_register'
+
+###############SCREEN################
+    MDScreen:
+        name: 'open_screen'
+        md_bg_color: 255/255, 90/255, 30/255,1
+        MDBoxLayout:
+            orientation: 'vertical'
+            padding: dp(12)
+            spacing: dp(12)
+            MDFloatingActionButton:
+                icon:'arrow-left'
+                color_icon: '#000000'
+                on_release: root.current = 'login'
+    
+
+    MDScreen:
+        name: 'screen_register'
+        md_bg_color: 0,0,0,1
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            padding: dp(12)
+            spacing: dp(12)
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint: 1, 0.2
+                MDFloatingActionButton:
+                    icon:'arrow-left'
+                    pos_hint: {'center_y':0.5}
+                    on_release:
+                        root.current = 'login'
+                        app.clear_signal()
+
+                MDLabel:
+                    text: 'Crear cuenta'
+                    halign: 'center'
+                    color: '#FF5A1E'
+                    font_size: dp(28)
+                    bold: True
+                    pos_hint: {'center_y': 0.5}
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint: 1, 0.7
+                MDLabel:
+                    text: 'Nombre de usuario'
+                    halign: 'center'
+                    color: '#FF5A1E'
+                    font_size:dp(20)
+                MDTextField:
+                    id: new_user
+                    hint_text: 'Usuario'
+                    icon_right: 'account'
+                    font_size: dp(20)
+                    icon_right_color: '#FF5A1E'
+                    pos_hint: {'center_x': 0.5}
+                MDLabel:
+                    text: 'Ingrese su contrasena'
+                    halign: 'center'
+                    color: '#FF5A1E'
+                    font_size:dp(20)
+                MDTextField:
+                    id: new_password
+                    password:True
+                    icon_right: 'key-variant'
+                    icon_right_color: '#FF5A1E'
+                    hint_text: 'Contrasena'
+                    font_size: dp(20)
+                    pos_hint: {'center_x':0.5}
+                MDLabel:
+                    text: 'Confirmar contrasena'
+                    halign: 'center'
+                    color: '#FF5A1E'
+                    font_size:dp(20)
+                MDTextField:
+                    id: new_password_two
+                    password: True
+                    icon_right: 'key-variant'
+                    icon_right_color: '#FF5A1E'
+                    hint_text: 'Contrasena'
+                    font_size:dp(20)
+                    pos_hint: {'center_x':0.5}
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint: 1, 0.3
+                MDLabel:
+                    id: signal_register
+                    text:''
+                    halign:'center'
+                    color: '#FF5A1E'
+                    font_size: dp(15)
+
+                MDFillRoundFlatButton:
+                    id: bt_register
+                    text: 'Registrarse'
+                    pos_hint: {'center_x':0.5, 'y':0.5}
+                    on_release: app.register_data()                    
+
+
     MDScreen:
         name: 'screen_principal'
         md_bg_color: 0, .5, 1, 1 #color del fondo
