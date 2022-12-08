@@ -1,23 +1,21 @@
-# pip install git+https://github.com/ozgur/python-firebase
-# pip install python-firebase
-
-import itertools
-import re
-import time
-import email
-from operator import ge
-from tkinter import N
-from turtle import color
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 from geopy.geocoders import Nominatim
 geolocator = Nominatim(user_agent="evently")
-cred = credentials.Certificate("firebase/evently-key.json")
-firebase_admin.initialize_app(cred, {
-    'databaseURL': 'https://evently-646a2-default-rtdb.firebaseio.com/'
-})
-
+firebase_admin.initialize_app(credentials.Certificate({
+    "type": "service_account",
+    "project_id": "evently-646a2",
+    "private_key_id": "4e16c187074ef1ab70c1be4901d03d55e82cf521",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCk6DhtSvEvDsHm\nvFtmsdIZGIirivDL5nVSsN98wgeeu3Y0ITtG8kSfs2D9U21uIbj3DEZ+58TiB2u1\nGXrAioa8Ocf+AhUeGp/VZtRQTntmZ7amPsjbM1vwQVlWyhETyns3Tlc5ivLJ2K15\ntfk//W4UudCb+p5bqbQz9iyUWkZOJZ01hXLQeNqXNhQPKByDulE0CvjPShBjEXka\n9sdjNFsWl3NrG66ltjZrphzwdYib1i5JtA4N42OJ+r1wHs8Eccv9ZWWrEDjisTNq\n9oXxJF+IvgJXWTwBWTmkqgKEXL0LTT5AdIbcS2RFZLvT536vNaX7HbNoiFhWdJsJ\nNvutb413AgMBAAECggEAAUx+QUdxUy8OZ5Gn4KJZkW6y3jMCcYCs/4vlaWH31bq2\nlB4yOCf+qAlYJAv3qoHj0eJMCIItIqCaAGZPzrC980E7P4IRsNfXLBhFZ3qEGKA2\n0o61CJuaHPAkKChVmRkjqPcE0y8HztTWN5qveLRiHRICQBrptgwbShDQH2ep8myb\nLMfR5BNXs7vd0VKkm6hk+1XRKovKK7bW/IdFf0U4deGrgj7d15mcXCRfd9c2YxZT\nKjxFWql2Nxr6sa+WUvot03royLEDZPUWbwbbLatf+v3ZeZDhFAvr576Bscq2lTp2\n5KF4xk+su3YcOVU66IRj8CnQEBzPWct9W479wOeUFQKBgQDY2ae0GZUmhkHBjXPz\ncrIwIYA5xW+i8/4dCgY64AJQndHeXEvKQXl0HMaC2LqRhZNFVGu6yqc2gxi9MO6C\n6yHywlEIaotoVdLnWbRJN03D4iPP+rkuXLoVPWcNJRFVOXEzbylfJKsFIWB+JZ8/\n8zirdxVeErfNRhdKmR4YfQRFXQKBgQDCrd49ElyUsy7nM7ENuNTkncJ1dKwx/7n8\nk2pgw6U87UI0zNP7ThuMnlwzEwMD1Vmukd+h5/yBY9y6O+h1z36REmBdHpAt44Fw\ny26bXBMfud0rIS6SRHzHfkjwwrLLH8j4VkdmUPyul7ylx1nlwGLr27GXv67rJXB/\nnPlnf3F84wKBgFyu8rHUeV5E5df/SH7WF/jgaLjIfUWNuZ/Zx/3j/rlMKwY6Np6U\ny39oSSRl06AdEmwAgCcPNNbkw28hed/09caXbSEGwNzwSbteKONeQtulTR84j2uU\ncGhhnSkOHdFqQsr0CR/EQWBo+qAQHner0h3fQP+7SlnvSkc1GJro3Cl1AoGAR4lA\nSsy+fF3DdG3IN7SddkyKMkLnK5A+tZMt2dTKmTLNyz0hAA1Zjjh6xMHNr9DsHXu4\n43Otk5Ywe7ab2v6eEYzhIBalAFfDLsFyKWCSHmxb2wdcZ58HAv9iqiXBMWbCoI6D\nuhM0ZquXRIuWexhQwT5/abWj/wBI8HusId3ww+UCgYBwraEeyXnUSipmAtDXg+kr\nGq3QRMwNCVS5tBku9ka7RfJpQzCv1y9LwpQ8Kjbzrg2vQAbrwnDVtswrSAiwVSYz\nI6QJWuOZlGkXysBGXWoVOUrEdZIgn3Xp1PI5uwu9h2qrXj96a9ISuhlTDhf3nrO9\n2ZNvMt0yoD78e6x7I2HBtg==\n-----END PRIVATE KEY-----\n",
+    "client_email": "firebase-adminsdk-v8e3j@evently-646a2.iam.gserviceaccount.com",
+    "client_id": "113165337138307162527",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-v8e3j%40evently-646a2.iam.gserviceaccount.com",
+}), {'databaseURL': 'https://evently-646a2-default-rtdb.firebaseio.com/'
+     })
 
 # THEME
 # Array de colores
@@ -148,7 +146,7 @@ def insertarFiesta(nombre, calle, numero, zona, usuario, ruta):
     # print(ubicacion2)
     insertarFiestaEficiente(
         nombre, ubicacion2, location.longitude, location.latitude, ruta)
-    
+
 
 def borrarDatos(datos):
     db.reference('test').child(datos).delete()
