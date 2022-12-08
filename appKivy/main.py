@@ -3,6 +3,7 @@ from kivy.uix.screenmanager import ScreenManager
 from kivy.lang import Builder
 from kivy.uix.image import Image
 import requests
+from baseDatosPrueba import insertarDiscotecaEficiente
 
 class Ui(ScreenManager):
     pass
