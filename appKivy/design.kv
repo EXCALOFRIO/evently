@@ -205,8 +205,40 @@
         
     MDScreen:
         name: 'screen2'
-        CustomizeScreen:
-            text: 'Pantalla dos'
+        MDBoxLayout:
+            orientation: 'vertical'
+            MDBoxLayout:
+                orientation: 'vertical'
+                Spinner:
+                    size_hint: None, None
+                    size: 400, 50
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+                    text: 'Zona'
+                    values: 'Zona', 'Nombre', 'Calle', 'Valoracion'
+                    on_text:
+                        print("The spinner {} has text {}".format(self, self.text))
+                MDBoxLayout:
+                    orientation: 'horizontal'
+                    
+                    MDTextField:
+                        size_hint_x: .5
+                        hint_text: "Introducir texto"
+                        size: 200, 50
+                        mode: "fill"
+                        fill_color: 0, 0, 0, .4
+                        pos_hint: {"center_x": .5, 'center_y': .95}
+
+                    MDIconButton:
+                        icon: 'images/iconoBusqueda.png'
+                        md_bg_color: 0, .5, 1, 1
+                        pos_hint: {'center_y': .95}
+
+            MDFillRoundFlatButton:
+                text: 'Regresar'
+                pos_hint: {'center_x': .5, 'center_y': .5}
+                on_release:
+                    app.root.current = 'screen_principal'
+                    app.root.transition = SlideTransition(direction= 'left')
     
     MDScreen:
         name: 'screen3'
