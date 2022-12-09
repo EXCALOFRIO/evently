@@ -469,18 +469,18 @@ class Ui_MainWindow(QMainWindow):
         datosUsuarioEspecifico=getDatosElementoConcreto('usuarios','usuario',usuarioText,['usuario','nombre','apellido','email','edad'],'data')
         self.usuario = datosUsuarioEspecifico[0]
         print(self.usuario)
-        self.textBrowser_usuario.setText(usuarioText)
+        self.textBrowser_usuarioPerfil2.setText(usuarioText)
         self.nombre =  datosUsuarioEspecifico[1]
         print(self.nombre)
-        self.textBrowser_nombre.setText(self.nombre)
+        self.textBrowser_nombrePerfil2.setText(self.nombre)
         self.apellido = datosUsuarioEspecifico[2]
-        self.textBrowser_apellido.setText(self.apellido)
+        self.textBrowser_apellidoPerfil2.setText(self.apellido)
         print(self.apellido)
         self.email = datosUsuarioEspecifico[3]
-        self.textBrowser_email.setText(self.email)
+        self.textBrowser_emailPerfil2.setText(self.email)
         print(self.email) 
         self.edad = datosUsuarioEspecifico[4]
-        self.textBrowser_edad.setText(str(self.edad))
+        self.textBrowser_edadPerfil2.setText(str(self.edad))
         
     def buttonMisResennas(self):
         self.usr = datosUsuario('usuario')
@@ -1248,97 +1248,97 @@ class Ui_MainWindow(QMainWindow):
         self.verticalLayout_2.setStretch(0, 1)
         self.verticalLayout_2.setStretch(1, 8)
         self.verticalLayout_12.addWidget(self.frame)
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(5)
-        QMetaObject.connectSlotsByName(MainWindow)
+        #MainWindow.setCentralWidget(self.centralwidget)
+        #self.retranslateUi(MainWindow)
+        #self.stackedWidget.setCurrentIndex(5)
+        #QMetaObject.connectSlotsByName(MainWindow)
         
         """PÁGINA MI PERFIL2 """
         self.page_MiPerfil2 = QtWidgets.QWidget()
         self.page_MiPerfil2.setObjectName("page_MiPerfil2")
-        self.label_7 = QLabel(self.page_MiPerfil2)
-        self.label_7.setObjectName("label_7")
-        self.label_7.setGeometry(QtCore.QRect(6, 10, 591, 20))
-        self.label_7.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_7Perfil2 = QLabel(self.page_MiPerfil2)
+        self.label_7Perfil2.setObjectName("label_7Perfil2")
+        self.label_7Perfil2.setGeometry(QtCore.QRect(6, 10, 591, 20))
+        self.label_7Perfil2.setAlignment(QtCore.Qt.AlignCenter)
         self.verticalLayoutWidget = QWidget(self.page_MiPerfil2)
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayoutWidget.setGeometry(QRect(10, 40, 111, 141))
-        self.verticalLayout_15 = QVBoxLayout(self.verticalLayoutWidget)
-        self.verticalLayout_15.setObjectName("verticalLayout_15")
-        self.verticalLayout_15.setContentsMargins(0, 0, 0, 0)
-        self.label_usuario = QLabel(self.verticalLayoutWidget)
-        self.label_usuario.setObjectName("label_usuario")
-        self.label_usuario.setAlignment(
+        self.verticalLayout_15Perfil2 = QVBoxLayout(self.verticalLayoutWidget)
+        self.verticalLayout_15Perfil2.setObjectName("verticalLayout_15Perfil2")
+        self.verticalLayout_15Perfil2.setContentsMargins(0, 0, 0, 0)
+        self.label_usuarioPerfil2 = QLabel(self.verticalLayoutWidget)
+        self.label_usuarioPerfil2.setObjectName("label_usuarioPerfil2")
+        self.label_usuarioPerfil2.setAlignment(
             QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
-        self.verticalLayout_15.addWidget(self.label_usuario)
-        self.label_nombre = QLabel(self.verticalLayoutWidget)
-        self.label_nombre.setObjectName("label_nombre")
-        self.label_nombre.setAlignment(
+        self.verticalLayout_15Perfil2.addWidget(self.label_usuarioPerfil2)
+        self.label_nombrePerfil2 = QLabel(self.verticalLayoutWidget)
+        self.label_nombrePerfil2.setObjectName("label_nombrePerfil2")
+        self.label_nombrePerfil2.setAlignment(
             QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
-        self.verticalLayout_15.addWidget(self.label_nombre)
-        self.label_apellido = QLabel(self.verticalLayoutWidget)
-        self.label_apellido.setObjectName("label_apellido")
-        self.label_apellido.setAlignment(
+        self.verticalLayout_15Perfil2.addWidget(self.label_nombrePerfil2)
+        self.label_apellidoPerfil2 = QLabel(self.verticalLayoutWidget)
+        self.label_apellidoPerfil2.setObjectName("label_apellidoPerfil2")
+        self.label_apellidoPerfil2.setAlignment(
             QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
-        self.verticalLayout_15.addWidget(self.label_apellido)
-        self.textBrowser_usuario = QTextBrowser(self.page_MiPerfil2)
-        self.textBrowser_usuario.setObjectName("textBrowser_usuario")
-        self.textBrowser_usuario.setGeometry(QtCore.QRect(130, 50, 151, 31))
-        self.textBrowser_usuario.setStyleSheet(
+        self.verticalLayout_15Perfil2.addWidget(self.label_apellidoPerfil2)
+        self.textBrowser_usuarioPerfil2 = QTextBrowser(self.page_MiPerfil2)
+        self.textBrowser_usuarioPerfil2.setObjectName("textBrowser_usuarioPerfil2")
+        self.textBrowser_usuarioPerfil2.setGeometry(QtCore.QRect(130, 50, 151, 31))
+        self.textBrowser_usuarioPerfil2.setStyleSheet(
             "background-color: rgb(255, 255, 255)")
-        self.textBrowser_nombre = QTextBrowser(self.page_MiPerfil2)
-        self.textBrowser_nombre.setObjectName("textBrowser_nombre")
-        self.textBrowser_nombre.setGeometry(QRect(130, 100, 151, 31))
-        self.textBrowser_nombre.setStyleSheet(
+        self.textBrowser_nombrePerfil2 = QTextBrowser(self.page_MiPerfil2)
+        self.textBrowser_nombrePerfil2.setObjectName("textBrowser_nombrePerfil2")
+        self.textBrowser_nombrePerfil2.setGeometry(QRect(130, 100, 151, 31))
+        self.textBrowser_nombrePerfil2.setStyleSheet(
             "background-color: rgb(255, 255, 255)")
-        self.textBrowser_apellido = QTextBrowser(self.page_MiPerfil2)
-        self.textBrowser_apellido.setObjectName("textBrowser_apellido")
-        self.textBrowser_apellido.setGeometry(QRect(130, 150, 151, 31))
-        self.textBrowser_apellido.setStyleSheet(
+        self.textBrowser_apellidoPerfil2 = QTextBrowser(self.page_MiPerfil2)
+        self.textBrowser_apellidoPerfil2.setObjectName("textBrowser_apellidoPerfil2")
+        self.textBrowser_apellidoPerfil2.setGeometry(QRect(130, 150, 151, 31))
+        self.textBrowser_apellidoPerfil2.setStyleSheet(
             "background-color: rgb(255, 255, 255)")
-        self.verticalLayoutWidget_2 = QWidget(self.page_MiPerfil2)
-        self.verticalLayoutWidget_2.setObjectName("verticalLayoutWidget_2")
-        self.verticalLayoutWidget_2.setGeometry(QRect(290, 40, 91, 141))
-        self.verticalLayout_15 = QVBoxLayout(self.verticalLayoutWidget_2)
-        self.verticalLayout_15.setObjectName("verticalLayout_15")
-        self.verticalLayout_15.setContentsMargins(0, 0, 0, 0)
-        self.label_email = QLabel(self.verticalLayoutWidget_2)
-        self.label_email.setObjectName("label_email")
-        self.label_email.setAlignment(
+        self.verticalLayoutWidget_2Perfil = QWidget(self.page_MiPerfil2)
+        self.verticalLayoutWidget_2Perfil.setObjectName("verticalLayoutWidget_2Perfil")
+        self.verticalLayoutWidget_2Perfil.setGeometry(QRect(290, 40, 91, 141))
+        self.verticalLayout_15Perfil2 = QVBoxLayout(self.verticalLayoutWidget_2)
+        self.verticalLayout_15Perfil2.setObjectName("verticalLayout_15Perfil2")
+        self.verticalLayout_15Perfil2.setContentsMargins(0, 0, 0, 0)
+        self.label_emailPerfil2 = QLabel(self.verticalLayoutWidget_2Perfil)
+        self.label_emailPerfil2.setObjectName("label_emailPerfil2")
+        self.label_emailPerfil2.setAlignment(
             Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
-        self.verticalLayout_15.addWidget(self.label_email)
-        self.label_edad = QLabel(self.verticalLayoutWidget_2)
-        self.label_edad.setObjectName("label_edad")
-        self.label_edad.setAlignment(
+        self.verticalLayout_15Perfil2.addWidget(self.label_emailPerfil2)
+        self.label_edadPerfil2 = QLabel(self.verticalLayoutWidget_2Perfil)
+        self.label_edadPerfil2.setObjectName("label_edadPerfil2")
+        self.label_edadPerfil2.setAlignment(
             Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
-        self.verticalLayout_15.addWidget(self.label_edad)
-        self.textBrowser_email = QTextBrowser(self.page_MiPerfil2)
-        self.textBrowser_email.setObjectName("textBrowser_email")
-        self.textBrowser_email.setGeometry(QRect(390, 60, 150, 31))
-        self.textBrowser_email.setStyleSheet(
+        self.verticalLayout_15Perfil2.addWidget(self.label_edadPerfil2)
+        self.textBrowser_emailPerfil2 = QTextBrowser(self.page_MiPerfil2)
+        self.textBrowser_emailPerfil2.setObjectName("textBrowser_emailPerfil2")
+        self.textBrowser_emailPerfil2.setGeometry(QRect(390, 60, 150, 31))
+        self.textBrowser_emailPerfil2.setStyleSheet(
             "background-color: rgb(255, 255, 255)")
-        self.textBrowser_edad = QTextBrowser(self.page_MiPerfil2)
-        self.textBrowser_edad.setObjectName("textBrowser_edad")
-        self.textBrowser_edad.setGeometry(QRect(390, 130, 150, 31))
-        self.textBrowser_edad.setStyleSheet(
+        self.textBrowser_edadPerfil2 = QTextBrowser(self.page_MiPerfil2)
+        self.textBrowser_edadPerfil2.setObjectName("textBrowser_edadPerfil2")
+        self.textBrowser_edadPerfil2.setGeometry(QRect(390, 130, 150, 31))
+        self.textBrowser_edadPerfil2.setStyleSheet(
             "background-color: rgb(255, 255, 255)")
-        self.textBrowser_MiPerfil = QTextBrowser(self.page_MiPerfil2)
-        self.textBrowser_MiPerfil.setObjectName("textBrowser_MiPerfil")
-        self.textBrowser_MiPerfil.setGeometry(QRect(10, 230, 520, 280))
-        self.textBrowser_MiPerfil.setStyleSheet(
+        self.textBrowser_MiPerfilPerfil2 = QTextBrowser(self.page_MiPerfil2)
+        self.textBrowser_MiPerfilPerfil2.setObjectName("textBrowser_MiPerfilPerfil2")
+        self.textBrowser_MiPerfilPerfil2.setGeometry(QRect(10, 230, 520, 280))
+        self.textBrowser_MiPerfilPerfil2.setStyleSheet(
             "background-color: rgb(255, 255, 255)")
-        self.pushButton_MisResennas = QPushButton(self.page_MiPerfil2)
-        self.pushButton_MisResennas.setObjectName("pushButton_MisResennas")
-        self.pushButton_MisResennas.clicked.connect(self.buttonMisResennas)
-        self.pushButton_MisResennas.setGeometry(QRect(250, 200, 111, 23))
-        self.pushButton_MisFiestas = QPushButton(self.page_MiPerfil2)
-        self.pushButton_MisFiestas.setObjectName("pushButton_MisFiestas")
-        self.pushButton_MisFiestas.clicked.connect(self.buttonMisFiestas)
-        self.pushButton_MisFiestas.setGeometry(QRect(370, 200, 101, 23))
-        self.pushButton_MisFotos = QPushButton(self.page_MiPerfil2)
-        self.pushButton_MisFotos.setObjectName("pushButton_MisFotos")
-        self.pushButton_MisFotos.clicked.connect(self.boton_mis_fotos)
-        self.pushButton_MisFotos.setGeometry(QRect(145, 200, 101, 23))
+        self.pushButton_MisResennasPerfil2 = QPushButton(self.page_MiPerfil2)
+        self.pushButton_MisResennasPerfil2.setObjectName("pushButton_MisResennasPerfil2")
+        self.pushButton_MisResennasPerfil2.clicked.connect(self.buttonMisResennas)
+        self.pushButton_MisResennasPerfil2.setGeometry(QRect(250, 200, 111, 23))
+        self.pushButton_MisFiestasPerfil2 = QPushButton(self.page_MiPerfil2)
+        self.pushButton_MisFiestasPerfil2.setObjectName("pushButton_MisFiestasPerfil2")
+        self.pushButton_MisFiestasPerfil2.clicked.connect(self.buttonMisFiestas)
+        self.pushButton_MisFiestasPerfil2.setGeometry(QRect(370, 200, 101, 23))
+        self.pushButton_MisFotosPerfil2 = QPushButton(self.page_MiPerfil2)
+        self.pushButton_MisFotosPerfil2.setObjectName("pushButton_MisFotosPerfil2")
+        self.pushButton_MisFotosPerfil2.clicked.connect(self.boton_mis_fotos)
+        self.pushButton_MisFotosPerfil2.setGeometry(QRect(145, 200, 101, 23))
         
         self.stackedWidget.addWidget(self.page_MiPerfil2)
         self.verticalLayout_4.addWidget(self.stackedWidget)
@@ -1347,6 +1347,7 @@ class Ui_MainWindow(QMainWindow):
         self.verticalLayout_2.setStretch(0, 1)
         self.verticalLayout_2.setStretch(1, 8)
         self.verticalLayout_12.addWidget(self.frame)
+        
         MainWindow.setCentralWidget(self.centralwidget)
         self.retranslateUi(MainWindow)
         self.stackedWidget.setCurrentIndex(5)
@@ -1415,6 +1416,7 @@ class Ui_MainWindow(QMainWindow):
         self.pushButton_AddResenna.setText(_translate("MainWindow", "AÑADIR"))
         self.label_5.setText(_translate("MainWindow", "OTRAS RESEÑAS"))
         self.label_7.setText(_translate("MainWindow", "MI PERFIL"))
+        self.label_7Perfil2.setText(_translate("MainWindow", "PERFIL"))
         self.pushButton_MiPerfil.setText(_translate("MainWindow", "MI PERFIL"))
         self.label_usuario.setText(_translate("MainWindow", "USUARIO:"))
         self.label_nombre.setText(_translate("MainWindow", "NOMBRE:"))
@@ -1429,6 +1431,17 @@ class Ui_MainWindow(QMainWindow):
             _translate("MainWindow", "Subir fotos"))
         self.pushButton_MisFotos.setText(
             _translate("MainWindow", "Mis fotos"))
+        self.label_usuarioPerfil2.setText(_translate("MainWindow", "USUARIO:"))
+        self.label_nombrePerfil2.setText(_translate("MainWindow", "NOMBRE:"))
+        self.label_apellidoPerfil2.setText(_translate("MainWindow", "APELLIDO:"))
+        self.label_emailPerfil2.setText(_translate("MainWindow", "EMAIL:"))
+        self.label_edadPerfil2.setText(_translate("MainWindow", "EDAD:"))
+        self.pushButton_MisResennasPerfil2.setText(
+            _translate("MainWindow", "Rese\u00f1as"))
+        self.pushButton_MisFiestasPerfil2.setText(
+            _translate("MainWindow", "Fiestas"))
+        self.pushButton_MisFotosPerfil2.setText(
+            _translate("MainWindow", "Fotos"))
 
 if __name__ == "__main__":
     import sys
