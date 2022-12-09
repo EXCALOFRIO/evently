@@ -1,8 +1,8 @@
 # pip install git+https://github.com/ozgur/python-firebase
 # pip install python-firebase
 
+from collections import deque
 import itertools
-import re
 import time
 import email
 from operator import ge
@@ -148,7 +148,7 @@ def insertarFiesta(nombre, calle, numero, zona, usuario, ruta):
     # print(ubicacion2)
     insertarFiestaEficiente(
         nombre, ubicacion2, location.longitude, location.latitude, ruta)
-    
+
 
 def borrarDatos(datos):
     db.reference('test').child(datos).delete()
@@ -159,37 +159,37 @@ def borrarTodo(ruta):
 
 
 def getItemBaseDatos(elemento, variable, ruta):
-    lista = []
-    if db.reference(ruta).child(elemento).get() != None:
-        for k, v in db.reference(ruta).child(elemento).get().items():
-            lista.append(v[variable])
-        return lista
+    data = db.reference(ruta).child(elemento).get()
+    if data is not None:
+        # Use the map() function to extract the desired values from the data
+        values = map(lambda x: x[variable], data.values())
+        return list(values)  # Convert the values to a list and return it
     else:
-        return lista
+        return []
 
 
 def getTodosLosDatos(elemento, ruta):
-    lista = []
-    if db.reference(ruta).child(elemento).get() != None:
-        for k, v in db.reference(ruta).child(elemento).get().items():
-            lista.append(v)
-        return lista
+    data = db.reference(ruta).child(elemento).get()
+    if data is not None:
+        return list(data.values())  # Return a list of the values in the data
     else:
-        return lista
+        return []
+
+
+def getDatosElementoConcreto(elemento, variable, dato, elementos, ruta):
+    temp = getItemBaseDatos(elemento, variable, ruta)
+    pos = temp.index(dato)
+    array = []
+    for elemen in elementos:
+        array.append(getItemBaseDatos(elemento, elemen, ruta)[pos])
+    return array
+
 
 # Metodo de para mostrar la carta de las discotecas
+# print(getTodosLosDatos('discotecas', 'data'))
+# print(get_Todos_Los_Datos('discotecas', 'data'))
 
-def getDatosElementoConcreto(elemento,variable,dato,elementos,ruta):
-    temp=getItemBaseDatos(elemento, variable, ruta)
-    print(temp)
-    pos=temp.index(dato)
-    print(pos)
-    array=[]
-    for elemen in elementos:
-        array.append(getItemBaseDatos(elemento,elemen,ruta)[pos])
-    return array
-    
-    
+
 def mostrar_carta(elemento, variable, ruta):
     elemento = db.reference(ruta+'/'+elemento)
     lista = []
@@ -301,31 +301,37 @@ def insertarValoracion(fecha, usuario, nombre_discoteca, nota, texto, ruta):
 
 
 def comprobarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta):
-    if usuario in getItemBaseDatos('usuarios', 'usuario', ruta) or email in getItemBaseDatos('usuarios', 'email', ruta) or '@' not in email or '.' not in email or usuario == '' or nombre == '' or apellido == '' or edad == '' or email == '' or contraseña == '':
-        # print('El usuario o el email ya existen o no ha rellenado todos los campos o el email no es correcto')
+    # Comprueba si el email está vacío o no tiene un formato válido
+    if not email or '@' not in email or '.' not in email:
         return False
-    insertarUsuario(usuario, nombre, apellido,
-                    edad, email, contraseña, ruta)
+    # Comprueba si algún campo obligatorio está vacío
+    if not usuario or not nombre or not apellido or not edad or not contraseña:
+        return False
+    # Comprueba si el usuario o el email ya existen en la base de datos
+    usuarios = getItemBaseDatos('usuarios', 'usuario', ruta)
+    emails = getItemBaseDatos('usuarios', 'email', ruta)
+    if usuario in usuarios or email in emails:
+        return False
+    # Inserta la información del usuario en la base de datos
+    insertarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta)
     return True
 
 
 def comprobarInicioSesion(usuario, contraseña, ruta):
-    if usuario == '' or contraseña == '':
-        # print('Todos los campos deben estar completos.')
+    if not usuario or not contraseña:
         return False
-    indice = getItemBaseDatos('usuarios', 'usuario', ruta).index(usuario)
-    if getItemBaseDatos('usuarios', 'contraseña', ruta)[indice] == contraseña:
-        variableUsuarioSimp(usuario)
-        nombreUsr = getItemBaseDatos('usuarios', 'nombre', ruta)[indice]
-        variableNombreUsuario(nombreUsr)
-        apellidoUsr = getItemBaseDatos('usuarios', 'apellido', ruta)[indice]
-        variableApellidoUsuario(apellidoUsr)
-        emailUsr = getItemBaseDatos('usuarios', 'email', ruta)[indice]
-        variableEmailUsuario(emailUsr)
-        edadUsr = getItemBaseDatos('usuarios', 'edad', ruta)[indice]
-        variableEdadUsuario(edadUsr)
-        return True
-    # print('El usuario o la contraseña no son correctos, o no ha rellenado todos los campos')
+
+    user_data = getTodosLosDatos('usuarios', ruta)
+
+    for user in user_data:
+        if user['usuario'] == usuario and user['contraseña'] == contraseña:
+            variableUsuarioSimp(usuario)
+            variableNombreUsuario(user['nombre'])
+            variableApellidoUsuario(user['apellido'])
+            variableEmailUsuario(user['email'])
+            variableEdadUsuario(user['edad'])
+            return True
+
     return False
 
 
