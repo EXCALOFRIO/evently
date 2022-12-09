@@ -33,6 +33,11 @@ class Ui(ScreenManager):
     def mostrar_mapa(self):
         print('Mostrar mapa')
 
+    def inicioSesion(self, usuario, password):
+        if comprobarInicioSesion(usuario, password, 'data'):
+            self.current = 'screen_principal'
+        else:
+            self.ids.signal_login.text = 'Usuario o contraseña incorrectos'
     
     def clear_signal(self):
         self.ids.signal_register.text = ''
