@@ -35,8 +35,8 @@ class Ui(ScreenManager):
 
     
     def clear_signal(self):
-        self.root.ids.signal_register.text = ''
-        self.root.ids.signal_login.text = ''
+        self.ids.signal_register.text = ''
+        self.ids.signal_login.text = ''
 
 
 class MainApp(MDApp):
