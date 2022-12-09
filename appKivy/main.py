@@ -33,13 +33,16 @@ class Ui(ScreenManager):
     def mostrar_mapa(self):
         print('Mostrar mapa')
 
+    
+    def clear_signal(self):
+        self.root.ids.signal_register.text = ''
+        self.root.ids.signal_login.text = ''
+
 
 class MainApp(MDApp):
     def build(self):
         self.theme_cls.theme_style = 'Dark'
         self.theme_cls.primary_palette = 'Blue'
-        self.url = 'https://evently-646a2-default-rtdb.firebaseio.com/.json'
-        self.key = 'f56cws1P0VqbWLLiquVOReDvJONfKtq9qzeWDSIl'
         Builder.load_file('design.kv')
 
         return Ui()
