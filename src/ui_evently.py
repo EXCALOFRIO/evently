@@ -28,7 +28,7 @@ from tkinter import messagebox
 import ui_carta
 from datetime import timedelta
 
-from baseDatosPrueba import datosUsuario, getTodosLosDatos, valoracionesUsuario, fiestasUsuario, nombreUsuario, apellidoUsuario, emailUsuario, edadUsuario, filtrarDiscotecas, getItemBaseDatos, insertarMensaje, insertarDiscoteca, insertarFiesta, insertarValoracion, mostrar_carta, color, color2
+from baseDatosPrueba import datosUsuario, getDatosElementoConcreto, getTodosLosDatos, valoracionesUsuario, fiestasUsuario, nombreUsuario, apellidoUsuario, emailUsuario, edadUsuario, filtrarDiscotecas, getItemBaseDatos, insertarMensaje, insertarDiscoteca, insertarFiesta, insertarValoracion, mostrar_carta, color, color2
 
 from Interfaz_Imagenes import subir_foto, ver_mis_fotos
 
@@ -296,45 +296,10 @@ class Ui_MainWindow(QMainWindow):
                 self.verticalLayout_14Usuarios.addWidget(
                     self. botonesBusquedaUsuarios[out[i]])
                 self. botonesBusquedaUsuarios[out[i]].clicked.connect(
-                    lambda checked, out=out, i=i: self.abrirUsuario(out[i]))
+                    lambda checked, out=out, i=i: self.buttonPerfil2(out[i]))
                 self.busquedaUsuarios = False
 
-    def abrirUsuario(self, nombreUsuario):
-       self.borrarBotonesBusquedaUsuarios()
-       self.tablaChatCreada = True
-       self.tablaChat = QTableWidget()   
-       self.tablaChat.setObjectName("tablaChat")
-       self.tablaChat.setRowCount(0)
-       self.tablaChat.setColumnCount(2)
-       self.tablaChat.setStyleSheet(
-           "QHeaderView::section { font-size: 12pt; }")
-       self.verticalLayout_14Chat.addWidget(self.tablaChat)
-       # creamos el textEdit y el boton circular
-       self.textEditChat = QtWidgets.QTextEdit(self.scrollAreaWidgetContents3)
-       self.textEditChat.setObjectName("textEditChat")
-       self.textEditChat.setFixedHeight(80)
-       
-       self.textEditChat.setStyleSheet("color:  "+color+";\n")
-       #color del fondo blanco con poca opacidad
-       self.textEditChat.setStyleSheet("background-color: rgba(255, 255, 255, 0.8);")
-       #set focus al final del texto
-       self.textEditChat.setFocus()
-       
-       self.horizontalLayout_15Usuarios = QtWidgets.QHBoxLayout()
-       self.tablaChat.setHorizontalHeaderLabels([nombreUsuario, "YO"])
-       self.tablaChat.horizontalHeader().setFont(
-           QtGui.QFont("Times", 10, QtGui.QFont.Bold))
-       self.botonEnviar = QtWidgets.QPushButton(
-           self.scrollAreaWidgetContents2)
-       self.botonEnviar.setObjectName("botonEnviar")
-       self.botonEnviar.setFixedHeight(80)
-       self.textEditChat.setFixedHeight(80)
-       self.botonEnviar.setStyleSheet("color:  "+color+";\n")
-       self.botonEnviar.setIcon(QtGui.QIcon("imágenes/enviar.png"))
-       self.botonEnviar.setIconSize(QtCore.QSize(60, 60))
-       self.horizontalLayout_15Usuarios.addWidget(self.textEditChat)
-       self.horizontalLayout_15Usuarios.addWidget(self.botonEnviar)
-       self.verticalLayout_14Usuarios.addLayout(self.horizontalLayout_15Usuarios)
+    
        
        
         
@@ -484,7 +449,7 @@ class Ui_MainWindow(QMainWindow):
     def abrir_ventana_usuarios(self):
         self.stackedWidget.setCurrentWidget(self.page_usuarios)
 
-    def buttonPerfil(self):
+    def buttonPerfil(self,usuarioText):
         self.stackedWidget.setCurrentWidget(self.page_MiPerfil)
         self.usuario = datosUsuario('usuario')
         self.textBrowser_usuario.setText(self.usuario)
@@ -496,8 +461,27 @@ class Ui_MainWindow(QMainWindow):
         self.textBrowser_email.setText(self.email)
         self.edad = edadUsuario('edad')
         self.textBrowser_edad.setText(str(self.edad))
-        #print("he seleccionado el boton MI PERFIL")
 
+            
+        #print("he seleccionado el boton MI PERFIL")
+    def buttonPerfil2(self,usuarioText):
+        self.stackedWidget.setCurrentWidget(self.page_MiPerfil2)
+        datosUsuarioEspecifico=getDatosElementoConcreto('usuarios','usuario',usuarioText,['usuario','nombre','apellido','email','edad'],'data')
+        self.usuario = datosUsuarioEspecifico[0]
+        print(self.usuario)
+        self.textBrowser_usuario.setText(usuarioText)
+        self.nombre =  datosUsuarioEspecifico[1]
+        print(self.nombre)
+        self.textBrowser_nombre.setText(self.nombre)
+        self.apellido = datosUsuarioEspecifico[2]
+        self.textBrowser_apellido.setText(self.apellido)
+        print(self.apellido)
+        self.email = datosUsuarioEspecifico[3]
+        self.textBrowser_email.setText(self.email)
+        print(self.email) 
+        self.edad = datosUsuarioEspecifico[4]
+        self.textBrowser_edad.setText(str(self.edad))
+        
     def buttonMisResennas(self):
         self.usr = datosUsuario('usuario')
         # print(self.usr)
@@ -1258,6 +1242,105 @@ class Ui_MainWindow(QMainWindow):
         self.pushButton_MisFotos.setGeometry(QRect(145, 200, 101, 23))
         
         self.stackedWidget.addWidget(self.page_MiPerfil)
+        self.verticalLayout_4.addWidget(self.stackedWidget)
+        self.horizontalLayout.addWidget(self.frame_paginas)
+        self.verticalLayout_2.addWidget(self.frame_contenido)
+        self.verticalLayout_2.setStretch(0, 1)
+        self.verticalLayout_2.setStretch(1, 8)
+        self.verticalLayout_12.addWidget(self.frame)
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.retranslateUi(MainWindow)
+        self.stackedWidget.setCurrentIndex(5)
+        QMetaObject.connectSlotsByName(MainWindow)
+        
+        """PÁGINA MI PERFIL2 """
+        self.page_MiPerfil2 = QtWidgets.QWidget()
+        self.page_MiPerfil2.setObjectName("page_MiPerfil2")
+        self.label_7 = QLabel(self.page_MiPerfil2)
+        self.label_7.setObjectName("label_7")
+        self.label_7.setGeometry(QtCore.QRect(6, 10, 591, 20))
+        self.label_7.setAlignment(QtCore.Qt.AlignCenter)
+        self.verticalLayoutWidget = QWidget(self.page_MiPerfil2)
+        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
+        self.verticalLayoutWidget.setGeometry(QRect(10, 40, 111, 141))
+        self.verticalLayout_15 = QVBoxLayout(self.verticalLayoutWidget)
+        self.verticalLayout_15.setObjectName("verticalLayout_15")
+        self.verticalLayout_15.setContentsMargins(0, 0, 0, 0)
+        self.label_usuario = QLabel(self.verticalLayoutWidget)
+        self.label_usuario.setObjectName("label_usuario")
+        self.label_usuario.setAlignment(
+            QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.verticalLayout_15.addWidget(self.label_usuario)
+        self.label_nombre = QLabel(self.verticalLayoutWidget)
+        self.label_nombre.setObjectName("label_nombre")
+        self.label_nombre.setAlignment(
+            QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.verticalLayout_15.addWidget(self.label_nombre)
+        self.label_apellido = QLabel(self.verticalLayoutWidget)
+        self.label_apellido.setObjectName("label_apellido")
+        self.label_apellido.setAlignment(
+            QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.verticalLayout_15.addWidget(self.label_apellido)
+        self.textBrowser_usuario = QTextBrowser(self.page_MiPerfil2)
+        self.textBrowser_usuario.setObjectName("textBrowser_usuario")
+        self.textBrowser_usuario.setGeometry(QtCore.QRect(130, 50, 151, 31))
+        self.textBrowser_usuario.setStyleSheet(
+            "background-color: rgb(255, 255, 255)")
+        self.textBrowser_nombre = QTextBrowser(self.page_MiPerfil2)
+        self.textBrowser_nombre.setObjectName("textBrowser_nombre")
+        self.textBrowser_nombre.setGeometry(QRect(130, 100, 151, 31))
+        self.textBrowser_nombre.setStyleSheet(
+            "background-color: rgb(255, 255, 255)")
+        self.textBrowser_apellido = QTextBrowser(self.page_MiPerfil2)
+        self.textBrowser_apellido.setObjectName("textBrowser_apellido")
+        self.textBrowser_apellido.setGeometry(QRect(130, 150, 151, 31))
+        self.textBrowser_apellido.setStyleSheet(
+            "background-color: rgb(255, 255, 255)")
+        self.verticalLayoutWidget_2 = QWidget(self.page_MiPerfil2)
+        self.verticalLayoutWidget_2.setObjectName("verticalLayoutWidget_2")
+        self.verticalLayoutWidget_2.setGeometry(QRect(290, 40, 91, 141))
+        self.verticalLayout_15 = QVBoxLayout(self.verticalLayoutWidget_2)
+        self.verticalLayout_15.setObjectName("verticalLayout_15")
+        self.verticalLayout_15.setContentsMargins(0, 0, 0, 0)
+        self.label_email = QLabel(self.verticalLayoutWidget_2)
+        self.label_email.setObjectName("label_email")
+        self.label_email.setAlignment(
+            Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
+        self.verticalLayout_15.addWidget(self.label_email)
+        self.label_edad = QLabel(self.verticalLayoutWidget_2)
+        self.label_edad.setObjectName("label_edad")
+        self.label_edad.setAlignment(
+            Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
+        self.verticalLayout_15.addWidget(self.label_edad)
+        self.textBrowser_email = QTextBrowser(self.page_MiPerfil2)
+        self.textBrowser_email.setObjectName("textBrowser_email")
+        self.textBrowser_email.setGeometry(QRect(390, 60, 150, 31))
+        self.textBrowser_email.setStyleSheet(
+            "background-color: rgb(255, 255, 255)")
+        self.textBrowser_edad = QTextBrowser(self.page_MiPerfil2)
+        self.textBrowser_edad.setObjectName("textBrowser_edad")
+        self.textBrowser_edad.setGeometry(QRect(390, 130, 150, 31))
+        self.textBrowser_edad.setStyleSheet(
+            "background-color: rgb(255, 255, 255)")
+        self.textBrowser_MiPerfil = QTextBrowser(self.page_MiPerfil2)
+        self.textBrowser_MiPerfil.setObjectName("textBrowser_MiPerfil")
+        self.textBrowser_MiPerfil.setGeometry(QRect(10, 230, 520, 280))
+        self.textBrowser_MiPerfil.setStyleSheet(
+            "background-color: rgb(255, 255, 255)")
+        self.pushButton_MisResennas = QPushButton(self.page_MiPerfil2)
+        self.pushButton_MisResennas.setObjectName("pushButton_MisResennas")
+        self.pushButton_MisResennas.clicked.connect(self.buttonMisResennas)
+        self.pushButton_MisResennas.setGeometry(QRect(250, 200, 111, 23))
+        self.pushButton_MisFiestas = QPushButton(self.page_MiPerfil2)
+        self.pushButton_MisFiestas.setObjectName("pushButton_MisFiestas")
+        self.pushButton_MisFiestas.clicked.connect(self.buttonMisFiestas)
+        self.pushButton_MisFiestas.setGeometry(QRect(370, 200, 101, 23))
+        self.pushButton_MisFotos = QPushButton(self.page_MiPerfil2)
+        self.pushButton_MisFotos.setObjectName("pushButton_MisFotos")
+        self.pushButton_MisFotos.clicked.connect(self.boton_mis_fotos)
+        self.pushButton_MisFotos.setGeometry(QRect(145, 200, 101, 23))
+        
+        self.stackedWidget.addWidget(self.page_MiPerfil2)
         self.verticalLayout_4.addWidget(self.stackedWidget)
         self.horizontalLayout.addWidget(self.frame_paginas)
         self.verticalLayout_2.addWidget(self.frame_contenido)

@@ -179,7 +179,17 @@ def getTodosLosDatos(elemento, ruta):
 
 # Metodo de para mostrar la carta de las discotecas
 
-
+def getDatosElementoConcreto(elemento,variable,dato,elementos,ruta):
+    temp=getItemBaseDatos(elemento, variable, ruta)
+    print(temp)
+    pos=temp.index(dato)
+    print(pos)
+    array=[]
+    for elemen in elementos:
+        array.append(getItemBaseDatos(elemento,elemen,ruta)[pos])
+    return array
+    
+    
 def mostrar_carta(elemento, variable, ruta):
     elemento = db.reference(ruta+'/'+elemento)
     lista = []
