@@ -37,11 +37,11 @@ version = 1.69
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy==2.1.0,kivymd==1.0.2,sdl2_ttf==2.0.15,pillow,kivy==master,openssl,requests,urllib3,charset-normalizer,certifi,chardet,idna,jwt, cryptography, pyparsing, firebase_admin, google-auth, cachetools, pyasn1, pyasn1_modules, rsa, google-api-python-client, httplib2,geopy
+requirements = python3,kivy==2.1.0,kivymd==1.0.2,sdl2_ttf==2.0.15,pillow,kivy==master,openssl,requests,urllib3,charset-normalizer,certifi,chardet,idna,jwt, cryptography, pyparsing, firebase_admin, google-auth, cachetools, pyasn1, pyasn1_modules, rsa, google-api-python-client, httplib2,geopy,webview
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
-requirements.source.kivy = ../../kivy
+#requirements.source.kivy = ../../kivy
 
 # (str) Presplash of the application
 #presplash.filename = %(source.dir)s/data/presplash.png

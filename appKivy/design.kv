@@ -468,73 +468,81 @@
         
         BoxLayout:
             orientation: 'vertical'
+            
+            
 
             MDLabel:
                 text: 'Añadir Discoteca'
                 halign: 'center'
+                size_hint_y: 0.2
 
             BoxLayout:
                 orientation: 'horizontal'
-                padding: 0, 20
+                size_hint_y: 0.2
                 MDLabel:
                     text: 'NOMBRE'
-                    size_hint_max_x: 70
                     halign: 'left'
+                    size_hint_x: 0.2
                 MDTextFieldRect:
                     id: MDTextFieldNombre
                     hint_text: "Introducir el nombre de la discoteca"
-                    size_hint_max_x: 400
+                    size_hint_x: 0.8
                     height: "30dp"
                     max_text_length: 20
                     #required: True
+                    max_size_hint_y:0.15
                     mode: "fill"
                     fill_color: 0, 0, 0, .4
             BoxLayout:
                 orientation: 'horizontal'
-                padding: 0, 20
+                size_hint_y: 0.2
+                
                 MDLabel:
                     text: 'ZONA'
                     halign: 'left'
-                    size_hint_max_x: 70
+                    size_hint_x: 0.2
                 MDTextFieldRect:
                     id: MDTextFieldZona
                     hint_text: "Introducir el nombre de la discoteca"
-                    size_hint_max_x: 400
                     height: "30dp"
                     max_text_length: 10
+                    size_hint_x: 0.8
+                    max_size_hint_y:0.15
                     #required: True
                     mode: "fill"
                     fill_color: 0, 0, 0, .4
 
             BoxLayout:
                 orientation: 'horizontal'
-                padding: 0, 20
+                size_hint_y: 0.2
                 MDLabel:
                     text: 'CALLE'
                     halign: 'left'
-                    size_hint_max_x: 70
+                    size_hint_x: 0.2
                 MDTextFieldRect:
                     id: MDTextFieldCalle
                     hint_text: "Introducir el nombre de la discoteca"
-                    size_hint_max_x: 400
                     height: "30dp"
                     max_text_length: 30
+                    size_hint_x: 0.8
+                    max_size_hint_y:0.15
                     #required: True
                     mode: "fill"
                     fill_color: 0, 0, 0, .4
             BoxLayout:
                 orientation: 'horizontal'
-                padding: 0, 20
+                size_hint_y: 0.2
                 MDLabel:
                     text: 'NUMERO'
                     halign: 'left'
-                    size_hint_max_x: 70
+                    size_hint_x: 0.2
                 MDTextFieldRect:
                     id: MDTextFieldNumero
                     hint_text: "Introducir el nombre de la discoteca"
-                    size_hint_max_x: 400
                     height: "30dp"
-                    max_text_length: 3
+                    max_text_length: 30
+                    size_hint_x: 0.8
+                    max_size_hint_y:0.15
                     #required: True
                     mode: "fill"
                     fill_color: 0, 0, 0, .4
