@@ -194,7 +194,10 @@ def mostrar_carta(elemento, variable, ruta):
     for v, k in elemento.get().items():
         if v == variable:
             lista.append(k)
-    return lista[0]
+    try:
+        return lista[0]
+    except IndexError:
+        return ('Error: elemento no encontrado en la lista')
 
 # TODO  crea un metodo que devuelava la key sabiendo la posocion en el array
 

@@ -412,22 +412,23 @@
             orientation: 'vertical'
             MDBoxLayout:
                 orientation: 'vertical'
-                Spinner:
-                    id: spinnerFiltrado
-                    adaptative_width: True
-                    size_hint_max_y: 60
-                    pos_hint: {'center_x': .5, 'center_y': .5}
-                    text: 'Zona'
-                    values: 'Zona', 'Nombre', 'Calle', 'Valoracion'
-                    on_text:
-                        print("The spinner {} has text {}".format(self, self.text))
+                
                 MDBoxLayout:
                     orientation: 'horizontal'
                     size_hint_max_y: 50
+                    Spinner:
+                        id: spinnerFiltrado
+                        adaptative_width: True
+                        size_hint_max_y: 50
+                        pos_hint: {'center_x': .5, 'center_y': .5}
+                        text: 'Zona'
+                        values: 'Zona', 'Nombre', 'Calle', 'Valoracion'
+                        on_text:
+                            print("The spinner {} has text {}".format(self, self.text))
                     MDTextField:
                         id: MDTextFieldFiltrado
                         hint_text: "Introducir texto"
-                        size: 200, 40
+                        size: 200, 50
                         mode: "fill"
                         fill_color: 0, 0, 0, .4
                         pos_hint: {"center_x": .25, 'center_y': .90}
@@ -438,17 +439,23 @@
                         pos_hint: {'center_y': .90}
                         on_press: root.botonBusquedaFiltrado(MDTextFieldFiltrado.text, spinnerFiltrado.text)
                 
-                ScrollView:
+                MDScrollView:
                     do_scroll_y: True
-                    MDList:
+                    
+                    MDList: 
                         id: MDListFiltrado
                         adaptative_height: True
                         padding: 0, 0
                         pos_hint: {'center_x': .5, 'center_y': 1}
-                        size: 200, 400
                         scroll_type: 'bars'
                         bar_width: '12dp'
-
+                            
+            MDLabel:
+                id: MDLabelFiltrado
+                opacity: 0
+                size: (0, 0)
+                
+                size_hint: None, None
 
 
             MDFillRoundFlatButton:
@@ -565,12 +572,49 @@
 
     MDScreen:
         name: 'chat'
-        CustomizeScreen:
-            text: 'Pantalla ocho'
+        MDBoxLayout:
+            orientation: 'vertical'
+            MDBoxLayout:
+                orientation: 'vertical'
+                MDBoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_max_y: 50
+                    MDTextField:
+                        id: MDTextFieldBuscadorChat
+                        hint_text: "Introducir texto"
+                        size: 200, 40
+                        mode: "fill"
+                        fill_color: 0, 0, 0, .4
+                        pos_hint: {"center_x": .25, 'center_y': .90}
+
+                    MDFloatingActionButton:
+                        icon: 'images/iconoBusqueda.png'
+                        md_bg_color: 0, .5, 1, 1
+                        pos_hint: {'center_y': .90}
+                        on_press: root.botonBusquedaChat(MDTextFieldBuscadorChat.text)
+                
+                ScrollView:
+                    do_scroll_y: True
+                    MDList:
+                        id: MDListFiltradoChat
+                        adaptative_height: True
+                        padding: 0, 0
+                        pos_hint: {'center_x': .5, 'center_y': 1}
+                        size: 200, 400
+                        scroll_type: 'bars'
+                        bar_width: '12dp'
+
+
+
+            MDFillRoundFlatButton:
+                text: 'Regresar'
+                pos_hint: {'center_x': .5, 'center_y': .5}
+                on_release:
+                    root.borrarBusquedaFiltrado()
+                    app.root.current = 'screen_principal'
+                    app.root.transition = SlideTransition(direction= 'left')
 
     MDScreen:
         name: 'ajustes'
         CustomizeScreen:
             text: 'Pantalla nueve'
-
-
