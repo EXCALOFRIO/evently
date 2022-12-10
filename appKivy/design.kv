@@ -415,12 +415,11 @@
                 
                 MDBoxLayout:
                     orientation: 'horizontal'
-                    size_hint_max_y: 50
+                    size_hint_y: 0.1
                     Spinner:
                         id: spinnerFiltrado
                         adaptative_width: True
-                        size_hint_max_y: 50
-                        pos_hint: {'center_x': .5, 'center_y': .5}
+                        size_hint_x: 0.25
                         text: 'Zona'
                         values: 'Zona', 'Nombre', 'Calle', 'Valoracion'
                         on_text:
@@ -428,25 +427,23 @@
                     MDTextField:
                         id: MDTextFieldFiltrado
                         hint_text: "Introducir texto"
-                        size: 200, 50
                         mode: "fill"
+                        size_hint_x: 0.6
                         fill_color: 0, 0, 0, .4
-                        pos_hint: {"center_x": .25, 'center_y': .90}
 
                     MDFloatingActionButton:
                         icon: 'images/iconoBusqueda.png'
                         md_bg_color: 0, .5, 1, 1
-                        pos_hint: {'center_y': .90}
+                        size_hint_x: 0.15
                         on_press: root.botonBusquedaFiltrado(MDTextFieldFiltrado.text, spinnerFiltrado.text)
                 
                 MDScrollView:
                     do_scroll_y: True
+                    size_hint_y: 0.85
                     
                     MDList: 
                         id: MDListFiltrado
                         adaptative_height: True
-                        padding: 0, 0
-                        pos_hint: {'center_x': .5, 'center_y': 1}
                         scroll_type: 'bars'
                         bar_width: '12dp'
                             
@@ -454,13 +451,12 @@
                 id: MDLabelFiltrado
                 opacity: 0
                 size: (0, 0)
-                
                 size_hint: None, None
 
 
             MDFillRoundFlatButton:
                 text: 'Regresar'
-                pos_hint: {'center_x': .5, 'center_y': .5}
+                size_hint_y: 0.05
                 on_release:
                     root.borrarBusquedaFiltrado()
                     app.root.current = 'screen_principal'
@@ -578,37 +574,36 @@
                 orientation: 'vertical'
                 MDBoxLayout:
                     orientation: 'horizontal'
-                    size_hint_max_y: 50
+                    size_hint_y: 0.1
                     MDTextField:
                         id: MDTextFieldBuscadorChat
                         hint_text: "Introducir texto"
-                        size: 200, 40
                         mode: "fill"
+                        size_hint_x: 0.9
+                        height: self.minimum_height
                         fill_color: 0, 0, 0, .4
-                        pos_hint: {"center_x": .25, 'center_y': .90}
+
 
                     MDFloatingActionButton:
                         icon: 'images/iconoBusqueda.png'
                         md_bg_color: 0, .5, 1, 1
-                        pos_hint: {'center_y': .90}
+                        size_hint_x: 0.1
                         on_press: root.botonBusquedaChat(MDTextFieldBuscadorChat.text)
                 
                 ScrollView:
                     do_scroll_y: True
+                    size_hint_y: 0.85
                     MDList:
                         id: MDListFiltradoChat
-                        adaptative_height: True
-                        padding: 0, 0
-                        pos_hint: {'center_x': .5, 'center_y': 1}
-                        size: 200, 400
                         scroll_type: 'bars'
+                        height: self.minimum_height
                         bar_width: '12dp'
 
 
 
             MDFillRoundFlatButton:
                 text: 'Regresar'
-                pos_hint: {'center_x': .5, 'center_y': .5}
+                size_hint_y: 0.05
                 on_release:
                     root.borrarBusquedaFiltrado()
                     app.root.current = 'screen_principal'
@@ -618,3 +613,60 @@
         name: 'ajustes'
         CustomizeScreen:
             text: 'Pantalla nueve'
+
+    MDScreen:
+        name: 'chatDm'
+        BoxLayout:
+            orientation: 'vertical'
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: 0.1
+                Button:
+                    id: send_button
+                    size_hint_x: 0.05
+                    md_bg_color: 0, .5, 1, 1
+                    icon: 'images/iconoBusqueda.png'
+                    on_release:
+                        root.current = 'chat'
+                Label:
+                    id: user_label
+                    text:
+                    size_hint_x: 0.95
+                    halign: 'center'    
+
+            ScrollView:
+                id: scrollChat
+                size_hint_y: 0.8
+                
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: None
+                    height: self.minimum_height
+
+                    MDList:
+                        id: other_user_list
+                        halign: 'left'
+                        size_hint_x: 0.5
+
+                    MDList:
+                        id: this_user_list
+                        halign: 'right'
+                        size_hint_x: 0.5
+
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: 0.1
+                halign: 'end'
+
+                TextInput:
+                    id: message_input
+                    size_hint_x: 0.9
+                    height: self.line_height
+                    multiline: False
+
+                Button:
+                    id: send_button
+                    size_hint_x: 0.1
+                    md_bg_color: 0, .5, 1, 1
+                    icon: 'images/iconoBusqueda.png'
+                    on_press: root.send_message(message_input.text,user_label.text)

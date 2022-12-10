@@ -4,6 +4,8 @@ from kivy.lang import Builder
 from kivy.uix.image import Image
 from kivy.uix.button import Button
 from kivymd.uix.list import OneLineListItem
+
+
 from baseDatosPruebaApp import *
 
 
@@ -45,10 +47,60 @@ class Ui(ScreenManager):
         self.ids.MDLabelFiltrado.size_hint = (1, 1)
 
     def botonBusquedaChat(self, texto):
+        self.borrarBusquedaChat()
         out = filtrarDiscotecas(5, texto)
         for element in out:
-            self.ids.MDListFiltradoChat.add_widget(
-                OneLineListItem(text=element))
+            item = OneLineListItem(
+                text=str(element), width=300, on_release=lambda x: self.crearChat(x.text))
+            self.ids.MDListFiltradoChat.add_widget(item)
+
+    def crearChat(self, usuario):
+        self.borrarBusquedaChat()
+        self.current = 'chatDm'
+        self.ids.user_label.text = usuario
+
+        usuario2 = datosUsuario('usuario')
+        usuario1 = usuario
+        if usuario1 < usuario2:
+            chat = usuario1+usuario2
+        else:
+            chat = usuario2+usuario1
+
+        rutaChat = 'chats/'+chat
+        chatsAnteriores = getTodosLosDatos(rutaChat, 'data')
+        if chatsAnteriores == []:
+            insertarMensaje(
+                usuario2, 'Hola, quieres usar Evently conmigo :)', chat, 'data')
+        else:
+            for chatAnterior in chatsAnteriores:
+                if chatAnterior['usuario'] == usuario1:
+                    item = OneLineListItem(
+                        text=str(chatAnterior['mensaje']), bg_color=('FF5A1E'))
+                    self.ids.other_user_list.add_widget(item)
+                    item2 = OneLineListItem(text=str(''), opacity=0)
+                    self.ids.this_user_list.add_widget(item2)
+                else:
+                    item = OneLineListItem(
+                        text=str(chatAnterior['mensaje']), bg_color=('FF5A1E'))
+                    self.ids.this_user_list.add_widget(item)
+                    item = OneLineListItem(text=str(''), opacity=0)
+                    self.ids.other_user_list.add_widget(item)
+        self.ids.scrollChat.scroll_y = 0
+        self.ids.message_input.text = ''
+
+    def send_message(self, mensaje, usuario1):
+
+        if(str(mensaje) != ''):
+            usuario2 = datosUsuario('usuario')
+            if usuario1 < usuario2:
+                chat = usuario1+usuario2
+            else:
+                chat = usuario2+usuario1
+            insertarMensaje(datosUsuario('usuario'),
+                            str(mensaje), chat, 'data')
+            self.crearChat(usuario1)
+        else:
+            self.crearChat(usuario1)
 
     def borrarBusquedaChat(self):
         try:
@@ -60,12 +112,12 @@ class Ui(ScreenManager):
         print('Mostrar mapa')
 
     def inicioSesion(self, usuario, password):
-        self.current = 'screen_principal'
-       # QUITAR LOS COMENTARIOS PARA QUE FUNCIONE EL LOGIN Y REGISTRO
-       # if comprobarInicioSesion(usuario, password, 'data'):
-       #     self.current = 'screen_principal'
-       # else:
-       #     self.ids.signal_login.text = 'Usuario o contraseña incorrectos'
+        #self.current = 'screen_principal'
+        # QUITAR LOS COMENTARIOS PARA QUE FUNCIONE EL LOGIN Y REGISTRO
+        if comprobarInicioSesion(usuario, password, 'data'):
+            self.current = 'screen_principal'
+        else:
+            self.ids.signal_login.text = 'Usuario o contraseña incorrectos'
 
     def clear_signal(self):
         self.ids.signal_register.text = ''
