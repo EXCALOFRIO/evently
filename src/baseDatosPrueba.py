@@ -340,7 +340,7 @@ def valoracionesUsuario(usuario):
     temp = []
     for k, v in valoraciones.get().items():
         if v['usuario'].lower().__contains__(str(usuario)+'·º·'):
-            resultado = 'FECHA: ', v['fecha'], 'DISCOTECA: ', v['nombre_discoteca'], 'RESEÑA: ', v['texto'], 'ESTRELLAS: ', v['nota']
+            resultado = 'FECHA: ' + str(v['fecha']) + '   DISCOTECA: ' + str(v['nombre_discoteca']) + '   RESEÑA: ' + str(v['texto']) + '   ESTRELLAS: ' + str(v['nota'])
             temp.append(resultado)
     return temp
 
