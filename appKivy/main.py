@@ -166,6 +166,31 @@ class Ui(ScreenManager):
         self.ids.edad.text = str(self.edad)
         self.ids.email.text = self.email
 
+    def borrarBusquedaUsuario(self):
+        try:
+            self.ids.MDListBuscadorUsuarios.clear_widgets()
+        except AttributeError:
+            pass
+
+    def dataUsuarioBuscado(self, usuario):
+        datos = getTodosLosDatos('usuarios', 'data')
+        for dato in datos:
+            if dato['usuario'] == usuario:
+                self.ids.userTextUsuarioBuscado.text = usuario
+                self.ids.nombreTextUsuarioBuscado.text = dato['nombre']
+                self.ids.apellidoTextUsuarioBuscado.text = dato['apellido']
+                self.ids.edadTextUsuarioBuscado.text = str(dato['edad'])
+                self.ids.emailTextUsuarioBuscado.text = dato['email']
+        self.current = 'datosUsuarioBuscado'
+
+    def botonBusquedaUsuarios(self, texto):
+        self.borrarBusquedaUsuario()
+        out = filtrarDiscotecas(5, texto)
+        for element in out:
+            item = OneLineListItem(
+                text=str(element), width=300, on_release=lambda x: self.dataUsuarioBuscado(x.text))
+            self.ids.MDListBuscadorUsuarios.add_widget(item)
+
     def clear_signal(self):
         self.ids.signal_register.text = ''
         self.ids.signal_login.text = ''
