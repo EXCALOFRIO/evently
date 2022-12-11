@@ -27,7 +27,8 @@
         pos_hint: {'center_x': .5}
 
     MDFillRoundFlatButton:
-        text: 'Regresar'
+        icon: 'images/iconoBusqueda.png'
+        color_icon: '#000000'
         pos_hint: {'center_x': .5}
         on_release:
             app.root.current = 'screen_principal'
@@ -113,7 +114,7 @@
             padding: dp(12)
             spacing: dp(12)
             MDFloatingActionButton:
-                icon:'arrow-left'
+                icon: 'images/iconoBusqueda.png'
                 color_icon: '#000000'
                 on_release: root.current = 'login'
     
@@ -131,6 +132,7 @@
                 size_hint: 1, 0.2
                 MDFloatingActionButton:
                     icon:'arrow-left'
+                    color_icon: '#000000'
                     pos_hint: {'center_y':0.5}
                     on_release:
                         root.current = 'login'
@@ -415,11 +417,12 @@
                 
                 MDBoxLayout:
                     orientation: 'horizontal'
-                    size_hint_y: 0.1
+                    size_hint_y: 0.05
                     Spinner:
                         id: spinnerFiltrado
                         adaptative_width: True
                         size_hint_x: 0.25
+                        max_size_hint_y: 0.05
                         text: 'Zona'
                         values: 'Zona', 'Nombre', 'Calle', 'Valoracion'
                         on_text:
@@ -428,18 +431,24 @@
                         id: MDTextFieldFiltrado
                         hint_text: "Introducir texto"
                         mode: "fill"
-                        size_hint_x: 0.6
+                        max_size_hint_y: 0.05
+                        size_hint_y: 1
+                        size_hint_x: 0.55
                         fill_color: 0, 0, 0, .4
 
                     MDFloatingActionButton:
                         icon: 'images/iconoBusqueda.png'
+                        #icon size is 24dp
+                        elevation_normal: 8
+                        max_size_hint_y: 0.05
+                        size_hint_y: 1
                         md_bg_color: 0, .5, 1, 1
-                        size_hint_x: 0.15
+                        size_hint_x: 0.2
                         on_press: root.botonBusquedaFiltrado(MDTextFieldFiltrado.text, spinnerFiltrado.text)
                 
                 MDScrollView:
                     do_scroll_y: True
-                    size_hint_y: 0.85
+                    size_hint_y: 0.9
                     
                     MDList: 
                         id: MDListFiltrado
@@ -455,8 +464,11 @@
 
 
             MDFillRoundFlatButton:
-                text: 'Regresar'
+                icon: 'images/iconoBusqueda.png'
+                color_icon: '#000000'
                 size_hint_y: 0.05
+                #centrasdo
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                 on_release:
                     root.borrarBusquedaFiltrado()
                     app.root.current = 'screen_principal'
@@ -548,7 +560,9 @@
                     fill_color: 0, 0, 0, .4
 
             MDFillRoundFlatButton:
-                text: 'Regresar'
+                icon: 'images/iconoBusqueda.png'
+                color_icon: '#000000'
+
                 pos_hint: {'center_x': .5, 'center_y': .5}
                 on_release:
                     app.root.current = 'screen_principal'
@@ -582,11 +596,13 @@
                 orientation: 'vertical'
                 MDBoxLayout:
                     orientation: 'horizontal'
-                    size_hint_y: 0.1
+                    size_hint_y: 0.05
                     MDTextField:
                         id: MDTextFieldBuscadorChat
                         hint_text: "Introducir texto"
                         mode: "fill"
+                        max_size_hint_y: 0.05
+                        size_hint_y: 1
                         size_hint_x: 0.9
                         height: self.minimum_height
                         fill_color: 0, 0, 0, .4
@@ -594,8 +610,12 @@
 
                     MDFloatingActionButton:
                         icon: 'images/iconoBusqueda.png'
+                        #icon size is 24dp
+                        elevation_normal: 8
+                        max_size_hint_y: 0.05
+                        size_hint_y: 1
                         md_bg_color: 0, .5, 1, 1
-                        size_hint_x: 0.1
+                        size_hint_x: 0.2
                         on_press: root.botonBusquedaChat(MDTextFieldBuscadorChat.text)
                 
                 ScrollView:
@@ -610,8 +630,11 @@
 
 
             MDFillRoundFlatButton:
-                text: 'Regresar'
+                icon: 'images/iconoBusqueda.png'
+                color_icon: '#000000'
+
                 size_hint_y: 0.05
+                pos_hint: {'center_x': .5, 'center_y': .5}
                 on_release:
                     root.borrarBusquedaFiltrado()
                     app.root.current = 'screen_principal'

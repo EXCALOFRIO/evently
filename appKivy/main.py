@@ -112,12 +112,12 @@ class Ui(ScreenManager):
         print('Mostrar mapa')
 
     def inicioSesion(self, usuario, password):
-        #self.current = 'screen_principal'
+        self.current = 'screen_principal'
         # QUITAR LOS COMENTARIOS PARA QUE FUNCIONE EL LOGIN Y REGISTRO
-        if comprobarInicioSesion(usuario, password, 'data'):
-            self.current = 'screen_principal'
-        else:
-            self.ids.signal_login.text = 'Usuario o contraseña incorrectos'
+        #if comprobarInicioSesion(usuario, password, 'data'):
+        #    self.current = 'screen_principal'
+        #else:
+        #    self.ids.signal_login.text = 'Usuario o contraseña incorrectos'
 
     def clear_signal(self):
         self.ids.signal_register.text = ''
