@@ -595,8 +595,54 @@
 
     MDScreen:
         name: 'perfil'
-        CustomizeScreen:
-            text: 'Pantalla cinco'
+        on_pre_enter: root.cargarDatos()
+        BoxLayout:
+            orientation: 'vertical'
+            Label:
+                text: 'Nombre de usuario:'
+                font_size: 20
+                bold: True
+            Label:
+                id: userText
+                text: root.usernameText
+                font_size: 15
+                bold: True
+            Label:
+                text: 'Edad:'
+                font_size: 20
+                bold: True
+            Label:
+                id: edad
+                text: root.edad
+                font_size: 15
+                bold: True
+            Label:
+                text: 'Correo electrónico:'
+                font_size: 20
+                bold: True
+            Label:
+                id: email
+                text: root.email
+                font_size: 15
+                bold: True
+            Label:
+                text: 'Nombre:'
+                font_size: 20
+                bold: True
+            Label:
+                id: nombre
+                text: root.nombre
+                font_size: 15
+                bold: True
+            Label:
+                text: 'Apellido:'
+                font_size: 20
+                bold: True
+            Label:
+                id: apellido
+                text: root.apellido
+                font_size: 15
+                bold: True
 
     MDScreen:
         name: 'reseña'

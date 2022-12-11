@@ -13,6 +13,12 @@ from baseDatosPruebaApp import *
 
 
 class Ui(ScreenManager):
+    usernameText = ''
+    nombre = ''
+    apellido = ''
+    edad = ''
+    email = ''
+
     def botonBusquedaFiltrado(self, texto, textoFiltro):
         if textoFiltro == 'Zona':
             numeroFiltro = 1
@@ -134,12 +140,31 @@ class Ui(ScreenManager):
         self.current = 'Mapa'
 
     def inicioSesion(self, usuario, password):
-        self.current = 'screen_principal'
+        # self.current = 'screen_principal'
         # QUITAR LOS COMENTARIOS PARA QUE FUNCIONE EL LOGIN Y REGISTRO
-        # if comprobarInicioSesion(usuario, password, 'data'):
-        #    self.current = 'screen_principal'
-        # else:
-        #    self.ids.signal_login.text = 'Usuario o contraseña incorrectos'
+        if comprobarInicioSesion(usuario, password, 'data'):
+            print("hola")
+
+            datos = getTodosLosDatos('usuarios', 'data')
+            username = datosUsuario('usuario')
+            for dato in datos:
+                if dato['usuario'] == username:
+                    self.nombre = dato['nombre']
+                    self.apellido = dato['apellido']
+                    self.edad = dato['edad']
+                    self.email = dato['email']
+
+            self.usernameText = datosUsuario('usuario')
+            self.current = 'screen_principal'
+        else:
+            self.ids.signal_login.text = 'Usuario o contraseña incorrectos'
+
+    def cargarDatos(self):
+        self.ids.userText.text = self.usernameText
+        self.ids.nombre.text = self.nombre
+        self.ids.apellido.text = self.apellido
+        self.ids.edad.text = str(self.edad)
+        self.ids.email.text = self.email
 
     def clear_signal(self):
         self.ids.signal_register.text = ''
