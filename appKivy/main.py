@@ -1,9 +1,12 @@
+import webbrowser
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager
 from kivy.lang import Builder
 from kivy.uix.image import Image
 from kivy.uix.button import Button
 from kivymd.uix.list import OneLineListItem
+from kivy_garden.mapview import MapView
+from kivy_garden.mapview import MapMarker
 
 
 from baseDatosPruebaApp import *
@@ -108,15 +111,34 @@ class Ui(ScreenManager):
         except AttributeError:
             pass
 
-    def mostrar_mapa(self):
-        print('Mostrar mapa')
+    def generate_markers(self):
+        loc = getTodosLosDatos('discotecasEficientes', 'data')
+        for location in loc:
+            marker = MapMarker(
+                lat=location['latitud'], lon=location['longitud'])
+            marker.marker_name = location['nombre']+','+location['ubicacion']
+
+            # Función que se ejecutará al presionar el marcador
+
+            def open_location(marker):
+                # Abrir el navegador en la ubicación del marcador
+                url = f'https://www.google.com/maps/search/?api=1&query={marker.lat},{marker.lon}'
+                query = marker.marker_name
+                url2 = f"https://www.google.com/maps/search/?api=1&query={query}"
+                webbrowser.open(url2)
+                print(url)
+                print(url2)
+
+            marker.bind(on_release=open_location)
+            self.ids.mapview.add_marker(marker)
+        self.current = 'Mapa'
 
     def inicioSesion(self, usuario, password):
         self.current = 'screen_principal'
         # QUITAR LOS COMENTARIOS PARA QUE FUNCIONE EL LOGIN Y REGISTRO
-        #if comprobarInicioSesion(usuario, password, 'data'):
+        # if comprobarInicioSesion(usuario, password, 'data'):
         #    self.current = 'screen_principal'
-        #else:
+        # else:
         #    self.ids.signal_login.text = 'Usuario o contraseña incorrectos'
 
     def clear_signal(self):

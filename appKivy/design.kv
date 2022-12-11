@@ -274,7 +274,7 @@
 
                 ElementCard:  #Boton de Mapa
                     on_release:
-                        root.mostrar_mapa()
+                        root.generate_markers()
                     MDBoxLayout:
                         orientation: 'vertical'
                         MDLabel:
@@ -405,7 +405,27 @@
                             halign: 'center'
 
     MDScreen:
-        name: 'mapa'
+        name: 'Mapa'
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            MapView:
+                id: mapview
+                lat: 40.416775
+                lon: -3.703790
+                text: ''
+                zoom: 15
+
+            MDFillRoundFlatButton:
+                icon: 'images/iconoBusqueda.png'
+                color_icon: '#000000'
+                size_hint_y: 0.05
+                #centrasdo
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                on_release:
+                    root.borrarBusquedaFiltrado()
+                    app.root.current = 'screen_principal'
+                    app.root.transition = SlideTransition(direction= 'left')
         
         
     MDScreen:
