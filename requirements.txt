@@ -12,3 +12,5 @@ imutils
 PySide2
 Pyrebase4
 mapvie
+kivy
+kivymd
