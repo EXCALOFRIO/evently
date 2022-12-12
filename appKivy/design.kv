@@ -527,7 +527,7 @@
                     halign: 'left'
                     size_hint_x: 0.2
                 MDTextFieldRect:
-                    id: MDTextFieldNombre
+                    id: MDTextFieldNombreDiscoteca
                     hint_text: "Introducir el nombre de la discoteca"
                     size_hint_x: 0.8
                     height: "30dp"
@@ -545,7 +545,7 @@
                     halign: 'left'
                     size_hint_x: 0.2
                 MDTextFieldRect:
-                    id: MDTextFieldZona
+                    id: MDTextFieldZonaDiscoteca
                     hint_text: "Introducir el nombre de la discoteca"
                     height: "30dp"
                     max_text_length: 10
@@ -563,7 +563,7 @@
                     halign: 'left'
                     size_hint_x: 0.2
                 MDTextFieldRect:
-                    id: MDTextFieldCalle
+                    id: MDTextFieldCalleDiscoteca
                     hint_text: "Introducir el nombre de la discoteca"
                     height: "30dp"
                     max_text_length: 30
@@ -580,7 +580,7 @@
                     halign: 'left'
                     size_hint_x: 0.2
                 MDTextFieldRect:
-                    id: MDTextFieldNumero
+                    id: MDTextFieldNumeroDiscoteca
                     hint_text: "Introducir el nombre de la discoteca"
                     height: "30dp"
                     max_text_length: 30
@@ -596,8 +596,8 @@
                 id: MDFillRoundFlatButtonAñadirDiscoteca
                 pos_hint: {'center_x': .5, 'center_y': .5}
                 on_release:
-                    root.botonAñadirDiscoteca(MDTextFieldNombre.text, MDTextFieldZona.text, MDTextFieldCalle.text, MDTextFieldNumero.text)
-                    app.root.transition = SlideTransition(direction= 'left')
+                    root.botonAñadirDiscoteca(MDTextFieldNombreDiscoteca.text, MDTextFieldZonaDiscoteca.text, MDTextFieldCalleDiscoteca.text, MDTextFieldNumeroDiscoteca.text)
+                    
 
             MDFillRoundFlatButton:
                 #icon: 'images/iconoBusqueda.png'

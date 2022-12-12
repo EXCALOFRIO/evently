@@ -305,10 +305,10 @@ class Ui(ScreenManager):
 
     def botonAñadirDiscoteca(self,nombre,zona,calle,numero):
         insertarDiscoteca(nombre, calle, numero, zona, 'data')
-        self.ids.MDTextFieldNombre.text=''
-        self.ids.MDTextFieldZona.text=''
-        self.ids.MDTextFieldCalle.text=''
-        self.ids.MDTextFieldNumero.text=''
+        self.ids.MDTextFieldNombreDiscoteca.text=''
+        self.ids.MDTextFieldZonaDiscoteca.text=''
+        self.ids.MDTextFieldCalleDiscoteca.text=''
+        self.ids.MDTextFieldNumeroDiscoteca.text=''
 
     def botonAñadirFiesta(self,nombre,zona,calle,numero):
         usuarioFiesta=datosUsuario('usuario')
