@@ -470,3 +470,14 @@ def filtrarDiscotecas(opcion, consulta):
                              v['texto'], v['usuario'], v['fecha']]
                 temp.append(resultado)
         return temp
+    elif opcion == 10:
+        # FILTRADO DE FIESTAS
+        valoraciones = db.reference('data/fiestas')
+        consulta = consulta.lower()
+        temp = []
+        for k, v in valoraciones.get().items():
+            if v['usuario'].lower().startswith(consulta):
+                resultado = [v['nombre'], v['calle'],
+                             v['numero'], v['zona'], v['usuario']]
+                temp.append(resultado)
+        return temp

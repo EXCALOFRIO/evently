@@ -88,7 +88,7 @@ class Ui_MainWindow(QMainWindow):
             for i in self.scrollAreaWidgetContents2.children():
                 if isinstance(i, QPushButton):
                     i.deleteLater()
-    
+
     def borrarBotonesBusquedaUsuarios(self):
         for i in self.scrollAreaWidgetContents3.children():
             if isinstance(i, QPushButton):
@@ -120,7 +120,7 @@ class Ui_MainWindow(QMainWindow):
                 self.verticalLayout_14.addWidget(
                     self.botonesDiscotecas[out[i]])
                 self.botonesDiscotecas[out[i]].clicked.connect(
-                    lambda checked, out=out, i=i: self.imprimirNombreDiscoteca(out[i]))   
+                    lambda checked, out=out, i=i: self.imprimirNombreDiscoteca(out[i]))
                 self.filtrado = False
 
     def imprimirNombreDiscoteca(self, nombreDiscoteca):
@@ -150,10 +150,10 @@ class Ui_MainWindow(QMainWindow):
                 self.verticalLayout_14Chat.addWidget(
                     self.botonesChatUsuarios[out[i]])
                 self.botonesChatUsuarios[out[i]].clicked.connect(
-                    lambda checked, out=out, i=i: self.crearChat(out[i],''))
+                    lambda checked, out=out, i=i: self.crearChat(out[i], ''))
                 self.busquedaUsuarios = False
 
-    def crearChat(self, nombreUsuario,textoMensaje):
+    def crearChat(self, nombreUsuario, textoMensaje):
         self.borrarBotonesChatUsuarios()
         self.tablaChatCreada = True
         self.tablaChat = QTableWidget()
@@ -168,14 +168,14 @@ class Ui_MainWindow(QMainWindow):
         self.textEditChat = QtWidgets.QTextEdit(self.scrollAreaWidgetContents2)
         self.textEditChat.setObjectName("textEditChat")
         self.textEditChat.setFixedHeight(80)
-        
+
         self.textEditChat.setStyleSheet("color:  "+color+";\n")
-        #color del fondo blanco con poca opacidad
-        self.textEditChat.setStyleSheet("background-color: rgba(255, 255, 255, 0.8);")
+        # color del fondo blanco con poca opacidad
+        self.textEditChat.setStyleSheet(
+            "background-color: rgba(255, 255, 255, 0.8);")
         self.textEditChat.setText(textoMensaje)
-        #set focus al final del texto
+        # set focus al final del texto
         self.textEditChat.setFocus()
-        
 
         self.horizontalLayout_15Chat = QtWidgets.QHBoxLayout()
         self.tablaChat.setHorizontalHeaderLabels([nombreUsuario, "YO"])
@@ -229,7 +229,6 @@ class Ui_MainWindow(QMainWindow):
                     # cada elemento alinea el texto a la derecha y centrado
                     self.tablaChat.item(fila, 1).setTextAlignment(
                         QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
-                    
 
         # recorrer la tabla, si una celda no tiene texto el color del fondeo es color2, si tiene texto el color del fondo es color
         for i in range(self.tablaChat.rowCount()):
@@ -250,9 +249,10 @@ class Ui_MainWindow(QMainWindow):
             1, QtWidgets.QHeaderView.Stretch)
         self.tablaChat.verticalHeader().setVisible(False)
 
-        #esperar10 seg y si acaba el tiempo se actualiza el chat, pero si se cambai el text edit se resetea el tiempo
+        # esperar10 seg y si acaba el tiempo se actualiza el chat, pero si se cambai el text edit se resetea el tiempo
         self.timer = QtCore.QTimer()
-        self.timer.timeout.connect(lambda: self.crearChat(usuario1,self.textEditChat.toPlainText()))
+        self.timer.timeout.connect(lambda: self.crearChat(
+            usuario1, self.textEditChat.toPlainText()))
         self.timer.start(5000)
         self.textEditChat.textChanged.connect(self.timer.stop)
         self.pushButton_BuscarChat.clicked.connect(self.timer.stop)
@@ -269,9 +269,9 @@ class Ui_MainWindow(QMainWindow):
         rutaChat = 'chats/'+chat
         if(mensaje.toPlainText() != ''):
             insertarMensaje(usuario2, mensaje.toPlainText(), chat, 'data')
-            self.crearChat(usuario1,'')
+            self.crearChat(usuario1, '')
         else:
-            self.crearChat(usuario1,'')
+            self.crearChat(usuario1, '')
 
     def crearBotonesUsuarios(self):
         out = filtrarDiscotecas(5, self.lineEdit_BusquedaUsuarios.text())
@@ -296,7 +296,7 @@ class Ui_MainWindow(QMainWindow):
         # comprueba si existe textEditCarta y lo borra
         if hasattr(self, 'textEditCarta'):
             self.borrarTextFiltrado()
-            
+
         if self.comboBox.currentText() == "ZONA":
             self.crearBotonesDiscotecasFiltradas(1)
 
@@ -394,26 +394,26 @@ class Ui_MainWindow(QMainWindow):
         for i in range(self.tablaResennas.rowCount()):
             for j in range(self.tablaResennas.columnCount()-1):
                 self.tablaResennas.item(i, j).setTextAlignment(Qt.AlignCenter)
-                
+
     def boton_subir_foto(self):
         self.usuario = datosUsuario('usuario')
         try:
-            self.file_name = QFileDialog.getOpenFileName(filter="Imagen (*.*)")[0]
+            self.file_name = QFileDialog.getOpenFileName(
+                filter="Imagen (*.*)")[0]
             self.image = cv2.imread(self.file_name)
             print(self.file_name)
             subir_foto(self.file_name, self.usuario)
             self.show_popup_imagen_subida()
         except FileNotFoundError:
             pass
-            
+
     def show_popup_imagen_subida(self):
         msg = QMessageBox()
         msg.setWindowTitle("EVENTLY")
         msg.setText("Imagen subida correctamente.")
-        
+
         x = msg.exec_()
-    
-    
+
     def boton_mis_fotos(self):
         self.usuario = datosUsuario('usuario')
         url_fotos = ver_mis_fotos(self.usuario)
@@ -428,28 +428,28 @@ class Ui_MainWindow(QMainWindow):
             image = imutils.resize(image, width=200, height=200)
             self.label = QtWidgets.QLabel()
             frame = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-            image = QImage(frame, frame.shape[1], frame.shape[0], frame.strides[0], QImage.Format_RGB888)
+            image = QImage(
+                frame, frame.shape[1], frame.shape[0], frame.strides[0], QImage.Format_RGB888)
             self.label.setPixmap(QtGui.QPixmap.fromImage(image))
-            
+
             self.hbox.addWidget(self.label)
-    
-            
+
     def createGridLayout(self, x):
         self.horizontalGroupBox = QGroupBox("Grid")
         layout = QGridLayout
         layout.setGeometry(QtCore.QRect(130, 50, 151, 31))
         layout.setColumnStretch(1, x)
         layout.setColumnStretch(2, x)
-        
+
     # SE ABRE EL CHAT
 
     def abrir_ventana_chat(self):
         self.stackedWidget.setCurrentWidget(self.page_chat)
-    
+
     def abrir_ventana_usuarios(self):
         self.stackedWidget.setCurrentWidget(self.page_usuarios)
 
-    def buttonPerfil(self,usuarioText):
+    def buttonPerfil(self, usuarioText):
         self.stackedWidget.setCurrentWidget(self.page_MiPerfil)
         self.usuario = datosUsuario('usuario')
         self.textBrowser_usuario.setText(self.usuario)
@@ -462,13 +462,14 @@ class Ui_MainWindow(QMainWindow):
         self.edad = edadUsuario('edad')
         self.textBrowser_edad.setText(str(self.edad))
 
-    def buttonPerfil2(self,usuarioText):
+    def buttonPerfil2(self, usuarioText):
         self.stackedWidget.setCurrentWidget(self.page_MiPerfil2)
-        datosUsuarioEspecifico=getDatosElementoConcreto('usuarios','usuario',usuarioText,['usuario','nombre','apellido','email','edad'],'data')
+        datosUsuarioEspecifico = getDatosElementoConcreto('usuarios', 'usuario', usuarioText, [
+                                                          'usuario', 'nombre', 'apellido', 'email', 'edad'], 'data')
         self.usuario = datosUsuarioEspecifico[0]
         self.usuarioBuscado = self.usuario
         self.textBrowser_usuarioPerfil2.setText(usuarioText)
-        self.nombre =  datosUsuarioEspecifico[1]
+        self.nombre = datosUsuarioEspecifico[1]
         self.textBrowser_nombrePerfil2.setText(self.nombre)
         self.apellido = datosUsuarioEspecifico[2]
         self.textBrowser_apellidoPerfil2.setText(self.apellido)
@@ -476,31 +477,41 @@ class Ui_MainWindow(QMainWindow):
         self.textBrowser_emailPerfil2.setText(self.email)
         self.edad = datosUsuarioEspecifico[4]
         self.textBrowser_edadPerfil2.setText(str(self.edad))
-        
+
     def buttonMisResennas(self):
         self.usr = datosUsuario('usuario')
-        self.mis_resennas = str(valoracionesUsuario(self.usr))
-        if self.textBrowser_MiPerfil.isHidden(): self.textBrowser_MiPerfil.show()
+        out = filtrarDiscotecas(7, (self.usr))
+        self.mis_resennas = str(out)
+        if self.textBrowser_MiPerfil.isHidden():
+            self.textBrowser_MiPerfil.show()
         self.textBrowser_MiPerfil.setText(self.mis_resennas)
-    
-    def buttonMisResennasOtroPerfil(self,usuarioText):
+
+    def buttonMisResennasOtroPerfil(self, usuarioText):
         self.usr = self.usuarioBuscado
-        self.mis_resennas = str(valoracionesUsuario(self.usr))
-        if self.textBrowser_MiPerfilPerfil2.isHidden(): self.textBrowser_MiPerfilPerfil2.show()
-        self.textBrowser_MiPerfilPerfil2.setText(self.mis_resennas) 
+        out = filtrarDiscotecas(7, (self.usr))
+        self.mis_resennas = str(out)
+        if self.textBrowser_MiPerfilPerfil2.isHidden(
+        ):
+            self.textBrowser_MiPerfilPerfil2.show()
+        self.textBrowser_MiPerfilPerfil2.setText(self.mis_resennas)
 
     def buttonMisFiestas(self):
         self.usr = datosUsuario('usuario')
-        self.mis_fiestas = str(fiestasUsuario(self.usr))
-        if self.textBrowser_MiPerfil.isHidden(): self.textBrowser_MiPerfil.show()
+        out = filtrarDiscotecas(10, (self.usr))
+        self.mis_fiestas = str(out)
+        if self.textBrowser_MiPerfil.isHidden():
+            self.textBrowser_MiPerfil.show()
         self.textBrowser_MiPerfil.setText(self.mis_fiestas)
-    
+
     def buttonMisFiestasOtroPerfil(self):
         self.usr = self.usuarioBuscado
-        self.mis_fiestas = str(fiestasUsuario(self.usr))
-        if self.textBrowser_MiPerfilPerfil2.isHidden(): self.textBrowser_MiPerfilPerfil2.show()
-        self.textBrowser_MiPerfilPerfil2.setText(self.mis_fiestas) 
-    
+        out = filtrarDiscotecas(10, (self.usr))
+        self.mis_fiestas = str(out)
+        if self.textBrowser_MiPerfilPerfil2.isHidden(
+        ):
+            self.textBrowser_MiPerfilPerfil2.show()
+        self.textBrowser_MiPerfilPerfil2.setText(self.mis_fiestas)
+
     def boton_mis_fotos_OtroUsuario(self):
         self.usuario = self.usuarioBuscado
         url_fotos = ver_mis_fotos(self.usuario)
@@ -515,9 +526,10 @@ class Ui_MainWindow(QMainWindow):
             image = imutils.resize(image, width=200, height=200)
             self.label = QtWidgets.QLabel()
             frame = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-            image = QImage(frame, frame.shape[1], frame.shape[0], frame.strides[0], QImage.Format_RGB888)
+            image = QImage(
+                frame, frame.shape[1], frame.shape[0], frame.strides[0], QImage.Format_RGB888)
             self.label.setPixmap(QtGui.QPixmap.fromImage(image))
-            
+
             self.hbox.addWidget(self.label)
 
     def setupUi(self, MainWindow):
@@ -592,7 +604,7 @@ class Ui_MainWindow(QMainWindow):
         self.frame_control.setObjectName("frame_control")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.frame_control)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
-       #BOTON USUARIOS
+       # BOTON USUARIOS
         self.pushButton_Usuarios = QPushButton(
             self.frame_control, clicked=lambda: self.abrir_ventana_usuarios())
         self.pushButton_Usuarios.setObjectName(u"pushButton_Usuarios")
@@ -600,35 +612,35 @@ class Ui_MainWindow(QMainWindow):
         self.pushButton_Usuarios.setEnabled(True)
         self.pushButton_Usuarios.setMinimumSize(QSize(0, 40))
         self.verticalLayout_3.addWidget(self.pushButton_Usuarios)
-        #BOTON MAPA
+        # BOTON MAPA
         self.pushButton_Mapa = QtWidgets.QPushButton(self.frame_control)
         self.pushButton_Mapa.setEnabled(True)
         self.pushButton_Mapa.setMinimumSize(QtCore.QSize(0, 40))
         self.pushButton_Mapa.clicked.connect(self.buttonMapa)
         self.pushButton_Mapa.setObjectName("pushButton_Mapa")
         self.verticalLayout_3.addWidget(self.pushButton_Mapa)
-        #BOTON FILTRADO
+        # BOTON FILTRADO
         self.pushButton_Filtrado = QtWidgets.QPushButton(self.frame_control)
         self.pushButton_Filtrado.setEnabled(True)
         self.pushButton_Filtrado.setMinimumSize(QtCore.QSize(0, 40))
         self.pushButton_Filtrado.clicked.connect(self.buttonFiltrado)
         self.pushButton_Filtrado.setObjectName("pushButton_Filtrado")
         self.verticalLayout_3.addWidget(self.pushButton_Filtrado)
-        #BOTON DICOTECA
+        # BOTON DICOTECA
         self.pushButton_Discoteca = QtWidgets.QPushButton(self.frame_control)
         self.pushButton_Discoteca.setEnabled(True)
         self.pushButton_Discoteca.setMinimumSize(QtCore.QSize(0, 40))
         self.pushButton_Discoteca.clicked.connect(self.buttonDiscotecas)
         self.pushButton_Discoteca.setObjectName("pushButton_Discoteca")
         self.verticalLayout_3.addWidget(self.pushButton_Discoteca)
-        #BOTON FIESTA
+        # BOTON FIESTA
         self.pushButton_Fiesta = QtWidgets.QPushButton(self.frame_control)
         self.pushButton_Fiesta.setEnabled(True)
         self.pushButton_Fiesta.setMinimumSize(QtCore.QSize(0, 40))
         self.pushButton_Fiesta.clicked.connect(self.buttonFiesta)
         self.pushButton_Fiesta.setObjectName("pushButton_Fiesta")
         self.verticalLayout_3.addWidget(self.pushButton_Fiesta)
-        #BOTON RESEÑA
+        # BOTON RESEÑA
         self.pushButton_Resenna = QtWidgets.QPushButton(self.frame_control)
         self.pushButton_Resenna.setEnabled(True)
         self.pushButton_Resenna.setMinimumSize(QtCore.QSize(0, 40))
@@ -637,7 +649,7 @@ class Ui_MainWindow(QMainWindow):
         self.verticalLayout_3.addWidget(self.pushButton_Resenna)
         self.horizontalLayout.addWidget(self.frame_control)
         self.frame_paginas = QtWidgets.QFrame(self.frame_contenido)
-        #BOTON PERFIL
+        # BOTON PERFIL
         self.pushButton_MiPerfil = QPushButton(self.frame_control)
         self.pushButton_MiPerfil.setObjectName(u"pushButton_MiPerfil")
         self.pushButton_MiPerfil.clicked.connect(self.buttonPerfil)
@@ -653,7 +665,7 @@ class Ui_MainWindow(QMainWindow):
         self.pushButton_Chat.setEnabled(True)
         self.pushButton_Chat.setMinimumSize(QSize(0, 40))
         self.verticalLayout_3.addWidget(self.pushButton_Chat)
-        
+
         # ESTE ES EL DE FILTRADO
         self.frame_paginas.setStyleSheet("QFrame{\n"
                                          "    background-color:"+color2+";\n"
@@ -816,18 +828,21 @@ class Ui_MainWindow(QMainWindow):
         self.verticalLayout_13Chat.addWidget(self.scrollAreaChat)
         # añade un boton dentro del scroll area
         self.stackedWidget.addWidget(self.page_chat)
-    
-        #PAGINA DE USUARIOS
+
+        # PAGINA DE USUARIOS
         self.page_usuarios = QtWidgets.QWidget()
         self.page_usuarios.setObjectName("page_usuarios")
-        self.verticalLayout_13Usuarios = QtWidgets.QVBoxLayout(self.page_usuarios)
-        self.verticalLayout_13Usuarios.setObjectName("verticalLayout_13Usuarios")
+        self.verticalLayout_13Usuarios = QtWidgets.QVBoxLayout(
+            self.page_usuarios)
+        self.verticalLayout_13Usuarios.setObjectName(
+            "verticalLayout_13Usuarios")
         self.label_6Usuarios = QtWidgets.QLabel(self.page_usuarios)
         self.label_6Usuarios.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_6Usuarios.setObjectName("label_6Usuarios")   
+        self.label_6Usuarios.setObjectName("label_6Usuarios")
         self.verticalLayout_13Usuarios.addWidget(self.label_6Usuarios)
         self.horizontalLayout_9Usuarios = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_9Usuarios.setObjectName("horizontalLayout_9Usuarios")
+        self.horizontalLayout_9Usuarios.setObjectName(
+            "horizontalLayout_9Usuarios")
 
         self.lineEdit_BusquedaUsuarios = QtWidgets.QLineEdit(
             self.page_usuarios)
@@ -835,7 +850,8 @@ class Ui_MainWindow(QMainWindow):
             "color:  "+color+";")
         self.lineEdit_BusquedaUsuarios.setObjectName(
             "lineEdit_BusquedaUsuarios")
-        self.horizontalLayout_9Usuarios.addWidget(self.lineEdit_BusquedaUsuarios)
+        self.horizontalLayout_9Usuarios.addWidget(
+            self.lineEdit_BusquedaUsuarios)
         spacerItem1 = QtWidgets.QSpacerItem(
             40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_9Usuarios.addItem(spacerItem1)
@@ -845,11 +861,13 @@ class Ui_MainWindow(QMainWindow):
             "pushButton_BuscarUsuarios")
         self.pushButton_BuscarUsuarios.clicked.connect(
             self.crearBotonesUsuarios)
-        self.horizontalLayout_9Usuarios.addWidget(self.pushButton_BuscarUsuarios)
+        self.horizontalLayout_9Usuarios.addWidget(
+            self.pushButton_BuscarUsuarios)
         spacerItem2Usuarios = QtWidgets.QSpacerItem(
             40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_9Usuarios.addItem(spacerItem2Usuarios)
-        self.verticalLayout_13Usuarios.addLayout(self.horizontalLayout_9Usuarios)
+        self.verticalLayout_13Usuarios.addLayout(
+            self.horizontalLayout_9Usuarios)
 
         # añade para poder añadir un boton por cada discoteca, y poder desplazarte con un scroll bar por los botones
         self.scrollAreaUsuarios = QtWidgets.QScrollArea(self.page_usuarios)
@@ -863,7 +881,8 @@ class Ui_MainWindow(QMainWindow):
             "scrollAreaWidgetContents3")
         self.verticalLayout_14Usuarios = QtWidgets.QVBoxLayout(
             self.scrollAreaWidgetContents3)
-        self.verticalLayout_14Usuarios.setObjectName("verticalLayout_14Usuarios")
+        self.verticalLayout_14Usuarios.setObjectName(
+            "verticalLayout_14Usuarios")
         self.scrollAreaUsuarios.setWidget(self.scrollAreaWidgetContents3)
         self.verticalLayout_13Usuarios.addWidget(self.scrollAreaUsuarios)
         # añade un boton dentro del scroll area
@@ -1259,7 +1278,7 @@ class Ui_MainWindow(QMainWindow):
         self.verticalLayout_2.setStretch(0, 1)
         self.verticalLayout_2.setStretch(1, 8)
         self.verticalLayout_12.addWidget(self.frame)
-        
+
         """PÁGINA MI PERFIL2 """
         self.page_MiPerfil2 = QtWidgets.QWidget()
         self.page_MiPerfil2.setObjectName("page_MiPerfil2")
@@ -1289,24 +1308,30 @@ class Ui_MainWindow(QMainWindow):
             QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
         self.verticalLayout_15Perfil2.addWidget(self.label_apellidoPerfil2)
         self.textBrowser_usuarioPerfil2 = QTextBrowser(self.page_MiPerfil2)
-        self.textBrowser_usuarioPerfil2.setObjectName("textBrowser_usuarioPerfil2")
-        self.textBrowser_usuarioPerfil2.setGeometry(QtCore.QRect(130, 50, 151, 31))
+        self.textBrowser_usuarioPerfil2.setObjectName(
+            "textBrowser_usuarioPerfil2")
+        self.textBrowser_usuarioPerfil2.setGeometry(
+            QtCore.QRect(130, 50, 151, 31))
         self.textBrowser_usuarioPerfil2.setStyleSheet(
             "background-color: rgb(255, 255, 255)")
         self.textBrowser_nombrePerfil2 = QTextBrowser(self.page_MiPerfil2)
-        self.textBrowser_nombrePerfil2.setObjectName("textBrowser_nombrePerfil2")
+        self.textBrowser_nombrePerfil2.setObjectName(
+            "textBrowser_nombrePerfil2")
         self.textBrowser_nombrePerfil2.setGeometry(QRect(130, 100, 151, 31))
         self.textBrowser_nombrePerfil2.setStyleSheet(
             "background-color: rgb(255, 255, 255)")
         self.textBrowser_apellidoPerfil2 = QTextBrowser(self.page_MiPerfil2)
-        self.textBrowser_apellidoPerfil2.setObjectName("textBrowser_apellidoPerfil2")
+        self.textBrowser_apellidoPerfil2.setObjectName(
+            "textBrowser_apellidoPerfil2")
         self.textBrowser_apellidoPerfil2.setGeometry(QRect(130, 150, 151, 31))
         self.textBrowser_apellidoPerfil2.setStyleSheet(
             "background-color: rgb(255, 255, 255)")
         self.verticalLayoutWidget_2Perfil = QWidget(self.page_MiPerfil2)
-        self.verticalLayoutWidget_2Perfil.setObjectName("verticalLayoutWidget_2Perfil")
+        self.verticalLayoutWidget_2Perfil.setObjectName(
+            "verticalLayoutWidget_2Perfil")
         self.verticalLayoutWidget_2Perfil.setGeometry(QRect(290, 40, 91, 141))
-        self.verticalLayout_15Perfil2 = QVBoxLayout(self.verticalLayoutWidget_2)
+        self.verticalLayout_15Perfil2 = QVBoxLayout(
+            self.verticalLayoutWidget_2)
         self.verticalLayout_15Perfil2.setObjectName("verticalLayout_15Perfil2")
         self.verticalLayout_15Perfil2.setContentsMargins(0, 0, 0, 0)
         self.label_emailPerfil2 = QLabel(self.verticalLayoutWidget_2Perfil)
@@ -1330,23 +1355,31 @@ class Ui_MainWindow(QMainWindow):
         self.textBrowser_edadPerfil2.setStyleSheet(
             "background-color: rgb(255, 255, 255)")
         self.textBrowser_MiPerfilPerfil2 = QTextBrowser(self.page_MiPerfil2)
-        self.textBrowser_MiPerfilPerfil2.setObjectName("textBrowser_MiPerfilPerfil2")
+        self.textBrowser_MiPerfilPerfil2.setObjectName(
+            "textBrowser_MiPerfilPerfil2")
         self.textBrowser_MiPerfilPerfil2.setGeometry(QRect(10, 230, 520, 280))
         self.textBrowser_MiPerfilPerfil2.setStyleSheet(
             "background-color: rgb(255, 255, 255)")
         self.pushButton_MisResennasPerfil2 = QPushButton(self.page_MiPerfil2)
-        self.pushButton_MisResennasPerfil2.setObjectName("pushButton_MisResennasPerfil2")
-        self.pushButton_MisResennasPerfil2.clicked.connect(self.buttonMisResennasOtroPerfil)
-        self.pushButton_MisResennasPerfil2.setGeometry(QRect(250, 200, 111, 23))
+        self.pushButton_MisResennasPerfil2.setObjectName(
+            "pushButton_MisResennasPerfil2")
+        self.pushButton_MisResennasPerfil2.clicked.connect(
+            self.buttonMisResennasOtroPerfil)
+        self.pushButton_MisResennasPerfil2.setGeometry(
+            QRect(250, 200, 111, 23))
         self.pushButton_MisFiestasPerfil2 = QPushButton(self.page_MiPerfil2)
-        self.pushButton_MisFiestasPerfil2.setObjectName("pushButton_MisFiestasPerfil2")
-        self.pushButton_MisFiestasPerfil2.clicked.connect(self.buttonMisFiestasOtroPerfil)
+        self.pushButton_MisFiestasPerfil2.setObjectName(
+            "pushButton_MisFiestasPerfil2")
+        self.pushButton_MisFiestasPerfil2.clicked.connect(
+            self.buttonMisFiestasOtroPerfil)
         self.pushButton_MisFiestasPerfil2.setGeometry(QRect(370, 200, 101, 23))
         self.pushButton_MisFotosPerfil2 = QPushButton(self.page_MiPerfil2)
-        self.pushButton_MisFotosPerfil2.setObjectName("pushButton_MisFotosPerfil2")
-        self.pushButton_MisFotosPerfil2.clicked.connect(self.boton_mis_fotos_OtroUsuario)
+        self.pushButton_MisFotosPerfil2.setObjectName(
+            "pushButton_MisFotosPerfil2")
+        self.pushButton_MisFotosPerfil2.clicked.connect(
+            self.boton_mis_fotos_OtroUsuario)
         self.pushButton_MisFotosPerfil2.setGeometry(QRect(145, 200, 101, 23))
-        
+
         self.stackedWidget.addWidget(self.page_MiPerfil2)
         self.verticalLayout_4.addWidget(self.stackedWidget)
         self.horizontalLayout.addWidget(self.frame_paginas)
@@ -1354,7 +1387,7 @@ class Ui_MainWindow(QMainWindow):
         self.verticalLayout_2.setStretch(0, 1)
         self.verticalLayout_2.setStretch(1, 8)
         self.verticalLayout_12.addWidget(self.frame)
-        
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.retranslateUi(MainWindow)
         self.stackedWidget.setCurrentIndex(5)
@@ -1440,7 +1473,8 @@ class Ui_MainWindow(QMainWindow):
             _translate("MainWindow", "Mis fotos"))
         self.label_usuarioPerfil2.setText(_translate("MainWindow", "USUARIO:"))
         self.label_nombrePerfil2.setText(_translate("MainWindow", "NOMBRE:"))
-        self.label_apellidoPerfil2.setText(_translate("MainWindow", "APELLIDO:"))
+        self.label_apellidoPerfil2.setText(
+            _translate("MainWindow", "APELLIDO:"))
         self.label_emailPerfil2.setText(_translate("MainWindow", "EMAIL:"))
         self.label_edadPerfil2.setText(_translate("MainWindow", "EDAD:"))
         self.pushButton_MisResennasPerfil2.setText(
@@ -1449,6 +1483,7 @@ class Ui_MainWindow(QMainWindow):
             _translate("MainWindow", "Fiestas"))
         self.pushButton_MisFotosPerfil2.setText(
             _translate("MainWindow", "Fotos"))
+
 
 if __name__ == "__main__":
     import sys
