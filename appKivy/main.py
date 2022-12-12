@@ -14,8 +14,13 @@ from kivy_garden.mapview import MapMarker
 
 from baseDatosPruebaApp import *
 
+class OneLineListItemAligned(OneLineListItem):
+    def __init__(self, halign, **kwargs):
+        super(OneLineListItemAligned, self).__init__(**kwargs)
+        self.ids._lbl_primary.halign = halign
 
 class Ui(ScreenManager):
+    
     usernameText = ''
     nombre = ''
     apellido = ''
@@ -92,14 +97,14 @@ class Ui(ScreenManager):
         else:
             for chatAnterior in chatsAnteriores:
                 if chatAnterior['usuario'] == usuario1:
-                    item = OneLineListItem(
-                        text=str(chatAnterior['mensaje']), bg_color=('292828'))
+                    item = OneLineListItemAligned(
+                        text=str(chatAnterior['mensaje']), bg_color=('292828'),halign="left")
                     self.ids.other_user_list.add_widget(item)
                     item2 = OneLineListItem(text=str(''), opacity=0)
                     self.ids.this_user_list.add_widget(item2)
                 else:
-                    item = OneLineListItem(
-                        text=str(chatAnterior['mensaje']), bg_color=('b84814'))
+                    item = OneLineListItemAligned(
+                        text=str(chatAnterior['mensaje']), bg_color=('b84814'),halign="right")
                     self.ids.this_user_list.add_widget(item)
                     item = OneLineListItem(text=str(''), opacity=0)
                     self.ids.other_user_list.add_widget(item)
