@@ -93,23 +93,28 @@ class Ui(ScreenManager):
             for chatAnterior in chatsAnteriores:
                 if chatAnterior['usuario'] == usuario1:
                     item = OneLineListItem(
-                        text=str(chatAnterior['mensaje']), bg_color=('FF5A1E'))
+                        text=str(chatAnterior['mensaje']), bg_color=('292828'))
                     self.ids.other_user_list.add_widget(item)
                     item2 = OneLineListItem(text=str(''), opacity=0)
                     self.ids.this_user_list.add_widget(item2)
                 else:
                     item = OneLineListItem(
-                        text=str(chatAnterior['mensaje']), bg_color=('FF5A1E'))
+                        text=str(chatAnterior['mensaje']), bg_color=('b84814'))
                     self.ids.this_user_list.add_widget(item)
                     item = OneLineListItem(text=str(''), opacity=0)
                     self.ids.other_user_list.add_widget(item)
             Clock.schedule_once(self.actualizarChat, 5)
+            
         self.ids.scrollChat.scroll_y = 0
         
         #espera 5 segundos y actualiza el chat
+    
+    def pararTimer(self):
+        Clock.unschedule(self.actualizarChat)
         
         
     def actualizarChat(self, dt):
+        self.ids.scrollChat.scroll_y = 0
         self.crearChat(self.ids.user_label.text, self.ids.message_input.text)
 
     def send_message(self, mensaje, usuario1):
