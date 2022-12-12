@@ -251,6 +251,7 @@
 
 
     MDScreen:
+        id: pantalla_principa
         name: 'screen_principal'
         md_bg_color: '#F45434'#color del fondo
         MDBoxLayout:
@@ -399,16 +400,16 @@
 
                 ElementCard:  #Boton de ajustes
                     on_release:
-                        root.current = 'ajustes'
+                        root.current = 'Notas de la version'
                     MDBoxLayout:
                         orientation: 'vertical'
                         MDLabel:
-                            text: 'Ajustes'
+                            text: 'Información'
                             halign: 'center'
                         Image: 
                             source: 'images/iconoAjustes.png'
                         MDLabel:
-                            text: 'Personaliza evently'
+                            text: 'Notas de la versión'
                             halign: 'center'
 
     MDScreen:
@@ -993,9 +994,10 @@
                     app.root.transition = SlideTransition(direction= 'left')
 
     MDScreen:
-        name: 'ajustes'
+        name: 'Notas de la version'
         CustomizeScreen:
-            text: 'Pantalla nueve'
+            text: 'Esta es la versión de la demo final de Evently La aplicación ha sido desarrollada por Alejandro Ramírez, Alberto Daguerre, Joaquin Moreno, Pablo Rivero y Serena Blanco EVENTLY TM es una marca registrada Interesados en contactar en el numero de atención gratuito 684317608 o al correo: evently@evently.com'
+            
 
     MDScreen:
         name: 'datosUsuarioBuscado'
