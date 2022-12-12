@@ -91,14 +91,18 @@ def insertarDiscoteca(nombre, calle, numero, zona, ruta):
         'numero': numero,
         'zona': zona
     }
-    db.reference(ruta).child('discotecas').push(discotecas)
-    ubicacion = calle + ', ' + str(numero) + ', ' + zona + ', Madrid España'
-    ubicacion2 = ubicacion.replace('C ', 'Calle ').replace('Av ', 'Avenida ').replace(
-        'Avda ', 'Avenida ').replace('C.', 'Calle ').replace('PL ', 'Plaza ').replace('c', 'Calle ').replace('av', 'Avenida ').replace('avda', 'Avenida ').replace('c.', 'Calle ').replace('pl', 'Plaza ')
+    if(nombre=''or calle=''or numero=''or zona=''):
+        return False
+    else:
+        db.reference(ruta).child('discotecas').push(discotecas)
+        ubicacion = calle + ', ' + str(numero) + ', ' + zona + ', Madrid España'
+        ubicacion2 = ubicacion.replace('C ', 'Calle ').replace('Av ', 'Avenida ').replace(
+            'Avda ', 'Avenida ').replace('C.', 'Calle ').replace('PL ', 'Plaza ').replace('c', 'Calle ').replace('av', 'Avenida ').replace('avda', 'Avenida ').replace('c.', 'Calle ').replace('pl', 'Plaza ')
 
-    location = geolocator.geocode(ubicacion2)
-    insertarDiscotecaEficiente(
-        nombre, ubicacion2, location.longitude, location.latitude, ruta)
+        location = geolocator.geocode(ubicacion2)
+        print(location)
+        insertarDiscotecaEficiente(
+            nombre, ubicacion2, location.longitude, location.latitude, ruta)
 
 # crea un metodo que de la base de datos extraiga todos los datos de las discotecas y llame a la funcion insertarDiscotecaEficiente
 
@@ -138,14 +142,17 @@ def insertarFiesta(nombre, calle, numero, zona, usuario, ruta):
         'usuario': usuario
 
     }
-    db.reference(ruta).child('fiestas').push(fiestas)
-    ubicacion = calle + ', ' + str(numero) + ', ' + zona + ', Madrid España'
-    ubicacion2 = ubicacion.replace('C ', 'Calle ').replace('Av ', 'Avenida ').replace(
-        'Avda ', 'Avenida ').replace('C.', 'Calle ').replace('PL ', 'Plaza ').replace('c ', 'Calle ').replace('av ', 'Avenida ').replace('avda ', 'Avenida ').replace('c.', 'Calle ').replace('pl ', 'Plaza ')
-    location = geolocator.geocode(ubicacion2)
-    # print(ubicacion2)
-    insertarFiestaEficiente(
-        nombre, ubicacion2, location.longitude, location.latitude, ruta)
+    if(nombre == ''or calle == '' or numero == '' or zona == '' or usuario == ''):
+        return False
+    else:
+        db.reference(ruta).child('fiestas').push(fiestas)
+        ubicacion = calle + ', ' + str(numero) + ', ' + zona + ', Madrid España'
+        ubicacion2 = ubicacion.replace('C ', 'Calle ').replace('Av ', 'Avenida ').replace(
+            'Avda ', 'Avenida ').replace('C.', 'Calle ').replace('PL ', 'Plaza ').replace('c ', 'Calle ').replace('av ', 'Avenida ').replace('avda ', 'Avenida ').replace('c.', 'Calle ').replace('pl ', 'Plaza ')
+        location = geolocator.geocode(ubicacion2)
+        # print(ubicacion2)
+        insertarFiestaEficiente(
+            nombre, ubicacion2, location.longitude, location.latitude, ruta)
 
 
 def borrarDatos(datos):
