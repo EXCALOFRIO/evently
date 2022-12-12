@@ -44,6 +44,7 @@ class Ui_MainWindow(QMainWindow):
     botonesDiscotecas = {}
     botonesChatUsuarios = {}
     botonesBusquedaUsuarios = {}
+    usuarioBuscado = ''
     # BOTON DE AÑADIR DISCOTECA
 
     def annadirDiscoteca(self):
@@ -128,7 +129,7 @@ class Ui_MainWindow(QMainWindow):
                 self.verticalLayout_14.addWidget(
                     self.botonesDiscotecas[out[i]])
                 self.botonesDiscotecas[out[i]].clicked.connect(
-                    lambda checked, out=out, i=i: self.imprimirNombreDiscoteca(out[i]))
+                    lambda checked, out=out, i=i: self.imprimirNombreDiscoteca(out[i]))   
                 self.filtrado = False
 
     def imprimirNombreDiscoteca(self, nombreDiscoteca):
@@ -457,25 +458,6 @@ class Ui_MainWindow(QMainWindow):
             
             self.hbox.addWidget(self.label)
     
-    def boton_mis_fotos_OtroUsuario(self):
-        self.usuario = datosUsuario('usuario')
-        url_fotos = ver_mis_fotos(self.usuario)
-        self.textBrowser_MiPerfilPerfil2.clear()
-        self.hbox = QHBoxLayout(self.page_MiPerfil2)
-        self.hbox.setContentsMargins(10, 235, 10, 10)
-
-        for i in range(len(url_fotos)):
-            resp = urlopen(url_fotos[i])
-            image = np.asarray(bytearray(resp.read()), dtype="uint8")
-            image = cv2.imdecode(image, cv2.IMREAD_COLOR)
-            image = imutils.resize(image, width=200, height=200)
-            self.label = QtWidgets.QLabel()
-            frame = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-            image = QImage(frame, frame.shape[1], frame.shape[0], frame.strides[0], QImage.Format_RGB888)
-            self.label.setPixmap(QtGui.QPixmap.fromImage(image))
-            
-            self.hbox.addWidget(self.label)
-
             
     def createGridLayout(self, x):
         self.horizontalGroupBox = QGroupBox("Grid")
@@ -513,6 +495,8 @@ class Ui_MainWindow(QMainWindow):
         datosUsuarioEspecifico=getDatosElementoConcreto('usuarios','usuario',usuarioText,['usuario','nombre','apellido','email','edad'],'data')
         self.usuario = datosUsuarioEspecifico[0]
         print(self.usuario)
+        self.usuarioBuscado = self.usuario
+        print(self.usuarioBuscado)
         self.textBrowser_usuarioPerfil2.setText(usuarioText)
         self.nombre =  datosUsuarioEspecifico[1]
         print(self.nombre)
@@ -533,9 +517,11 @@ class Ui_MainWindow(QMainWindow):
         if self.textBrowser_MiPerfil.isHidden(): self.textBrowser_MiPerfil.show()
         self.textBrowser_MiPerfil.setText(self.mis_resennas)
     
-    def buttonMisResennasOtroPerfil(self):
-        self.usr = datosUsuario('usuario')
-        # print(self.usr)
+    def buttonMisResennasOtroPerfil(self,usuarioText):
+        self.usr = self.usuarioBuscado
+        print("----------------------")
+        print(self.usr)
+        print("----------------------")
         self.mis_resennas = str(valoracionesUsuario(self.usr))
         if self.textBrowser_MiPerfilPerfil2.isHidden(): self.textBrowser_MiPerfilPerfil2.show()
         self.textBrowser_MiPerfilPerfil2.setText(self.mis_resennas) 
@@ -547,10 +533,29 @@ class Ui_MainWindow(QMainWindow):
         self.textBrowser_MiPerfil.setText(self.mis_fiestas)
     
     def buttonMisFiestasOtroPerfil(self):
-        self.usr = datosUsuario('usuario')
+        self.usr = self.usuarioBuscado
         self.mis_fiestas = str(fiestasUsuario(self.usr))
         if self.textBrowser_MiPerfilPerfil2.isHidden(): self.textBrowser_MiPerfilPerfil2.show()
         self.textBrowser_MiPerfilPerfil2.setText(self.mis_fiestas) 
+    
+    def boton_mis_fotos_OtroUsuario(self):
+        self.usuario = self.usuarioBuscado
+        url_fotos = ver_mis_fotos(self.usuario)
+        self.textBrowser_MiPerfilPerfil2.clear()
+        self.hbox = QHBoxLayout(self.page_MiPerfil2)
+        self.hbox.setContentsMargins(10, 235, 10, 10)
+
+        for i in range(len(url_fotos)):
+            resp = urlopen(url_fotos[i])
+            image = np.asarray(bytearray(resp.read()), dtype="uint8")
+            image = cv2.imdecode(image, cv2.IMREAD_COLOR)
+            image = imutils.resize(image, width=200, height=200)
+            self.label = QtWidgets.QLabel()
+            frame = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+            image = QImage(frame, frame.shape[1], frame.shape[0], frame.strides[0], QImage.Format_RGB888)
+            self.label.setPixmap(QtGui.QPixmap.fromImage(image))
+            
+            self.hbox.addWidget(self.label)
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
