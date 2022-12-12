@@ -91,7 +91,7 @@ def insertarDiscoteca(nombre, calle, numero, zona, ruta):
         'numero': numero,
         'zona': zona
     }
-    if(nombre=''or calle=''or numero=''or zona=''):
+    if(nombre ==''or calle==''or numero==''or zona==''):
         return False
     else:
         db.reference(ruta).child('discotecas').push(discotecas)
