@@ -14,13 +14,15 @@ from kivy_garden.mapview import MapMarker
 
 from baseDatosPruebaApp import *
 
+
 class OneLineListItemAligned(OneLineListItem):
     def __init__(self, halign, **kwargs):
         super(OneLineListItemAligned, self).__init__(**kwargs)
         self.ids._lbl_primary.halign = halign
 
+
 class Ui(ScreenManager):
-    
+
     usernameText = ''
     nombre = ''
     apellido = ''
@@ -61,7 +63,7 @@ class Ui(ScreenManager):
         carta = mostrar_carta("carta", discoteca, 'data')
         self.ids.MDLabelFiltrado.text = carta
         self.ids.MDLabelFiltrado.opacity = 1
-        self.ids.MDLabelFiltrado.font_size= 30
+        self.ids.MDLabelFiltrado.font_size = 30
         self.ids.MDLabelFiltrado.size_hint = (1, 1)
 
     def botonBusquedaChat(self, texto):
@@ -71,10 +73,10 @@ class Ui(ScreenManager):
         out = filtrarDiscotecas(5, texto)
         for element in out:
             item = OneLineListItem(
-                text=str(element), width=300, on_release=lambda x: self.crearChat(x.text,''))
+                text=str(element), width=300, on_release=lambda x: self.crearChat(x.text, ''))
             self.ids.MDListFiltradoChat.add_widget(item)
 
-    def crearChat(self, usuario,texto):
+    def crearChat(self, usuario, texto):
         self.ids.scrollChat.scroll_y = 0
         self.ids.message_input.text = texto
         self.ids.other_user_list.clear_widgets()
@@ -93,37 +95,37 @@ class Ui(ScreenManager):
         rutaChat = 'chats/'+chat
         chatsAnteriores = getTodosLosDatos(rutaChat, 'data')
         if chatsAnteriores == []:
-            insertarMensaje(usuario2, 'Hola, quieres usar Evently conmigo :)', chat, 'data')
+            insertarMensaje(
+                usuario2, 'Hola, quieres usar Evently conmigo :)', chat, 'data')
         else:
             for chatAnterior in chatsAnteriores:
                 if chatAnterior['usuario'] == usuario1:
                     item = OneLineListItemAligned(
-                        text=str(chatAnterior['mensaje']), bg_color=('292828'),halign="left")
+                        text=str(chatAnterior['mensaje']), bg_color=('292828'), halign="left")
                     self.ids.other_user_list.add_widget(item)
                     item2 = OneLineListItem(text=str(''), opacity=0)
                     self.ids.this_user_list.add_widget(item2)
                 else:
                     item = OneLineListItemAligned(
-                        text=str(chatAnterior['mensaje']), bg_color=('b84814'),halign="right")
+                        text=str(chatAnterior['mensaje']), bg_color=('b84814'), halign="right")
                     self.ids.this_user_list.add_widget(item)
                     item = OneLineListItem(text=str(''), opacity=0)
                     self.ids.other_user_list.add_widget(item)
             Clock.schedule_once(self.actualizarChat, 5)
-            
+
         self.ids.scrollChat.scroll_y = 0
-        
-        #espera 5 segundos y actualiza el chat
-    
+
+        # espera 5 segundos y actualiza el chat
+
     def pararTimer(self):
         Clock.unschedule(self.actualizarChat)
-        
-        
+
     def actualizarChat(self, dt):
         self.ids.scrollChat.scroll_y = 0
         self.crearChat(self.ids.user_label.text, self.ids.message_input.text)
 
     def send_message(self, mensaje, usuario1):
-        self.ids.message_input.text=''
+        self.ids.message_input.text = ''
         self.ids.other_user_list.clear_widgets()
         self.ids.this_user_list.clear_widgets()
         if(str(mensaje) != ''):
@@ -134,11 +136,10 @@ class Ui(ScreenManager):
                 chat = usuario2+usuario1
             insertarMensaje(datosUsuario('usuario'),
                             str(mensaje), chat, 'data')
-            self.crearChat(usuario1,'')
+            self.crearChat(usuario1, '')
         else:
-            self.crearChat(usuario1,'')
+            self.crearChat(usuario1, '')
 
-        
     def borrarBusquedaChat(self):
         try:
             self.ids.MDListFiltradoChat.clear_widgets()
@@ -188,15 +189,19 @@ class Ui(ScreenManager):
             self.ids.signal_login.text = 'Usuario o contraseña incorrectos'
 
     def agregar_usuario(self, ap, cont, ed, mail, nombre, usuario):
-        print(ap, cont, ed, mail, nombre, usuario)
-        if comprobarUsuario(usuario, nombre, ap, ed, mail, cont, 'data'):
-            print("correcto")
-            print(ap, cont, ed, mail, nombre, usuario)
+        resultado = comprobarUsuario(
+            usuario, nombre, ap, ed, mail, cont, 'data')
+
+        if resultado == True:
             self.ids.error_registro.text = ("Usuario registrado correctamente")
             self.current = 'login'
+        elif resultado == False:
+            self.ids.error_registro.text = "El usuario ya existe"
         else:
-            print("error")
-            self.ids.error_registro.text = ("Error, los datos introducidos no son correctos, por favor inténtelo de nuevo.")
+            errorText = ''
+            for error in resultado:
+                errorText = errorText+error+' '
+            self.ids.error_registro.text = "Los siguientes campos están incompletos: "+errorText
 
     def cargarDatos(self):
         self.ids.userText.text = self.usernameText
@@ -281,42 +286,74 @@ class Ui(ScreenManager):
         self.ids.MDLabelFiltradoRsenaTres.size_hint = (1, 1)
 
     def cargarDiscotecasSpinner(self):
-        discotecas = getItemBaseDatos('discotecas','nombre', 'data')
+        discotecas = getItemBaseDatos('discotecas', 'nombre', 'data')
         for discoteca in discotecas:
             self.ids.discoteca.values.append(discoteca)
         self.ids.discoteca.text = discotecas[0]
         self.current = 'annadirReseñaScreen'
 
-    def annadirReseña(self, discoteca,estrellas,texto):
+    def annadirReseña(self, discoteca, estrellas, texto):
         if discoteca == '' or estrellas == '' or texto == '':
             self.ids.error.text = 'Rellena todos los campos'
             self.ids.error.opacity = 1
             self.ids.error.size_hint = (1, 1)
         else:
             fecha_actual = date.today().strftime("%d/%m/%Y")
-            usuario=datosUsuario('usuario')
+            usuario = datosUsuario('usuario')
             if(comprobarValoracion(fecha_actual, usuario, discoteca, 'data')):
-                insertarValoracion(fecha_actual, usuario, discoteca, estrellas, texto, 'data')
+                insertarValoracion(fecha_actual, usuario,
+                                   discoteca, estrellas, texto, 'data')
                 self.current = 'reseña'
             else:
                 self.ids.error.text = 'Ya has valorado esta discoteca, espera 24 horas para volver a valorarla'
                 self.ids.error.opacity = 1
                 self.ids.error.size_hint = (1, 1)
 
-    def botonAñadirDiscoteca(self,nombre,zona,calle,numero):
-        insertarDiscoteca(nombre, calle, numero, zona, 'data')
-        self.ids.MDTextFieldNombreDiscoteca.text=''
-        self.ids.MDTextFieldZonaDiscoteca.text=''
-        self.ids.MDTextFieldCalleDiscoteca.text=''
-        self.ids.MDTextFieldNumeroDiscoteca.text=''
+    def botonAñadirDiscoteca(self, nombre, zona, calle, numero):
+        self.ids.MDLabelAñadirDiscoteca.text = 'Añadir discoteca'
+        # comprueba que devuelve el insertarDiscoteca, si devuelve un array imprimir un error en la pantalla, si devuelve false otra cosa
+        resultado = insertarDiscoteca(nombre, calle, numero, zona, 'data')
+        if(resultado == False):
+            self.ids.MDLabelAñadirDiscoteca.text = 'No se puede obtener la localización de la discoteca'
+            self.ids.MDLabelAñadirDiscoteca.color = (1, 0, 0, 1)
+        elif(resultado == True):
+            self.ids.MDLabelAñadirDiscoteca.text = 'Se ha añadido la discoteca correctamente'
+            self.ids.MDLabelAñadirDiscoteca.color = (1, 1, 1, 1)
+        else:
+            errorText = ''
+            for error in resultado:
+                errorText = errorText+error+' '
+            self.ids.MDLabelAñadirDiscoteca.text = 'Los siguientes campos estan sin completar: '+errorText+'.'
+            self.ids.MDLabelAñadirDiscoteca.color = (1, 0, 0, 1)
 
-    def botonAñadirFiesta(self,nombre,zona,calle,numero):
-        usuarioFiesta=datosUsuario('usuario')
-        insertarFiesta(nombre, calle, numero, zona,usuarioFiesta, 'data')
-        self.ids.MDTextFieldNombre.text=''
-        self.ids.MDTextFieldZona.text=''
-        self.ids.MDTextFieldCalle.text=''
-        self.ids.MDTextFieldNumero.text=''
+        self.ids.MDTextFieldNombreDiscoteca.text = ''
+        self.ids.MDTextFieldZonaDiscoteca.text = ''
+        self.ids.MDTextFieldCalleDiscoteca.text = ''
+        self.ids.MDTextFieldNumeroDiscoteca.text = ''
+
+    def botonAñadirFiesta(self, nombre, zona, calle, numero):
+        usuarioFiesta = datosUsuario('usuario')
+        self.ids.MDLabelFiesta.text = 'Añadir discoteca'
+        # comprueba que devuelve el insertarDiscoteca, si devuelve un array imprimir un error en la pantalla, si devuelve false otra cosa
+        resultado = insertarFiesta(
+            nombre, calle, numero, zona, usuarioFiesta, 'data')
+        if(resultado == False):
+            self.ids.MDLabelFiesta.text = 'No se puede obtener la localización de la fiesta'
+            self.ids.MDLabelFiesta.color = (1, 0, 0, 1)
+        elif(resultado == True):
+            self.ids.MDLabelFiesta.text = 'Se ha añadido la fiesta correctamente'
+            self.ids.MDLabelFiesta.color = (1, 1, 1, 1)
+        else:
+            errorText = ''
+            for error in resultado:
+                errorText = errorText+error+' '
+            self.ids.MDLabelFiesta.text = 'Los siguientes campos estan sin completar: '+errorText+'.'
+            self.ids.MDLabelFiesta.color = (1, 0, 0, 1)
+
+        self.ids.MDTextFieldNombre.text = ''
+        self.ids.MDTextFieldZona.text = ''
+        self.ids.MDTextFieldCalle.text = ''
+        self.ids.MDTextFieldNumero.text = ''
 
     def clear_signal(self):
         self.ids.signal_register.text = ''

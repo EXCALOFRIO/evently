@@ -513,15 +513,19 @@
             orientation: 'vertical'
             
             
-
+            
             MDLabel:
+                id: MDLabelAñadirDiscoteca
                 text: 'Añadir Discoteca'
+                #segundo texto
+                secondary_text: ''
                 halign: 'center'
-                size_hint_y: 0.2
+                size_hint_y: 0.1
+
 
             BoxLayout:
                 orientation: 'horizontal'
-                size_hint_y: 0.2
+                size_hint_y: 0.15
                 MDLabel:
                     text: 'NOMBRE'
                     halign: 'left'
@@ -538,7 +542,7 @@
                     fill_color: 0, 0, 0, .4
             BoxLayout:
                 orientation: 'horizontal'
-                size_hint_y: 0.2
+                size_hint_y: 0.15
                 
                 MDLabel:
                     text: 'ZONA'
@@ -557,7 +561,7 @@
 
             BoxLayout:
                 orientation: 'horizontal'
-                size_hint_y: 0.2
+                size_hint_y: 0.15
                 MDLabel:
                     text: 'CALLE'
                     halign: 'left'
@@ -574,7 +578,7 @@
                     fill_color: 0, 0, 0, .4
             BoxLayout:
                 orientation: 'horizontal'
-                size_hint_y: 0.2
+                size_hint_y: 0.15
                 MDLabel:
                     text: 'NUMERO'
                     halign: 'left'
@@ -591,12 +595,12 @@
                     fill_color: 0, 0, 0, .4
             MDFillRoundFlatButton:
                 #icon: 'images/iconoBusqueda.png'
+                ize_hint_y: 0.2
                 text: 'Añadir'
                 color_icon: '#F45434'
                 id: MDFillRoundFlatButtonAñadirDiscoteca
                 pos_hint: {'center_x': .5, 'center_y': .5}
-                on_release:
-                    root.botonAñadirDiscoteca(MDTextFieldNombreDiscoteca.text, MDTextFieldZonaDiscoteca.text, MDTextFieldCalleDiscoteca.text, MDTextFieldNumeroDiscoteca.text)
+                on_release:root.botonAñadirDiscoteca(MDTextFieldNombreDiscoteca.text, MDTextFieldZonaDiscoteca.text, MDTextFieldCalleDiscoteca.text, MDTextFieldNumeroDiscoteca.text)
                     
 
             MDFillRoundFlatButton:
@@ -617,6 +621,7 @@
             
 
             MDLabel:
+                id:MDLabelFiesta
                 text: 'Añadir Fiesta'
                 halign: 'center'
                 size_hint_y: 0.2

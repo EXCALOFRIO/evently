@@ -102,12 +102,17 @@ def insertarDiscoteca(nombre, calle, numero, zona, ruta):
             'zona': zona
         }
         if(nombre == '' or calle == '' or numero == '' or zona == ''):
-            print('No se ha podido insertar la discoteca')
-            return False
+            # compreuba cual de los campos esta vacio y lo devuelve
+            camposVacios = []
+            for k, v in discotecas.items():
+                if(v == ''):  # si el campo esta vacio lo devuelve
+                    camposVacios.append(k)
+            return camposVacios
         else:
             db.reference(ruta).child('discotecas').push(discotecas)
             insertarDiscotecaEficiente(
                 nombre, ubicacion2, location.longitude, location.latitude, ruta)
+            return True
 
 
 # crea un metodo que de la base de datos extraiga todos los datos de las discotecas y llame a la funcion insertarDiscotecaEficiente
@@ -155,12 +160,16 @@ def insertarFiesta(nombre, calle, numero, zona, usuario, ruta):
 
         }
         if(nombre == '' or calle == '' or numero == '' or zona == '' or usuario == ''):
-            print('faltan datos')
-            return False
+            camposVacios = []
+            for k, v in fiestas.items():
+                if(v == ''):  # si el campo esta vacio lo devuelve
+                    camposVacios.append(k)
+            return camposVacios
         else:
             db.reference(ruta).child('fiestas').push(fiestas)
             insertarFiestaEficiente(
                 nombre, ubicacion2, location.longitude, location.latitude, ruta)
+            return True
 
 
 def borrarDatos(datos):
@@ -318,12 +327,29 @@ def insertarValoracion(fecha, usuario, nombre_discoteca, nota, texto, ruta):
 
 def comprobarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta):
     # Comprueba si el email está vacío o no tiene un formato válido
-    if not email or '@' not in email or '.' not in email:
-        return False
+    emailMal = ''
+    if '@' not in email or '.' not in email:
+        emailMal = ' y email mal formado'
     # Comprueba si algún campo obligatorio está vacío
     if not usuario or not nombre or not apellido or not edad or not contraseña:
-        return False
-    # Comprueba si el usuario o el email ya existen en la base de datos
+
+        camposVacios = []
+        usuarioCon = {
+            'usuario': usuario,
+            'nombre': nombre,
+            'apellido': apellido,
+            'edad': edad,
+            'email': email,
+            'contraseña': contraseña
+        }
+        for k, v in usuarioCon.items():
+            if(v == ''):  # si el campo esta vacio lo devuelve
+                print("entra")
+                camposVacios.append(k)
+
+        camposVacios.append(emailMal)
+        return camposVacios
+        # Comprueba si el usuario o el email ya existen en la base de datos
     usuarios = getItemBaseDatos('usuarios', 'usuario', ruta)
     emails = getItemBaseDatos('usuarios', 'email', ruta)
     if usuario in usuarios or email in emails:
