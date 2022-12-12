@@ -1,4 +1,6 @@
 from datetime import date
+import time
+from kivy.clock import Clock
 import webbrowser
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager
@@ -64,10 +66,12 @@ class Ui(ScreenManager):
         out = filtrarDiscotecas(5, texto)
         for element in out:
             item = OneLineListItem(
-                text=str(element), width=300, on_release=lambda x: self.crearChat(x.text))
+                text=str(element), width=300, on_release=lambda x: self.crearChat(x.text,''))
             self.ids.MDListFiltradoChat.add_widget(item)
 
-    def crearChat(self, usuario):
+    def crearChat(self, usuario,texto):
+        self.ids.scrollChat.scroll_y = 0
+        self.ids.message_input.text = texto
         self.ids.other_user_list.clear_widgets()
         self.ids.this_user_list.clear_widgets()
         self.borrarBusquedaChat()
@@ -83,7 +87,6 @@ class Ui(ScreenManager):
 
         rutaChat = 'chats/'+chat
         chatsAnteriores = getTodosLosDatos(rutaChat, 'data')
-        print(chatsAnteriores)
         if chatsAnteriores == []:
             insertarMensaje(usuario2, 'Hola, quieres usar Evently conmigo :)', chat, 'data')
         else:
@@ -100,10 +103,17 @@ class Ui(ScreenManager):
                     self.ids.this_user_list.add_widget(item)
                     item = OneLineListItem(text=str(''), opacity=0)
                     self.ids.other_user_list.add_widget(item)
+            Clock.schedule_once(self.actualizarChat, 5)
         self.ids.scrollChat.scroll_y = 0
-        self.ids.message_input.text = ''
+        
+        #espera 5 segundos y actualiza el chat
+        
+        
+    def actualizarChat(self, dt):
+        self.crearChat(self.ids.user_label.text, self.ids.message_input.text)
 
     def send_message(self, mensaje, usuario1):
+        self.ids.message_input.text=''
         self.ids.other_user_list.clear_widgets()
         self.ids.this_user_list.clear_widgets()
         if(str(mensaje) != ''):
@@ -114,10 +124,11 @@ class Ui(ScreenManager):
                 chat = usuario2+usuario1
             insertarMensaje(datosUsuario('usuario'),
                             str(mensaje), chat, 'data')
-            self.crearChat(usuario1)
+            self.crearChat(usuario1,'')
         else:
-            self.crearChat(usuario1)
+            self.crearChat(usuario1,'')
 
+        
     def borrarBusquedaChat(self):
         try:
             self.ids.MDListFiltradoChat.clear_widgets()
