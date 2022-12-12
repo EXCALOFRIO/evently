@@ -11,6 +11,6 @@ opencv-python
 imutils
 PySide2
 Pyrebase4
-mapvie
+mapview
 kivy
 kivymd
