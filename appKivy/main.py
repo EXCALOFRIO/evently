@@ -58,6 +58,8 @@ class Ui(ScreenManager):
         self.ids.MDLabelFiltrado.size_hint = (1, 1)
 
     def botonBusquedaChat(self, texto):
+        self.ids.other_user_list.clear_widgets()
+        self.ids.this_user_list.clear_widgets()
         self.borrarBusquedaChat()
         out = filtrarDiscotecas(5, texto)
         for element in out:
@@ -66,6 +68,8 @@ class Ui(ScreenManager):
             self.ids.MDListFiltradoChat.add_widget(item)
 
     def crearChat(self, usuario):
+        self.ids.other_user_list.clear_widgets()
+        self.ids.this_user_list.clear_widgets()
         self.borrarBusquedaChat()
         self.current = 'chatDm'
         self.ids.user_label.text = usuario
@@ -79,9 +83,9 @@ class Ui(ScreenManager):
 
         rutaChat = 'chats/'+chat
         chatsAnteriores = getTodosLosDatos(rutaChat, 'data')
+        print(chatsAnteriores)
         if chatsAnteriores == []:
-            insertarMensaje(
-                usuario2, 'Hola, quieres usar Evently conmigo :)', chat, 'data')
+            insertarMensaje(usuario2, 'Hola, quieres usar Evently conmigo :)', chat, 'data')
         else:
             for chatAnterior in chatsAnteriores:
                 if chatAnterior['usuario'] == usuario1:
@@ -100,7 +104,8 @@ class Ui(ScreenManager):
         self.ids.message_input.text = ''
 
     def send_message(self, mensaje, usuario1):
-
+        self.ids.other_user_list.clear_widgets()
+        self.ids.this_user_list.clear_widgets()
         if(str(mensaje) != ''):
             usuario2 = datosUsuario('usuario')
             if usuario1 < usuario2:
