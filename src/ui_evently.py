@@ -539,7 +539,6 @@ class Ui_MainWindow(QMainWindow):
         self.mis_resennas = str(valoracionesUsuario(self.usr))
         if self.textBrowser_MiPerfilPerfil2.isHidden(): self.textBrowser_MiPerfilPerfil2.show()
         self.textBrowser_MiPerfilPerfil2.setText(self.mis_resennas) 
-        print(self.mis_resennas)   
 
     def buttonMisFiestas(self):
         self.usr = datosUsuario('usuario')
