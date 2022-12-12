@@ -187,6 +187,17 @@ class Ui(ScreenManager):
         else:
             self.ids.signal_login.text = 'Usuario o contraseña incorrectos'
 
+    def agregar_usuario(self, ap, cont, ed, mail, nombre, usuario):
+        print(ap, cont, ed, mail, nombre, usuario)
+        if comprobarUsuario(usuario, nombre, ap, ed, mail, cont, 'data'):
+            print("correcto")
+            print(ap, cont, ed, mail, nombre, usuario)
+            self.ids.error_registro.text = ("Usuario registrado correctamente")
+            self.current = 'login'
+        else:
+            print("error")
+            self.ids.error_registro.text = ("Error, los datos introducidos no son correctos, por favor inténtelo de nuevo.")
+
     def cargarDatos(self):
         self.ids.userText.text = self.usernameText
         self.ids.nombre.text = self.nombre
@@ -302,7 +313,7 @@ class Ui(ScreenManager):
 class MainApp(MDApp):
     def build(self):
         self.theme_cls.theme_style = 'Dark'
-        self.theme_cls.primary_palette = 'Blue'
+        self.theme_cls.primary_palette = 'DeepOrange'
         Builder.load_file('design.kv')
 
         return Ui()

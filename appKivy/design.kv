@@ -27,9 +27,9 @@
         pos_hint: {'center_x': .5}
 
     MDFillRoundFlatButton:
-        icon: 'images/iconoBusqueda.png'
+        #icon: 'images/iconoBusqueda.png'
         text: 'Retroceso'
-        color_icon: '#000000'
+        color_icon: '#F45434'
         pos_hint: {'center_x': .5}
         on_release:
             app.root.current = 'screen_principal'
@@ -56,7 +56,7 @@
                 MDLabel:
                     text: 'Iniciar Sesion'
                     halign: 'center'
-                    color: 'FF5A1E'
+                    color: 'F45434'
                     font_size:dp(28)
                     bold: True
                     pos_hint: {'center_y': 0.5}
@@ -69,13 +69,13 @@
                     hint_text: 'Nombre de usuario'
                     icon_right: 'account'
                     font_size: dp(20)
-                    icon_right_color: '#FF5A1E'
+                    icon_right_color: '#F45434'
                     pos_hint: {'center_x': 0.5}
                 MDTextField:
                     id: password
                     password: True
                     icon_right: 'key-variant'
-                    icon_right_color: '#FF5A1E'
+                    icon_right_color: '#F45434'
                     hint_text: 'Contrasena'
                     font_size:dp(20)
                     pos_hint: {'center_x':0.5}
@@ -84,7 +84,7 @@
                     id: signal_login
                     text: ''
                     halign:'center'
-                    color:'#FF5A1E'
+                    color:'#F45434'
                     font_size:dp(15)
             
             MDBoxLayout:
@@ -94,13 +94,14 @@
                 MDFillRoundFlatButton:
                     id: bt_ingresar
                     text: 'Acceder'
+                    font_size: dp(20)
                     pos_hint:{'center_x':0.5}
                     on_release: 
                         #x = app.login_data()
                         root.inicioSesion(user.text, password.text)
                 MDFillRoundFlatButton:
-                    md_bg_color: '#000000'
-                    text_color: 255/255, 90/255, 30/255,1
+                    md_bg_color: '#F45434'
+                    text_color: 1,1,1,1
                     text: 'Crear cuenta'
                     font_size: dp(20)
                     pos_hint: {'center_x':0.5}
@@ -109,14 +110,14 @@
 ###############SCREEN################
     MDScreen:
         name: 'open_screen'
-        md_bg_color: 255/255, 90/255, 30/255,1
+        md_bg_color: '#F45434'
         MDBoxLayout:
             orientation: 'vertical'
             padding: dp(12)
             spacing: dp(12)
             MDFloatingActionButton:
                 icon: 'images/iconoBusqueda.png'
-                color_icon: '#000000'
+                color_icon: '#F45434'
                 on_release: root.current = 'login'
     
 
@@ -133,7 +134,7 @@
                 size_hint: 1, 0.2
                 MDFloatingActionButton:
                     icon:'arrow-left'
-                    color_icon: '#000000'
+                    color_icon: '#F45434'
                     pos_hint: {'center_y':0.5}
                     on_release:
                         root.current = 'login'
@@ -142,7 +143,7 @@
                 MDLabel:
                     text: 'Crear cuenta'
                     halign: 'center'
-                    color: '#FF5A1E'
+                    color: '#F45434'
                     font_size: dp(28)
                     bold: True
                     pos_hint: {'center_y': 0.5}
@@ -152,37 +153,37 @@
                 MDLabel:
                     text: 'Nombre de usuario'
                     halign: 'center'
-                    color: '#FF5A1E'
+                    color: '#F45434'
                     font_size:dp(20)
                 MDTextField:
                     id: new_user
                     hint_text: 'Usuario'
                     icon_right: 'account'
                     font_size: dp(20)
-                    icon_right_color: '#FF5A1E'
+                    icon_right_color: '#F45434'
                     pos_hint: {'center_x': 0.5}
                 MDLabel:
                     text: 'Ingrese su contrasena'
                     halign: 'center'
-                    color: '#FF5A1E'
+                    color: '#F45434'
                     font_size:dp(20)
                 MDTextField:
                     id: new_password
                     password:True
                     icon_right: 'key-variant'
-                    icon_right_color: '#FF5A1E'
+                    icon_right_color: '#F45434'
                     hint_text: 'Contrasena'
                     font_size: dp(20)
                     pos_hint: {'center_x':0.5}
                 MDLabel:
                     text: 'Nombre'
                     halign: 'center'
-                    color: '#FF5A1E'
+                    color: '#F45434'
                     font_size:dp(20)
                 MDTextField:
-                    id: new_password_two
+                    id: nombre_r
                     icon_right: 'deathly-hallows'
-                    icon_right_color: '#FF5A1E'
+                    icon_right_color: '#F45434'
                     hint_text: 'Nombre'
                     font_size:dp(20)
                     pos_hint: {'center_x':0.5}
@@ -190,41 +191,47 @@
                 MDLabel:
                     text: 'Apellido'
                     halign: 'center'
-                    color: '#FF5A1E'
+                    color: '#F45434'
                     font_size:dp(20)
                 MDTextField:
-                    id: new_user
+                    id: apellido_r
                     hint_text: 'Apellido'
                     icon_right: 'deathly-hallows'
                     font_size: dp(20)
-                    icon_right_color: '#FF5A1E'
+                    icon_right_color: '#F45434'
                     pos_hint: {'center_x': 0.5}
                 
                 MDLabel:
                     text: 'Correo electronico'
                     halign: 'center'
-                    color: '#FF5A1E'
+                    color: '#F45434'
                     font_size:dp(20)
                 MDTextField:
-                    id: new_user
+                    id: correo_r
                     hint_text: 'Correo electronico'
                     icon_right: 'email'
                     font_size: dp(20)
-                    icon_right_color: '#FF5A1E'
+                    icon_right_color: '#F45434'
                     pos_hint: {'center_x': 0.5}
 
                 MDLabel:
                     text: 'Edad'
                     halign: 'center'
-                    color: '#FF5A1E'
+                    color: '#F45434'
                     font_size:dp(20)
                 MDTextField:
-                    id: new_user
+                    id: edad_r
                     hint_text: 'Edad'
                     icon_right: 'death-star'
                     font_size: dp(20)
-                    icon_right_color: '#FF5A1E'
+                    icon_right_color: '#F45434'
                     pos_hint: {'center_x': 0.5}
+
+                MDLabel:
+                    id:error_registro
+                    color: 1,0,0,1
+                    text: ''
+                    font_size: dp(20)
 
             MDBoxLayout:
                 orientation: 'vertical'
@@ -233,19 +240,19 @@
                     id: signal_register
                     text:''
                     halign:'center'
-                    color: '#FF5A1E'
+                    color: '#F45434'
                     font_size: dp(15)
 
                 MDFillRoundFlatButton:
                     id: bt_register
                     text: 'Registrarse'
                     pos_hint: {'center_x':0.5, 'y':0.5}
-                    on_release: app.register_data()                    
+                    on_release: root.agregar_usuario(apellido_r.text, new_password.text, edad_r.text, correo_r.text, nombre_r.text, new_user.text)                    
 
 
     MDScreen:
         name: 'screen_principal'
-        md_bg_color: 0, .5, 1, 1 #color del fondo
+        md_bg_color: '#F45434'#color del fondo
         MDBoxLayout:
             orientation: 'vertical'
             MDBoxLayout:
@@ -420,7 +427,7 @@
                 #icon: 'images/atras.png'
                 text: 'Atrás'
                 font_size: 30
-                color_icon: '#000000'
+                color_icon: '#F45434'
                 size_hint_y: 0.05
                 #centrasdo
 
@@ -465,7 +472,7 @@
                         elevation_normal: 8
                         max_size_hint_y: 0.1
                         size_hint_y: 1
-                        md_bg_color: 0, .5, 1, 1
+                        md_bg_color: '#F45434'
                         size_hint_x: 0.2
                         on_press: root.botonBusquedaFiltrado(MDTextFieldFiltrado.text, spinnerFiltrado.text)
                 
@@ -489,7 +496,7 @@
             MDFillRoundFlatButton:
                 #icon: 'images/iconoBusqueda.png'
                 text: 'Retornar'
-                color_icon: '#000000'
+                color_icon: '#F45434'
                 size_hint_y: 0.05
                 #centrasdo
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
@@ -557,7 +564,7 @@
                     size_hint_x: 0.2
                 MDTextFieldRect:
                     id: MDTextFieldCalle
-                    hint_text: "Introducir la calle de la discoteca"
+                    hint_text: "Introducir el nombre de la discoteca"
                     height: "30dp"
                     max_text_length: 30
                     size_hint_x: 0.8
@@ -574,7 +581,7 @@
                     size_hint_x: 0.2
                 MDTextFieldRect:
                     id: MDTextFieldNumero
-                    hint_text: "Introducir el numero de la calle de la discoteca"
+                    hint_text: "Introducir el nombre de la discoteca"
                     height: "30dp"
                     max_text_length: 30
                     size_hint_x: 0.8
@@ -585,8 +592,8 @@
 
             MDFillRoundFlatButton:
                 #icon: 'images/iconoBusqueda.png'
-                text: 'Retroceso'
-                color_icon: '#000000'
+                text: 'voltar'
+                color_icon: '#F45434'
 
                 pos_hint: {'center_x': .5, 'center_y': .5}
                 on_release:
@@ -684,7 +691,6 @@
                 on_release:
                     app.root.current = 'screen_principal'
                     app.root.transition = SlideTransition(direction= 'left')
-            
 
     MDScreen:
         name: 'perfil'
@@ -754,7 +760,7 @@
             MDFillRoundFlatButton:
                 #icon: 'images/iconoBusqueda.png'
                 text: 'Back'
-                color_icon: '#000000'
+                color_icon: '#F45434'
 
                 pos_hint: {'center_x': .5, 'center_y': .5}
                 on_release:
@@ -795,7 +801,7 @@
                         elevation_normal: 8
                         max_size_hint_y: 0.1
                         size_hint_y: 1
-                        md_bg_color: 0, .5, 1, 1
+                        md_bg_color: '#F45434'
                         size_hint_x: 0.2
                         on_press: root.botonBusquedaFiltradoResenas(MDTextFieldFiltradoResena.text, spinnerFiltradoResena.text)
                 
@@ -811,8 +817,8 @@
 
                 MDFillRoundFlatButton:
                     id: MDFillRoundFlatButtonAnnadirReseña
-                    icon: 'images/iconoBusqueda.png'
-                    color_icon: '#000000'
+                    text: 'Añadir'
+                    color_icon: '#F45434'
 
                     pos_hint: {'center_x': .5, 'center_y': .5}
                     on_release:
@@ -847,7 +853,7 @@
             MDFillRoundFlatButton:
                 #icon: 'images/iconoBusqueda.png'
                 text: 'De vuelta'
-                color_icon: '#000000'
+                color_icon: '#F45434'
                 size_hint_y: 0.05
                 #centrasdo
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
@@ -882,7 +888,7 @@
                         elevation_normal: 8
                         max_size_hint_y: 0.1
                         size_hint_y: 1
-                        md_bg_color: 0, .5, 1, 1
+                        md_bg_color: '#F45434'
                         size_hint_x: 0.2
                         on_press: root.botonBusquedaUsuarios(MDTextFieldBuscadorUsuarios.text)
                 
@@ -900,7 +906,7 @@
             MDFillRoundFlatButton:
                 #icon: 'images/iconoBusqueda.png'
                 text: 'zurückkehren'
-                color_icon: '#000000'
+                color_icon: '#F45434'
 
                 size_hint_y: 0.05
                 pos_hint: {'center_x': .5, 'center_y': .5}
@@ -936,7 +942,7 @@
                         elevation_normal: 8
                         max_size_hint_y: 0.1
                         size_hint_y: 1
-                        md_bg_color: 0, .5, 1, 1
+                        md_bg_color: '#F45434'
                         size_hint_x: 0.2
                         on_press: root.botonBusquedaChat(MDTextFieldBuscadorChat.text)
                 
@@ -954,7 +960,7 @@
             MDFillRoundFlatButton:
                 #icon: 'images/iconoBusqueda.png'
                 text: 'Volver'
-                color_icon: '#000000'
+                color_icon: '#F45434'
 
                 size_hint_y: 0.05
                 pos_hint: {'center_x': .5, 'center_y': .5}
@@ -1029,7 +1035,7 @@
 
             MDFillRoundFlatButton:
                 icon: 'images/iconoBusqueda.png'
-                color_icon: '#000000'
+                color_icon: '#F45434'
 
                 pos_hint: {'center_x': .5, 'center_y': .5}
                 on_release:
@@ -1046,7 +1052,7 @@
                 Button:
                     id: send_button
                     size_hint_x: 0.1
-                    md_bg_color: 0, .5, 1, 1
+                    md_bg_color: '#F45434'
                     icon: 'images/iconoBusqueda.png'
                     on_release:
                         root.pararTimer()
@@ -1090,7 +1096,7 @@
                 Button:
                     id: send_button
                     size_hint_x: 0.1
-                    md_bg_color: 0, .5, 1, 1
+                    md_bg_color: '#F45434'
                     icon: 'images/iconoBusqueda.png'
                     on_press: root.send_message(message_input.text,user_label.text)
 
@@ -1135,4 +1141,12 @@
                 on_release:
                     root.annadirReseña(discoteca.text, estrellas.text, reseñaTexto.text)
                     app.root.transition = SlideTransition(direction= 'up')
-                
+            MDFillRoundFlatButton:
+                icon: 'images/iconoBusqueda.png'
+                text: 'de volta'
+                color_icon: '#F45434'
+                pos_hint: {'center_x': .5}
+                on_release:
+                    app.root.current = 'reseña'
+                    app.root.transition = SlideTransition(direction= 'left')
+                        
