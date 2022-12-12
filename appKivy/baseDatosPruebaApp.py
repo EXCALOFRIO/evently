@@ -299,6 +299,7 @@ def insertarValoracion(fecha, usuario, nombre_discoteca, nota, texto, ruta):
 
         }
         db.reference(ruta).child('valoraciones').push(valoraciones)
+        
 
 def comprobarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta):
     # Comprueba si el email está vacío o no tiene un formato válido

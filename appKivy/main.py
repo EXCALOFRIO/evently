@@ -1,3 +1,4 @@
+from datetime import date
 import webbrowser
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager
@@ -241,6 +242,31 @@ class Ui(ScreenManager):
         self.ids.MDLabelFiltradoRsenaTres.text = texto2
         self.ids.MDLabelFiltradoRsenaTres.opacity = 1
         self.ids.MDLabelFiltradoRsenaTres.size_hint = (1, 1)
+
+    def cargarDiscotecasSpinner(self):
+        discotecas = getItemBaseDatos('discotecas','nombre', 'data')
+        for discoteca in discotecas:
+            self.ids.discoteca.values.append(discoteca)
+        self.ids.discoteca.text = discotecas[0]
+        self.current = 'annadirReseñaScreen'
+
+    def annadirReseña(self, discoteca,estrellas,texto):
+        if discoteca == '' or estrellas == '' or texto == '':
+            self.ids.error.text = 'Rellena todos los campos'
+            self.ids.error.opacity = 1
+            self.ids.error.size_hint = (1, 1)
+        else:
+            fecha_actual = date.today().strftime("%d/%m/%Y")
+            usuario=datosUsuario('usuario')
+            if(comprobarValoracion(fecha_actual, usuario, discoteca, 'data')):
+                insertarValoracion(fecha_actual, usuario, discoteca, estrellas, texto, 'data')
+                self.current = 'reseña'
+            else:
+                self.ids.error.text = 'Ya has valorado esta discoteca, espera 24 horas para volver a valorarla'
+                self.ids.error.opacity = 1
+                self.ids.error.size_hint = (1, 1)
+
+           
 
     def clear_signal(self):
         self.ids.signal_register.text = ''
