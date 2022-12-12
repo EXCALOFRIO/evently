@@ -589,6 +589,15 @@
                     #required: True
                     mode: "fill"
                     fill_color: 0, 0, 0, .4
+            MDFillRoundFlatButton:
+                #icon: 'images/iconoBusqueda.png'
+                text: 'Añadir'
+                color_icon: '#F45434'
+                id: MDFillRoundFlatButtonAñadirDiscoteca
+                pos_hint: {'center_x': .5, 'center_y': .5}
+                on_release:
+                    root.botonAñadirDiscoteca(MDTextFieldNombre.text, MDTextFieldZona.text, MDTextFieldCalle.text, MDTextFieldNumero.text)
+                    app.root.transition = SlideTransition(direction= 'left')
 
             MDFillRoundFlatButton:
                 #icon: 'images/iconoBusqueda.png'
@@ -682,6 +691,15 @@
                     #required: True
                     mode: "fill"
                     fill_color: 0, 0, 0, .4
+
+            MDFillRoundFlatButton:
+                text: 'Añadir'
+                color_icon: '#000000'
+
+                pos_hint: {'center_x': .5, 'center_y': .5}
+                on_release:
+                    root.botonAñadirFiesta(MDTextFieldNombre.text, MDTextFieldZona.text, MDTextFieldCalle.text, MDTextFieldNumero.text)
+                    app.root.transition = SlideTransition(direction= 'left')
 
             MDFillRoundFlatButton:
                 text: 'retornar'

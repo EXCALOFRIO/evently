@@ -303,7 +303,20 @@ class Ui(ScreenManager):
                 self.ids.error.opacity = 1
                 self.ids.error.size_hint = (1, 1)
 
-           
+    def botonAñadirDiscoteca(self,nombre,zona,calle,numero):
+        insertarDiscoteca(nombre, calle, numero, zona, 'data')
+        self.ids.MDTextFieldNombre.text=''
+        self.ids.MDTextFieldZona.text=''
+        self.ids.MDTextFieldCalle.text=''
+        self.ids.MDTextFieldNumero.text=''
+
+    def botonAñadirFiesta(self,nombre,zona,calle,numero):
+        usuarioFiesta=datosUsuario('usuario')
+        insertarFiesta(nombre, calle, numero, zona,usuarioFiesta, 'data')
+        self.ids.MDTextFieldNombre.text=''
+        self.ids.MDTextFieldZona.text=''
+        self.ids.MDTextFieldCalle.text=''
+        self.ids.MDTextFieldNumero.text=''
 
     def clear_signal(self):
         self.ids.signal_register.text = ''
