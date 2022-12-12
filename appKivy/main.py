@@ -53,7 +53,7 @@ class Ui(ScreenManager):
         carta = mostrar_carta("carta", discoteca, 'data')
         self.ids.MDLabelFiltrado.text = carta
         self.ids.MDLabelFiltrado.opacity = 1
-        self.ids.MDLabelFiltrado.font_size= 45
+        self.ids.MDLabelFiltrado.font_size= 30
         self.ids.MDLabelFiltrado.size_hint = (1, 1)
 
     def botonBusquedaChat(self, texto):
