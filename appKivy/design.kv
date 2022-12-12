@@ -783,6 +783,16 @@
 
             MDFillRoundFlatButton:
                 #icon: 'images/iconoBusqueda.png'
+                text: 'Galeria'
+                color_icon: '#F45434'
+
+                pos_hint: {'center_x': .5, 'center_y': .5}
+                on_release:
+                    app.root.current = 'galeria'
+                    app.root.transition = SlideTransition(direction= 'left')
+
+            MDFillRoundFlatButton:
+                #icon: 'images/iconoBusqueda.png'
                 text: 'Back'
                 color_icon: '#F45434'
 
@@ -1057,6 +1067,16 @@
                         font_size: 50
                         align: 'left'
                         bold: True
+                        
+            MDFillRoundFlatButton:
+                #icon: 'images/iconoBusqueda.png'
+                text: 'Galeria'
+                color_icon: '#F45434'
+
+                pos_hint: {'center_x': .5, 'center_y': .5}
+                on_release:
+                    root.cargarImagenes2(userTextUsuarioBuscado.text)
+                    app.root.transition = SlideTransition(direction= 'left')
 
             MDFillRoundFlatButton:
                 icon: 'images/iconoBusqueda.png'
@@ -1174,4 +1194,55 @@
                 on_release:
                     app.root.current = 'reseña'
                     app.root.transition = SlideTransition(direction= 'left')
-                        
+
+    MDScreen:
+        name: 'galeria'
+        on_pre_enter:
+            root.cargarImagenes()
+        #añade un scrollview para que se pueda desplazar la pantalla y dentro una galeria de imagenes
+        ScrollView:
+            size_hint: 1, 1
+            size_hint_y: 0.8
+            GridLayout:
+                id: gridGallery
+                cols: 2
+                size_hint: 1, 1
+                padding: 10
+                spacing: 10
+        MDFillRoundFlatButton:
+            #icon: 'images/iconoBusqueda.png'
+            text: 'Retroceso'
+            color_icon: '#F45434'
+            size_hint_y: 0.2
+            pos_hint: {'center_x': .5}
+            on_release:
+                app.root.current = 'perfil'
+                #borra las imagenes de la galeria
+                
+
+                app.root.transition = SlideTransition(direction= 'left')
+
+    MDScreen:
+        name: 'galeria2'
+        #añade un scrollview para que se pueda desplazar la pantalla y dentro una galeria de imagenes
+        ScrollView:
+            size_hint: 1, 1
+            size_hint_y: 0.8
+            GridLayout:
+                id: gridGallery2
+                cols: 2
+                size_hint: 1, 1
+                padding: 10
+                spacing: 10
+        MDFillRoundFlatButton:
+            #icon: 'images/iconoBusqueda.png'
+            text: 'Retroceso'
+            color_icon: '#F45434'
+            size_hint_y: 0.2
+            pos_hint: {'center_x': .5}
+            on_release:
+                app.root.current = 'datosUsuarioBuscado'
+                #borra las imagenes de la galeria
+                
+
+                app.root.transition = SlideTransition(direction= 'left')

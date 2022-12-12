@@ -10,6 +10,7 @@ from kivy.uix.button import Button
 from kivymd.uix.list import OneLineListItem, ThreeLineListItem
 from kivy_garden.mapview import MapView
 from kivy_garden.mapview import MapMarker
+from kivy.uix.image import AsyncImage
 
 
 from baseDatosPruebaApp import *
@@ -355,6 +356,30 @@ class Ui(ScreenManager):
         self.ids.MDTextFieldCalle.text = ''
         self.ids.MDTextFieldNumero.text = ''
 
+    def cargarImagenes(self):
+        self.ids.gridGallery.clear_widgets()
+        imgArray = ver_mis_fotos(datosUsuario('usuario'))
+        # por cada imagen en el array de imagenes añadir a gridGallery una imagen
+        for imgUrl in imgArray:
+            img = AsyncImage(source=imgUrl, keep_ratio=True,
+                             allow_stretch=True)
+            img.size_hint_y = None
+            self.ids.gridGallery.add_widget(img)
+        print(imgArray)
+
+    def cargarImagenes2(self, user):
+        self.current = 'galeria2'
+        self.ids.gridGallery2.clear_widgets()
+        imgArray = ver_mis_fotos(user)
+        # por cada imagen en el array de imagenes añadir a gridGallery una imagen
+        for imgUrl in imgArray:
+            img = AsyncImage(source=imgUrl, keep_ratio=True,
+                             allow_stretch=True)
+            img.size_hint_y = None
+            self.ids.gridGallery2.add_widget(img)
+        print(imgArray)
+
+        
     def clear_signal(self):
         self.ids.signal_register.text = ''
         self.ids.signal_login.text = ''

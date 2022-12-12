@@ -2,6 +2,7 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 from geopy.geocoders import Nominatim
+import pyrebase
 geolocator = Nominatim(user_agent="evently")
 firebase_admin.initialize_app(credentials.Certificate({
     "type": "service_account",
@@ -17,10 +18,39 @@ firebase_admin.initialize_app(credentials.Certificate({
 }), {'databaseURL': 'https://evently-646a2-default-rtdb.firebaseio.com/'
      })
 
+config = {
+    "apiKey": "AIzaSyAcXjtVOWvZmFH5jzT9ErMBk7W35ve3zU4",
+    "authDomain": "evently-646a2.firebaseapp.com",
+    "databaseURL": "https://evently-646a2-default-rtdb.firebaseio.com",
+    "projectId": "evently-646a2",
+    "storageBucket": "evently-646a2.appspot.com",
+    "messagingSenderId": "906232807040",
+    "appId": "1:906232807040:web:79d5b6f0faea348d647065",
+    "measurementId": "G-7SBMVQG52S",
+    "serviceAccount": "serviceAcc.json"
+}
+
+firebase = pyrebase.initialize_app(config)
+
 # THEME
 # Array de colores
 # metodo para cambiar el tema
 fuentePrincipal = "ABeeZee"
+
+
+def ver_mis_fotos(usuario):
+    storage = firebase.storage()
+    all_files = storage.child('').list_files()
+    urls = []
+    for file in all_files:
+        indice_separador = file.name.rfind("/")
+        nombre_fichero = file.name[: indice_separador]
+        if nombre_fichero == usuario:
+            z = storage.child(file.name).get_url(None)
+            # print(z)
+            urls.append(z)
+
+    return urls
 
 
 def colorTema(numero):
