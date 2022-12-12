@@ -4,7 +4,7 @@ from kivy.uix.screenmanager import ScreenManager
 from kivy.lang import Builder
 from kivy.uix.image import Image
 from kivy.uix.button import Button
-from kivymd.uix.list import OneLineListItem
+from kivymd.uix.list import OneLineListItem, ThreeLineListItem
 from kivy_garden.mapview import MapView
 from kivy_garden.mapview import MapMarker
 
@@ -190,6 +190,56 @@ class Ui(ScreenManager):
             item = OneLineListItem(
                 text=str(element), width=300, on_release=lambda x: self.dataUsuarioBuscado(x.text))
             self.ids.MDListBuscadorUsuarios.add_widget(item)
+
+    def borrarBusquedaFiltradoResenas(self):
+        try:
+            self.ids.MDLabelFiltradoRsenaUno.text = ''
+            self.ids.MDLabelFiltradoRsenaUno.opacity = 0
+            self.ids.MDLabelFiltradoRsenaUno.size_hint = (None, None)
+            self.ids.MDLabelFiltradoRsenaUno.size = (0, 0)
+            self.ids.MDLabelFiltradoRsenaDos.text = ''
+            self.ids.MDLabelFiltradoRsenaDos.opacity = 0
+            self.ids.MDLabelFiltradoRsenaDos.size_hint = (None, None)
+            self.ids.MDLabelFiltradoRsenaDos.size = (0, 0)
+            self.ids.MDLabelFiltradoRsenaTres.text = ''
+            self.ids.MDLabelFiltradoRsenaTres.opacity = 0
+            self.ids.MDLabelFiltradoRsenaTres.size_hint = (None, None)
+            self.ids.MDLabelFiltradoRsenaTres.size = (0, 0)
+            self.ids.MDListFiltradoResena.clear_widgets()
+        except AttributeError:
+            pass
+
+    def botonBusquedaFiltradoResenas(self, texto, textoFiltro):
+        self.borrarBusquedaFiltradoResenas()
+        if textoFiltro == 'Nombre':
+            numeroFiltro = 6
+        elif textoFiltro == 'Usuario':
+            numeroFiltro = 7
+        elif textoFiltro == 'Valoración':
+            numeroFiltro = 8
+        elif textoFiltro == 'Nota':
+            numeroFiltro = 9
+
+        out = filtrarDiscotecas(numeroFiltro, texto)
+
+        self.borrarBusquedaFiltradoResenas()
+        for element in out:
+            item = ThreeLineListItem(
+                text=str(element[0]), secondary_text=str(element[3]+': '+element[2]), tertiary_text=str('Nota:'+str(element[1])+' Fecha:'+str(element[4])), width=300, on_release=lambda x: self.resenaFocus(x.text, x.secondary_text, x.tertiary_text))
+            self.ids.MDListFiltradoResena.add_widget(item)
+
+    def resenaFocus(self, texto1, texto2, texto3):
+        self.borrarBusquedaFiltradoResenas()
+        self.ids.MDListFiltradoResena.clear_widgets()
+        self.ids.MDLabelFiltradoRsenaUno.text = texto1
+        self.ids.MDLabelFiltradoRsenaUno.opacity = 1
+        self.ids.MDLabelFiltradoRsenaUno.size_hint = (1, 1)
+        self.ids.MDLabelFiltradoRsenaDos.text = texto3
+        self.ids.MDLabelFiltradoRsenaDos.opacity = 1
+        self.ids.MDLabelFiltradoRsenaDos.size_hint = (1, 1)
+        self.ids.MDLabelFiltradoRsenaTres.text = texto2
+        self.ids.MDLabelFiltradoRsenaTres.opacity = 1
+        self.ids.MDLabelFiltradoRsenaTres.size_hint = (1, 1)
 
     def clear_signal(self):
         self.ids.signal_register.text = ''
