@@ -87,24 +87,32 @@ def insertarDiscotecaEficiente(nombre, ubicacion, longitud, latitud, ruta):
 
 
 def insertarDiscoteca(nombre, calle, numero, zona, ruta):
-    discotecas = {
-        'nombre': nombre,
-        'calle': calle,
-        'numero': numero,
-        'zona': zona
-    }
-    db.reference(ruta).child('discotecas').push(discotecas)
-    ubicacion = calle + ', ' + str(numero) + ', ' + zona + ', Madrid España'
+    ubicacion = calle + ', ' + \
+        str(numero) + ', ' + zona + ', Madrid España'
     ubicacion2 = ubicacion.replace('C ', 'Calle ').replace('Av ', 'Avenida ').replace(
         'Avda ', 'Avenida ').replace('C.', 'Calle ').replace('PL ', 'Plaza ').replace('c', 'Calle ').replace('av', 'Avenida ').replace('avda', 'Avenida ').replace('c.', 'Calle ').replace('pl', 'Plaza ')
 
     location = geolocator.geocode(ubicacion2)
-    insertarDiscotecaEficiente(
-        nombre, ubicacion2, location.longitude, location.latitude, ruta)
+    if location == None:
+        print('No se ha encontrado la ubicacion de la discoteca')
+        return False
+    else:
+        discotecas = {
+            'nombre': nombre,
+            'calle': calle,
+            'numero': numero,
+            'zona': zona
+        }
+        if(nombre == '' or calle == '' or numero == '' or zona == ''):
+            print('No se ha podido insertar la discoteca')
+            return False
+        else:
+            db.reference(ruta).child('discotecas').push(discotecas)
+            insertarDiscotecaEficiente(
+                nombre, ubicacion2, location.longitude, location.latitude, ruta)
+
 
 # crea un metodo que de la base de datos extraiga todos los datos de las discotecas y llame a la funcion insertarDiscotecaEficiente
-
-
 def insertarDiscotecasEficienteScript(ruta):
     discotecas = db.reference(ruta+'/discotecas')
     for k, v in discotecas.get().items():
@@ -132,22 +140,29 @@ def insertarFiestaEficiente(nombre, ubicacion, longitud, latitud, ruta):
 
 
 def insertarFiesta(nombre, calle, numero, zona, usuario, ruta):
-    fiestas = {
-        'nombre': nombre,
-        'calle': calle,
-        'numero': numero,
-        'zona': zona,
-        'usuario': usuario
-
-    }
-    db.reference(ruta).child('fiestas').push(fiestas)
     ubicacion = calle + ', ' + str(numero) + ', ' + zona + ', Madrid España'
     ubicacion2 = ubicacion.replace('C ', 'Calle ').replace('Av ', 'Avenida ').replace(
         'Avda ', 'Avenida ').replace('C.', 'Calle ').replace('PL ', 'Plaza ').replace('c ', 'Calle ').replace('av ', 'Avenida ').replace('avda ', 'Avenida ').replace('c.', 'Calle ').replace('pl ', 'Plaza ')
     location = geolocator.geocode(ubicacion2)
-    # print(ubicacion2)
-    insertarFiestaEficiente(
-        nombre, ubicacion2, location.longitude, location.latitude, ruta)
+    if(location == None):
+        print('ubicacion no encontrada')
+        return False
+    else:
+        fiestas = {
+            'nombre': nombre,
+            'calle': calle,
+            'numero': numero,
+            'zona': zona,
+            'usuario': usuario
+
+        }
+        if(nombre == '' or calle == '' or numero == '' or zona == '' or usuario == ''):
+            print('faltan datos')
+            return False
+        else:
+            db.reference(ruta).child('fiestas').push(fiestas)
+            insertarFiestaEficiente(
+                nombre, ubicacion2, location.longitude, location.latitude, ruta)
 
 
 def borrarDatos(datos):
@@ -196,7 +211,10 @@ def mostrar_carta(elemento, variable, ruta):
     for v, k in elemento.get().items():
         if v == variable:
             lista.append(k)
-    return lista[0]
+    try:
+        return lista[0]
+    except IndexError:
+        return ('Error: elemento no encontrado en la lista')
 
 # TODO  crea un metodo que devuelava la key sabiendo la posocion en el array
 
@@ -299,8 +317,6 @@ def insertarValoracion(fecha, usuario, nombre_discoteca, nota, texto, ruta):
         }
         db.reference(ruta).child('valoraciones').push(valoraciones)
 
-insertarValoracion('2020-12-12', 'usuario', 'nombre_discoteca', 5, 'texto', 'data')
-
 
 def comprobarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta):
     # Comprueba si el email está vacío o no tiene un formato válido
@@ -336,22 +352,22 @@ def comprobarInicioSesion(usuario, contraseña, ruta):
 
     return False
 
+
 def valoracionesUsuario(usuario):
     valoraciones = db.reference('data/valoraciones')
     temp = []
     for k, v in valoraciones.get().items():
-        if v['usuario'].lower().__contains__(str(usuario.lower())+'·º·'):
-            print(v)
-            resultado = 'FECHA: ' + str(v['fecha']) + '   DISCOTECA: ' + str(v['nombre_discoteca']) + '   RESEÑA: ' + str(v['texto']) + '   ESTRELLAS: ' + str(v['nota'])
-            print(resultado)
+        if v['usuario'].lower().__contains__(str(usuario)+'·º·'):
+            resultado = 'FECHA: ', v['fecha'], 'DISCOTECA: ', v['nombre_discoteca'], 'RESEÑA: ', v['texto'], 'ESTRELLAS: ', v['nota']
             temp.append(resultado)
     return temp
+
 
 def fiestasUsuario(usuario):
     fiestas = db.reference('data/fiestas')
     temp = []
     for k, v in fiestas.get().items():
-        if v['usuario'].lower().__contains__(str(usuario.lower())+'·º·'):
+        if v['usuario'].lower().__contains__(str(usuario)+'·º·'):
             resultado = 'FIESTA: ', v['nombre'], 'ZONA: ', v['zona'], 'CALLE: ', v['calle'], 'NÚMERO: ', v['numero']
             temp.append(resultado)
     return temp
@@ -417,7 +433,8 @@ def filtrarDiscotecas(opcion, consulta):
         temp = []
         for k, v in valoraciones.get().items():
             if v['nombre_discoteca'].lower().startswith(consulta):
-                resultado = [v['nombre_discoteca'], v['nota'], v['texto'], v['usuario'], v['fecha']]
+                resultado = [v['nombre_discoteca'], v['nota'],
+                             v['texto'], v['usuario'], v['fecha']]
                 temp.append(resultado)
         return temp
     elif opcion == 7:
@@ -427,7 +444,8 @@ def filtrarDiscotecas(opcion, consulta):
         temp = []
         for k, v in valoraciones.get().items():
             if v['usuario'].lower().startswith(consulta):
-                resultado = [v['nombre_discoteca'], v['nota'], v['texto'], v['usuario'], v['fecha']]
+                resultado = [v['nombre_discoteca'], v['nota'],
+                             v['texto'], v['usuario'], v['fecha']]
                 temp.append(resultado)
         return temp
     elif opcion == 8:
@@ -437,7 +455,8 @@ def filtrarDiscotecas(opcion, consulta):
         temp = []
         for k, v in valoraciones.get().items():
             if v['texto'].lower().__contains__(consulta):
-                resultado = [v['nombre_discoteca'], v['nota'], v['texto'], v['usuario'], v['fecha']]
+                resultado = [v['nombre_discoteca'], v['nota'],
+                             v['texto'], v['usuario'], v['fecha']]
                 temp.append(resultado)
         return temp
     elif opcion == 9:
@@ -446,7 +465,8 @@ def filtrarDiscotecas(opcion, consulta):
         consulta = consulta.lower()
         temp = []
         for k, v in valoraciones.get().items():
-            if v['nota']==int(consulta):
-                resultado = [v['nombre_discoteca'], v['nota'], v['texto'], v['usuario'], v['fecha']]
+            if v['nota'] == int(consulta):
+                resultado = [v['nombre_discoteca'], v['nota'],
+                             v['texto'], v['usuario'], v['fecha']]
                 temp.append(resultado)
         return temp
