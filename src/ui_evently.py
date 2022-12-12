@@ -302,20 +302,11 @@ class Ui_MainWindow(QMainWindow):
                     lambda checked, out=out, i=i: self.buttonPerfil2(out[i]))
                 self.busquedaUsuarios = False
 
-    
-       
-       
-        
-        
-# nuevo fin
-
-
     def busquedaFilter(self):
         # comprueba si existe textEditCarta y lo borra
         if hasattr(self, 'textEditCarta'):
             self.borrarTextFiltrado()
-
-        #print("busqueda filter")
+            
         if self.comboBox.currentText() == "ZONA":
             self.crearBotonesDiscotecasFiltradas(1)
 
@@ -330,27 +321,21 @@ class Ui_MainWindow(QMainWindow):
 
     def buttonMapa(self):
         self.stackedWidget.setCurrentWidget(self.page_mapa)
-        # import mapViewer
         webview.create_window('Evently - Mapa de discotecas', '../mapa.html')
         webview.start()
-        #print("he seleccionado el boton MAPA")
 
     def buttonFiltrado(self):
         self.stackedWidget.setCurrentWidget(self.page_filtrado)
-        #print("he seleccionado el boton FILTRADO")
 
     def buttonDiscotecas(self):
         self.stackedWidget.setCurrentWidget(self.page_AddDiscoteca)
-        #print("he selecionado el boton DISCOTECAS")
 
     def buttonFiesta(self):
         self.stackedWidget.setCurrentWidget(self.page_AddFiesta)
-        #print("he seleccionado el boton FIESTA")
 
     def buttonResenna(self):
         # comprueba si existe tablaResenna y la borra
         if hasattr(self, 'tablaResennas'):
-            #print("borrar tabla")
             self.borrarTablaResennas()
 
         self.stackedWidget.setCurrentWidget(self.page_AddResenna)
@@ -488,40 +473,29 @@ class Ui_MainWindow(QMainWindow):
         self.edad = edadUsuario('edad')
         self.textBrowser_edad.setText(str(self.edad))
 
-            
-        #print("he seleccionado el boton MI PERFIL")
     def buttonPerfil2(self,usuarioText):
         self.stackedWidget.setCurrentWidget(self.page_MiPerfil2)
         datosUsuarioEspecifico=getDatosElementoConcreto('usuarios','usuario',usuarioText,['usuario','nombre','apellido','email','edad'],'data')
         self.usuario = datosUsuarioEspecifico[0]
-        print(self.usuario)
         self.usuarioBuscado = self.usuario
-        print(self.usuarioBuscado)
         self.textBrowser_usuarioPerfil2.setText(usuarioText)
         self.nombre =  datosUsuarioEspecifico[1]
-        print(self.nombre)
         self.textBrowser_nombrePerfil2.setText(self.nombre)
         self.apellido = datosUsuarioEspecifico[2]
         self.textBrowser_apellidoPerfil2.setText(self.apellido)
-        print(self.apellido)
         self.email = datosUsuarioEspecifico[3]
         self.textBrowser_emailPerfil2.setText(self.email)
-        print(self.email) 
         self.edad = datosUsuarioEspecifico[4]
         self.textBrowser_edadPerfil2.setText(str(self.edad))
         
     def buttonMisResennas(self):
         self.usr = datosUsuario('usuario')
-        # print(self.usr)
         self.mis_resennas = str(valoracionesUsuario(self.usr))
         if self.textBrowser_MiPerfil.isHidden(): self.textBrowser_MiPerfil.show()
         self.textBrowser_MiPerfil.setText(self.mis_resennas)
     
     def buttonMisResennasOtroPerfil(self,usuarioText):
         self.usr = self.usuarioBuscado
-        print("----------------------")
-        print(self.usr)
-        print("----------------------")
         self.mis_resennas = str(valoracionesUsuario(self.usr))
         if self.textBrowser_MiPerfilPerfil2.isHidden(): self.textBrowser_MiPerfilPerfil2.show()
         self.textBrowser_MiPerfilPerfil2.setText(self.mis_resennas) 
