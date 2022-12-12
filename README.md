@@ -64,6 +64,8 @@ pip3 install opencv-python
 pip install imutils
 pip install PySide2
 pip install Pyrebase4
+pip install kivymd
+pip install kivy
 pip install mapview
 garde install mapview
 ```
