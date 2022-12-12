@@ -429,7 +429,7 @@ def filtrarDiscotecas(opcion, consulta):
                 temp.append(resultado)
         return temp
     elif opcion == 8:
-        # FILTRADO DE VALORACION
+        # FILTRADO DE VALORACION TEXTO
         valoraciones = db.reference('data/valoraciones')
         consulta = consulta.lower()
         temp = []
@@ -439,12 +439,12 @@ def filtrarDiscotecas(opcion, consulta):
                 temp.append(resultado)
         return temp
     elif opcion == 9:
-        # FILTRADO DE VALORACION
+        # FILTRADO DE NOTA
         valoraciones = db.reference('data/valoraciones')
         consulta = consulta.lower()
         temp = []
         for k, v in valoraciones.get().items():
-            if v['nota']>=int(consulta):
+            if v['nota']==int(consulta):
                 resultado = [v['nombre_discoteca'], v['nota'], v['texto'], v['usuario'], v['fecha']]
                 temp.append(resultado)
         return temp
