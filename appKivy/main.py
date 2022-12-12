@@ -1,3 +1,6 @@
+from datetime import date
+import time
+from kivy.clock import Clock
 import webbrowser
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager
@@ -11,8 +14,13 @@ from kivy_garden.mapview import MapMarker
 
 from baseDatosPruebaApp import *
 
+class OneLineListItemAligned(OneLineListItem):
+    def __init__(self, halign, **kwargs):
+        super(OneLineListItemAligned, self).__init__(**kwargs)
+        self.ids._lbl_primary.halign = halign
 
 class Ui(ScreenManager):
+    
     usernameText = ''
     nombre = ''
     apellido = ''
@@ -57,14 +65,20 @@ class Ui(ScreenManager):
         self.ids.MDLabelFiltrado.size_hint = (1, 1)
 
     def botonBusquedaChat(self, texto):
+        self.ids.other_user_list.clear_widgets()
+        self.ids.this_user_list.clear_widgets()
         self.borrarBusquedaChat()
         out = filtrarDiscotecas(5, texto)
         for element in out:
             item = OneLineListItem(
-                text=str(element), width=300, on_release=lambda x: self.crearChat(x.text))
+                text=str(element), width=300, on_release=lambda x: self.crearChat(x.text,''))
             self.ids.MDListFiltradoChat.add_widget(item)
 
-    def crearChat(self, usuario):
+    def crearChat(self, usuario,texto):
+        self.ids.scrollChat.scroll_y = 0
+        self.ids.message_input.text = texto
+        self.ids.other_user_list.clear_widgets()
+        self.ids.this_user_list.clear_widgets()
         self.borrarBusquedaChat()
         self.current = 'chatDm'
         self.ids.user_label.text = usuario
@@ -79,27 +93,39 @@ class Ui(ScreenManager):
         rutaChat = 'chats/'+chat
         chatsAnteriores = getTodosLosDatos(rutaChat, 'data')
         if chatsAnteriores == []:
-            insertarMensaje(
-                usuario2, 'Hola, quieres usar Evently conmigo :)', chat, 'data')
+            insertarMensaje(usuario2, 'Hola, quieres usar Evently conmigo :)', chat, 'data')
         else:
             for chatAnterior in chatsAnteriores:
                 if chatAnterior['usuario'] == usuario1:
-                    item = OneLineListItem(
-                        text=str(chatAnterior['mensaje']), bg_color=('FF5A1E'))
+                    item = OneLineListItemAligned(
+                        text=str(chatAnterior['mensaje']), bg_color=('292828'),halign="left")
                     self.ids.other_user_list.add_widget(item)
                     item2 = OneLineListItem(text=str(''), opacity=0)
                     self.ids.this_user_list.add_widget(item2)
                 else:
-                    item = OneLineListItem(
-                        text=str(chatAnterior['mensaje']), bg_color=('FF5A1E'))
+                    item = OneLineListItemAligned(
+                        text=str(chatAnterior['mensaje']), bg_color=('b84814'),halign="right")
                     self.ids.this_user_list.add_widget(item)
                     item = OneLineListItem(text=str(''), opacity=0)
                     self.ids.other_user_list.add_widget(item)
+            Clock.schedule_once(self.actualizarChat, 5)
+            
         self.ids.scrollChat.scroll_y = 0
-        self.ids.message_input.text = ''
+        
+        #espera 5 segundos y actualiza el chat
+    
+    def pararTimer(self):
+        Clock.unschedule(self.actualizarChat)
+        
+        
+    def actualizarChat(self, dt):
+        self.ids.scrollChat.scroll_y = 0
+        self.crearChat(self.ids.user_label.text, self.ids.message_input.text)
 
     def send_message(self, mensaje, usuario1):
-
+        self.ids.message_input.text=''
+        self.ids.other_user_list.clear_widgets()
+        self.ids.this_user_list.clear_widgets()
         if(str(mensaje) != ''):
             usuario2 = datosUsuario('usuario')
             if usuario1 < usuario2:
@@ -108,10 +134,11 @@ class Ui(ScreenManager):
                 chat = usuario2+usuario1
             insertarMensaje(datosUsuario('usuario'),
                             str(mensaje), chat, 'data')
-            self.crearChat(usuario1)
+            self.crearChat(usuario1,'')
         else:
-            self.crearChat(usuario1)
+            self.crearChat(usuario1,'')
 
+        
     def borrarBusquedaChat(self):
         try:
             self.ids.MDListFiltradoChat.clear_widgets()
@@ -241,6 +268,31 @@ class Ui(ScreenManager):
         self.ids.MDLabelFiltradoRsenaTres.text = texto2
         self.ids.MDLabelFiltradoRsenaTres.opacity = 1
         self.ids.MDLabelFiltradoRsenaTres.size_hint = (1, 1)
+
+    def cargarDiscotecasSpinner(self):
+        discotecas = getItemBaseDatos('discotecas','nombre', 'data')
+        for discoteca in discotecas:
+            self.ids.discoteca.values.append(discoteca)
+        self.ids.discoteca.text = discotecas[0]
+        self.current = 'annadirReseñaScreen'
+
+    def annadirReseña(self, discoteca,estrellas,texto):
+        if discoteca == '' or estrellas == '' or texto == '':
+            self.ids.error.text = 'Rellena todos los campos'
+            self.ids.error.opacity = 1
+            self.ids.error.size_hint = (1, 1)
+        else:
+            fecha_actual = date.today().strftime("%d/%m/%Y")
+            usuario=datosUsuario('usuario')
+            if(comprobarValoracion(fecha_actual, usuario, discoteca, 'data')):
+                insertarValoracion(fecha_actual, usuario, discoteca, estrellas, texto, 'data')
+                self.current = 'reseña'
+            else:
+                self.ids.error.text = 'Ya has valorado esta discoteca, espera 24 horas para volver a valorarla'
+                self.ids.error.opacity = 1
+                self.ids.error.size_hint = (1, 1)
+
+           
 
     def clear_signal(self):
         self.ids.signal_register.text = ''

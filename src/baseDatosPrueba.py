@@ -299,6 +299,8 @@ def insertarValoracion(fecha, usuario, nombre_discoteca, nota, texto, ruta):
         }
         db.reference(ruta).child('valoraciones').push(valoraciones)
 
+insertarValoracion('2020-12-12', 'usuario', 'nombre_discoteca', 5, 'texto', 'data')
+
 
 def comprobarUsuario(usuario, nombre, apellido, edad, email, contraseña, ruta):
     # Comprueba si el email está vacío o no tiene un formato válido
@@ -334,22 +336,22 @@ def comprobarInicioSesion(usuario, contraseña, ruta):
 
     return False
 
-
 def valoracionesUsuario(usuario):
     valoraciones = db.reference('data/valoraciones')
     temp = []
     for k, v in valoraciones.get().items():
-        if v['usuario'].lower().__contains__(str(usuario)+'·º·'):
+        if v['usuario'].lower().__contains__(str(usuario.lower())+'·º·'):
+            print(v)
             resultado = 'FECHA: ' + str(v['fecha']) + '   DISCOTECA: ' + str(v['nombre_discoteca']) + '   RESEÑA: ' + str(v['texto']) + '   ESTRELLAS: ' + str(v['nota'])
+            print(resultado)
             temp.append(resultado)
     return temp
-
 
 def fiestasUsuario(usuario):
     fiestas = db.reference('data/fiestas')
     temp = []
     for k, v in fiestas.get().items():
-        if v['usuario'].lower().__contains__(str(usuario)+'·º·'):
+        if v['usuario'].lower().__contains__(str(usuario.lower())+'·º·'):
             resultado = 'FIESTA: ', v['nombre'], 'ZONA: ', v['zona'], 'CALLE: ', v['calle'], 'NÚMERO: ', v['numero']
             temp.append(resultado)
     return temp

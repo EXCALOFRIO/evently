@@ -28,6 +28,7 @@
 
     MDFillRoundFlatButton:
         icon: 'images/iconoBusqueda.png'
+        text: 'Retroceso'
         color_icon: '#000000'
         pos_hint: {'center_x': .5}
         on_release:
@@ -180,10 +181,9 @@
                     font_size:dp(20)
                 MDTextField:
                     id: new_password_two
-                    password: True
                     icon_right: 'deathly-hallows'
                     icon_right_color: '#FF5A1E'
-                    hint_text: 'Contrasena'
+                    hint_text: 'Nombre'
                     font_size:dp(20)
                     pos_hint: {'center_x':0.5}
 
@@ -417,10 +417,13 @@
                 zoom: 15
 
             MDFillRoundFlatButton:
-                icon: 'images/iconoBusqueda.png'
+                #icon: 'images/atras.png'
+                text: 'Atrás'
+                font_size: 30
                 color_icon: '#000000'
                 size_hint_y: 0.05
                 #centrasdo
+
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                 on_release:
                     root.borrarBusquedaFiltrado()
@@ -484,7 +487,8 @@
 
 
             MDFillRoundFlatButton:
-                icon: 'images/iconoBusqueda.png'
+                #icon: 'images/iconoBusqueda.png'
+                text: 'Retornar'
                 color_icon: '#000000'
                 size_hint_y: 0.05
                 #centrasdo
@@ -580,7 +584,8 @@
                     fill_color: 0, 0, 0, .4
 
             MDFillRoundFlatButton:
-                icon: 'images/iconoBusqueda.png'
+                #icon: 'images/iconoBusqueda.png'
+                text: 'Retroceso'
                 color_icon: '#000000'
 
                 pos_hint: {'center_x': .5, 'center_y': .5}
@@ -747,7 +752,8 @@
                         bold: True
 
             MDFillRoundFlatButton:
-                icon: 'images/iconoBusqueda.png'
+                #icon: 'images/iconoBusqueda.png'
+                text: 'Back'
                 color_icon: '#000000'
 
                 pos_hint: {'center_x': .5, 'center_y': .5}
@@ -802,6 +808,16 @@
                         adaptative_height: True
                         scroll_type: 'bars'
                         bar_width: '12dp'
+
+                MDFillRoundFlatButton:
+                    id: MDFillRoundFlatButtonAnnadirReseña
+                    icon: 'images/iconoBusqueda.png'
+                    color_icon: '#000000'
+
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+                    on_release:
+                        root.cargarDiscotecasSpinner()
+                        app.root.transition = SlideTransition(direction= 'down')
                             
             MDLabel:
                 id: MDLabelFiltradoRsenaUno
@@ -829,7 +845,8 @@
 
 
             MDFillRoundFlatButton:
-                icon: 'images/iconoBusqueda.png'
+                #icon: 'images/iconoBusqueda.png'
+                text: 'De vuelta'
                 color_icon: '#000000'
                 size_hint_y: 0.05
                 #centrasdo
@@ -881,7 +898,8 @@
 
 
             MDFillRoundFlatButton:
-                icon: 'images/iconoBusqueda.png'
+                #icon: 'images/iconoBusqueda.png'
+                text: 'zurückkehren'
                 color_icon: '#000000'
 
                 size_hint_y: 0.05
@@ -934,7 +952,8 @@
 
 
             MDFillRoundFlatButton:
-                icon: 'images/iconoBusqueda.png'
+                #icon: 'images/iconoBusqueda.png'
+                text: 'Volver'
                 color_icon: '#000000'
 
                 size_hint_y: 0.05
@@ -1030,6 +1049,7 @@
                     md_bg_color: 0, .5, 1, 1
                     icon: 'images/iconoBusqueda.png'
                     on_release:
+                        root.pararTimer()
                         root.current = 'chat'
                 Label:
                     id: user_label
@@ -1073,3 +1093,46 @@
                     md_bg_color: 0, .5, 1, 1
                     icon: 'images/iconoBusqueda.png'
                     on_press: root.send_message(message_input.text,user_label.text)
+
+    MDScreen:
+        name: 'annadirReseñaScreen'
+        MDBoxLayout:
+            orientation: 'vertical'
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: 0.15
+                Spinner:
+                    id: discoteca
+                    text: ''
+                    size_hint_x: 0.7
+
+                Spinner:
+                    id: estrellas
+                    text: 'Estrellas'
+                    values: '1', '2', '3', '4', '5'
+                    size_hint_x: 0.3
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: 0.65
+                MDTextField:
+                    id: reseñaTexto
+                    hint_text: 'Introduce tu reseña'
+                    multiline: True
+                    size_hint_x: 0.5
+
+            Label:
+                id: error
+                opacity: 0
+                size: (0, 0)
+                color: 1, 0, 0, 1
+                size_hint: None, None
+
+                text: ''
+            MDFillRoundFlatButton:
+                size_hint_y: 0.2
+                text: 'Añadir reseña'
+                pos_hint: {'center_x': .5, 'center_y': .5}
+                on_release:
+                    root.annadirReseña(discoteca.text, estrellas.text, reseñaTexto.text)
+                    app.root.transition = SlideTransition(direction= 'up')
+                

@@ -456,6 +456,25 @@ class Ui_MainWindow(QMainWindow):
             self.label.setPixmap(QtGui.QPixmap.fromImage(image))
             
             self.hbox.addWidget(self.label)
+    
+    def boton_mis_fotos_OtroUsuario(self):
+        self.usuario = datosUsuario('usuario')
+        url_fotos = ver_mis_fotos(self.usuario)
+        self.textBrowser_MiPerfilPerfil2.clear()
+        self.hbox = QHBoxLayout(self.page_MiPerfil2)
+        self.hbox.setContentsMargins(10, 235, 10, 10)
+
+        for i in range(len(url_fotos)):
+            resp = urlopen(url_fotos[i])
+            image = np.asarray(bytearray(resp.read()), dtype="uint8")
+            image = cv2.imdecode(image, cv2.IMREAD_COLOR)
+            image = imutils.resize(image, width=200, height=200)
+            self.label = QtWidgets.QLabel()
+            frame = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+            image = QImage(frame, frame.shape[1], frame.shape[0], frame.strides[0], QImage.Format_RGB888)
+            self.label.setPixmap(QtGui.QPixmap.fromImage(image))
+            
+            self.hbox.addWidget(self.label)
 
             
     def createGridLayout(self, x):
@@ -513,13 +532,25 @@ class Ui_MainWindow(QMainWindow):
         self.mis_resennas = str(valoracionesUsuario(self.usr))
         if self.textBrowser_MiPerfil.isHidden(): self.textBrowser_MiPerfil.show()
         self.textBrowser_MiPerfil.setText(self.mis_resennas)
-        
+    
+    def buttonMisResennasOtroPerfil(self):
+        self.usr = datosUsuario('usuario')
+        # print(self.usr)
+        self.mis_resennas = str(valoracionesUsuario(self.usr))
+        if self.textBrowser_MiPerfilPerfil2.isHidden(): self.textBrowser_MiPerfilPerfil2.show()
+        self.textBrowser_MiPerfilPerfil2.setText(self.mis_resennas) 
 
     def buttonMisFiestas(self):
         self.usr = datosUsuario('usuario')
         self.mis_fiestas = str(fiestasUsuario(self.usr))
         if self.textBrowser_MiPerfil.isHidden(): self.textBrowser_MiPerfil.show()
         self.textBrowser_MiPerfil.setText(self.mis_fiestas)
+    
+    def buttonMisFiestasOtroPerfil(self):
+        self.usr = datosUsuario('usuario')
+        self.mis_fiestas = str(fiestasUsuario(self.usr))
+        if self.textBrowser_MiPerfilPerfil2.isHidden(): self.textBrowser_MiPerfilPerfil2.show()
+        self.textBrowser_MiPerfilPerfil2.setText(self.mis_fiestas) 
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -1357,15 +1388,15 @@ class Ui_MainWindow(QMainWindow):
             "background-color: rgb(255, 255, 255)")
         self.pushButton_MisResennasPerfil2 = QPushButton(self.page_MiPerfil2)
         self.pushButton_MisResennasPerfil2.setObjectName("pushButton_MisResennasPerfil2")
-        self.pushButton_MisResennasPerfil2.clicked.connect(self.buttonMisResennas)
+        self.pushButton_MisResennasPerfil2.clicked.connect(self.buttonMisResennasOtroPerfil)
         self.pushButton_MisResennasPerfil2.setGeometry(QRect(250, 200, 111, 23))
         self.pushButton_MisFiestasPerfil2 = QPushButton(self.page_MiPerfil2)
         self.pushButton_MisFiestasPerfil2.setObjectName("pushButton_MisFiestasPerfil2")
-        self.pushButton_MisFiestasPerfil2.clicked.connect(self.buttonMisFiestas)
+        self.pushButton_MisFiestasPerfil2.clicked.connect(self.buttonMisFiestasOtroPerfil)
         self.pushButton_MisFiestasPerfil2.setGeometry(QRect(370, 200, 101, 23))
         self.pushButton_MisFotosPerfil2 = QPushButton(self.page_MiPerfil2)
         self.pushButton_MisFotosPerfil2.setObjectName("pushButton_MisFotosPerfil2")
-        self.pushButton_MisFotosPerfil2.clicked.connect(self.boton_mis_fotos)
+        self.pushButton_MisFotosPerfil2.clicked.connect(self.boton_mis_fotos_OtroUsuario)
         self.pushButton_MisFotosPerfil2.setGeometry(QRect(145, 200, 101, 23))
         
         self.stackedWidget.addWidget(self.page_MiPerfil2)
