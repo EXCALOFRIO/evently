@@ -149,6 +149,7 @@ class Ui(ScreenManager):
 
     def generate_markers(self):
         loc = getTodosLosDatos('discotecasEficientes', 'data')
+        locFiestas = getTodosLosDatos('fiestasEficientes', 'data')
         for location in loc:
             marker = MapMarker(
                 lat=location['latitud'], lon=location['longitud'])
@@ -167,6 +168,25 @@ class Ui(ScreenManager):
 
             marker.bind(on_release=open_location)
             self.ids.mapview.add_marker(marker)
+
+        for locationF in locFiestas:
+            marker2 = MapMarker(
+                lat=locationF['latitud'], lon=locationF['longitud'], color=(
+                    0, 0, 1, 1))
+            marker2.marker_name = locationF['nombre'] + \
+                ','+locationF['ubicacion']
+
+            def open_location2(marker2):
+                # Abrir el navegador en la ubicación del marcador
+                url = f'https://www.google.com/maps/search/?api=1&query={marker.lat},{marker.lon}'
+                query = marker2.marker_name
+                url2 = f"https://www.google.com/maps/search/?api=1&query={query}"
+                webbrowser.open(url2)
+                print(url)
+                print(url2)
+
+            marker2.bind(on_release=open_location2)
+            self.ids.mapview.add_marker(marker2)
         self.current = 'Mapa'
 
     def inicioSesion(self, usuario, password):
