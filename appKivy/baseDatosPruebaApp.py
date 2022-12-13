@@ -116,7 +116,7 @@ def insertarDiscotecaEficiente(nombre, ubicacion, longitud, latitud, ruta):
 
 def insertarDiscoteca(nombre, calle, numero, zona, ruta):
     ubicacion = calle + ', ' + \
-        str(numero) + ', ' + zona + ', Madrid España'
+        str(numero) + ', ' + zona + ', España'
     ubicacion2 = ubicacion.replace('C ', 'Calle ').replace('Av ', 'Avenida ').replace(
         'Avda ', 'Avenida ').replace('C.', 'Calle ').replace('PL ', 'Plaza ').replace('c', 'Calle ').replace('av', 'Avenida ').replace('avda', 'Avenida ').replace('c.', 'Calle ').replace('pl', 'Plaza ')
 
@@ -173,7 +173,7 @@ def insertarFiestaEficiente(nombre, ubicacion, longitud, latitud, ruta):
 
 
 def insertarFiesta(nombre, calle, numero, zona, usuario, ruta):
-    ubicacion = calle + ', ' + str(numero) + ', ' + zona + ', Madrid España'
+    ubicacion = calle + ', ' + str(numero) + ', ' + zona + ', España'
     ubicacion2 = ubicacion.replace('C ', 'Calle ').replace('Av ', 'Avenida ').replace(
         'Avda ', 'Avenida ').replace('C.', 'Calle ').replace('PL ', 'Plaza ').replace('c ', 'Calle ').replace('av ', 'Avenida ').replace('avda ', 'Avenida ').replace('c.', 'Calle ').replace('pl ', 'Plaza ')
     location = geolocator.geocode(ubicacion2)
